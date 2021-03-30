@@ -1,7 +1,7 @@
 ﻿
 namespace CompareWOLL
 {
-    partial class addWO
+    partial class importWO
     {
         /// <summary>
         /// Required designer variable.
@@ -48,11 +48,9 @@ namespace CompareWOLL
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pcbNo = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWO)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -172,13 +170,14 @@ namespace CompareWOLL
             // 
             // dataGridViewWO
             // 
+            this.dataGridViewWO.AllowUserToAddRows = false;
             this.dataGridViewWO.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewWO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewWO.Location = new System.Drawing.Point(12, 280);
+            this.dataGridViewWO.Location = new System.Drawing.Point(12, 250);
             this.dataGridViewWO.Name = "dataGridViewWO";
-            this.dataGridViewWO.Size = new System.Drawing.Size(747, 195);
+            this.dataGridViewWO.Size = new System.Drawing.Size(747, 225);
             this.dataGridViewWO.TabIndex = 18;
             // 
             // saveButton
@@ -217,50 +216,10 @@ namespace CompareWOLL
             this.dateTimeNow.Size = new System.Drawing.Size(124, 17);
             this.dateTimeNow.Text = "toolStripStatusLabel2";
             // 
-            // pcbNo
-            // 
-            this.pcbNo.Location = new System.Drawing.Point(481, 178);
-            this.pcbNo.Name = "pcbNo";
-            this.pcbNo.Size = new System.Drawing.Size(223, 20);
-            this.pcbNo.TabIndex = 22;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(386, 185);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(45, 13);
-            this.label7.TabIndex = 21;
-            this.label7.Text = "PCB No";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "1 Side",
-            "2 Side",
-            "2 Side with testing",
-            "2 Side with dipping"});
-            this.comboBox1.Location = new System.Drawing.Point(115, 216);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(223, 21);
-            this.comboBox1.TabIndex = 24;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(20, 224);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(31, 13);
-            this.label8.TabIndex = 23;
-            this.label8.Text = "Type";
-            // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.woPTSN);
             this.groupBox1.Controls.Add(this.browseWO);
             this.groupBox1.Controls.Add(this.filepathWO);
@@ -278,12 +237,29 @@ namespace CompareWOLL
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Location = new System.Drawing.Point(12, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(747, 259);
+            this.groupBox1.Size = new System.Drawing.Size(747, 223);
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Work Order Detail";
             // 
-            // addWO
+            // pcbNo
+            // 
+            this.pcbNo.Location = new System.Drawing.Point(481, 178);
+            this.pcbNo.Name = "pcbNo";
+            this.pcbNo.ReadOnly = true;
+            this.pcbNo.Size = new System.Drawing.Size(223, 20);
+            this.pcbNo.TabIndex = 22;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(386, 185);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(45, 13);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "PCB No";
+            // 
+            // importWO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -292,7 +268,7 @@ namespace CompareWOLL
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.dataGridViewWO);
             this.Controls.Add(this.groupBox1);
-            this.Name = "addWO";
+            this.Name = "importWO";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add Work Order";
             this.Load += new System.EventHandler(this.addWO_Load);
@@ -327,10 +303,8 @@ namespace CompareWOLL
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel dateTimeNow;
+        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox pcbNo;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

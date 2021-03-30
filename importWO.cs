@@ -9,12 +9,12 @@ using Ubiety.Dns.Core;
 
 namespace CompareWOLL
 {
-    public partial class addWO : Form
+    public partial class importWO : Form
     {
         ConnectionDB con = new ConnectionDB();      
 
 
-        public addWO()
+        public importWO()
         {
             InitializeComponent();
         }
@@ -109,7 +109,7 @@ namespace CompareWOLL
                 }
 
                 // Set table title Wo
-                string[] titleWO = { "Model", "", "Part No", "Model No", "QTY", "Issue", "", "WO No", "BOM Row", "Process","",  "WO PTSN", "WO Qty" };
+                string[] titleWO = { "Model", "", "Part No", "Model No", "Usage", "Issue", "", "WO No", "BOM Row", "Process","",  "WO PTSN", "WO Qty" };
                 for (int i = 0; i < titleWO.Length; i++)
                 {
                     dataGridViewWO.Columns[i].HeaderText = "" + titleWO[i];
@@ -124,24 +124,71 @@ namespace CompareWOLL
             string modelNoo = modelNo.Text;
             string modell = model.Text;
             string woqtyy = woQty.Text;
-            string pcbNoo = pcbNo.Text;
+            //string pcbNoo = pcbNo.Text;
+            saveButton.Enabled = false;
 
-            var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
-            var cmd = new MySqlCommand("", conn);
 
-            string query = "INSERT INTO tbl_wo VALUES('"+woPTSNN+ "','" + woNoo + "','" + modelNoo + "','" + modell + "', '" + woqtyy + "', '3520C3LM0A9T', '1 SIDE' )";
+            if (woPTSNN == ""| woNoo == ""| modelNoo == "" | modell == "" | woqtyy == "")
+            {
+                MessageBox.Show("Unable to import Work Order without fill data properly", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                saveButton.Enabled = true;
+            }
 
-            cmd.CommandText = query;
-            //Masukkan perintah/query yang akan dijalankan ke dalam CommandText
+            else
+            {
+                try
+                {
+                    var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
+                    var cmd = new MySqlCommand("", conn);
 
-            conn.Open();
-            //Buka koneksi
-            cmd.ExecuteNonQuery();
-            //Jalankan perintah / query dalam CommandText pada database
-            conn.Close();
-            //Tutup koneksi
+                    string query = "INSERT INTO tbl_wo VALUES('" + woPTSNN + "','" + woNoo + "','" + modelNoo + "','" + modell + "', '" + woqtyy + "', '3520C3LM0A9T', '1 SIDE' )";
 
-            this.Close();
+                    cmd.CommandText = query;
+                    //Masukkan perintah/query yang akan dijalankan ke dalam CommandText
+
+                    conn.Open();
+                    //Buka koneksi
+                    cmd.ExecuteNonQuery();
+                    //Jalankan perintah / query dalam CommandText pada database
+
+                    for (int i = 0; i < dataGridViewWO.Rows.Count; i++)
+                    {
+                        string StrQuery = "INSERT INTO tbl_wodetail VALUES ('"
+                            + dataGridViewWO.Rows[i].Cells[3].Value.ToString() + "', '"
+                            + dataGridViewWO.Rows[i].Cells[2].Value.ToString() + "', '"
+                            + dataGridViewWO.Rows[i].Cells[4].Value.ToString() + "');";
+                        cmd.CommandText = StrQuery;
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    conn.Close();
+                    //Tutup koneksi
+                                        
+                    MessageBox.Show("Work Order Successfully saved", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    saveButton.Enabled = true;
+
+                    this.Close();
+                    WorkOrder wo = new WorkOrder();
+                    wo.Show();
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+
+
+            }            
+        }
+
+        private void workOrderToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void compareWOVsLLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

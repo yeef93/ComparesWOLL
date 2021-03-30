@@ -19,16 +19,18 @@ namespace CompareWOLL
 
         private void compareWOWithLLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            addWO addWO = new addWO();
-            addWO.Show();
-            this.Hide();
+                        
         }
 
         private void compareWOVsLLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ImportLLWOForm f2 = new ImportLLWOForm();
-            f2.Show();
+
+        }
+
+        private void workOrderToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            WorkOrder wo = new WorkOrder();
+            wo.Show();
             this.Hide();
         }
     }

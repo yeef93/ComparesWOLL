@@ -92,11 +92,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="addWO.cs">
+    <Compile Include="importWO.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="addWO.Designer.cs">
-      <DependentUpon>addWO.cs</DependentUpon>
+    <Compile Include="importWO.Designer.cs">
+      <DependentUpon>importWO.cs</DependentUpon>
     </Compile>
     <Compile Include="Helper.cs" />
     <Compile Include="MainMenu.cs">
@@ -120,8 +120,14 @@
     <Compile Include="ConnectionDB.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="addWO.resx">
-      <DependentUpon>addWO.cs</DependentUpon>
+    <Compile Include="WorkOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorkOrder.Designer.cs">
+      <DependentUpon>WorkOrder.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="importWO.resx">
+      <DependentUpon>importWO.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
@@ -141,6 +147,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="WorkOrder.resx">
+      <DependentUpon>WorkOrder.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
