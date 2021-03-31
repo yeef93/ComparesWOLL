@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
@@ -69,6 +70,8 @@ namespace CompareWOLL
             string filePathWO = string.Empty;
             string fileExtWO = string.Empty;
             string queryWO = string.Empty;
+            string queryPcbNo = string.Empty;
+            
 
             openFileDialogWO.Title = "Please Select a File Work Order";
             //openFileDialogWO.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm| CSV files (*.csv)|*.csv";
@@ -96,7 +99,21 @@ namespace CompareWOLL
                         modelNo.Text = dataGridViewWO.Rows[0].Cells[3].Value.ToString();
                         model.Text = dataGridViewWO.Rows[0].Cells[0].Value.ToString();
                         woQty.Text = dataGridViewWO.Rows[0].Cells[12].Value.ToString();
-                        
+                        //dataGridViewWO.Rows[0].Cells[12].Value.ToString().StartsWith("35");
+                        //woUsage.Text = dataGridViewWO.Rows.Count.ToString();
+
+
+                        //show total qty component
+                        int sum = 0;
+                        for (int i = 0; i < dataGridViewWO.Rows.Count; ++i)
+                        {
+                            //get total qty component
+                            sum += Convert.ToInt32(dataGridViewWO.Rows[i].Cells[4].Value);
+
+                        }
+                        woUsage.Text = sum.ToString();
+
+
                     }
                     catch (Exception ex)
                     {
@@ -142,20 +159,30 @@ namespace CompareWOLL
                     var cmd = new MySqlCommand("", conn);
 
                     string query = "INSERT INTO tbl_wo VALUES('" + woPTSNN + "','" + woNoo + "','" + modelNoo + "','" + modell + "', '" + woqtyy + "', '3520C3LM0A9T', '1 SIDE' )";
-
-                    cmd.CommandText = query;
-                    //Masukkan perintah/query yang akan dijalankan ke dalam CommandText
+                    string querymodel = "INSERT INTO tbl_model VALUES('','" + modelNoo + "')";
 
                     conn.Open();
                     //Buka koneksi
-                    cmd.ExecuteNonQuery();
-                    //Jalankan perintah / query dalam CommandText pada database
+
+                    string[] allQuery = { query, querymodel };
+                    for (int i = 0; i < allQuery.Length; i++)
+                    {
+                        cmd.CommandText = allQuery[i];
+                        //Masukkan perintah/query yang akan dijalankan ke dalam CommandText
+                        cmd.ExecuteNonQuery();
+                        //Jalankan perintah / query dalam CommandText pada database
+                    }
+
+                    //cmd.CommandText = query;
+                    //cmd.CommandText = querymodel;
+                    ////Masukkan perintah/query yang akan dijalankan ke dalam CommandText  
 
                     for (int i = 0; i < dataGridViewWO.Rows.Count; i++)
                     {
                         string StrQuery = "INSERT INTO tbl_wodetail VALUES ('"
                             + dataGridViewWO.Rows[i].Cells[3].Value.ToString() + "', '"
                             + dataGridViewWO.Rows[i].Cells[2].Value.ToString() + "', '"
+                            + dataGridViewWO.Rows[i].Cells[9].Value.ToString() + "', '"
                             + dataGridViewWO.Rows[i].Cells[4].Value.ToString() + "');";
                         cmd.CommandText = StrQuery;
                         cmd.ExecuteNonQuery();
@@ -175,6 +202,7 @@ namespace CompareWOLL
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message.ToString());
+                    saveButton.Enabled = true;
                 }
 
 
@@ -189,6 +217,20 @@ namespace CompareWOLL
         private void compareWOVsLLToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MainMenu mm = new MainMenu();
+            mm.Show();
+            this.Hide();
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            WorkOrder wo = new WorkOrder();
+            wo.Show();
+            this.Hide();
         }
     }
 }

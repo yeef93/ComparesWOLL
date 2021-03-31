@@ -92,6 +92,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="importLL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="importLL.Designer.cs">
+      <DependentUpon>importLL.cs</DependentUpon>
+    </Compile>
     <Compile Include="importWO.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +105,12 @@
       <DependentUpon>importWO.cs</DependentUpon>
     </Compile>
     <Compile Include="Helper.cs" />
+    <Compile Include="LoadingList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadingList.Designer.cs">
+      <DependentUpon>LoadingList.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,8 +138,14 @@
     <Compile Include="WorkOrder.Designer.cs">
       <DependentUpon>WorkOrder.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="importLL.resx">
+      <DependentUpon>importLL.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="importWO.resx">
       <DependentUpon>importWO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadingList.resx">
+      <DependentUpon>LoadingList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>

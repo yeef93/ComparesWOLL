@@ -33,5 +33,12 @@ namespace CompareWOLL
             wo.Show();
             this.Hide();
         }
+
+        private void loadingListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadingList LL = new LoadingList();
+            LL.Show();
+            this.Hide();
+        }
     }
 }

@@ -31,12 +31,12 @@ namespace CompareWOLL
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.workOrderToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.loadingListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compareWOVsLLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
-            this.workOrderToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -61,16 +61,24 @@ namespace CompareWOLL
             this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.menuToolStripMenuItem.Text = "Menu";
             // 
+            // workOrderToolStripMenuItem1
+            // 
+            this.workOrderToolStripMenuItem1.Name = "workOrderToolStripMenuItem1";
+            this.workOrderToolStripMenuItem1.Size = new System.Drawing.Size(175, 22);
+            this.workOrderToolStripMenuItem1.Text = "Work Order";
+            this.workOrderToolStripMenuItem1.Click += new System.EventHandler(this.workOrderToolStripMenuItem1_Click);
+            // 
             // loadingListToolStripMenuItem
             // 
             this.loadingListToolStripMenuItem.Name = "loadingListToolStripMenuItem";
             this.loadingListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadingListToolStripMenuItem.Text = "Loading List";
+            this.loadingListToolStripMenuItem.Click += new System.EventHandler(this.loadingListToolStripMenuItem_Click);
             // 
             // compareWOVsLLToolStripMenuItem
             // 
             this.compareWOVsLLToolStripMenuItem.Name = "compareWOVsLLToolStripMenuItem";
-            this.compareWOVsLLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.compareWOVsLLToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.compareWOVsLLToolStripMenuItem.Text = "Compare WO vs LL";
             this.compareWOVsLLToolStripMenuItem.Click += new System.EventHandler(this.compareWOVsLLToolStripMenuItem_Click);
             // 
@@ -98,13 +106,6 @@ namespace CompareWOLL
             this.dateTimeNow.Name = "dateTimeNow";
             this.dateTimeNow.Size = new System.Drawing.Size(124, 17);
             this.dateTimeNow.Text = "toolStripStatusLabel2";
-            // 
-            // workOrderToolStripMenuItem1
-            // 
-            this.workOrderToolStripMenuItem1.Name = "workOrderToolStripMenuItem1";
-            this.workOrderToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.workOrderToolStripMenuItem1.Text = "Work Order";
-            this.workOrderToolStripMenuItem1.Click += new System.EventHandler(this.workOrderToolStripMenuItem1_Click);
             // 
             // MainMenu
             // 

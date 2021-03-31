@@ -51,6 +51,10 @@ namespace CompareWOLL
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pcbNo = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.woUsage = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.backButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWO)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -175,15 +179,15 @@ namespace CompareWOLL
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewWO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewWO.Location = new System.Drawing.Point(12, 250);
+            this.dataGridViewWO.Location = new System.Drawing.Point(12, 296);
             this.dataGridViewWO.Name = "dataGridViewWO";
-            this.dataGridViewWO.Size = new System.Drawing.Size(747, 225);
+            this.dataGridViewWO.Size = new System.Drawing.Size(892, 310);
             this.dataGridViewWO.TabIndex = 18;
             // 
             // saveButton
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.saveButton.Location = new System.Drawing.Point(354, 507);
+            this.saveButton.Location = new System.Drawing.Point(416, 617);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 19;
@@ -198,9 +202,9 @@ namespace CompareWOLL
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.dateTimeNow});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 544);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 648);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(792, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(916, 22);
             this.statusStrip1.TabIndex = 20;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -220,6 +224,8 @@ namespace CompareWOLL
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.woUsage);
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.woPTSN);
             this.groupBox1.Controls.Add(this.browseWO);
             this.groupBox1.Controls.Add(this.filepathWO);
@@ -235,9 +241,9 @@ namespace CompareWOLL
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.woQty);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Location = new System.Drawing.Point(12, 6);
+            this.groupBox1.Location = new System.Drawing.Point(12, 54);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(747, 223);
+            this.groupBox1.Size = new System.Drawing.Size(892, 226);
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Work Order Detail";
@@ -259,18 +265,64 @@ namespace CompareWOLL
             this.label7.TabIndex = 21;
             this.label7.Text = "PCB No";
             // 
+            // woUsage
+            // 
+            this.woUsage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.woUsage.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.woUsage.Location = new System.Drawing.Point(758, 61);
+            this.woUsage.Name = "woUsage";
+            this.woUsage.ReadOnly = true;
+            this.woUsage.Size = new System.Drawing.Size(100, 47);
+            this.woUsage.TabIndex = 27;
+            this.woUsage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(764, 39);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(94, 16);
+            this.label8.TabIndex = 26;
+            this.label8.Text = "Total Usage";
+            // 
+            // backButton
+            // 
+            this.backButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.backButton.Location = new System.Drawing.Point(829, 25);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(75, 23);
+            this.backButton.TabIndex = 27;
+            this.backButton.Text = "Back";
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(748, 25);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 26;
+            this.button1.Text = "Home";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // importWO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 566);
+            this.ClientSize = new System.Drawing.Size(916, 670);
+            this.Controls.Add(this.backButton);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.dataGridViewWO);
             this.Controls.Add(this.groupBox1);
             this.Name = "importWO";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Add Work Order";
+            this.Text = "Import Work Order";
             this.Load += new System.EventHandler(this.addWO_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWO)).EndInit();
             this.statusStrip1.ResumeLayout(false);
@@ -306,5 +358,9 @@ namespace CompareWOLL
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox pcbNo;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox woUsage;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button backButton;
+        private System.Windows.Forms.Button button1;
     }
 }

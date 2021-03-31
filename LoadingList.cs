@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace CompareWOLL
 {
-    public partial class WorkOrder : Form
+    public partial class LoadingList : Form
     {
-        public WorkOrder()
+        public LoadingList()
         {
             InitializeComponent();
         }
 
-        private void WorkOrder_Load(object sender, EventArgs e)
+        private void LoadingList_Load(object sender, EventArgs e)
         {
             dateTimeNow.Text = DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:ss");
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -27,7 +27,7 @@ namespace CompareWOLL
             MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
             connection.Open();
 
-            string query = "SELECT wo_PTSN, wo_No, model_No, model, wo_QTY FROM tbl_wo";
+            string query = "SELECT model_No, pwb_Type, pcb_No, part_Count FROM tbl_ll";
 
             using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
             {
@@ -40,28 +40,11 @@ namespace CompareWOLL
             connection.Close();
 
             // Set table title Wo
-            string[] titleWO = { "WO PTSN", "WO NO", "MODEL NO", "MODEL", "WO QTY" };
+            string[] titleWO = { "MODEL NO", "PWB TYPE", "PCB NO", "PART COUNT" };
             for (int i = 0; i < titleWO.Length; i++)
             {
                 dataGridViewWoList.Columns[i].HeaderText = "" + titleWO[i];
             }
-        }
-
-        private void importWO_Click(object sender, EventArgs e)
-        {
-            importWO wo = new importWO();
-            wo.Show();
-            this.Hide();
-        }
-
-        private void workOrderToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void compareWOVsLLToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void backButton_Click(object sender, EventArgs e)
@@ -69,6 +52,11 @@ namespace CompareWOLL
             MainMenu mm = new MainMenu();
             mm.Show();
             this.Hide();
+        }
+
+        private void importWO_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
