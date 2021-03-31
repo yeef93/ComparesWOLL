@@ -43,7 +43,7 @@ namespace CompareWOLL
 
         private void addWO_Load(object sender, EventArgs e)
         {
-
+            dateTimeNow.Text = DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:ss");
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             dataGridViewWO.ReadOnly = true;
@@ -101,7 +101,6 @@ namespace CompareWOLL
                         woQty.Text = dataGridViewWO.Rows[0].Cells[12].Value.ToString();
                         //dataGridViewWO.Rows[0].Cells[12].Value.ToString().StartsWith("35");
                         //woUsage.Text = dataGridViewWO.Rows.Count.ToString();
-
 
                         //show total qty component
                         int sum = 0;
@@ -204,8 +203,6 @@ namespace CompareWOLL
                     MessageBox.Show(ex.Message.ToString());
                     saveButton.Enabled = true;
                 }
-
-
             }            
         }
 

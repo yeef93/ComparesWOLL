@@ -46,9 +46,9 @@ namespace CompareWOLL
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.dateTimeNow});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 428);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 346);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(780, 22);
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -83,7 +83,7 @@ namespace CompareWOLL
             // importWO
             // 
             this.importWO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.importWO.Location = new System.Drawing.Point(597, 25);
+            this.importWO.Location = new System.Drawing.Point(577, 25);
             this.importWO.Name = "importWO";
             this.importWO.Size = new System.Drawing.Size(75, 23);
             this.importWO.TabIndex = 6;
@@ -94,7 +94,7 @@ namespace CompareWOLL
             // backButton
             // 
             this.backButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.backButton.Location = new System.Drawing.Point(678, 25);
+            this.backButton.Location = new System.Drawing.Point(658, 25);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(75, 23);
             this.backButton.TabIndex = 9;
@@ -106,7 +106,7 @@ namespace CompareWOLL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(780, 368);
             this.Controls.Add(this.backButton);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.dataGridViewWoList);

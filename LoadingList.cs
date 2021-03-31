@@ -56,7 +56,9 @@ namespace CompareWOLL
 
         private void importWO_Click(object sender, EventArgs e)
         {
-
+            importLL ill = new importLL();
+            ill.Show();
+            this.Hide();
         }
     }
 }
