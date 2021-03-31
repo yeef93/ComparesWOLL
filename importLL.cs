@@ -117,11 +117,11 @@ namespace CompareWOLL
                         dtExcel = ReadExcel(woFileName, fileExtLL, queryLL); //read excel file  
                         dataGridViewLLHide.DataSource = dtExcel;
 
-                       tbModel.Text = dataGridViewLLHide.Rows[0].Cells[0].Value.ToString();
-                       tbMachine.Text = dataGridViewLLHide.Rows[1].Cells[0].Value.ToString();
-                       tbPWBType.Text = dataGridViewLLHide.Rows[2].Cells[0].Value.ToString();
-                       tbMachine.Text = dataGridViewLLHide.Rows[3].Cells[0].Value.ToString();
-                       tbProg.Text = dataGridViewLLHide.Rows[3].Cells[0].Value.ToString();
+                       tbModel.Text = dataGridViewLLHide.Rows[0].Cells[0].Value.ToString().Remove(0,12);
+                       tbMachine.Text = dataGridViewLLHide.Rows[1].Cells[0].Value.ToString().Remove(0, 12);
+                       tbPWBType.Text = dataGridViewLLHide.Rows[2].Cells[0].Value.ToString().Remove(0, 12);
+                       tbMachine.Text = dataGridViewLLHide.Rows[3].Cells[0].Value.ToString().Remove(0, 12);
+                       tbProg.Text = dataGridViewLLHide.Rows[3].Cells[0].Value.ToString().Remove(0, 12);
                        tbRev.Text = dataGridViewLLHide.Rows[4].Cells[5].Value.ToString();
 
 
@@ -131,15 +131,15 @@ namespace CompareWOLL
                         dataGridViewLL.DataSource = dtExcel1;
 
 
-                        //show total qty component
-                        int sum = 0;
-                        for (int i = 0; i < dataGridViewLL.Rows.Count; ++i)
-                        {
-                            //get total qty component
-                            sum += Convert.ToInt32(dataGridViewLL.Rows[i].Cells[3].Value);
+                        ////show total qty component
+                        //int sum = 0;
+                        //for (int i = 0; i < dataGridViewLL.Rows.Count; ++i)
+                        //{
+                        //    //get total qty component
+                        //    sum += Convert.ToInt32(dataGridViewLL.Rows[i].Cells[3].Value);
 
-                        }
-                        llUsage.Text = sum.ToString();
+                        //}
+                        //llUsage.Text = sum.ToString();
 
 
                     }
@@ -196,6 +196,79 @@ namespace CompareWOLL
         private void cmbProcess_SelectedIndexChanged(object sender, EventArgs e)
         {
             browseLL.Enabled = true;
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            string model = tbModel.Text;
+            string machine = tbMachine.Text;
+            string pwbType = tbPWBType.Text;
+            string prog = tbProg.Text;
+            string rev = tbRev.Text;
+            
+            saveButton.Enabled = false;
+
+
+            if (model == "" | machine == "" | pwbType == "" | prog == "" | rev == "")
+            {
+                MessageBox.Show("Unable to import Work Order without fill data properly", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                saveButton.Enabled = true;
+            }
+
+            else
+            {
+                try
+                {
+                    var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
+                    var cmd = new MySqlCommand("", conn);
+
+                    string query = "INSERT INTO tbl_ll VALUES('" + model + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','sda','')";
+                    //string querymodel = "INSERT INTO tbl_model VALUES('','" + modelNoo + "')";
+
+                    conn.Open();
+                    //Buka koneksi
+
+                    string[] allQuery = { query };
+                    for (int i = 0; i < allQuery.Length; i++)
+                    {
+                        cmd.CommandText = allQuery[i];
+                        //Masukkan perintah/query yang akan dijalankan ke dalam CommandText
+                        cmd.ExecuteNonQuery();
+                        //Jalankan perintah / query dalam CommandText pada database
+                    }
+
+                    //cmd.CommandText = query;
+                    //cmd.CommandText = querymodel;
+                    ////Masukkan perintah/query yang akan dijalankan ke dalam CommandText  
+
+                    //for (int i = 0; i < dataGridViewWO.Rows.Count; i++)
+                    //{
+                    //    string StrQuery = "INSERT INTO tbl_wodetail VALUES ('"
+                    //        + dataGridViewWO.Rows[i].Cells[3].Value.ToString() + "', '"
+                    //        + dataGridViewWO.Rows[i].Cells[2].Value.ToString() + "', '"
+                    //        + dataGridViewWO.Rows[i].Cells[9].Value.ToString() + "', '"
+                    //        + dataGridViewWO.Rows[i].Cells[4].Value.ToString() + "');";
+                    //    cmd.CommandText = StrQuery;
+                    //    cmd.ExecuteNonQuery();
+                    //}
+
+                    conn.Close();
+                    //Tutup koneksi
+
+                    MessageBox.Show("Loading List Successfully saved", "Loading List", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    saveButton.Enabled = true;
+
+                    this.Close();
+                    WorkOrder wo = new WorkOrder();
+                    wo.Show();
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                    saveButton.Enabled = true;
+                }
+            }
         }
     }
 }
