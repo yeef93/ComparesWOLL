@@ -43,7 +43,7 @@ namespace CompareWOLL
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             dataGridViewLLHide.Visible = false;
             browseLL.Enabled = false;
-            
+            saveButton.Enabled = false;            
 
             MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
             connection.Open();
@@ -159,6 +159,8 @@ namespace CompareWOLL
                 {
                     dataGridViewLL.Columns[i].HeaderText = "" + titleWO[i];
                 }
+
+                saveButton.Enabled = true;
             }
         }
 
@@ -259,8 +261,8 @@ namespace CompareWOLL
                     saveButton.Enabled = true;
 
                     this.Close();
-                    WorkOrder wo = new WorkOrder();
-                    wo.Show();
+                    LoadingList ll = new LoadingList();
+                    ll.Show();
                 }
 
                 catch (Exception ex)

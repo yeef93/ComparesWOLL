@@ -33,7 +33,7 @@ namespace CompareWOLL
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
             this.dataGridViewWoList = new System.Windows.Forms.DataGridView();
-            this.importWO = new System.Windows.Forms.Button();
+            this.importLL = new System.Windows.Forms.Button();
             this.backButton = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWoList)).BeginInit();
@@ -80,16 +80,16 @@ namespace CompareWOLL
             this.dataGridViewWoList.Size = new System.Drawing.Size(729, 262);
             this.dataGridViewWoList.TabIndex = 7;
             // 
-            // importWO
+            // importLL
             // 
-            this.importWO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.importWO.Location = new System.Drawing.Point(577, 25);
-            this.importWO.Name = "importWO";
-            this.importWO.Size = new System.Drawing.Size(75, 23);
-            this.importWO.TabIndex = 6;
-            this.importWO.Text = "Import";
-            this.importWO.UseVisualStyleBackColor = true;
-            this.importWO.Click += new System.EventHandler(this.importWO_Click);
+            this.importLL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.importLL.Location = new System.Drawing.Point(577, 25);
+            this.importLL.Name = "importLL";
+            this.importLL.Size = new System.Drawing.Size(75, 23);
+            this.importLL.TabIndex = 6;
+            this.importLL.Text = "Import";
+            this.importLL.UseVisualStyleBackColor = true;
+            this.importLL.Click += new System.EventHandler(this.importWO_Click);
             // 
             // backButton
             // 
@@ -110,7 +110,7 @@ namespace CompareWOLL
             this.Controls.Add(this.backButton);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.dataGridViewWoList);
-            this.Controls.Add(this.importWO);
+            this.Controls.Add(this.importLL);
             this.Name = "LoadingList";
             this.Text = "Loading List";
             this.Load += new System.EventHandler(this.LoadingList_Load);
@@ -128,7 +128,7 @@ namespace CompareWOLL
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel dateTimeNow;
         private System.Windows.Forms.DataGridView dataGridViewWoList;
-        private System.Windows.Forms.Button importWO;
+        private System.Windows.Forms.Button importLL;
         private System.Windows.Forms.Button backButton;
     }
 }
