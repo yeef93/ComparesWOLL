@@ -62,6 +62,8 @@ namespace CompareWOLL
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
             this.openFileDialogLL = new System.Windows.Forms.OpenFileDialog();
             this.dataGridViewLL = new System.Windows.Forms.DataGridView();
+            this.tbPcbNo = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLLHide)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -94,6 +96,8 @@ namespace CompareWOLL
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.tbPcbNo);
+            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.tbRev);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.tbProg);
@@ -358,14 +362,11 @@ namespace CompareWOLL
             // dataGridViewLL
             // 
             this.dataGridViewLL.AllowUserToAddRows = false;
-            this.dataGridViewLL.AllowUserToDeleteRows = false;
-            this.dataGridViewLL.AllowUserToOrderColumns = true;
-            this.dataGridViewLL.AllowUserToResizeColumns = false;
-            this.dataGridViewLL.AllowUserToResizeRows = false;
             this.dataGridViewLL.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewLL.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewLL.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridViewLL.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -385,9 +386,24 @@ namespace CompareWOLL
             this.dataGridViewLL.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewLL.Location = new System.Drawing.Point(12, 352);
             this.dataGridViewLL.Name = "dataGridViewLL";
-            this.dataGridViewLL.ReadOnly = true;
             this.dataGridViewLL.Size = new System.Drawing.Size(852, 311);
             this.dataGridViewLL.TabIndex = 34;
+            // 
+            // tbPcbNo
+            // 
+            this.tbPcbNo.Location = new System.Drawing.Point(544, 242);
+            this.tbPcbNo.Name = "tbPcbNo";
+            this.tbPcbNo.Size = new System.Drawing.Size(223, 20);
+            this.tbPcbNo.TabIndex = 45;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(447, 242);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(45, 13);
+            this.label10.TabIndex = 44;
+            this.label10.Text = "PCB No";
             // 
             // importLL
             // 
@@ -445,5 +461,7 @@ namespace CompareWOLL
         private System.Windows.Forms.TextBox tbMachine;
         private System.Windows.Forms.TextBox tbModel;
         private System.Windows.Forms.DataGridView dataGridViewLL;
+        private System.Windows.Forms.TextBox tbPcbNo;
+        private System.Windows.Forms.Label label10;
     }
 }

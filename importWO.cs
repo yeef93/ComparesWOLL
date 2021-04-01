@@ -103,7 +103,9 @@ namespace CompareWOLL
                         modelNo.Text = dataGridViewWO.Rows[0].Cells[2].Value.ToString();
                         model.Text = dataGridViewWO.Rows[0].Cells[0].Value.ToString();
                         woQty.Text = dataGridViewWO.Rows[0].Cells[9].Value.ToString();
-                        //dataGridViewWO.Rows[0].Cells[12].Value.ToString().StartsWith("35");
+                        //bool pcbNoo = dataGridViewWO.Rows[0].Cells[2].Value.ToString().StartsWith("35");
+                        //pcbNo.Text = pcbNoo.ToString();
+
                         //woUsage.Text = dataGridViewWO.Rows.Count.ToString();
 
 

@@ -129,13 +129,20 @@ namespace CompareWOLL
                         dtExcel1 = ReadExcel(woFileName, fileExtLL, queryLLDetail); //read excel file  
                         dataGridViewLL.DataSource = dtExcel1;
 
+                        dataGridViewLL.Columns.RemoveAt(5);
+                        dataGridViewLL.Columns.RemoveAt(6);
 
                         ////show total qty component
                         //int sum = 0;
                         //for (int i = 0; i < dataGridViewLL.Rows.Count; ++i)
                         //{
+                        //    if (dataGridViewLL.Rows[i].Cells[2].Value == "")
+                        //    {
+                        //        dataGridViewLL.Rows.RemoveAt(i);
+                        //    }
+
                         //    //get total qty component
-                        //    sum += Convert.ToInt32(dataGridViewLL.Rows[i].Cells[3].Value);
+                        //    sum += Convert.ToInt32(dataGridViewLL.Rows[i].Cells[2].Value);
 
                         //}
                         //llUsage.Text = sum.ToString();
@@ -153,7 +160,7 @@ namespace CompareWOLL
                 }
 
                 // Set table title Wo
-                string[] titleWO = { "REEL", "PART CODE", "TP", "QTY", "LOC.", "", "DEC", "","F.Type" };
+                string[] titleWO = { "REEL", "PART CODE", "TP", "QTY", "LOC.", "DEC", "F.Type" };
                 for (int i = 0; i < titleWO.Length; i++)
                 {
                     dataGridViewLL.Columns[i].HeaderText = "" + titleWO[i];
@@ -201,16 +208,19 @@ namespace CompareWOLL
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            string model = tbModel.Text;
+            string model = cmbModelNo.Text;            
+            string process = cmbProcess.Text;
+            string modelLL = tbModel.Text;
             string machine = tbMachine.Text;
             string pwbType = tbPWBType.Text;
             string prog = tbProg.Text;
             string rev = tbRev.Text;
+            string pcb = tbPcbNo.Text;
             
             saveButton.Enabled = false;
 
 
-            if (model == "" | machine == "" | pwbType == "" | prog == "" | rev == "")
+            if (model == "" | process == "" | modelLL == "" | machine == "" | pwbType == "" | prog == "" | rev == "" | pcb == "")
             {
                 MessageBox.Show("Unable to import Work Order without fill data properly", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 saveButton.Enabled = true;
@@ -223,13 +233,13 @@ namespace CompareWOLL
                     var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
                     var cmd = new MySqlCommand("", conn);
 
-                    string query = "INSERT INTO tbl_ll VALUES('" + model + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','sda','')";
-                    //string querymodel = "INSERT INTO tbl_model VALUES('','" + modelNoo + "')";
+                    string queryLL = "INSERT INTO tbl_ll VALUES('" + model + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','')";
+                   
 
                     conn.Open();
                     //Buka koneksi
 
-                    string[] allQuery = { query };
+                    string[] allQuery = { queryLL };
                     for (int i = 0; i < allQuery.Length; i++)
                     {
                         cmd.CommandText = allQuery[i];
@@ -238,20 +248,16 @@ namespace CompareWOLL
                         //Jalankan perintah / query dalam CommandText pada database
                     }
 
-                    //cmd.CommandText = query;
-                    //cmd.CommandText = querymodel;
-                    ////Masukkan perintah/query yang akan dijalankan ke dalam CommandText  
-
-                    //for (int i = 0; i < dataGridViewWO.Rows.Count; i++)
-                    //{
-                    //    string StrQuery = "INSERT INTO tbl_wodetail VALUES ('"
-                    //        + dataGridViewWO.Rows[i].Cells[3].Value.ToString() + "', '"
-                    //        + dataGridViewWO.Rows[i].Cells[2].Value.ToString() + "', '"
-                    //        + dataGridViewWO.Rows[i].Cells[9].Value.ToString() + "', '"
-                    //        + dataGridViewWO.Rows[i].Cells[4].Value.ToString() + "');";
-                    //    cmd.CommandText = StrQuery;
-                    //    cmd.ExecuteNonQuery();
-                    //}
+                    for (int i = 0; i < dataGridViewLL.Rows.Count; i++)
+                    {
+                        string StrQuery = "INSERT INTO tbl_wodetail VALUES ('"
+                            + dataGridViewLL.Rows[i].Cells[3].Value.ToString() + "', '"
+                            + dataGridViewLL.Rows[i].Cells[2].Value.ToString() + "', '"
+                            + dataGridViewLL.Rows[i].Cells[9].Value.ToString() + "', '"
+                            + dataGridViewLL.Rows[i].Cells[4].Value.ToString() + "');";
+                        cmd.CommandText = StrQuery;
+                        cmd.ExecuteNonQuery();
+                    }
 
                     conn.Close();
                     //Tutup koneksi
