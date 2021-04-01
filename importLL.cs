@@ -262,29 +262,22 @@ namespace CompareWOLL
 
                         cmd.CommandText = StrQuery;
                         cmd.ExecuteNonQuery();
+                    }
 
+                    for (int j = 0; j < dataGridViewLL.Rows.Count; j++)
+                    {
+                        if (dataGridViewLL.Rows[j].Cells[0].Value.ToString() != "")
+                    {
+                        string StrQueryLLDetail = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','"
+                        + dataGridViewLL.Rows[j].Cells[0].Value.ToString() + "', '"
+                        + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "', '', '', '', '', '', '"
+                        + dataGridViewLL.Rows[j].Cells[3].Value.ToString() + "', '"
+                        + dataGridViewLL.Rows[j].Cells[4].Value.ToString() + "', '"
+                        + dataGridViewLL.Rows[j].Cells[6].Value.ToString() + "');";
 
-                        if (dataGridViewLL.Rows[i].Cells[0].Value.ToString() != "")
-                        {
-                            string StrQueryLLDetail = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','"
-                            + dataGridViewLL.Rows[i].Cells[0].Value.ToString() + "', '"
-                            + dataGridViewLL.Rows[i].Cells[1].Value.ToString() + "', '', '', '', '', '', '"
-                            + dataGridViewLL.Rows[i].Cells[3].Value.ToString() + "', '"
-                            + dataGridViewLL.Rows[i].Cells[4].Value.ToString() + "', '"
-                            + dataGridViewLL.Rows[i].Cells[6].Value.ToString() + "');";
-
-                            cmd.CommandText = StrQueryLLDetail;
-                            cmd.ExecuteNonQuery();
-                        }
-
-                        else if (dataGridViewLL.Rows[i].Cells[0].Value.ToString() == "" || dataGridViewLL.Rows[i].Cells[0].Value.ToString() != "")
-                        {
-                            string StrQueryLLDetails = "UPDATE tbl_lldetail SET choice2 = '2' WHERE model_No = '" + model + "' AND process_Name = '" + process + "' AND reel = '" + dataGridViewLL.Rows[i].Cells[0].Value.ToString() + "');";
-
-                            cmd.CommandText = StrQueryLLDetails;
-                            cmd.ExecuteNonQuery();
-                        }
-
+                        cmd.CommandText = StrQueryLLDetail;
+                        cmd.ExecuteNonQuery();
+                    }
 
                     }
 
