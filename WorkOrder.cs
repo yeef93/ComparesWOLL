@@ -36,6 +36,15 @@ namespace CompareWOLL
                 adpt.Fill(dset);
 
                 dataGridViewWoList.DataSource = dset.Tables[0];
+
+                // add button in datagridview table
+                DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
+                dataGridViewWoList.Columns.Add(btn);
+                btn.HeaderText = "";
+                btn.Text = "Detail";
+                btn.Name = "btn";
+                btn.UseColumnTextForButtonValue = true;
+
             }
             connection.Close();
 
@@ -69,6 +78,17 @@ namespace CompareWOLL
             MainMenu mm = new MainMenu();
             mm.Show();
             this.Hide();
+        }
+
+        private void dataGridViewWoList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 5)
+            {
+                WorkOrderDetail wod = new WorkOrderDetail();
+                wod.Show();
+                this.Hide();
+                //MessageBox.Show((e.RowIndex + 1) + "  Row  " + (e.ColumnIndex + 1) + "  Column button clicked ");
+            }
         }
     }
 }

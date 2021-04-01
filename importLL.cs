@@ -120,7 +120,6 @@ namespace CompareWOLL
                        tbModel.Text = dataGridViewLLHide.Rows[0].Cells[0].Value.ToString().Remove(0,12);
                        tbMachine.Text = dataGridViewLLHide.Rows[1].Cells[0].Value.ToString().Remove(0, 12);
                        tbPWBType.Text = dataGridViewLLHide.Rows[2].Cells[0].Value.ToString().Remove(0, 12);
-                       tbMachine.Text = dataGridViewLLHide.Rows[3].Cells[0].Value.ToString().Remove(0, 12);
                        tbProg.Text = dataGridViewLLHide.Rows[3].Cells[0].Value.ToString().Remove(0, 12);
                        tbRev.Text = dataGridViewLLHide.Rows[4].Cells[5].Value.ToString();
 

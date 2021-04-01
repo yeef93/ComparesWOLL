@@ -94,20 +94,25 @@ namespace CompareWOLL
                         dataGridViewWO.Visible = true;
                         dataGridViewWO.DataSource = dtExcel;
 
-                        woPTSN.Text = dataGridViewWO.Rows[0].Cells[11].Value.ToString();
-                        woNo.Text = dataGridViewWO.Rows[0].Cells[7].Value.ToString();
-                        modelNo.Text = dataGridViewWO.Rows[0].Cells[3].Value.ToString();
+                        dataGridViewWO.Columns.RemoveAt(1);
+                        dataGridViewWO.Columns.RemoveAt(5);
+                        dataGridViewWO.Columns.RemoveAt(8);
+
+                        woPTSN.Text = dataGridViewWO.Rows[0].Cells[8].Value.ToString();
+                        woNo.Text = dataGridViewWO.Rows[0].Cells[5].Value.ToString();
+                        modelNo.Text = dataGridViewWO.Rows[0].Cells[2].Value.ToString();
                         model.Text = dataGridViewWO.Rows[0].Cells[0].Value.ToString();
-                        woQty.Text = dataGridViewWO.Rows[0].Cells[12].Value.ToString();
+                        woQty.Text = dataGridViewWO.Rows[0].Cells[9].Value.ToString();
                         //dataGridViewWO.Rows[0].Cells[12].Value.ToString().StartsWith("35");
                         //woUsage.Text = dataGridViewWO.Rows.Count.ToString();
+
 
                         //show total qty component
                         int sum = 0;
                         for (int i = 0; i < dataGridViewWO.Rows.Count; ++i)
                         {
                             //get total qty component
-                            sum += Convert.ToInt32(dataGridViewWO.Rows[i].Cells[4].Value);
+                            sum += Convert.ToInt32(dataGridViewWO.Rows[i].Cells[3].Value);
 
                         }
                         woUsage.Text = sum.ToString();
@@ -125,7 +130,7 @@ namespace CompareWOLL
                 }
 
                 // Set table title Wo
-                string[] titleWO = { "Model", "", "Part No", "Model No", "Usage", "Issue", "", "WO No", "BOM Row", "Process","",  "WO PTSN", "WO Qty" };
+                string[] titleWO = { "Model", "Part No", "Model No", "Usage", "Issue", "WO No", "BOM Row", "Process", "WO PTSN", "WO Qty" };
                 for (int i = 0; i < titleWO.Length; i++)
                 {
                     dataGridViewWO.Columns[i].HeaderText = "" + titleWO[i];
@@ -179,10 +184,10 @@ namespace CompareWOLL
                     for (int i = 0; i < dataGridViewWO.Rows.Count; i++)
                     {
                         string StrQuery = "INSERT INTO tbl_wodetail VALUES ('"
-                            + dataGridViewWO.Rows[i].Cells[3].Value.ToString() + "', '"
                             + dataGridViewWO.Rows[i].Cells[2].Value.ToString() + "', '"
-                            + dataGridViewWO.Rows[i].Cells[9].Value.ToString() + "', '"
-                            + dataGridViewWO.Rows[i].Cells[4].Value.ToString() + "');";
+                            + dataGridViewWO.Rows[i].Cells[1].Value.ToString() + "', '"
+                            + dataGridViewWO.Rows[i].Cells[7].Value.ToString() + "', '"
+                            + dataGridViewWO.Rows[i].Cells[3].Value.ToString() + "');";
                         cmd.CommandText = StrQuery;
                         cmd.ExecuteNonQuery();
                     }

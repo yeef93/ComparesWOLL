@@ -49,10 +49,10 @@ namespace CompareWOLL
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.pcbNo = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.woUsage = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.pcbNo = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.backButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWO)).BeginInit();
@@ -178,6 +178,7 @@ namespace CompareWOLL
             this.dataGridViewWO.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewWO.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewWO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewWO.Location = new System.Drawing.Point(12, 296);
             this.dataGridViewWO.Name = "dataGridViewWO";
@@ -248,23 +249,6 @@ namespace CompareWOLL
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Work Order Detail";
             // 
-            // pcbNo
-            // 
-            this.pcbNo.Location = new System.Drawing.Point(481, 178);
-            this.pcbNo.Name = "pcbNo";
-            this.pcbNo.ReadOnly = true;
-            this.pcbNo.Size = new System.Drawing.Size(223, 20);
-            this.pcbNo.TabIndex = 22;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(386, 185);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(45, 13);
-            this.label7.TabIndex = 21;
-            this.label7.Text = "PCB No";
-            // 
             // woUsage
             // 
             this.woUsage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -286,6 +270,23 @@ namespace CompareWOLL
             this.label8.Size = new System.Drawing.Size(94, 16);
             this.label8.TabIndex = 26;
             this.label8.Text = "Total Usage";
+            // 
+            // pcbNo
+            // 
+            this.pcbNo.Location = new System.Drawing.Point(481, 178);
+            this.pcbNo.Name = "pcbNo";
+            this.pcbNo.ReadOnly = true;
+            this.pcbNo.Size = new System.Drawing.Size(223, 20);
+            this.pcbNo.TabIndex = 22;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(386, 185);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(45, 13);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "PCB No";
             // 
             // backButton
             // 

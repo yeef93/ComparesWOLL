@@ -138,6 +138,12 @@
     <Compile Include="WorkOrder.Designer.cs">
       <DependentUpon>WorkOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="WorkOrderDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorkOrderDetail.Designer.cs">
+      <DependentUpon>WorkOrderDetail.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="importLL.resx">
       <DependentUpon>importLL.cs</DependentUpon>
     </EmbeddedResource>
@@ -167,6 +173,9 @@
     </Compile>
     <EmbeddedResource Include="WorkOrder.resx">
       <DependentUpon>WorkOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorkOrderDetail.resx">
+      <DependentUpon>WorkOrderDetail.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
