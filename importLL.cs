@@ -95,7 +95,6 @@ namespace CompareWOLL
             string queryLL = string.Empty;
             string queryLLDetail = string.Empty;
 
-
             openFileDialogLL.Title = "Please Select a File Loading List";
             openFileDialogLL.Filter = "Excel Files|*.xls;*.xlsx;";
             openFileDialogLL.InitialDirectory = @"D:\";
@@ -164,6 +163,11 @@ namespace CompareWOLL
                 for (int i = 0; i < titleWO.Length; i++)
                 {
                     dataGridViewLL.Columns[i].HeaderText = "" + titleWO[i];
+                }
+
+                for (int i = 0; i < dataGridViewLL.Columns.Count; i++)
+                {
+                    dataGridViewLL.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
 
                 saveButton.Enabled = true;
@@ -250,13 +254,38 @@ namespace CompareWOLL
 
                     for (int i = 0; i < dataGridViewLL.Rows.Count; i++)
                     {
-                        string StrQuery = "INSERT INTO tbl_wodetail VALUES ('"
-                            + dataGridViewLL.Rows[i].Cells[3].Value.ToString() + "', '"
+                        // query insert data part code
+                        string StrQuery = "INSERT INTO tbl_partcodedetail VALUES ('" + model + "','" + process + "','"
+                            + dataGridViewLL.Rows[i].Cells[1].Value.ToString() + "', '"
                             + dataGridViewLL.Rows[i].Cells[2].Value.ToString() + "', '"
-                            + dataGridViewLL.Rows[i].Cells[9].Value.ToString() + "', '"
-                            + dataGridViewLL.Rows[i].Cells[4].Value.ToString() + "');";
+                            + dataGridViewLL.Rows[i].Cells[5].Value.ToString() + "');";
+
                         cmd.CommandText = StrQuery;
                         cmd.ExecuteNonQuery();
+
+
+                        if (dataGridViewLL.Rows[i].Cells[0].Value.ToString() != "")
+                        {
+                            string StrQueryLLDetail = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','"
+                            + dataGridViewLL.Rows[i].Cells[0].Value.ToString() + "', '"
+                            + dataGridViewLL.Rows[i].Cells[1].Value.ToString() + "', '', '', '', '', '', '"
+                            + dataGridViewLL.Rows[i].Cells[3].Value.ToString() + "', '"
+                            + dataGridViewLL.Rows[i].Cells[4].Value.ToString() + "', '"
+                            + dataGridViewLL.Rows[i].Cells[6].Value.ToString() + "');";
+
+                            cmd.CommandText = StrQueryLLDetail;
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        else if (dataGridViewLL.Rows[i].Cells[0].Value.ToString() == "" || dataGridViewLL.Rows[i].Cells[0].Value.ToString() != "")
+                        {
+                            string StrQueryLLDetails = "UPDATE tbl_lldetail SET choice2 = '2' WHERE model_No = '" + model + "' AND process_Name = '" + process + "' AND reel = '" + dataGridViewLL.Rows[i].Cells[0].Value.ToString() + "');";
+
+                            cmd.CommandText = StrQueryLLDetails;
+                            cmd.ExecuteNonQuery();
+                        }
+
+
                     }
 
                     conn.Close();

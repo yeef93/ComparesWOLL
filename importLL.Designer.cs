@@ -386,6 +386,7 @@ namespace CompareWOLL
             this.dataGridViewLL.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewLL.Location = new System.Drawing.Point(12, 352);
             this.dataGridViewLL.Name = "dataGridViewLL";
+            this.dataGridViewLL.ReadOnly = true;
             this.dataGridViewLL.Size = new System.Drawing.Size(852, 311);
             this.dataGridViewLL.TabIndex = 34;
             // 
