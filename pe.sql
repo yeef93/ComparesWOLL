@@ -124,9 +124,9 @@ insert  into `tbl_lldetail_copy`(`model_No`,`process_Name`,`reel`,`partcode`,`al
 ('522J19C10000','SMT-A','1011','40110000109X','1',2,'ANT104, ANT103','12 X 4 E'),
 ('522J19C10000','SMT-A','1113','21AG00027068','1',1,'D107','8 X 4 E'),
 ('522J19C10000','SMT-A','1435','4002F1623063','1',1,'J101','24 X 12 E'),
-('522J19C10000','SMT-A','pcb','352J19SP1A9X','',1,'',''),
+('522J19C10000','SMT-A','pcb','352J19SP1A9X','1',1,'',''),
 ('522J19C10000','SMT-A','308','23D000RNA002','2',2,'R108, R106','8 X 2 P'),
-('522J19C10000','SMT-A','522','24050000169X','1',2,'B103, B102','8 X 2 P'),
+('522J19C10000','SMT-A','522','24050000169X','2',2,'B103, B102','8 X 2 P'),
 ('522J19C10000','SMT-A','621','24050000189X','2',1,'R103','8 X 2 P'),
 ('522J19C10000','SMT-A','623','240500001K9X','2',2,'R110, R152','8 X 2 P'),
 ('522J19C10000','SMT-A','710','40110000179X','2',2,'ANT107, ANT106','12 X 4 E'),
@@ -134,7 +134,9 @@ insert  into `tbl_lldetail_copy`(`model_No`,`process_Name`,`reel`,`partcode`,`al
 ('522J19C10000','SMT-A','1009','22BK1HC1052D','2',1,'C113','8 X 4 P'),
 ('522J19C10000','SMT-A','1011','40110000119X','2',2,'ANT104, ANT103','12 X 4 E'),
 ('522J19C10000','SMT-A','1113','21AG020330A9','2',1,'D107','8 X 4 E'),
-('522J19C10000','SMT-A','1435','4003000005AF','2',1,'J101','24 X 12 E');
+('522J19C10000','SMT-A','1435','4003000005AF','2',1,'J101','24 X 12 E'),
+('522J19C10000','SMT-A','pcb','354J19SP1A9X','2',1,'',''),
+('522J19C10000','SMT-A','pcb','356J19SP1A9X','3',1,'','');
 
 /*Table structure for table `tbl_model` */
 
@@ -193,6 +195,36 @@ insert  into `tbl_partcodedetail`(`model_No`,`process_Name`,`partcode`,`tp`,`dec
 ('522J19C10000','SMT-A','21AG020330A9',2,'DIODE-ESD BLK 033 0 Will S:2020 MSL:3 P:TRAY'),
 ('522J19C10000','SMT-A','4002F1623063',2,'USB TYPE-C-Connector (16PIN)'),
 ('522J19C10000','SMT-A','4003000005AF',2,'Connector_MicroUSB TypeC_Type C_Sink Borad_16_8A_IPX4_UC40-0B0104R0_HRD');
+
+/*Table structure for table `tbl_reel` */
+
+DROP TABLE IF EXISTS `tbl_reel`;
+
+CREATE TABLE `tbl_reel` (
+  `model_No` varchar(100) NOT NULL,
+  `process_Name` varchar(15) NOT NULL,
+  `reel` varchar(15) NOT NULL,
+  `qty` int(20) DEFAULT NULL,
+  `loc` mediumtext NOT NULL,
+  `f_Type` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `tbl_reel` */
+
+insert  into `tbl_reel`(`model_No`,`process_Name`,`reel`,`qty`,`loc`,`f_Type`) values 
+('522J19C10000','SMT-A','110',2,'C109, C102','8 X 2 P'),
+('522J19C10000','SMT-A','209',3,'C108, C106, C100','8 X 2 P'),
+('522J19C10000','SMT-A','524',1,'C112','8 X 2 P'),
+('522J19C10000','SMT-A','308',2,'R108, R106','8 X 2 P'),
+('522J19C10000','SMT-A','522',2,'B103, B102','8 X 2 P'),
+('522J19C10000','SMT-A','621',1,'R103','8 X 2 P'),
+('522J19C10000','SMT-A','623',2,'R110, R152','8 X 2 P'),
+('522J19C10000','SMT-A','710',2,'ANT107, ANT106','12 X 4 E'),
+('522J19C10000','SMT-A','809',2,'B104, B101','8 X 4 P'),
+('522J19C10000','SMT-A','1009',1,'C113','8 X 4 P'),
+('522J19C10000','SMT-A','1011',2,'ANT104, ANT103','12 X 4 E'),
+('522J19C10000','SMT-A','1113',1,'D107','8 X 4 E'),
+('522J19C10000','SMT-A','1435',1,'J101','24 X 12 E');
 
 /*Table structure for table `tbl_wo` */
 
