@@ -51,10 +51,10 @@ namespace CompareWOLL
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.woUsage = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.pcbNo = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.backButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.process = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWO)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -225,6 +225,8 @@ namespace CompareWOLL
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.process);
+            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.woUsage);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.woPTSN);
@@ -233,8 +235,6 @@ namespace CompareWOLL
             this.groupBox1.Controls.Add(this.modelNo);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.pcbNo);
-            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.woNo);
             this.groupBox1.Controls.Add(this.label3);
@@ -271,23 +271,6 @@ namespace CompareWOLL
             this.label8.TabIndex = 26;
             this.label8.Text = "Total Usage";
             // 
-            // pcbNo
-            // 
-            this.pcbNo.Location = new System.Drawing.Point(481, 178);
-            this.pcbNo.Name = "pcbNo";
-            this.pcbNo.ReadOnly = true;
-            this.pcbNo.Size = new System.Drawing.Size(223, 20);
-            this.pcbNo.TabIndex = 22;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(386, 185);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(45, 13);
-            this.label7.TabIndex = 21;
-            this.label7.Text = "PCB No";
-            // 
             // backButton
             // 
             this.backButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -309,6 +292,23 @@ namespace CompareWOLL
             this.button1.Text = "Home";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // process
+            // 
+            this.process.Location = new System.Drawing.Point(481, 174);
+            this.process.Name = "process";
+            this.process.ReadOnly = true;
+            this.process.Size = new System.Drawing.Size(223, 20);
+            this.process.TabIndex = 29;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(386, 181);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(45, 13);
+            this.label7.TabIndex = 28;
+            this.label7.Text = "Process";
             // 
             // importWO
             // 
@@ -357,11 +357,11 @@ namespace CompareWOLL
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel dateTimeNow;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox pcbNo;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox woUsage;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button backButton;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox process;
+        private System.Windows.Forms.Label label7;
     }
 }

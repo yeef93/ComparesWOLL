@@ -92,6 +92,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompareWOLL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CompareWOLL.Designer.cs">
+      <DependentUpon>CompareWOLL.cs</DependentUpon>
+    </Compile>
     <Compile Include="importLL.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +150,9 @@
     <Compile Include="WorkOrderDetail.Designer.cs">
       <DependentUpon>WorkOrderDetail.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CompareWOLL.resx">
+      <DependentUpon>CompareWOLL.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="importLL.resx">
       <DependentUpon>importLL.cs</DependentUpon>
     </EmbeddedResource>

@@ -36,6 +36,8 @@ namespace CompareWOLL
             this.backButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tbPcbNo = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.tbRev = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.tbProg = new System.Windows.Forms.TextBox();
@@ -52,8 +54,6 @@ namespace CompareWOLL
             this.cmbProcess = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbModelNo = new System.Windows.Forms.ComboBox();
-            this.llUsage = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.saveButton = new System.Windows.Forms.Button();
             this.dataGridViewLLHide = new System.Windows.Forms.DataGridView();
@@ -62,8 +62,6 @@ namespace CompareWOLL
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
             this.openFileDialogLL = new System.Windows.Forms.OpenFileDialog();
             this.dataGridViewLL = new System.Windows.Forms.DataGridView();
-            this.tbPcbNo = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLLHide)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -114,8 +112,6 @@ namespace CompareWOLL
             this.groupBox1.Controls.Add(this.cmbProcess);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.cmbModelNo);
-            this.groupBox1.Controls.Add(this.llUsage);
-            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Location = new System.Drawing.Point(12, 54);
             this.groupBox1.Name = "groupBox1";
@@ -123,6 +119,22 @@ namespace CompareWOLL
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Loading List Detail";
+            // 
+            // tbPcbNo
+            // 
+            this.tbPcbNo.Location = new System.Drawing.Point(544, 242);
+            this.tbPcbNo.Name = "tbPcbNo";
+            this.tbPcbNo.Size = new System.Drawing.Size(223, 20);
+            this.tbPcbNo.TabIndex = 45;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(447, 242);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(45, 13);
+            this.label10.TabIndex = 44;
+            this.label10.Text = "PCB No";
             // 
             // tbRev
             // 
@@ -264,28 +276,6 @@ namespace CompareWOLL
             this.cmbModelNo.TabIndex = 28;
             this.cmbModelNo.SelectedIndexChanged += new System.EventHandler(this.cmbModelNo_SelectedIndexChanged);
             // 
-            // llUsage
-            // 
-            this.llUsage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.llUsage.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.llUsage.Location = new System.Drawing.Point(718, 61);
-            this.llUsage.Name = "llUsage";
-            this.llUsage.ReadOnly = true;
-            this.llUsage.Size = new System.Drawing.Size(100, 47);
-            this.llUsage.TabIndex = 27;
-            this.llUsage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label8
-            // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(724, 39);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(94, 16);
-            this.label8.TabIndex = 26;
-            this.label8.Text = "Total Usage";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -390,22 +380,6 @@ namespace CompareWOLL
             this.dataGridViewLL.Size = new System.Drawing.Size(852, 311);
             this.dataGridViewLL.TabIndex = 34;
             // 
-            // tbPcbNo
-            // 
-            this.tbPcbNo.Location = new System.Drawing.Point(544, 242);
-            this.tbPcbNo.Name = "tbPcbNo";
-            this.tbPcbNo.Size = new System.Drawing.Size(223, 20);
-            this.tbPcbNo.TabIndex = 45;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(447, 242);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(45, 13);
-            this.label10.TabIndex = 44;
-            this.label10.Text = "PCB No";
-            // 
             // importLL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -436,8 +410,6 @@ namespace CompareWOLL
         private System.Windows.Forms.Button backButton;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox llUsage;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbProcess;
         private System.Windows.Forms.Label label1;

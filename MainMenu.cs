@@ -24,7 +24,9 @@ namespace CompareWOLL
 
         private void compareWOVsLLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            CompareWOLL cwl = new CompareWOLL();
+            cwl.Show();
+            this.Hide();
         }
 
         private void workOrderToolStripMenuItem1_Click(object sender, EventArgs e)

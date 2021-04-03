@@ -122,31 +122,13 @@ namespace CompareWOLL
                        tbProg.Text = dataGridViewLLHide.Rows[3].Cells[0].Value.ToString().Remove(0, 12);
                        tbRev.Text = dataGridViewLLHide.Rows[4].Cells[5].Value.ToString();
 
-
                         // baca data detail LL
                         DataTable dtExcel1 = new DataTable();
                         dtExcel1 = ReadExcel(woFileName, fileExtLL, queryLLDetail); //read excel file  
                         dataGridViewLL.DataSource = dtExcel1;
 
                         dataGridViewLL.Columns.RemoveAt(5);
-                        dataGridViewLL.Columns.RemoveAt(6);
-
-                        ////show total qty component
-                        //int sum = 0;
-                        //for (int i = 0; i < dataGridViewLL.Rows.Count; ++i)
-                        //{
-                        //    if (dataGridViewLL.Rows[i].Cells[2].Value == "")
-                        //    {
-                        //        dataGridViewLL.Rows.RemoveAt(i);
-                        //    }
-
-                        //    //get total qty component
-                        //    sum += Convert.ToInt32(dataGridViewLL.Rows[i].Cells[2].Value);
-
-                        //}
-                        //llUsage.Text = sum.ToString();
-
-
+                        dataGridViewLL.Columns.RemoveAt(6); 
                     }
                     catch (Exception ex)
                     {
@@ -223,6 +205,24 @@ namespace CompareWOLL
             
             saveButton.Enabled = false;
 
+            //show total qty component
+            int sum = 0;
+            for (int i = 0; i < dataGridViewLL.Rows.Count; ++i)
+            {
+                if (dataGridViewLL.Rows[i].Cells[3].Value == System.DBNull.Value)
+                {
+                    dataGridViewLL.Rows[i].Cells[3].Value = "0";
+                }
+
+                //get total qty component
+                sum += Convert.ToInt32(dataGridViewLL.Rows[i].Cells[3].Value);
+
+            }
+            sum = sum+1;
+
+            string llUsage = sum.ToString();
+
+
 
             if (model == "" | process == "" | modelLL == "" | machine == "" | pwbType == "" | prog == "" | rev == "" | pcb == "")
             {
@@ -237,7 +237,7 @@ namespace CompareWOLL
                     var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
                     var cmd = new MySqlCommand("", conn);
 
-                    string queryLL = "INSERT INTO tbl_ll VALUES('" + model + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','')";
+                    string queryLL = "INSERT INTO tbl_ll VALUES('" + model + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','"+ llUsage + "')";
                    
 
                     conn.Open();
@@ -270,20 +270,28 @@ namespace CompareWOLL
                     {
                         string StrQueryLLDetail = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','"
                         + dataGridViewLL.Rows[j].Cells[0].Value.ToString() + "', '"
-                        + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "', '', '', '', '', '', '', '', '"
+                        + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "', '1');";
+                            cmd.CommandText = StrQueryLLDetail;
+                            cmd.ExecuteNonQuery();
+
+
+                            string StrQueryReelDetail = "INSERT INTO tbl_reel VALUES ('" + model + "','" + process + "','"
+                        + dataGridViewLL.Rows[j].Cells[0].Value.ToString() + "', '"
                         + dataGridViewLL.Rows[j].Cells[3].Value.ToString() + "', '"
                         + dataGridViewLL.Rows[j].Cells[4].Value.ToString() + "', '"
                         + dataGridViewLL.Rows[j].Cells[6].Value.ToString() + "');";
-
-
-                            cmd.CommandText = StrQueryLLDetail;
+                            cmd.CommandText = StrQueryReelDetail;
                             cmd.ExecuteNonQuery();
-                    }
+
+
+                        }
                         else if (dataGridViewLL.Rows[j].Cells[0].Value.ToString() == "" || dataGridViewLL.Rows[--j].Cells[0].Value.ToString() != "")
                         {
                             //MessageBox.Show(dataGridViewLL.Rows[--j].Cells[0].Value.ToString(), "Loading List", MessageBoxButtons.OK, MessageBoxIcon.Information);                           
                             
-                            string StrQueryLLDetails = "UPDATE tbl_lldetail SET choice2 = '" + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "' WHERE model_No = '" + model + "' AND process_Name = '" + process + "' AND reel = '"+ dataGridViewLL.Rows[--j].Cells[0].Value.ToString() + "'; ";
+                            string StrQueryLLDetails = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','"
+                        + dataGridViewLL.Rows[--j].Cells[0].Value.ToString() + "', '"
+                        + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "', '2');";
 
                             cmd.CommandText = StrQueryLLDetails;
                             cmd.ExecuteNonQuery();
@@ -291,17 +299,17 @@ namespace CompareWOLL
                             j++;
                         }
 
-                        else if (dataGridViewLL.Rows[j].Cells[0].Value.ToString() == "" || dataGridViewLL.Rows[--j].Cells[0].Value.ToString() == "" || dataGridViewLL.Rows[j-2].Cells[0].Value.ToString() != "")
-                        {
-                            MessageBox.Show(dataGridViewLL.Rows[j-2].Cells[0].Value.ToString(), "Loading List", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //else if (dataGridViewLL.Rows[j].Cells[0].Value.ToString() == "" || dataGridViewLL.Rows[--j].Cells[0].Value.ToString() == "" || dataGridViewLL.Rows[2-j].Cells[0].Value.ToString() != "")
+                        //{
+                        //    MessageBox.Show(dataGridViewLL.Rows[2-j].Cells[0].Value.ToString(), "Loading List", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                            string StrQueryLLDetails = "UPDATE tbl_lldetail SET choice3 = '" + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "' WHERE model_No = '" + model + "' AND process_Name = '" + process + "' AND reel = '" + dataGridViewLL.Rows[j-2].Cells[0].Value.ToString() + "'; ";
+                        //    //string StrQueryLLDetails = "UPDATE tbl_lldetail SET choice3 = '" + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "' WHERE model_No = '" + model + "' AND process_Name = '" + process + "' AND reel = '" + dataGridViewLL.Rows[2-j].Cells[0].Value.ToString() + "'; ";
 
-                            cmd.CommandText = StrQueryLLDetails;
-                            cmd.ExecuteNonQuery();
+                        //    //cmd.CommandText = StrQueryLLDetails;
+                        //    //cmd.ExecuteNonQuery();
 
-                            j++;
-                        }
+                        //    j = j + 2;
+                        //}
 
                     }
 

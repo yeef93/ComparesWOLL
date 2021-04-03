@@ -82,7 +82,7 @@ namespace CompareWOLL
                 string woFileName = openFileDialogWO.FileName;
                 filepathWO.Text = woFileName;
                 fileExtWO = Path.GetExtension(woFileName); //get the file extension  
-                queryWO = "select * from [Sheet1$A2:M]";
+                queryWO = "select * from [Sheet1$A3:M]";
 
 
                 if (fileExtWO.CompareTo(".xls") == 0 || fileExtWO.CompareTo(".xlsx") == 0)
@@ -103,6 +103,7 @@ namespace CompareWOLL
                         modelNo.Text = dataGridViewWO.Rows[0].Cells[2].Value.ToString();
                         model.Text = dataGridViewWO.Rows[0].Cells[0].Value.ToString();
                         woQty.Text = dataGridViewWO.Rows[0].Cells[9].Value.ToString();
+                        process.Text = dataGridViewWO.Rows[0].Cells[7].Value.ToString();
                         //bool pcbNoo = dataGridViewWO.Rows[0].Cells[2].Value.ToString().StartsWith("35");
                         //pcbNo.Text = pcbNoo.ToString();
 
@@ -147,6 +148,7 @@ namespace CompareWOLL
             string modelNoo = modelNo.Text;
             string modell = model.Text;
             string woqtyy = woQty.Text;
+            string processs = process.Text;
             //string pcbNoo = pcbNo.Text;
             saveButton.Enabled = false;
 
@@ -164,8 +166,8 @@ namespace CompareWOLL
                     var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
                     var cmd = new MySqlCommand("", conn);
 
-                    string query = "INSERT INTO tbl_wo VALUES('" + woPTSNN + "','" + woNoo + "','" + modelNoo + "','" + modell + "', '" + woqtyy + "', '3520C3LM0A9T', '1 SIDE' )";
-                    string querymodel = "INSERT INTO tbl_model VALUES('','" + modelNoo + "')";
+                    string query = "INSERT INTO tbl_wo VALUES('" + woPTSNN + "','" + woNoo + "','" + modelNoo + "','" + modell + "', '" + woqtyy + "', '" + processs + "' )";
+                    string querymodel = "INSERT INTO tbl_model VALUES('','" + modelNoo + "','" + processs + "')";
 
                     conn.Open();
                     //Buka koneksi

@@ -27,7 +27,7 @@ namespace CompareWOLL
             MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
             connection.Open();
 
-            string query = "SELECT wo_PTSN, wo_No, model_No, model, wo_QTY FROM tbl_wo";
+            string query = "SELECT wo_PTSN, wo_No, model_No, model, wo_QTY, process_Name FROM tbl_wo";
 
             using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
             {
@@ -49,7 +49,7 @@ namespace CompareWOLL
             connection.Close();
 
             // Set table title Wo
-            string[] titleWO = { "WO PTSN", "WO NO", "MODEL NO", "MODEL", "WO QTY" };
+            string[] titleWO = { "WO PTSN", "WO NO", "MODEL NO", "MODEL", "WO QTY", "PROCESS NAME" };
             for (int i = 0; i < titleWO.Length; i++)
             {
                 dataGridViewWoList.Columns[i].HeaderText = "" + titleWO[i];
@@ -82,7 +82,7 @@ namespace CompareWOLL
 
         private void dataGridViewWoList_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 5)
+            if (e.ColumnIndex == 6)
             {
                 WorkOrderDetail wod = new WorkOrderDetail();
                 wod.Show();

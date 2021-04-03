@@ -214,7 +214,7 @@ namespace CompareWOLL
             this.dateTimeNow.Size = new System.Drawing.Size(124, 17);
             this.dateTimeNow.Text = "toolStripStatusLabel2";
             // 
-            // Form3
+            // CompareForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -223,9 +223,9 @@ namespace CompareWOLL
             this.Controls.Add(this.generateWOLL);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Name = "Form3";
+            this.Name = "CompareForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CompareWOLL";
+            this.Text = "Compare Work Order with Loading List";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWO)).EndInit();
