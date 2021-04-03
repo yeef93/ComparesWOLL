@@ -214,7 +214,9 @@ namespace CompareWOLL
                     adpt.Fill(dset);
 
                     dataGridViewCompareLLWO.DataSource = dset.Tables[0];
+
                 }
+
                 connection.Close();
 
                 // Set table title Wo
