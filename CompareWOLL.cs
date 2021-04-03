@@ -239,11 +239,7 @@ namespace CompareWOLL
                     compareQty.Text = "Not Match";
                     compareQty.BackColor = System.Drawing.Color.Red;
                     btnGenerate.Enabled = false;
-
                 }
-
-
-
 
             }
             catch (Exception ex)
