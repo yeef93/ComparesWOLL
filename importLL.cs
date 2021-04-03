@@ -239,7 +239,6 @@ namespace CompareWOLL
 
                     string queryLL = "INSERT INTO tbl_ll VALUES('" + model + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','"+ llUsage + "')";
                    
-
                     conn.Open();
                     //Buka koneksi
 
@@ -270,7 +269,8 @@ namespace CompareWOLL
                     {
                         string StrQueryLLDetail = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','"
                         + dataGridViewLL.Rows[j].Cells[0].Value.ToString() + "', '"
-                        + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "', '1');";
+                        + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "', '1', '"
+                        + dataGridViewLL.Rows[j].Cells[3].Value.ToString() + "');";
                             cmd.CommandText = StrQueryLLDetail;
                             cmd.ExecuteNonQuery();
 
@@ -288,16 +288,21 @@ namespace CompareWOLL
                         else if (dataGridViewLL.Rows[j].Cells[0].Value.ToString() == "" || dataGridViewLL.Rows[--j].Cells[0].Value.ToString() != "")
                         {
                             //MessageBox.Show(dataGridViewLL.Rows[--j].Cells[0].Value.ToString(), "Loading List", MessageBoxButtons.OK, MessageBoxIcon.Information);                           
-                            
+                            int k = --j;
+
                             string StrQueryLLDetails = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','"
-                        + dataGridViewLL.Rows[--j].Cells[0].Value.ToString() + "', '"
-                        + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "', '2');";
+                        + dataGridViewLL.Rows[k].Cells[0].Value.ToString() + "', '"
+                        + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "', '2', '"
+                        + dataGridViewLL.Rows[k].Cells[3].Value.ToString() + "');";
 
                             cmd.CommandText = StrQueryLLDetails;
                             cmd.ExecuteNonQuery();
 
                             j++;
                         }
+
+
+
 
                         //else if (dataGridViewLL.Rows[j].Cells[0].Value.ToString() == "" || dataGridViewLL.Rows[--j].Cells[0].Value.ToString() == "" || dataGridViewLL.Rows[2-j].Cells[0].Value.ToString() != "")
                         //{
@@ -312,6 +317,8 @@ namespace CompareWOLL
                         //}
 
                     }
+
+
 
                     conn.Close();
                     //Tutup koneksi

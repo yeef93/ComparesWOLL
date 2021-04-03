@@ -153,6 +153,7 @@ namespace CompareWOLL
             string queryWO = "SELECT SUM(qty) AS totalLL FROM tbl_wodetail WHERE model_No = '" + cmbWOModelNo.SelectedValue.ToString() + "' AND process_Name = '" + cmbWOProcess.SelectedValue.ToString() + "'";
             string queryLL = "SELECT part_Count FROM tbl_ll WHERE model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' AND process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
 
+            string queryTblWO = "SELECT partcode, qty FROM tbl_wodetail WHERE model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' AND process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
 
             try
             {
@@ -180,6 +181,25 @@ namespace CompareWOLL
                         llQty.Text = dset.Rows[0]["part_Count"].ToString();
                     }
 
+                }
+
+                string query = "SELECT partcode, qty FROM tbl_wodetail WHERE model_No =  '" + cmbLLModelNo.SelectedValue.ToString() + "' AND process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
+
+                using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
+                {
+                    DataSet dset = new DataSet();
+
+                    adpt.Fill(dset);
+
+                    dataGridViewCompareLLWO.DataSource = dset.Tables[0];
+                }
+                connection.Close();
+
+                // Set table title Wo
+                string[] titleWO = { "PART CODE WO", "QTY WO"};
+                for (int i = 0; i < titleWO.Length; i++)
+                {
+                    dataGridViewCompareLLWO.Columns[i].HeaderText = "" + titleWO[i];
                 }
 
 
