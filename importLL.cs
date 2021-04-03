@@ -152,7 +152,6 @@ namespace CompareWOLL
                     dataGridViewLL.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
 
-                saveButton.Enabled = true;
             }
         }
 
@@ -202,6 +201,8 @@ namespace CompareWOLL
             string prog = tbProg.Text;
             string rev = tbRev.Text;
             string pcb = tbPcbNo.Text;
+            string pcb1 = tbAltPcbNo1.Text;
+            string pcb2 = tbAltPcbNo2.Text;
             
             saveButton.Enabled = false;
 
@@ -222,8 +223,6 @@ namespace CompareWOLL
 
             string llUsage = sum.ToString();
 
-
-
             if (model == "" | process == "" | modelLL == "" | machine == "" | pwbType == "" | prog == "" | rev == "" | pcb == "")
             {
                 MessageBox.Show("Unable to import Work Order without fill data properly", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -238,11 +237,14 @@ namespace CompareWOLL
                     var cmd = new MySqlCommand("", conn);
 
                     string queryLL = "INSERT INTO tbl_ll VALUES('" + model + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','"+ llUsage + "')";
+                    string queryInputPCB = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '"+pcb+"', '1', '1');";
+                    string queryPCBAlt1 = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '"+pcb1+"', '2', '1');";
+                    string queryPCBAlt2 = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '"+pcb2+"', '3', '1');";
                    
                     conn.Open();
                     //Buka koneksi
 
-                    string[] allQuery = { queryLL };
+                    string[] allQuery = { queryLL, queryInputPCB };
                     for (int i = 0; i < allQuery.Length; i++)
                     {
                         cmd.CommandText = allQuery[i];
@@ -250,6 +252,19 @@ namespace CompareWOLL
                         cmd.ExecuteNonQuery();
                         //Jalankan perintah / query dalam CommandText pada database
                     }
+
+                    if (queryPCBAlt1 != "")
+                    {
+                        cmd.CommandText = queryPCBAlt1;
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    else if (queryPCBAlt2 != "")
+                    {
+                        cmd.CommandText = queryPCBAlt2;
+                        cmd.ExecuteNonQuery();
+                    }
+
 
                     for (int i = 0; i < dataGridViewLL.Rows.Count; i++)
                     {
@@ -288,11 +303,12 @@ namespace CompareWOLL
                         else if (dataGridViewLL.Rows[j].Cells[0].Value.ToString() == "" || dataGridViewLL.Rows[--j].Cells[0].Value.ToString() != "")
                         {
                             //MessageBox.Show(dataGridViewLL.Rows[--j].Cells[0].Value.ToString(), "Loading List", MessageBoxButtons.OK, MessageBoxIcon.Information);                           
-                            int k = --j;
+                            int l = j;
+                            int k = --j;                            
 
                             string StrQueryLLDetails = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','"
                         + dataGridViewLL.Rows[k].Cells[0].Value.ToString() + "', '"
-                        + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "', '2', '"
+                        + dataGridViewLL.Rows[l].Cells[1].Value.ToString() + "', '2', '"
                         + dataGridViewLL.Rows[k].Cells[3].Value.ToString() + "');";
 
                             cmd.CommandText = StrQueryLLDetails;
@@ -337,6 +353,11 @@ namespace CompareWOLL
                     saveButton.Enabled = true;
                 }
             }
+        }
+
+        private void tbPcbNo_TextChanged(object sender, EventArgs e)
+        {
+            saveButton.Enabled = true;
         }
     }
 }

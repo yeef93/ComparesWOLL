@@ -183,7 +183,12 @@ namespace CompareWOLL
 
                 }
 
-                string query = "SELECT partcode, qty FROM tbl_wodetail WHERE model_No =  '" + cmbLLModelNo.SelectedValue.ToString() + "' AND process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
+                string query = "SELECT tbl_wodetail.partcode, tbl_lldetail.partcode, tbl_wodetail.qty, " +
+                    "tbl_lldetail.qty, tbl_lldetail.alt_No FROM tbl_wodetail INNER JOIN tbl_lldetail " +
+                    "ON tbl_wodetail.partcode = tbl_lldetail.partcode WHERE " +
+                    "tbl_wodetail.model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' AND " +
+                    "tbl_wodetail.process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
+                    
 
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
                 {
@@ -196,7 +201,7 @@ namespace CompareWOLL
                 connection.Close();
 
                 // Set table title Wo
-                string[] titleWO = { "PART CODE WO", "QTY WO"};
+                string[] titleWO = { "PART CODE WO", "PART CODE LL", "QTY WO", "QTY LL", "ALT NO" };
                 for (int i = 0; i < titleWO.Length; i++)
                 {
                     dataGridViewCompareLLWO.Columns[i].HeaderText = "" + titleWO[i];

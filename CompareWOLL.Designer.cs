@@ -51,6 +51,9 @@ namespace CompareWOLL
             this.label6 = new System.Windows.Forms.Label();
             this.woQty = new System.Windows.Forms.TextBox();
             this.llQty = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareLLWO)).BeginInit();
@@ -65,7 +68,7 @@ namespace CompareWOLL
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.dateTimeNow});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 493);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 661);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1369, 22);
             this.statusStrip1.TabIndex = 5;
@@ -224,9 +227,9 @@ namespace CompareWOLL
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewCompareLLWO.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewCompareLLWO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewCompareLLWO.Location = new System.Drawing.Point(13, 289);
+            this.dataGridViewCompareLLWO.Location = new System.Drawing.Point(13, 323);
             this.dataGridViewCompareLLWO.Name = "dataGridViewCompareLLWO";
-            this.dataGridViewCompareLLWO.Size = new System.Drawing.Size(1344, 187);
+            this.dataGridViewCompareLLWO.Size = new System.Drawing.Size(1344, 286);
             this.dataGridViewCompareLLWO.TabIndex = 35;
             // 
             // groupBox2
@@ -295,11 +298,42 @@ namespace CompareWOLL
             this.llQty.TabIndex = 43;
             this.llQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(56, 295);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(90, 13);
+            this.label7.TabIndex = 40;
+            this.label7.Text = "Selected PCB No";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(196, 287);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(204, 20);
+            this.textBox1.TabIndex = 41;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(390, 615);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(234, 38);
+            this.button1.TabIndex = 42;
+            this.button1.Text = "Generate Excel File";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // CompareWOLL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1369, 515);
+            this.ClientSize = new System.Drawing.Size(1369, 683);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.dataGridViewCompareLLWO);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox1);
@@ -344,5 +378,8 @@ namespace CompareWOLL
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox llQty;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button1;
     }
 }
