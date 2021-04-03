@@ -150,8 +150,8 @@ namespace CompareWOLL
             MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
             connection.Open();
 
-            string queryWO = "SELECT SUM(qty) AS totalLL FROM tbl_wodetail WHERE model_No = '" + cmbWOModelNo.SelectedValue.ToString() + "' AND process_Name = '" + cmbWOProcess.SelectedValue.ToString() + "'";
-            string queryLL = "SELECT part_Count FROM tbl_ll WHERE model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' AND process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
+            string queryWO = "SELECT SUM(qty) AS totalWO FROM tbl_wodetail WHERE model_No = '" + cmbWOModelNo.SelectedValue.ToString() + "' AND process_Name = '" + cmbWOProcess.SelectedValue.ToString() + "'";
+            string queryLL = "SELECT SUM(qty) AS totalLL FROM tbl_lldetail WHERE alt_No = '1' AND model_No = '" + cmbWOModelNo.SelectedValue.ToString() + "' AND process_Name = '" + cmbWOProcess.SelectedValue.ToString() + "'";
 
             string queryTblWO = "SELECT partcode, qty FROM tbl_wodetail WHERE model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' AND process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
 
@@ -165,7 +165,7 @@ namespace CompareWOLL
 
                     if (dset.Rows.Count > 0)
                     {
-                        woQty.Text = dset.Rows[0]["totalLL"].ToString();
+                        woQty.Text = dset.Rows[0]["totalWO"].ToString();
                     }
 
                 }
@@ -178,13 +178,30 @@ namespace CompareWOLL
 
                     if (dset.Rows.Count > 0)
                     {
-                        llQty.Text = dset.Rows[0]["part_Count"].ToString();
+                        llQty.Text = dset.Rows[0]["totalLL"].ToString();
                     }
 
                 }
 
+                //nampilin selected PCB
+                string queryPCB = "SELECT tbl_wodetail.partcode FROM tbl_wodetail INNER JOIN tbl_lldetail ON " +
+                    "tbl_wodetail.partcode = tbl_lldetail.partcode WHERE tbl_wodetail.model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' " +
+                    "AND tbl_wodetail.process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "' AND tbl_lldetail.reel = 'PCB'";
+                using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryPCB, connection))
+                {
+                    DataTable dset = new DataTable();
+                    adpt.Fill(dset);
+
+                    if (dset.Rows.Count > 0)
+                    {
+                        tbPCB.Text = dset.Rows[0]["partcode"].ToString();
+                    }
+
+                }
+
+
                 string query = "SELECT tbl_wodetail.partcode, tbl_lldetail.partcode, tbl_wodetail.qty, " +
-                    "tbl_lldetail.qty, tbl_lldetail.alt_No FROM tbl_wodetail INNER JOIN tbl_lldetail " +
+                    "tbl_lldetail.qty, tbl_lldetail.alt_No FROM tbl_wodetail LEFT JOIN tbl_lldetail " +
                     "ON tbl_wodetail.partcode = tbl_lldetail.partcode WHERE " +
                     "tbl_wodetail.model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' AND " +
                     "tbl_wodetail.process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
@@ -207,8 +224,9 @@ namespace CompareWOLL
                     dataGridViewCompareLLWO.Columns[i].HeaderText = "" + titleWO[i];
                 }
 
-
                 connection.Close();
+
+                // display qty match or not
 
                 if (woQty.Text == llQty.Text)
                 {
@@ -220,7 +238,12 @@ namespace CompareWOLL
                 {
                     compareQty.Text = "Not Match";
                     compareQty.BackColor = System.Drawing.Color.Red;
+                    btnGenerate.Enabled = false;
+
                 }
+
+
+
 
             }
             catch (Exception ex)
