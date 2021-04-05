@@ -98,6 +98,7 @@
     <Compile Include="CompareWOLL.Designer.cs">
       <DependentUpon>CompareWOLL.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExcelConvert.cs" />
     <Compile Include="importLL.cs">
       <SubType>Form</SubType>
     </Compile>

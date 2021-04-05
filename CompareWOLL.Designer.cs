@@ -54,11 +54,13 @@ namespace CompareWOLL
             this.label7 = new System.Windows.Forms.Label();
             this.tbPCB = new System.Windows.Forms.TextBox();
             this.btnGenerate = new System.Windows.Forms.Button();
+            this.dataGridViewCompareLLWOResult = new System.Windows.Forms.DataGridView();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareLLWO)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareLLWOResult)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -68,7 +70,7 @@ namespace CompareWOLL
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.dateTimeNow});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 661);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 728);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1369, 22);
             this.statusStrip1.TabIndex = 5;
@@ -295,7 +297,7 @@ namespace CompareWOLL
             this.dataGridViewCompareLLWO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewCompareLLWO.Location = new System.Drawing.Point(13, 323);
             this.dataGridViewCompareLLWO.Name = "dataGridViewCompareLLWO";
-            this.dataGridViewCompareLLWO.Size = new System.Drawing.Size(1344, 286);
+            this.dataGridViewCompareLLWO.Size = new System.Drawing.Size(1344, 332);
             this.dataGridViewCompareLLWO.TabIndex = 35;
             // 
             // label7
@@ -319,24 +321,41 @@ namespace CompareWOLL
             // 
             this.btnGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGenerate.Location = new System.Drawing.Point(390, 615);
+            this.btnGenerate.Location = new System.Drawing.Point(451, 675);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(234, 38);
             this.btnGenerate.TabIndex = 42;
             this.btnGenerate.Text = "Generate Excel File";
             this.btnGenerate.UseVisualStyleBackColor = true;
+            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click_1);
+            // 
+            // dataGridViewCompareLLWOResult
+            // 
+            this.dataGridViewCompareLLWOResult.AllowUserToAddRows = false;
+            this.dataGridViewCompareLLWOResult.AllowUserToDeleteRows = false;
+            this.dataGridViewCompareLLWOResult.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewCompareLLWOResult.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewCompareLLWOResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewCompareLLWOResult.Location = new System.Drawing.Point(13, 323);
+            this.dataGridViewCompareLLWOResult.Name = "dataGridViewCompareLLWOResult";
+            this.dataGridViewCompareLLWOResult.Size = new System.Drawing.Size(1344, 332);
+            this.dataGridViewCompareLLWOResult.TabIndex = 43;
+            this.dataGridViewCompareLLWOResult.Visible = false;
             // 
             // CompareWOLL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1369, 683);
+            this.ClientSize = new System.Drawing.Size(1369, 750);
+            this.Controls.Add(this.dataGridViewCompareLLWOResult);
             this.Controls.Add(this.btnGenerate);
             this.Controls.Add(this.tbPCB);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.dataGridViewCompareLLWO);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.dataGridViewCompareLLWO);
             this.Name = "CompareWOLL";
             this.Text = "Compare Work Order with Loading List";
             this.Load += new System.EventHandler(this.CompareWOLL_Load);
@@ -349,6 +368,7 @@ namespace CompareWOLL
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareLLWO)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareLLWOResult)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -381,5 +401,6 @@ namespace CompareWOLL
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tbPCB;
         private System.Windows.Forms.Button btnGenerate;
+        private System.Windows.Forms.DataGridView dataGridViewCompareLLWOResult;
     }
 }

@@ -36,6 +36,10 @@ namespace CompareWOLL
             this.backButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tbAltPcbNo2 = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tbAltPcbNo1 = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.tbPcbNo = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.tbRev = new System.Windows.Forms.TextBox();
@@ -62,10 +66,8 @@ namespace CompareWOLL
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
             this.openFileDialogLL = new System.Windows.Forms.OpenFileDialog();
             this.dataGridViewLL = new System.Windows.Forms.DataGridView();
-            this.tbAltPcbNo1 = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.tbAltPcbNo2 = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tbRemark = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLLHide)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -98,6 +100,8 @@ namespace CompareWOLL
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.tbRemark);
+            this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.tbAltPcbNo2);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.tbAltPcbNo1);
@@ -123,10 +127,42 @@ namespace CompareWOLL
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Location = new System.Drawing.Point(12, 54);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(852, 316);
+            this.groupBox1.Size = new System.Drawing.Size(852, 376);
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Loading List Detail";
+            // 
+            // tbAltPcbNo2
+            // 
+            this.tbAltPcbNo2.Location = new System.Drawing.Point(544, 279);
+            this.tbAltPcbNo2.Name = "tbAltPcbNo2";
+            this.tbAltPcbNo2.Size = new System.Drawing.Size(223, 20);
+            this.tbAltPcbNo2.TabIndex = 49;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(447, 279);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(69, 13);
+            this.label11.TabIndex = 48;
+            this.label11.Text = "Alt PCB No 2";
+            // 
+            // tbAltPcbNo1
+            // 
+            this.tbAltPcbNo1.Location = new System.Drawing.Point(115, 279);
+            this.tbAltPcbNo1.Name = "tbAltPcbNo1";
+            this.tbAltPcbNo1.Size = new System.Drawing.Size(223, 20);
+            this.tbAltPcbNo1.TabIndex = 47;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(20, 279);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(69, 13);
+            this.label8.TabIndex = 46;
+            this.label8.Text = "Alt PCB No 1";
             // 
             // tbPcbNo
             // 
@@ -297,7 +333,7 @@ namespace CompareWOLL
             // saveButton
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.saveButton.Location = new System.Drawing.Point(366, 674);
+            this.saveButton.Location = new System.Drawing.Point(366, 700);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 32;
@@ -383,43 +419,28 @@ namespace CompareWOLL
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewLL.DefaultCellStyle = dataGridViewCellStyle8;
-            this.dataGridViewLL.Location = new System.Drawing.Point(12, 376);
+            this.dataGridViewLL.Location = new System.Drawing.Point(12, 436);
             this.dataGridViewLL.Name = "dataGridViewLL";
             this.dataGridViewLL.ReadOnly = true;
-            this.dataGridViewLL.Size = new System.Drawing.Size(852, 287);
+            this.dataGridViewLL.Size = new System.Drawing.Size(852, 253);
             this.dataGridViewLL.TabIndex = 34;
             // 
-            // tbAltPcbNo1
+            // label12
             // 
-            this.tbAltPcbNo1.Location = new System.Drawing.Point(117, 279);
-            this.tbAltPcbNo1.Name = "tbAltPcbNo1";
-            this.tbAltPcbNo1.Size = new System.Drawing.Size(223, 20);
-            this.tbAltPcbNo1.TabIndex = 47;
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(20, 323);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(44, 13);
+            this.label12.TabIndex = 50;
+            this.label12.Text = "Remark";
             // 
-            // label8
+            // tbRemark
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(20, 279);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(69, 13);
-            this.label8.TabIndex = 46;
-            this.label8.Text = "Alt PCB No 1";
-            // 
-            // tbAltPcbNo2
-            // 
-            this.tbAltPcbNo2.Location = new System.Drawing.Point(544, 279);
-            this.tbAltPcbNo2.Name = "tbAltPcbNo2";
-            this.tbAltPcbNo2.Size = new System.Drawing.Size(223, 20);
-            this.tbAltPcbNo2.TabIndex = 49;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(447, 279);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(69, 13);
-            this.label11.TabIndex = 48;
-            this.label11.Text = "Alt PCB No 2";
+            this.tbRemark.Location = new System.Drawing.Point(115, 320);
+            this.tbRemark.Multiline = true;
+            this.tbRemark.Name = "tbRemark";
+            this.tbRemark.Size = new System.Drawing.Size(652, 50);
+            this.tbRemark.TabIndex = 51;
             // 
             // importLL
             // 
@@ -481,5 +502,7 @@ namespace CompareWOLL
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox tbAltPcbNo2;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox tbRemark;
+        private System.Windows.Forms.Label label12;
     }
 }

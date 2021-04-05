@@ -146,7 +146,8 @@ namespace CompareWOLL
                 {
                     dataGridViewLL.Columns[i].HeaderText = "" + titleWO[i];
                 }
-
+                
+                // not allow to sort table
                 for (int i = 0; i < dataGridViewLL.Columns.Count; i++)
                 {
                     dataGridViewLL.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -203,6 +204,7 @@ namespace CompareWOLL
             string pcb = tbPcbNo.Text;
             string pcb1 = tbAltPcbNo1.Text;
             string pcb2 = tbAltPcbNo2.Text;
+            string remark = tbRemark.Text;
             
             saveButton.Enabled = false;
 
@@ -236,7 +238,7 @@ namespace CompareWOLL
                     var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
                     var cmd = new MySqlCommand("", conn);
 
-                    string queryLL = "INSERT INTO tbl_ll VALUES('" + model + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','"+ llUsage + "')";
+                    string queryLL = "INSERT INTO tbl_ll VALUES('" + model + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','"+ llUsage + "','"+ remark +"')";
                     string queryInputPCB = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '"+pcb+"', '1', '1');";
                     string queryPCBAlt1 = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '"+pcb1+"', '2', '1');";
                     string queryPCBAlt2 = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '"+pcb2+"', '3', '1');";

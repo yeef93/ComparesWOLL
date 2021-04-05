@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,9 @@ namespace CompareWOLL
 {
     public partial class CompareWOLL : Form
     {
+        ExcelConvert excelConvert = new ExcelConvert();
+
+
         public CompareWOLL()
         {
             InitializeComponent();
@@ -26,6 +30,7 @@ namespace CompareWOLL
 
             cmbLLModelNo.Enabled = false;
             btnCompare.Enabled = false;
+            btnGenerate.Enabled = false;
 
             MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
             connection.Open();
@@ -56,8 +61,6 @@ namespace CompareWOLL
                     cmbLLModelNo.DisplayMember = "model_No";
 
                 }
-
-
                 connection.Close();
 
             }
@@ -184,7 +187,7 @@ namespace CompareWOLL
                 }
 
                 //nampilin selected PCB
-                string queryPCB = "SELECT tbl_wodetail.partcode FROM tbl_wodetail INNER JOIN tbl_lldetail ON " +
+                string queryPCB = "SELECT tbl_wodetail.partcode FROM tbl_wodetail LEFT JOIN tbl_lldetail ON " +
                     "tbl_wodetail.partcode = tbl_lldetail.partcode WHERE tbl_wodetail.model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' " +
                     "AND tbl_wodetail.process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "' AND tbl_lldetail.reel = 'PCB'";
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryPCB, connection))
@@ -199,12 +202,13 @@ namespace CompareWOLL
 
                 }
 
+                //nampilin data dalam datagridview compare
 
-                string query = "SELECT tbl_wodetail.partcode, tbl_lldetail.partcode, tbl_wodetail.qty, " +
+                string query = "SELECT tbl_lldetail.reel, tbl_wodetail.partcode, tbl_lldetail.partcode, tbl_wodetail.qty, " +
                     "tbl_lldetail.qty, tbl_lldetail.alt_No FROM tbl_wodetail LEFT JOIN tbl_lldetail " +
                     "ON tbl_wodetail.partcode = tbl_lldetail.partcode WHERE " +
                     "tbl_wodetail.model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' AND " +
-                    "tbl_wodetail.process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
+                    "tbl_wodetail.process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "' AND tbl_lldetail.reel != 'PCB'";
                     
 
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
@@ -214,19 +218,78 @@ namespace CompareWOLL
                     adpt.Fill(dset);
 
                     dataGridViewCompareLLWO.DataSource = dset.Tables[0];
+                    dataGridViewCompareLLWO.Columns.Add("columnPartStatus", "Status");
+
+                    //tampilin data temporary result
+                    dataGridViewCompareLLWOResult.DataSource = dset.Tables[0];
 
                 }
 
+                dataGridViewCompareLLWOResult.Columns.RemoveAt(2);
+                dataGridViewCompareLLWOResult.Columns.RemoveAt(4);
+                dataGridViewCompareLLWOResult.Columns.RemoveAt(3);
+
                 connection.Close();
 
+                //menghitung jumlah row data
+
+                int rowCount = ((DataTable)this.dataGridViewCompareLLWO.DataSource).Rows.Count;
+                for (int i = 0; i < rowCount; i++)
+                {
+                    DataGridViewCellStyle styleOk = new DataGridViewCellStyle();
+                    styleOk.BackColor = Color.Green;
+                    styleOk.ForeColor = Color.White;
+
+                    DataGridViewCellStyle styleError = new DataGridViewCellStyle();
+                    styleError.BackColor = Color.Red;
+                    styleError.ForeColor = Color.White;
+
+                    //compare partcode
+                    if (dataGridViewCompareLLWO.Rows[i].Cells[1].Value.ToString() ==
+                        dataGridViewCompareLLWO.Rows[i].Cells[2].Value.ToString() ||
+                        dataGridViewCompareLLWO.Rows[i].Cells[3].Value.ToString() ==
+                        dataGridViewCompareLLWO.Rows[i].Cells[4].Value.ToString()) 
+                    {
+                        dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Part Code and Qty Match";
+                        dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleOk;
+                    }
+
+                    else if (dataGridViewCompareLLWO.Rows[i].Cells[1].Value.ToString() !=
+                        dataGridViewCompareLLWO.Rows[i].Cells[2].Value.ToString() ||
+                        dataGridViewCompareLLWO.Rows[i].Cells[3].Value.ToString() !=
+                        dataGridViewCompareLLWO.Rows[i].Cells[4].Value.ToString())
+                    {
+                        dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Part Code and Qty Not Match with Loading List";
+                        dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleError;
+                    }
+
+                    else if (dataGridViewCompareLLWO.Rows[i].Cells[1].Value.ToString() !=
+                        dataGridViewCompareLLWO.Rows[i].Cells[2].Value.ToString())
+                    {
+                        dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Part Code Not Found in Loading List";
+                        dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleError;
+                    }
+
+                    else if (dataGridViewCompareLLWO.Rows[i].Cells[3].Value.ToString() !=
+                        dataGridViewCompareLLWO.Rows[i].Cells[4].Value.ToString())
+                    {
+                        dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Qty Not Match with Loading List";
+                        dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleError;
+                    }
+
+                }
+
                 // Set table title Wo
-                string[] titleWO = { "PART CODE WO", "PART CODE LL", "QTY WO", "QTY LL", "ALT NO" };
+                string[] titleWO = { "REEL", "PART CODE WO", "PART CODE LL", "QTY WO", "QTY LL", "ALT NO" };
                 for (int i = 0; i < titleWO.Length; i++)
                 {
                     dataGridViewCompareLLWO.Columns[i].HeaderText = "" + titleWO[i];
                 }
 
-                connection.Close();
+                for (int i = 0; i < dataGridViewCompareLLWO.Columns.Count; i++)
+                {
+                    dataGridViewCompareLLWO.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
 
                 // display qty match or not
 
@@ -234,6 +297,7 @@ namespace CompareWOLL
                 {
                     compareQty.BackColor = System.Drawing.Color.Blue;
                     compareQty.Text = "Match";
+                    btnGenerate.Enabled = true;
                 }
 
                 else if (woQty.Text != llQty.Text)
@@ -242,13 +306,182 @@ namespace CompareWOLL
                     compareQty.BackColor = System.Drawing.Color.Red;
                     btnGenerate.Enabled = false;
                 }
-
+                
             }
             catch (Exception ex)
             {
                 // tampilkan pesan error
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnGenerate_Click_1(object sender, EventArgs e)
+        {
+            int totalpart;
+            int nextrow;
+
+            // Create a new workbook with a single sheet
+            excelConvert.NewFile();
+
+            // creating Excel Application  
+            Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+            // creating new WorkBook within Excel application  
+            Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+            // creating new Excelsheet in workbook  
+            Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+            // see the excel sheet behind the program  
+            app.Visible = true;
+            // get the reference of first sheet. By default its name is Sheet1.  
+            // store its reference to worksheet  
+            worksheet = workbook.Sheets["Sheet1"];
+            worksheet = workbook.ActiveSheet;
+            // changing the name of active sheet  
+
+            //Insert result to db
+            var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
+            var cmd = new MySqlCommand("", conn);
+            conn.Open();
+
+            for (int i = 0; i < dataGridViewCompareLLWOResult.Rows.Count; i++)
+            {
+                string queryResult = "INSERT INTO tbl_resultcompare (tbl_resultcompare.model_No, tbl_resultcompare.process_Name, " +
+                    "tbl_resultcompare.reel, tbl_resultcompare.partcode, tbl_resultcompare.alt_No, tbl_resultcompare.tp, tbl_resultcompare.qty," +
+                    " tbl_resultcompare.loc, tbl_resultcompare.dec, tbl_resultcompare.f_Type)" +
+                    "SELECT tbl_reel.model_No, tbl_reel.process_Name, tbl_reel.reel, tbl_partcodedetail.partcode,tbl_lldetail.alt_No," +
+                    " tbl_partcodedetail.tp, tbl_reel.qty, tbl_reel.loc, tbl_partcodedetail.dec,tbl_reel.f_Type " +
+                    "FROM tbl_reel, tbl_partcodedetail, tbl_lldetail WHERE tbl_reel.reel = '" + dataGridViewCompareLLWOResult.Rows[i].Cells[0].Value.ToString() + "' " +
+                    "AND tbl_partcodedetail.partcode = '" + dataGridViewCompareLLWOResult.Rows[i].Cells[1].Value.ToString() + "' AND tbl_reel.model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' " +
+                    "AND tbl_reel.process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "' " +
+                    "AND tbl_partcodedetail.partcode = tbl_lldetail.partcode";
+                cmd.CommandText = queryResult;
+                cmd.ExecuteNonQuery();
+            }
+            conn.Close();
+
+            worksheet.Rows.Font.Name = "Times New Roman";
+            worksheet.Range[worksheet.Cells[1, 1], worksheet.Cells[1, 9]].Merge();
+            worksheet.Cells[1, 1] = "SMT MACHINE LOADING LIST";
+            worksheet.Cells[1, 1].Style.Font.Size = 20;            
+            worksheet.Cells[1, 1].Font.Color = Color.Blue;
+            worksheet.Cells[1, 1].EntireRow.Font.Bold = true;
+
+            worksheet.Cells[2, 9] = "Page 1 of 1";
+            worksheet.Cells[2, 9].Style.Font.Size = 10;
+            //worksheet.Cells.Font.Color = Color.Blue;
+            worksheet.Cells[2, 9].EntireRow.Font.Italic = true;
+
+
+            worksheet.Rows.Font.Name = "Courier New";
+            worksheet.Cells[3, 1] = "MODEL     : XM-522J19C10000 SB  MASTER (SMT-A)";
+            worksheet.Cells[3, 6] = "Rev.";
+            worksheet.Cells[3, 6].Font.Color = Color.White;
+            worksheet.Cells[3, 7] = "Prepared by";
+            worksheet.Cells[3, 8] = "Checked by";
+            worksheet.Cells[3, 9] = "Approved by";
+
+            worksheet.Cells[4, 1] = "MACHINE   : NXT3-D15MCLB (LINE #07H-LB)";
+            worksheet.Cells[5, 1] = "PWB TYPE  : J19C SB (1 PNL : 16 PCS)";
+            worksheet.Cells[6, 1] = "PROG.NO.  : 7HLB-52J19CJSB-A";
+            worksheet.Cells[7, 1] = "DATE      : 19 Dec 2020";
+
+            worksheet.Cells[8, 1] = "REEL";
+            worksheet.Cells[8, 2] = "PART CODE";
+            worksheet.Cells[8, 3] = "TP";
+            worksheet.Cells[8, 4] = "QTY";
+            worksheet.Cells[8, 5] = "LOC.";
+            worksheet.Cells[8, 6] = "DEC.";
+            worksheet.Cells[8, 7] = "F. TYPE";
+
+            conn.Open();
+            string resultPartCode = "SELECT tbl_resultcompare.reel, tbl_resultcompare.partcode, tbl_resultcompare.tp, tbl_resultcompare.qty, " +
+                "tbl_resultcompare.loc,tbl_resultcompare.dec, tbl_resultcompare.f_Type  FROM tbl_resultcompare " +
+                "WHERE tbl_resultcompare.model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' AND tbl_resultcompare.process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
+               
+
+            using (MySqlDataAdapter dscmd = new MySqlDataAdapter(resultPartCode, conn))
+            {
+                DataSet ds = new DataSet();
+                dscmd.Fill(ds);
+
+                totalpart = ds.Tables[0].Rows.Count;
+
+                for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                {
+                    for (int j = 0; j <= ds.Tables[0].Columns.Count - 1; j++)
+                    {
+                        string data = ds.Tables[0].Rows[i].ItemArray[j].ToString();
+                        worksheet.Cells[i + 9, j + 1] = data;
+                    }
+                }
+
+            }
+
+            //nextrow = totalpart + 9;
+
+            //string remark = "SELECT tbl_ll.remarks FROM tbl_ll WHERE tbl_ll.model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' " +
+            //    "AND process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
+
+
+            //using (MySqlDataAdapter dscmd = new MySqlDataAdapter(remark, conn))
+            //{
+            //    DataSet ds = new DataSet();
+            //    dscmd.Fill(ds);
+
+            //    worksheet.Cells[nextrow, 1] = ds.Tables[0];
+
+
+            //}
+
+            conn.Close();
+
+            //conn.Open();
+
+            //for (int i = 0; i < dataGridViewCompareLLWOResult.Rows.Count; i++)
+            //{
+            //    string queryResult = "SELECT * FROM tbl_resultcompare WHERE " +
+            //        "tbl_resultcompare.model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' " +
+            //        "AND tbl_resultcompare.process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
+                
+            //    // storing Each row and column value to excel sheet  
+            //    //for (int i = 0; i < dataGridViewCompareLLWOResult.Rows.Count - 1; i++)
+            //    //{
+            //    //    for (int j = 0; j < dataGridViewCompareLLWOResult.Columns.Count; j++)
+            //    //    {
+            //    //        worksheet.Cells[i + 9, j + 8] = dataGridViewCompareLLWOResult.Rows[i].Cells[j].Value.ToString();
+            //    //    }
+            //    //}
+
+
+            //}
+            //conn.Close();
+
+
+
+            //for (int i = 1; i < dataGridViewCompareLLWOResult.Columns.Count + 1; i++)
+            //{
+            //    worksheet.Cells[9, i] = dataGridViewCompareLLWOResult.Columns[i - 1].HeaderText;
+            //}
+            //// storing Each row and column value to excel sheet  
+            //for (int i = 0; i < dataGridViewCompareLLWOResult.Rows.Count - 1; i++)
+            //{
+            //    for (int j = 0; j < dataGridViewCompareLLWOResult.Columns.Count; j++)
+            //    {
+            //        worksheet.Cells[i + 9, j + 8] = dataGridViewCompareLLWOResult.Rows[i].Cells[j].Value.ToString();
+            //    }
+            //}
+
+
+
+
+            // Saving the file in a speicifed path
+            // excelConvert.SaveAs(@"D:\" + cmbLLModelNo.SelectedValue.ToString() + " ( " + cmbLLProcess.SelectedValue.ToString() + " )");
+
+            // Closing the file
+            excelConvert.Close();
+
+            MessageBox.Show("Excel File Success Generated", "Generate Excel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            btnGenerate.Enabled = false;
         }
     }
 }
