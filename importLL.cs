@@ -299,11 +299,12 @@ namespace CompareWOLL
                         + dataGridViewLL.Rows[j].Cells[6].Value.ToString() + "');";
                             cmd.CommandText = StrQueryReelDetail;
                             cmd.ExecuteNonQuery();
-
-
                         }
+
                         else if (dataGridViewLL.Rows[j].Cells[0].Value.ToString() == "" || dataGridViewLL.Rows[--j].Cells[0].Value.ToString() != "")
                         {
+
+
                             //MessageBox.Show(dataGridViewLL.Rows[--j].Cells[0].Value.ToString(), "Loading List", MessageBoxButtons.OK, MessageBoxIcon.Information);                           
                             int l = j;
                             int k = --j;                            
@@ -320,8 +321,6 @@ namespace CompareWOLL
                         }
 
 
-
-
                         //else if (dataGridViewLL.Rows[j].Cells[0].Value.ToString() == "" || dataGridViewLL.Rows[--j].Cells[0].Value.ToString() == "" || dataGridViewLL.Rows[2-j].Cells[0].Value.ToString() != "")
                         //{
                         //    MessageBox.Show(dataGridViewLL.Rows[2-j].Cells[0].Value.ToString(), "Loading List", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -335,8 +334,6 @@ namespace CompareWOLL
                         //}
 
                     }
-
-
 
                     conn.Close();
                     //Tutup koneksi

@@ -342,6 +342,10 @@ namespace CompareWOLL
             var cmd = new MySqlCommand("", conn);
             conn.Open();
 
+
+
+
+
             for (int i = 0; i < dataGridViewCompareLLWOResult.Rows.Count; i++)
             {
                 string queryResult = "INSERT INTO tbl_resultcompare (tbl_resultcompare.model_No, tbl_resultcompare.process_Name, " +
@@ -369,7 +373,6 @@ namespace CompareWOLL
             worksheet.Cells[2, 9].Style.Font.Size = 10;
             //worksheet.Cells.Font.Color = Color.Blue;
             worksheet.Cells[2, 9].EntireRow.Font.Italic = true;
-
 
             worksheet.Rows.Font.Name = "Courier New";
             worksheet.Cells[3, 1] = "MODEL     : XM-522J19C10000 SB  MASTER (SMT-A)";
