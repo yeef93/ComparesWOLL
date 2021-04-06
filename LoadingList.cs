@@ -72,7 +72,32 @@ namespace CompareWOLL
 
         private void dataGridViewLLList_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.ColumnIndex == 9)
+            {
+                DetailLL dll = new DetailLL();
+                string modelNo = dataGridViewLLList.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string processName = dataGridViewLLList.Rows[e.RowIndex].Cells[1].Value.ToString();
+                string model = dataGridViewLLList.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string machine = dataGridViewLLList.Rows[e.RowIndex].Cells[3].Value.ToString();
+                string pwbType = dataGridViewLLList.Rows[e.RowIndex].Cells[4].Value.ToString();
+                string progNo = dataGridViewLLList.Rows[e.RowIndex].Cells[5].Value.ToString();
+                string rev = dataGridViewLLList.Rows[e.RowIndex].Cells[6].Value.ToString();
+                string pcbNo = dataGridViewLLList.Rows[e.RowIndex].Cells[7].Value.ToString();
+                
 
+                dll.tbModelNo.Text = modelNo;
+                dll.tbProcess.Text = processName;
+                dll.tbModel.Text = model;
+                dll.tbMachine.Text = machine;
+                dll.tbPWBType.Text = pwbType;
+                dll.tbProg.Text = progNo;
+                dll.tbRev.Text = rev;
+                dll.tbPcbNo.Text = pcbNo;
+
+                dll.Show();
+                this.Hide();
+                //MessageBox.Show((e.RowIndex + 1) + "  Row  " + (e.ColumnIndex + 1) + "  Column button clicked ");
+            }
         }
     }
 }

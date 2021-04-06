@@ -98,6 +98,12 @@
     <Compile Include="CompareWOLL.Designer.cs">
       <DependentUpon>CompareWOLL.cs</DependentUpon>
     </Compile>
+    <Compile Include="DetailLL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetailLL.Designer.cs">
+      <DependentUpon>DetailLL.cs</DependentUpon>
+    </Compile>
     <Compile Include="DetailWO.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,18 +136,6 @@
     <Compile Include="MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="ImportLLWOForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ImportLLWOForm.Designer.cs">
-      <DependentUpon>ImportLLWOForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CompareForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CompareForm.Designer.cs">
-      <DependentUpon>CompareForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="ConnectionDB.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -153,6 +147,9 @@
     </Compile>
     <EmbeddedResource Include="CompareWOLL.resx">
       <DependentUpon>CompareWOLL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DetailLL.resx">
+      <DependentUpon>DetailLL.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DetailWO.resx">
       <DependentUpon>DetailWO.cs</DependentUpon>
@@ -168,12 +165,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImportLLWOForm.resx">
-      <DependentUpon>ImportLLWOForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CompareForm.resx">
-      <DependentUpon>CompareForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
