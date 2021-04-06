@@ -121,7 +121,7 @@ namespace CompareWOLL
             {
                 ImportLL il = new ImportLL();
                 string model = dataGridViewWoList.Rows[e.RowIndex].Cells[2].Value.ToString();
-                string processName = dataGridViewWoList.Rows[e.RowIndex].Cells[5].Value.ToString();
+                string processName = dataGridViewWoList.Rows[e.RowIndex].Cells[4].Value.ToString();
                 il.Show();
                 il.tbModelNo.Text = model;
                 il.tbProcess.Text = processName;
