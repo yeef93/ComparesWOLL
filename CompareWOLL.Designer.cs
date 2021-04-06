@@ -56,6 +56,7 @@ namespace CompareWOLL
             this.btnGenerate = new System.Windows.Forms.Button();
             this.dataGridViewCompareLLWOResult = new System.Windows.Forms.DataGridView();
             this.btnHome = new System.Windows.Forms.Button();
+            this.btnWO = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -348,7 +349,7 @@ namespace CompareWOLL
             // btnHome
             // 
             this.btnHome.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnHome.Location = new System.Drawing.Point(1279, 25);
+            this.btnHome.Location = new System.Drawing.Point(1201, 25);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(75, 23);
             this.btnHome.TabIndex = 44;
@@ -356,11 +357,23 @@ namespace CompareWOLL
             this.btnHome.UseVisualStyleBackColor = true;
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
+            // btnWO
+            // 
+            this.btnWO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnWO.Location = new System.Drawing.Point(1282, 25);
+            this.btnWO.Name = "btnWO";
+            this.btnWO.Size = new System.Drawing.Size(75, 23);
+            this.btnWO.TabIndex = 45;
+            this.btnWO.Text = "Work Order";
+            this.btnWO.UseVisualStyleBackColor = true;
+            this.btnWO.Click += new System.EventHandler(this.btnWO_Click);
+            // 
             // CompareWOLL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1369, 750);
+            this.Controls.Add(this.btnWO);
             this.Controls.Add(this.btnHome);
             this.Controls.Add(this.dataGridViewCompareLLWOResult);
             this.Controls.Add(this.btnGenerate);
@@ -416,5 +429,6 @@ namespace CompareWOLL
         private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.DataGridView dataGridViewCompareLLWOResult;
         private System.Windows.Forms.Button btnHome;
+        private System.Windows.Forms.Button btnWO;
     }
 }

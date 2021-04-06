@@ -243,23 +243,17 @@ namespace CompareWOLL
                     styleError.BackColor = Color.Red;
                     styleError.ForeColor = Color.White;
 
-                    //compare partcode
-                    if (dataGridViewCompareLLWO.Rows[i].Cells[1].Value.ToString() ==
-                        dataGridViewCompareLLWO.Rows[i].Cells[2].Value.ToString() ||
-                        dataGridViewCompareLLWO.Rows[i].Cells[3].Value.ToString() ==
-                        dataGridViewCompareLLWO.Rows[i].Cells[4].Value.ToString()) 
-                    {
-                        dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Part Code and Qty Match";
-                        dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleOk;
-                    }
+                    
 
-                    else if (dataGridViewCompareLLWO.Rows[i].Cells[1].Value.ToString() !=
+                    if (dataGridViewCompareLLWO.Rows[i].Cells[1].Value.ToString() !=
                         dataGridViewCompareLLWO.Rows[i].Cells[2].Value.ToString() ||
                         dataGridViewCompareLLWO.Rows[i].Cells[3].Value.ToString() !=
                         dataGridViewCompareLLWO.Rows[i].Cells[4].Value.ToString())
                     {
                         dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Part Code and Qty Not Match with Loading List";
                         dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleError;
+
+                        btnWO.Enabled = true;
                     }
 
                     else if (dataGridViewCompareLLWO.Rows[i].Cells[1].Value.ToString() !=
@@ -274,6 +268,16 @@ namespace CompareWOLL
                     {
                         dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Qty Not Match with Loading List";
                         dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleError;
+                    }
+
+                    //compare partcode
+                    else if (dataGridViewCompareLLWO.Rows[i].Cells[1].Value.ToString() ==
+                        dataGridViewCompareLLWO.Rows[i].Cells[2].Value.ToString() ||
+                        dataGridViewCompareLLWO.Rows[i].Cells[3].Value.ToString() ==
+                        dataGridViewCompareLLWO.Rows[i].Cells[4].Value.ToString())
+                    {
+                        dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Part Code and Qty Match";
+                        dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleOk;
                     }
 
                 }
@@ -341,10 +345,6 @@ namespace CompareWOLL
             var cmd = new MySqlCommand("", conn);
             conn.Open();
 
-
-
-
-
             for (int i = 0; i < dataGridViewCompareLLWOResult.Rows.Count; i++)
             {
                 string queryResult = "INSERT INTO tbl_resultcompare (tbl_resultcompare.model_No, tbl_resultcompare.process_Name, " +
@@ -372,6 +372,7 @@ namespace CompareWOLL
             worksheet.Cells[2, 9].Style.Font.Size = 10;
             //worksheet.Cells.Font.Color = Color.Blue;
             worksheet.Cells[2, 9].EntireRow.Font.Italic = true;
+
 
             worksheet.Rows.Font.Name = "Courier New";
             worksheet.Cells[3, 1] = "MODEL     : XM-522J19C10000 SB  MASTER (SMT-A)";
@@ -418,62 +419,48 @@ namespace CompareWOLL
 
             }
 
-            //nextrow = totalpart + 9;
+            nextrow = totalpart + 9;
 
-            //string remark = "SELECT tbl_ll.remarks FROM tbl_ll WHERE tbl_ll.model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' " +
-            //    "AND process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
+            string remark = "SELECT remarks FROM tbl_ll";
 
 
-            //using (MySqlDataAdapter dscmd = new MySqlDataAdapter(remark, conn))
+            using (MySqlDataAdapter dscmd = new MySqlDataAdapter(remark, conn))
+            {
+                DataSet ds = new DataSet();
+                dscmd.Fill(ds);
+
+                for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+               {
+                    string data = ds.Tables[0].Rows[i].ItemArray[i].ToString();
+
+                    worksheet.Range[worksheet.Cells[23, 1], worksheet.Cells[23, 9]].Merge();
+                    worksheet.Cells[23, 1] = data ;
+                }
+            }
+
+            conn.Close();
+
+
+            //conn.Open();
+            //string detailLL = "SELECT model_No, machine, pwb_Type, prog_No, process_Name, model_detail, rev, pcb_No, remarks FROM tbl_ll";
+
+
+            //using (MySqlDataAdapter dscmd = new MySqlDataAdapter(detailLL, conn))
             //{
             //    DataSet ds = new DataSet();
             //    dscmd.Fill(ds);
 
-            //    worksheet.Cells[nextrow, 1] = ds.Tables[0];
-
-
-            //}
-
-            conn.Close();
-
-            //conn.Open();
-
-            //for (int i = 0; i < dataGridViewCompareLLWOResult.Rows.Count; i++)
-            //{
-            //    string queryResult = "SELECT * FROM tbl_resultcompare WHERE " +
-            //        "tbl_resultcompare.model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' " +
-            //        "AND tbl_resultcompare.process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
-                
-            //    // storing Each row and column value to excel sheet  
-            //    //for (int i = 0; i < dataGridViewCompareLLWOResult.Rows.Count - 1; i++)
-            //    //{
-            //    //    for (int j = 0; j < dataGridViewCompareLLWOResult.Columns.Count; j++)
-            //    //    {
-            //    //        worksheet.Cells[i + 9, j + 8] = dataGridViewCompareLLWOResult.Rows[i].Cells[j].Value.ToString();
-            //    //    }
-            //    //}
-
+            //    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+            //    {
+            //        for (int j = 0; j <= ds.Tables[0].Columns.Count - 1; j++)
+            //        {
+            //            string data = ds.Tables[0].Rows[i].ItemArray[j].ToString();
+            //            worksheet.Cells[i + 3, j + 1] = "MODEL     : " + data +"" ;
+            //        }
+            //    }
 
             //}
             //conn.Close();
-
-
-
-            //for (int i = 1; i < dataGridViewCompareLLWOResult.Columns.Count + 1; i++)
-            //{
-            //    worksheet.Cells[9, i] = dataGridViewCompareLLWOResult.Columns[i - 1].HeaderText;
-            //}
-            //// storing Each row and column value to excel sheet  
-            //for (int i = 0; i < dataGridViewCompareLLWOResult.Rows.Count - 1; i++)
-            //{
-            //    for (int j = 0; j < dataGridViewCompareLLWOResult.Columns.Count; j++)
-            //    {
-            //        worksheet.Cells[i + 9, j + 8] = dataGridViewCompareLLWOResult.Rows[i].Cells[j].Value.ToString();
-            //    }
-            //}
-
-
-
 
             // Saving the file in a speicifed path
             // excelConvert.SaveAs(@"D:\" + cmbLLModelNo.SelectedValue.ToString() + " ( " + cmbLLProcess.SelectedValue.ToString() + " )");
@@ -490,6 +477,13 @@ namespace CompareWOLL
         {
             MainMenu mm = new MainMenu();
             mm.Show();
+            this.Hide();
+        }
+
+        private void btnWO_Click(object sender, EventArgs e)
+        {
+            WorkOrder wo = new WorkOrder();
+            wo.Show();
             this.Hide();
         }
     }

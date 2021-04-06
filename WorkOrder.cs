@@ -55,6 +55,7 @@ namespace CompareWOLL
                 btnImport.Name = "btnImport";
                 btnImport.UseColumnTextForButtonValue = true;
 
+
             }
             connection.Close();
 

@@ -37,13 +37,14 @@ namespace CompareWOLL
 
                 dataGridViewLLList.DataSource = dset.Tables[0];
 
-                // add button detail in datagridview table
-                DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
-                dataGridViewLLList.Columns.Add(btn);
-                btn.HeaderText = "";
-                btn.Text = "Detail";
-                btn.Name = "btnDetail";
-                btn.UseColumnTextForButtonValue = true;
+
+                //// add button detail in datagridview table
+                //DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
+                //dataGridViewLLList.Columns.Add(btn);
+                //btn.HeaderText = "";
+                //btn.Text = "Detail";
+                //btn.Name = "btnDetail";
+                //btn.UseColumnTextForButtonValue = true;
 
             }
             connection.Close();
