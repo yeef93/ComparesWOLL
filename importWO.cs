@@ -148,6 +148,7 @@ namespace CompareWOLL
             string modelNoo = modelNo.Text;
             string modell = model.Text;
             string woqtyy = woQty.Text;
+            string wousagee = woUsage.Text;
             string processs = process.Text;
             //string pcbNoo = pcbNo.Text;
             saveButton.Enabled = false;
@@ -166,7 +167,7 @@ namespace CompareWOLL
                     var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
                     var cmd = new MySqlCommand("", conn);
 
-                    string query = "INSERT INTO tbl_wo VALUES('" + woPTSNN + "','" + woNoo + "','" + modelNoo + "','" + modell + "', '" + woqtyy + "', '" + processs + "' )";
+                    string query = "INSERT INTO tbl_wo VALUES('" + woPTSNN + "','" + woNoo + "','" + modelNoo + "','" + modell + "', '" + woqtyy + "', '" + wousagee + "','" + processs + "' )";
                     string querymodel = "INSERT INTO tbl_model VALUES('','" + modelNoo + "','" + processs + "')";
 
                     conn.Open();

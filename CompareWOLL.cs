@@ -16,7 +16,6 @@ namespace CompareWOLL
     {
         ExcelConvert excelConvert = new ExcelConvert();
 
-
         public CompareWOLL()
         {
             InitializeComponent();
@@ -280,7 +279,7 @@ namespace CompareWOLL
                 }
 
                 // Set table title Wo
-                string[] titleWO = { "REEL", "PART CODE WO", "PART CODE LL", "QTY WO", "QTY LL", "ALT NO" };
+                string[] titleWO = { "REEL", "PART CODE WO", "PART CODE LL", "QTY WO", "QTY LL", "CHOICE NO" };
                 for (int i = 0; i < titleWO.Length; i++)
                 {
                     dataGridViewCompareLLWO.Columns[i].HeaderText = "" + titleWO[i];
@@ -485,6 +484,13 @@ namespace CompareWOLL
             MessageBox.Show("Excel File Success Generated", "Generate Excel", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             btnGenerate.Enabled = false;
+        }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            MainMenu mm = new MainMenu();
+            mm.Show();
+            this.Hide();
         }
     }
 }

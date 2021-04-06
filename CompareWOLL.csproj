@@ -98,12 +98,18 @@
     <Compile Include="CompareWOLL.Designer.cs">
       <DependentUpon>CompareWOLL.cs</DependentUpon>
     </Compile>
-    <Compile Include="ExcelConvert.cs" />
-    <Compile Include="importLL.cs">
+    <Compile Include="DetailWO.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="importLL.Designer.cs">
-      <DependentUpon>importLL.cs</DependentUpon>
+    <Compile Include="DetailWO.Designer.cs">
+      <DependentUpon>DetailWO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExcelConvert.cs" />
+    <Compile Include="ImportLL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportLL.Designer.cs">
+      <DependentUpon>ImportLL.cs</DependentUpon>
     </Compile>
     <Compile Include="importWO.cs">
       <SubType>Form</SubType>
@@ -145,17 +151,14 @@
     <Compile Include="WorkOrder.Designer.cs">
       <DependentUpon>WorkOrder.cs</DependentUpon>
     </Compile>
-    <Compile Include="WorkOrderDetail.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WorkOrderDetail.Designer.cs">
-      <DependentUpon>WorkOrderDetail.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="CompareWOLL.resx">
       <DependentUpon>CompareWOLL.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="importLL.resx">
-      <DependentUpon>importLL.cs</DependentUpon>
+    <EmbeddedResource Include="DetailWO.resx">
+      <DependentUpon>DetailWO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportLL.resx">
+      <DependentUpon>ImportLL.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="importWO.resx">
       <DependentUpon>importWO.cs</DependentUpon>
@@ -183,9 +186,6 @@
     </Compile>
     <EmbeddedResource Include="WorkOrder.resx">
       <DependentUpon>WorkOrder.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WorkOrderDetail.resx">
-      <DependentUpon>WorkOrderDetail.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

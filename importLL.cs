@@ -7,11 +7,13 @@ using System.Windows.Forms;
 
 namespace CompareWOLL
 {
-    public partial class importLL : Form
+    public partial class ImportLL : Form
     {
-        public importLL()
+
+        public ImportLL()
         {
             InitializeComponent();
+            WorkOrder wo = new WorkOrder();
         }
 
         // for read excel file
@@ -42,35 +44,34 @@ namespace CompareWOLL
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             dataGridViewLLHide.Visible = false;
-            browseLL.Enabled = false;
-            saveButton.Enabled = false;            
+            saveButton.Enabled = false;             
 
-            MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
-            connection.Open();
+            //MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
+            //connection.Open();
 
-            string query = "SELECT model_No FROM tbl_model";
-            try
-            {
-                using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
-                {
-                    DataTable dset = new DataTable();
-                    adpt.Fill(dset);
+            //string query = "SELECT model_No FROM tbl_model";
+            //try
+            //{
+            //    using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
+            //    {
+            //        DataTable dset = new DataTable();
+            //        adpt.Fill(dset);
 
-                    cmbModelNo.DataSource = dset;
-                    cmbModelNo.ValueMember = "model_No";
-                    cmbModelNo.DisplayMember = "model_No";
+            //        cmbModelNo.DataSource = dset;
+            //        cmbModelNo.ValueMember = "model_No";
+            //        cmbModelNo.DisplayMember = "model_No";
 
-                }
-                connection.Close();
+            //    }
+            //    connection.Close();
 
-            }
-            catch (Exception ex)
-            {
-                // tampilkan pesan error
-                MessageBox.Show(ex.Message);
-            }       
+            //}
+            //catch (Exception ex)
+            //{
+            //    // tampilkan pesan error
+            //    MessageBox.Show(ex.Message);
+            //}       
 
-            string modelNo = cmbModelNo.SelectedValue.ToString();
+            //string modelNo = cmbModelNo.SelectedValue.ToString();
 
         }
 
@@ -83,8 +84,8 @@ namespace CompareWOLL
 
         private void backButton_Click(object sender, EventArgs e)
         {
-            LoadingList ll = new LoadingList();
-            ll.Show();
+            MainMenu mm = new MainMenu();
+            mm.Show();
             this.Hide();
         }
 
@@ -158,33 +159,33 @@ namespace CompareWOLL
 
         private void cmbModelNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //label2.Text = cmbModelNo.SelectedValue.ToString();
+            ////label2.Text = cmbModelNo.SelectedValue.ToString();
 
 
-            MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
-            connection.Open();
+            //MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
+            //connection.Open();
 
-            string query = "SELECT process_Name FROM tbl_wodetail WHERE model_No = '"+ cmbModelNo.SelectedValue.ToString() + "' GROUP BY process_Name ";
-            try
-            {
-                using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
-                {
-                    DataTable dset = new DataTable();
-                    adpt.Fill(dset);
+            //string query = "SELECT process_Name FROM tbl_wodetail WHERE model_No = '"+ cmbModelNo.SelectedValue.ToString() + "' GROUP BY process_Name ";
+            //try
+            //{
+            //    using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
+            //    {
+            //        DataTable dset = new DataTable();
+            //        adpt.Fill(dset);
 
-                    cmbProcess.DataSource = dset;
-                    cmbProcess.ValueMember = "process_Name";
-                    cmbProcess.DisplayMember = "process_Name";
+            //        cmbProcess.DataSource = dset;
+            //        cmbProcess.ValueMember = "process_Name";
+            //        cmbProcess.DisplayMember = "process_Name";
 
-                }
-                connection.Close();
+            //    }
+            //    connection.Close();
 
-            }
-            catch (Exception ex)
-            {
-                // tampilkan pesan error
-                MessageBox.Show(ex.Message);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    // tampilkan pesan error
+            //    MessageBox.Show(ex.Message);
+            //}
         }
 
         private void cmbProcess_SelectedIndexChanged(object sender, EventArgs e)
@@ -194,8 +195,8 @@ namespace CompareWOLL
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            string model = cmbModelNo.Text;            
-            string process = cmbProcess.Text;
+            string model = tbModelNo.Text;            
+            string process = tbProcess.Text;
             string modelLL = tbModel.Text;
             string machine = tbMachine.Text;
             string pwbType = tbPWBType.Text;
