@@ -45,11 +45,11 @@ namespace CompareWOLL
             // importWO
             // 
             this.importWO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.importWO.Location = new System.Drawing.Point(597, 25);
+            this.importWO.Location = new System.Drawing.Point(567, 25);
             this.importWO.Name = "importWO";
-            this.importWO.Size = new System.Drawing.Size(75, 23);
+            this.importWO.Size = new System.Drawing.Size(105, 23);
             this.importWO.TabIndex = 0;
-            this.importWO.Text = "Import";
+            this.importWO.Text = "Import Work Order";
             this.importWO.UseVisualStyleBackColor = true;
             this.importWO.Click += new System.EventHandler(this.importWO_Click);
             // 

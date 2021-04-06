@@ -49,12 +49,12 @@ namespace CompareWOLL
             this.openFileDialogWO = new System.Windows.Forms.OpenFileDialog();
             this.backButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
-            this.dataGridViewWO = new System.Windows.Forms.DataGridView();
+            this.dataGridViewWoList = new System.Windows.Forms.DataGridView();
             this.woQty = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWO)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWoList)).BeginInit();
             this.SuspendLayout();
             // 
             // dateTimeNow
@@ -246,18 +246,18 @@ namespace CompareWOLL
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
             // 
-            // dataGridViewWO
+            // dataGridViewWoList
             // 
-            this.dataGridViewWO.AllowUserToAddRows = false;
-            this.dataGridViewWO.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dataGridViewWoList.AllowUserToAddRows = false;
+            this.dataGridViewWoList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewWO.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewWO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewWO.Location = new System.Drawing.Point(15, 252);
-            this.dataGridViewWO.Name = "dataGridViewWO";
-            this.dataGridViewWO.Size = new System.Drawing.Size(1045, 370);
-            this.dataGridViewWO.TabIndex = 28;
+            this.dataGridViewWoList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewWoList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewWoList.Location = new System.Drawing.Point(15, 252);
+            this.dataGridViewWoList.Name = "dataGridViewWoList";
+            this.dataGridViewWoList.Size = new System.Drawing.Size(1045, 370);
+            this.dataGridViewWoList.TabIndex = 28;
             // 
             // woQty
             // 
@@ -291,7 +291,7 @@ namespace CompareWOLL
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.backButton);
             this.Controls.Add(this.saveButton);
-            this.Controls.Add(this.dataGridViewWO);
+            this.Controls.Add(this.dataGridViewWoList);
             this.Name = "DetailWO";
             this.Text = "Detail Work Order";
             this.Load += new System.EventHandler(this.DetailWO_Load);
@@ -299,7 +299,7 @@ namespace CompareWOLL
             this.groupBox1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWO)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWoList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -321,7 +321,7 @@ namespace CompareWOLL
         private System.Windows.Forms.OpenFileDialog openFileDialogWO;
         private System.Windows.Forms.Button backButton;
         private System.Windows.Forms.Button saveButton;
-        private System.Windows.Forms.DataGridView dataGridViewWO;
+        private System.Windows.Forms.DataGridView dataGridViewWoList;
         public System.Windows.Forms.TextBox process;
         public System.Windows.Forms.TextBox woUsage;
         public System.Windows.Forms.TextBox woPTSN;
