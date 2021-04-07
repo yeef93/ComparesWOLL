@@ -85,6 +85,7 @@ namespace CompareWOLL
         private void backButton_Click(object sender, EventArgs e)
         {
             MainMenu mm = new MainMenu();
+            mm.toolStripUsername.Text = toolStripUsername.Text;
             mm.Show();
             this.Hide();
         }

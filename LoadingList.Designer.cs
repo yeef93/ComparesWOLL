@@ -34,6 +34,7 @@ namespace CompareWOLL
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
             this.dataGridViewLLList = new System.Windows.Forms.DataGridView();
             this.backButton = new System.Windows.Forms.Button();
+            this.toolStripUsername = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLLList)).BeginInit();
             this.SuspendLayout();
@@ -43,6 +44,7 @@ namespace CompareWOLL
             this.statusStrip1.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripUsername,
             this.toolStripStatusLabel1,
             this.dateTimeNow});
             this.statusStrip1.Location = new System.Drawing.Point(0, 346);
@@ -91,6 +93,12 @@ namespace CompareWOLL
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
+            // toolStripUsername
+            // 
+            this.toolStripUsername.Name = "toolStripUsername";
+            this.toolStripUsername.Size = new System.Drawing.Size(124, 17);
+            this.toolStripUsername.Text = "toolStripStatusLabel2";
+            // 
             // LoadingList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -117,5 +125,6 @@ namespace CompareWOLL
         private System.Windows.Forms.ToolStripStatusLabel dateTimeNow;
         private System.Windows.Forms.DataGridView dataGridViewLLList;
         private System.Windows.Forms.Button backButton;
+        public System.Windows.Forms.ToolStripStatusLabel toolStripUsername;
     }
 }

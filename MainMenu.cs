@@ -26,6 +26,7 @@ namespace CompareWOLL
         private void compareWOVsLLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CompareWOLL cwl = new CompareWOLL();
+            cwl.toolStripUsername.Text = toolStripUsername.Text;
             cwl.Show();
             this.Hide();
         }
@@ -33,6 +34,7 @@ namespace CompareWOLL
         private void workOrderToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             WorkOrder wo = new WorkOrder();
+            wo.toolStripUsername.Text = toolStripUsername.Text;
             wo.Show();
             this.Hide();
         }
@@ -40,6 +42,7 @@ namespace CompareWOLL
         private void loadingListToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadingList LL = new LoadingList();
+            LL.toolStripUsername.Text = toolStripUsername.Text;
             LL.Show();
             this.Hide();
         }

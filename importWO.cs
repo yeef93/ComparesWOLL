@@ -229,6 +229,7 @@ namespace CompareWOLL
         private void button1_Click(object sender, EventArgs e)
         {
             MainMenu mm = new MainMenu();
+            mm.toolStripUsername.Text = toolStripUsername.Text;
             mm.Show();
             this.Hide();
         }
@@ -236,6 +237,7 @@ namespace CompareWOLL
         private void backButton_Click(object sender, EventArgs e)
         {
             WorkOrder wo = new WorkOrder();
+            wo.toolStripUsername.Text = toolStripUsername.Text;
             wo.Show();
             this.Hide();
         }

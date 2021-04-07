@@ -70,6 +70,7 @@ namespace CompareWOLL
         private void importWO_Click(object sender, EventArgs e)
         {
             importWO iWO = new importWO();
+            iWO.toolStripUsername.Text = toolStripUsername.Text;
             iWO.Show();
             this.Hide();
         }
@@ -87,6 +88,7 @@ namespace CompareWOLL
         private void backButton_Click(object sender, EventArgs e)
         {
             MainMenu mm = new MainMenu();
+            mm.toolStripUsername.Text = toolStripUsername.Text;
             mm.Show();
             this.Hide();
         }
