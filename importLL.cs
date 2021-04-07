@@ -98,6 +98,7 @@ namespace CompareWOLL
             string queryLLDetail = string.Empty;
             string queryGetPCBNo = string.Empty;
             string queryGetAltPCB = string.Empty;
+            string queryGetTotal = string.Empty;
 
             openFileDialogLL.Title = "Please Select a File Loading List";
             openFileDialogLL.Filter = "Excel Files|*.xls;*.xlsx;";
@@ -111,6 +112,7 @@ namespace CompareWOLL
                 queryLLDetail = "select * from [Sheet1$A9:I]";
                 queryGetPCBNo = "select * from [Sheet1$E9:E]";
                 queryGetAltPCB = "select * from [Sheet1$B9:B]";
+                queryGetTotal = "select * from [Sheet1$E9:E]";
 
 
                 if (fileExtLL.CompareTo(".xls") == 0 || fileExtLL.CompareTo(".xlsx") == 0)
@@ -172,7 +174,24 @@ namespace CompareWOLL
                         tbAltPcbNo1.Text = altPCB1;
                         tbAltPcbNo2.Text = altPCB2;
 
+                        // buat cari batas total row
+                        DataTable dtExcel4 = new DataTable();
+                        dtExcel4 = ReadExcel(woFileName, fileExtLL, queryGetTotal); //read excel file  
+                        dataGridViewGetTotalRow.DataSource = dtExcel4;
+
                         //MessageBox.Show(rowLL , "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+
+                        // count row until get text total points
+                        for (int i = 0; i < dataGridViewGetTotalRow.Columns.Count; i++)
+                        {
+                            int j = 0;
+                            if (dataGridViewGetTotalRow.Rows[i].Cells[0].Value.ToString().Contains(" PCB NO: "))
+                            {
+                                j++;
+                            }
+                            int result = j;
+                        }
+
 
                         for (int i = rowLL -1 ; i >= 23; i--)
                         {
