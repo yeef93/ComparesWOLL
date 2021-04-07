@@ -154,7 +154,7 @@ namespace CompareWOLL
                         //dataGridViewPCBNo.DataSource = dtExcel2;
 
                         DataView dataView1 = dtExcel3.DefaultView;
-                        dataView1.RowFilter = "F1 LIKE '% ALT%'";
+                        dataView1.RowFilter = "F1 LIKE '%PCB%'";
                         dataGridAltPCB.DataSource = dataView1;
 
                         string allPCB = dataGridAltPCB.Rows[0].Cells[0].Value.ToString();

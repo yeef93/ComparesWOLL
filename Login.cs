@@ -15,11 +15,13 @@ namespace CompareWOLL
     {
 
         ConnectionDB con = new ConnectionDB();
+        Helper help = new Helper();
         string id, username, password, name, role;
 
         public Login()
         {
             InitializeComponent();
+            Helper help = new Helper();
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -30,12 +32,14 @@ namespace CompareWOLL
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            string passwords = help.encryption(txtPassword.Text);
             try
             {
                 if (txtUsername.Text != "" && txtPassword.Text != "")
                 {
+
                     con.Open();
-                    string query = "select id,username,password,name,role from tbl_user WHERE username ='" + txtUsername.Text + "'";
+                    string query = "SELECT id,username,pass,NAME,ROLE FROM tbl_user WHERE username = '" + txtUsername.Text + "' AND pass = '" + passwords + "'";
                     MySqlDataReader row;
                     row = con.ExecuteReader(query);
                     if (row.HasRows)
@@ -44,7 +48,7 @@ namespace CompareWOLL
                         {
                             id = row["id"].ToString();
                             username = row["username"].ToString();
-                            password = row["password"].ToString();
+                            password = row["pass"].ToString();
                             name = row["name"].ToString();
                             role = row["role"].ToString();
                         }
