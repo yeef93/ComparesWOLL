@@ -95,6 +95,8 @@ namespace CompareWOLL
             string fileExtLL = string.Empty;
             string queryLL = string.Empty;
             string queryLLDetail = string.Empty;
+            string queryGetPCBNo = string.Empty;
+            string queryGetAltPCB = string.Empty;
 
             openFileDialogLL.Title = "Please Select a File Loading List";
             openFileDialogLL.Filter = "Excel Files|*.xls;*.xlsx;";
@@ -106,6 +108,8 @@ namespace CompareWOLL
                 fileExtLL = Path.GetExtension(woFileName); //get the file extension  
                 queryLL = "select * from [Sheet1$A3:I]";
                 queryLLDetail = "select * from [Sheet1$A9:I]";
+                queryGetPCBNo = "select * from [Sheet1$E9:E]";
+                queryGetAltPCB = "select * from [Sheet1$B9:B]";
 
 
                 if (fileExtLL.CompareTo(".xls") == 0 || fileExtLL.CompareTo(".xlsx") == 0)
@@ -129,7 +133,40 @@ namespace CompareWOLL
                         dataGridViewLL.DataSource = dtExcel1;
 
                         dataGridViewLL.Columns.RemoveAt(5);
-                        dataGridViewLL.Columns.RemoveAt(6); 
+                        dataGridViewLL.Columns.RemoveAt(6);
+
+                        // baca pcb No
+                        DataTable dtExcel2 = new DataTable();
+                        dtExcel2 = ReadExcel(woFileName, fileExtLL, queryGetPCBNo); //read excel file  
+                        //dataGridViewPCBNo.DataSource = dtExcel2;
+
+                        DataView dataView = dtExcel2.DefaultView;
+                        dataView.RowFilter = "F1 LIKE '% PCB NO%'";
+                        dataGridViewPCBNo.DataSource = dataView;
+
+                        tbPcbNo.Text = dataGridViewPCBNo.Rows[0].Cells[0].Value.ToString().Substring(11, 12);
+
+
+                        // baca Alt pcb No
+                        DataTable dtExcel3 = new DataTable();
+                        dtExcel3 = ReadExcel(woFileName, fileExtLL, queryGetAltPCB); //read excel file  
+                        //dataGridViewPCBNo.DataSource = dtExcel2;
+
+                        DataView dataView1 = dtExcel3.DefaultView;
+                        dataView1.RowFilter = "F1 LIKE '% ALT%'";
+                        dataGridAltPCB.DataSource = dataView1;
+
+                        string allPCB = dataGridAltPCB.Rows[0].Cells[0].Value.ToString();
+
+                        // Get 12 characters from the right of the string
+                        string altPCB1 = allPCB.Substring(allPCB.Length - 26, 12);
+
+                        // Get 12 characters from the right of the string
+                        string altPCB2 = allPCB.Substring(allPCB.Length- 12, 12);
+
+                        tbAltPcbNo1.Text = altPCB1;
+                        tbAltPcbNo2.Text = altPCB2;
+
                     }
                     catch (Exception ex)
                     {

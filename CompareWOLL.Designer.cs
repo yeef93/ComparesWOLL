@@ -98,7 +98,6 @@ namespace CompareWOLL
             this.label1.Size = new System.Drawing.Size(113, 13);
             this.label1.TabIndex = 31;
             this.label1.Text = "Loading List Model No";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnCompare
             // 
@@ -227,7 +226,6 @@ namespace CompareWOLL
             this.label5.Size = new System.Drawing.Size(111, 13);
             this.label5.TabIndex = 37;
             this.label5.Text = "Work Order Model No";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // cmbWOProcess
             // 

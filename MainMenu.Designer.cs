@@ -37,6 +37,7 @@ namespace CompareWOLL
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripUsername = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -71,7 +72,7 @@ namespace CompareWOLL
             // loadingListToolStripMenuItem
             // 
             this.loadingListToolStripMenuItem.Name = "loadingListToolStripMenuItem";
-            this.loadingListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadingListToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.loadingListToolStripMenuItem.Text = "Loading List";
             this.loadingListToolStripMenuItem.Click += new System.EventHandler(this.loadingListToolStripMenuItem_Click);
             // 
@@ -87,6 +88,7 @@ namespace CompareWOLL
             this.statusStrip1.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripUsername,
             this.toolStripStatusLabel1,
             this.dateTimeNow});
             this.statusStrip1.Location = new System.Drawing.Point(0, 373);
@@ -106,6 +108,12 @@ namespace CompareWOLL
             this.dateTimeNow.Name = "dateTimeNow";
             this.dateTimeNow.Size = new System.Drawing.Size(124, 17);
             this.dateTimeNow.Text = "toolStripStatusLabel2";
+            // 
+            // toolStripUsername
+            // 
+            this.toolStripUsername.Name = "toolStripUsername";
+            this.toolStripUsername.Size = new System.Drawing.Size(124, 17);
+            this.toolStripUsername.Text = "toolStripStatusLabel2";
             // 
             // MainMenu
             // 
@@ -139,6 +147,7 @@ namespace CompareWOLL
         private System.Windows.Forms.ToolStripMenuItem loadingListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem compareWOVsLLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem workOrderToolStripMenuItem1;
+        public System.Windows.Forms.ToolStripStatusLabel toolStripUsername;
     }
 }
 

@@ -99,11 +99,6 @@ namespace CompareWOLL
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
@@ -132,10 +127,6 @@ namespace CompareWOLL
             }
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void cmbWOProcess_SelectedIndexChanged(object sender, EventArgs e)
         {

@@ -29,12 +29,14 @@ namespace CompareWOLL
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.homeButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tbProcess = new System.Windows.Forms.TextBox();
+            this.tbModelNo = new System.Windows.Forms.TextBox();
             this.tbRemark = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.tbAltPcbNo2 = new System.Windows.Forms.TextBox();
@@ -65,12 +67,14 @@ namespace CompareWOLL
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
             this.openFileDialogLL = new System.Windows.Forms.OpenFileDialog();
             this.dataGridViewLL = new System.Windows.Forms.DataGridView();
-            this.tbModelNo = new System.Windows.Forms.TextBox();
-            this.tbProcess = new System.Windows.Forms.TextBox();
+            this.dataGridViewPCBNo = new System.Windows.Forms.DataGridView();
+            this.dataGridAltPCB = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLLHide)).BeginInit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLL)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPCBNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridAltPCB)).BeginInit();
             this.SuspendLayout();
             // 
             // homeButton
@@ -120,6 +124,22 @@ namespace CompareWOLL
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Loading List Detail";
             // 
+            // tbProcess
+            // 
+            this.tbProcess.Location = new System.Drawing.Point(544, 40);
+            this.tbProcess.Name = "tbProcess";
+            this.tbProcess.ReadOnly = true;
+            this.tbProcess.Size = new System.Drawing.Size(223, 20);
+            this.tbProcess.TabIndex = 53;
+            // 
+            // tbModelNo
+            // 
+            this.tbModelNo.Location = new System.Drawing.Point(115, 40);
+            this.tbModelNo.Name = "tbModelNo";
+            this.tbModelNo.ReadOnly = true;
+            this.tbModelNo.Size = new System.Drawing.Size(223, 20);
+            this.tbModelNo.TabIndex = 52;
+            // 
             // tbRemark
             // 
             this.tbRemark.Location = new System.Drawing.Point(115, 272);
@@ -141,6 +161,7 @@ namespace CompareWOLL
             // 
             this.tbAltPcbNo2.Location = new System.Drawing.Point(544, 231);
             this.tbAltPcbNo2.Name = "tbAltPcbNo2";
+            this.tbAltPcbNo2.ReadOnly = true;
             this.tbAltPcbNo2.Size = new System.Drawing.Size(223, 20);
             this.tbAltPcbNo2.TabIndex = 49;
             // 
@@ -157,6 +178,7 @@ namespace CompareWOLL
             // 
             this.tbAltPcbNo1.Location = new System.Drawing.Point(115, 231);
             this.tbAltPcbNo1.Name = "tbAltPcbNo1";
+            this.tbAltPcbNo1.ReadOnly = true;
             this.tbAltPcbNo1.Size = new System.Drawing.Size(223, 20);
             this.tbAltPcbNo1.TabIndex = 47;
             // 
@@ -173,6 +195,7 @@ namespace CompareWOLL
             // 
             this.tbPcbNo.Location = new System.Drawing.Point(544, 194);
             this.tbPcbNo.Name = "tbPcbNo";
+            this.tbPcbNo.ReadOnly = true;
             this.tbPcbNo.Size = new System.Drawing.Size(223, 20);
             this.tbPcbNo.TabIndex = 45;
             this.tbPcbNo.TextChanged += new System.EventHandler(this.tbPcbNo_TextChanged);
@@ -333,23 +356,23 @@ namespace CompareWOLL
             this.dataGridViewLLHide.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewLLHide.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewLLHide.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.dataGridViewLLHide.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewLLHide.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewLLHide.DefaultCellStyle = dataGridViewCellStyle14;
             this.dataGridViewLLHide.Location = new System.Drawing.Point(12, 436);
             this.dataGridViewLLHide.Name = "dataGridViewLLHide";
             this.dataGridViewLLHide.Size = new System.Drawing.Size(852, 227);
@@ -388,46 +411,52 @@ namespace CompareWOLL
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewLL.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewLL.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewLL.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewLL.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.dataGridViewLL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewLL.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewLL.DefaultCellStyle = dataGridViewCellStyle16;
             this.dataGridViewLL.Location = new System.Drawing.Point(12, 436);
             this.dataGridViewLL.Name = "dataGridViewLL";
             this.dataGridViewLL.ReadOnly = true;
             this.dataGridViewLL.Size = new System.Drawing.Size(852, 253);
             this.dataGridViewLL.TabIndex = 34;
             // 
-            // tbModelNo
+            // dataGridViewPCBNo
             // 
-            this.tbModelNo.Location = new System.Drawing.Point(115, 40);
-            this.tbModelNo.Name = "tbModelNo";
-            this.tbModelNo.ReadOnly = true;
-            this.tbModelNo.Size = new System.Drawing.Size(223, 20);
-            this.tbModelNo.TabIndex = 52;
+            this.dataGridViewPCBNo.AllowUserToAddRows = false;
+            this.dataGridViewPCBNo.AllowUserToDeleteRows = false;
+            this.dataGridViewPCBNo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewPCBNo.Location = new System.Drawing.Point(12, 436);
+            this.dataGridViewPCBNo.Name = "dataGridViewPCBNo";
+            this.dataGridViewPCBNo.Size = new System.Drawing.Size(240, 150);
+            this.dataGridViewPCBNo.TabIndex = 35;
+            this.dataGridViewPCBNo.Visible = false;
             // 
-            // tbProcess
+            // dataGridAltPCB
             // 
-            this.tbProcess.Location = new System.Drawing.Point(544, 40);
-            this.tbProcess.Name = "tbProcess";
-            this.tbProcess.ReadOnly = true;
-            this.tbProcess.Size = new System.Drawing.Size(223, 20);
-            this.tbProcess.TabIndex = 53;
+            this.dataGridAltPCB.AllowUserToAddRows = false;
+            this.dataGridAltPCB.AllowUserToDeleteRows = false;
+            this.dataGridAltPCB.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridAltPCB.Location = new System.Drawing.Point(12, 436);
+            this.dataGridAltPCB.Name = "dataGridAltPCB";
+            this.dataGridAltPCB.Size = new System.Drawing.Size(240, 150);
+            this.dataGridAltPCB.TabIndex = 36;
+            this.dataGridAltPCB.Visible = false;
             // 
-            // importLL
+            // ImportLL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -438,7 +467,9 @@ namespace CompareWOLL
             this.Controls.Add(this.dataGridViewLLHide);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.homeButton);
-            this.Name = "importLL";
+            this.Controls.Add(this.dataGridViewPCBNo);
+            this.Controls.Add(this.dataGridAltPCB);
+            this.Name = "ImportLL";
             this.Text = "Import Loading List";
             this.Load += new System.EventHandler(this.importLL_Load);
             this.groupBox1.ResumeLayout(false);
@@ -447,6 +478,8 @@ namespace CompareWOLL
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLL)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPCBNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridAltPCB)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -487,5 +520,7 @@ namespace CompareWOLL
         private System.Windows.Forms.Label label12;
         public System.Windows.Forms.TextBox tbProcess;
         public System.Windows.Forms.TextBox tbModelNo;
+        private System.Windows.Forms.DataGridView dataGridViewPCBNo;
+        private System.Windows.Forms.DataGridView dataGridAltPCB;
     }
 }
