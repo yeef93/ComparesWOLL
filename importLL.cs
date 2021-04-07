@@ -136,6 +136,10 @@ namespace CompareWOLL
                         dataGridViewLL.Columns.RemoveAt(5);
                         dataGridViewLL.Columns.RemoveAt(6);
 
+                        int rowLL = dataGridViewLL.Rows.Count;
+
+                        //dataGridViewLL.Rows.RemoveAt();
+
                         // baca pcb No
                         DataTable dtExcel2 = new DataTable();
                         dtExcel2 = ReadExcel(woFileName, fileExtLL, queryGetPCBNo); //read excel file  
@@ -167,6 +171,14 @@ namespace CompareWOLL
 
                         tbAltPcbNo1.Text = altPCB1;
                         tbAltPcbNo2.Text = altPCB2;
+
+                        //MessageBox.Show(rowLL , "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+
+                        for (int i = rowLL -1 ; i >= 23; i--)
+                        {
+                            dataGridViewLL.Rows.RemoveAt(i);
+                            
+                        }
 
                     }
                     catch (Exception ex)
