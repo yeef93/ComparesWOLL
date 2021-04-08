@@ -18,11 +18,6 @@ namespace CompareWOLL
 
         }
 
-        private void compareWOWithLLToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-                        
-        }
-
         private void compareWOVsLLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CompareWOLL cwl = new CompareWOLL();

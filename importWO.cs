@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Data;
 using System.Data.OleDb;
-using System.Data.SqlClient;
-using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-using Ubiety.Dns.Core;
 
 namespace CompareWOLL
 {
     public partial class importWO : Form
     {
-        ConnectionDB con = new ConnectionDB();      
-
 
         public importWO()
         {

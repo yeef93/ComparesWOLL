@@ -3,7 +3,7 @@ using _excel = Microsoft.Office.Interop.Excel;
 
 namespace CompareWOLL
 {
-    class ExcelConvert
+    public class ExcelConvert
     {
             // Create an excel application object, workbook oject and worksheet object
             _Application excel = new _excel.Application();

@@ -1,19 +1,12 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CompareWOLL
 {
     public partial class WorkOrder : Form
     {
-
         public WorkOrder()
         {
             InitializeComponent();
@@ -73,16 +66,6 @@ namespace CompareWOLL
             iWO.toolStripUsername.Text = toolStripUsername.Text;
             iWO.Show();
             this.Hide();
-        }
-
-        private void workOrderToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void compareWOVsLLToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void backButton_Click(object sender, EventArgs e)

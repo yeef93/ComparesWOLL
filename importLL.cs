@@ -10,33 +10,12 @@ namespace CompareWOLL
     public partial class ImportLL : Form
     {
 
+        WorkOrder wo = new WorkOrder();
+        Helper help = new Helper();
         public ImportLL()
         {
             InitializeComponent();
-            WorkOrder wo = new WorkOrder();
         }
-
-        // for read excel file
-        public DataTable ReadExcel(string fileName, string fileExt, string query)
-        {
-            string conn = string.Empty;
-            DataTable dtexcel = new DataTable();
-            if (fileExt.CompareTo(".xls") == 0)
-                conn = @"provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + fileName + ";Extended Properties='Excel 8.0;HRD=Yes;IMEX=1';"; //for below excel 2007  
-            else
-                conn = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties='Excel 12.0;HDR=NO';"; //for above excel 2007  
-            using (OleDbConnection con = new OleDbConnection(conn))
-            {
-                try
-                {
-                    OleDbDataAdapter oleAdpt = new OleDbDataAdapter(query, con); //here we read data from sheet1  
-                    oleAdpt.Fill(dtexcel); //fill excel data into dataTable  
-                }
-                catch { }
-            }
-            return dtexcel;
-        }
-
 
         private void importLL_Load(object sender, EventArgs e)
         {
@@ -45,34 +24,6 @@ namespace CompareWOLL
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             dataGridViewLLHide.Visible = false;
             saveButton.Enabled = false;             
-
-            //MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
-            //connection.Open();
-
-            //string query = "SELECT model_No FROM tbl_model";
-            //try
-            //{
-            //    using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
-            //    {
-            //        DataTable dset = new DataTable();
-            //        adpt.Fill(dset);
-
-            //        cmbModelNo.DataSource = dset;
-            //        cmbModelNo.ValueMember = "model_No";
-            //        cmbModelNo.DisplayMember = "model_No";
-
-            //    }
-            //    connection.Close();
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    // tampilkan pesan error
-            //    MessageBox.Show(ex.Message);
-            //}       
-
-            //string modelNo = cmbModelNo.SelectedValue.ToString();
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -117,11 +68,12 @@ namespace CompareWOLL
 
                 if (fileExtLL.CompareTo(".xls") == 0 || fileExtLL.CompareTo(".xlsx") == 0)
                 {
+                    
                     try
                     {
                         // baca data utama LL
                         DataTable dtExcel = new DataTable();
-                        dtExcel = ReadExcel(woFileName, fileExtLL, queryLL); //read excel file  
+                        dtExcel = help.ReadExcel(woFileName, fileExtLL, queryLL); //read excel file  
                         dataGridViewLLHide.DataSource = dtExcel;
 
                        tbModel.Text = dataGridViewLLHide.Rows[0].Cells[0].Value.ToString().Remove(0,12);
@@ -132,7 +84,7 @@ namespace CompareWOLL
 
                         // baca data detail LL
                         DataTable dtExcel1 = new DataTable();
-                        dtExcel1 = ReadExcel(woFileName, fileExtLL, queryLLDetail); //read excel file  
+                        dtExcel1 = help.ReadExcel(woFileName, fileExtLL, queryLLDetail); //read excel file  
                         dataGridViewLL.DataSource = dtExcel1;
 
                         dataGridViewLL.Columns.RemoveAt(5);
@@ -144,11 +96,11 @@ namespace CompareWOLL
 
                         // baca pcb No
                         DataTable dtExcel2 = new DataTable();
-                        dtExcel2 = ReadExcel(woFileName, fileExtLL, queryGetPCBNo); //read excel file  
+                        dtExcel2 = help.ReadExcel(woFileName, fileExtLL, queryGetPCBNo); //read excel file  
                         //dataGridViewPCBNo.DataSource = dtExcel2;
 
                         DataView dataView = dtExcel2.DefaultView;
-                        dataView.RowFilter = "F1 LIKE '% PCB NO%'";
+                        dataView.RowFilter = "F1 LIKE '%PCB NO%'";
                         dataGridViewPCBNo.DataSource = dataView;
 
                         tbPcbNo.Text = dataGridViewPCBNo.Rows[0].Cells[0].Value.ToString().Substring(11, 12);
@@ -156,29 +108,30 @@ namespace CompareWOLL
 
                         // baca Alt pcb No
                         DataTable dtExcel3 = new DataTable();
-                        dtExcel3 = ReadExcel(woFileName, fileExtLL, queryGetAltPCB); //read excel file  
+                        dtExcel3 = help.ReadExcel(woFileName, fileExtLL, queryGetAltPCB); //read excel file  
                         //dataGridViewPCBNo.DataSource = dtExcel2;
 
                         DataView dataView1 = dtExcel3.DefaultView;
                         dataView1.RowFilter = "F1 LIKE '%PCB%'";
                         dataGridAltPCB.DataSource = dataView1;
 
-                        
+                        if (dataView1.Count > 0)
+                        {
+                            string allPCB = dataGridAltPCB.Rows[0].Cells[0].Value.ToString();
 
-                        string allPCB = dataGridAltPCB.Rows[0].Cells[0].Value.ToString();
+                            // Get 12 characters from the right of the string
+                            string altPCB1 = allPCB.Substring(allPCB.Length - 26, 12);
 
-                        // Get 12 characters from the right of the string
-                        string altPCB1 = allPCB.Substring(allPCB.Length - 26, 12);
+                            // Get 12 characters from the right of the string
+                            string altPCB2 = allPCB.Substring(allPCB.Length - 12, 12);
 
-                        // Get 12 characters from the right of the string
-                        string altPCB2 = allPCB.Substring(allPCB.Length- 12, 12);
-
-                        tbAltPcbNo1.Text = altPCB1;
-                        tbAltPcbNo2.Text = altPCB2;
+                            tbAltPcbNo1.Text = altPCB1;
+                            tbAltPcbNo2.Text = altPCB2;
+                        }                        
 
                         // buat cari batas total row
                         DataTable dtExcel4 = new DataTable();
-                        dtExcel4 = ReadExcel(woFileName, fileExtLL, queryGetTotal); //read excel file  
+                        dtExcel4 = help.ReadExcel(woFileName, fileExtLL, queryGetTotal); //read excel file  
                         dataGridViewGetTotalRow.DataSource = dtExcel4;
                         int totalrow = dataGridViewGetTotalRow.Rows.Count;
 
@@ -194,10 +147,10 @@ namespace CompareWOLL
                             }
                         }
 
-                        if (rowIndex > 0)
-                            MessageBox.Show(rowIndex.ToString()+"Row found.");
-                        else
-                            MessageBox.Show("Row not found. Searching value does not exist.");
+                        //if (rowIndex > 0)
+                        //    MessageBox.Show(rowIndex.ToString()+"Row found.");
+                        //else
+                        //    MessageBox.Show("Row not found. Searching value does not exist.");
 
 
                         for (int i = rowLL -1 ; i >= rowIndex; i--)
@@ -205,7 +158,6 @@ namespace CompareWOLL
                             dataGridViewLL.Rows.RemoveAt(i);
                             
                         }
-
 
                     }
                     catch (Exception ex)
@@ -232,37 +184,6 @@ namespace CompareWOLL
                 }
 
             }
-        }
-
-        private void cmbModelNo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ////label2.Text = cmbModelNo.SelectedValue.ToString();
-
-
-            //MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
-            //connection.Open();
-
-            //string query = "SELECT process_Name FROM tbl_wodetail WHERE model_No = '"+ cmbModelNo.SelectedValue.ToString() + "' GROUP BY process_Name ";
-            //try
-            //{
-            //    using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
-            //    {
-            //        DataTable dset = new DataTable();
-            //        adpt.Fill(dset);
-
-            //        cmbProcess.DataSource = dset;
-            //        cmbProcess.ValueMember = "process_Name";
-            //        cmbProcess.DisplayMember = "process_Name";
-
-            //    }
-            //    connection.Close();
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    // tampilkan pesan error
-            //    MessageBox.Show(ex.Message);
-            //}
         }
 
         private void cmbProcess_SelectedIndexChanged(object sender, EventArgs e)
