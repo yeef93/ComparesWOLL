@@ -216,15 +216,6 @@ namespace CompareWOLL
             }            
         }
 
-        private void workOrderToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void compareWOVsLLToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {

@@ -163,6 +163,8 @@ namespace CompareWOLL
                         dataView1.RowFilter = "F1 LIKE '%PCB%'";
                         dataGridAltPCB.DataSource = dataView1;
 
+                        
+
                         string allPCB = dataGridAltPCB.Rows[0].Cells[0].Value.ToString();
 
                         // Get 12 characters from the right of the string
@@ -178,26 +180,32 @@ namespace CompareWOLL
                         DataTable dtExcel4 = new DataTable();
                         dtExcel4 = ReadExcel(woFileName, fileExtLL, queryGetTotal); //read excel file  
                         dataGridViewGetTotalRow.DataSource = dtExcel4;
+                        int totalrow = dataGridViewGetTotalRow.Rows.Count;
 
-                        //MessageBox.Show(rowLL , "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
 
-                        // count row until get text total points
-                        for (int i = 0; i < dataGridViewGetTotalRow.Columns.Count; i++)
+                        string searchingFor = " PCB NO";
+                        int rowIndex = 0;
+                        foreach (DataGridViewRow row in dataGridViewGetTotalRow.Rows)
                         {
-                            int j = 0;
-                            if (dataGridViewGetTotalRow.Rows[i].Cells[0].Value.ToString().Contains(" PCB NO: "))
+                            foreach (DataGridViewCell cell in row.Cells)
                             {
-                                j++;
+                                if (cell.Value.ToString().Contains(searchingFor))
+                                    rowIndex = row.Index;
                             }
-                            int result = j;
                         }
 
+                        if (rowIndex > 0)
+                            MessageBox.Show(rowIndex.ToString()+"Row found.");
+                        else
+                            MessageBox.Show("Row not found. Searching value does not exist.");
 
-                        for (int i = rowLL -1 ; i >= 23; i--)
+
+                        for (int i = rowLL -1 ; i >= rowIndex; i--)
                         {
                             dataGridViewLL.Rows.RemoveAt(i);
                             
                         }
+
 
                     }
                     catch (Exception ex)
