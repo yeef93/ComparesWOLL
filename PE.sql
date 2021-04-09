@@ -47,14 +47,15 @@ CREATE TABLE `tbl_ll` (
   `rev` varchar(5) NOT NULL,
   `pcb_No` varchar(15) NOT NULL,
   `part_Count` int(20) NOT NULL,
+  `stencil` varchar(50) DEFAULT NULL,
   `remarks` longtext DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tbl_ll` */
 
-insert  into `tbl_ll`(`id`,`model_No`,`process_Name`,`model_detail`,`machine`,`pwb_Type`,`prog_No`,`rev`,`pcb_No`,`part_Count`,`remarks`) values 
-(1,'522J19C10000','SMT-A','XM-522J19C10000 SB  MASTER (SMT-A)','NXT3-D15MCLB (LINE #07H-LB)','J19C SB (1 PNL : 16 PCS)','7HLB-52J19CJSB-A','03','352J19SP1A9X',23,'');
+insert  into `tbl_ll`(`id`,`model_No`,`process_Name`,`model_detail`,`machine`,`pwb_Type`,`prog_No`,`rev`,`pcb_No`,`part_Count`,`stencil`,`remarks`) values 
+(34,'522J19C10000','SMT-A','XM-522J19C10000 SB  MASTER (SMT-A)','NXT3-D15MCLB (LINE #07H-LB)','J19C SB (1 PNL : 16 PCS)','7HLB-52J19CJSB-A','03','352J19SP1A9X',23,'SOLDERPASTE','USING SOLDER PASTE\r\n	MAIN PART :       * PART NAME   : ECOSOLDER PASTE\r\n	                          * PART NO.      : S70G-HF TYPE5 (Sn96.5/Ag3.0/Cu0.5)\r\n	                          * VENDOR        : SENJU (MALAYSIA) SDN. BHD.\r\n\r\n       * MYLAR COMPONENT : PART NO. : MYL001-001');
 
 /*Table structure for table `tbl_lldetail` */
 
@@ -98,7 +99,8 @@ insert  into `tbl_lldetail`(`model_No`,`process_Name`,`reel`,`partcode`,`alt_No`
 ('522J19C10000','SMT-A','1011','40110000109X','1',2),
 ('522J19C10000','SMT-A','1011','40110000119X','2',0),
 ('522J19C10000','SMT-A','1113','21AG00027068','1',1),
-('522J19C10000','SMT-A','1113','21AG020330A9','2',0),
+('522J19C10000','SMT-A','1113','21AG00027069','2',0),
+('522J19C10000','SMT-A','1113','21AG020330A9','3',0),
 ('522J19C10000','SMT-A','1435','4002F1623063','1',1),
 ('522J19C10000','SMT-A','1435','4003000005AF','2',0);
 
@@ -112,12 +114,12 @@ CREATE TABLE `tbl_model` (
   `process_Name` varchar(15) NOT NULL,
   PRIMARY KEY (`model_No`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tbl_model` */
 
 insert  into `tbl_model`(`id`,`model_No`,`process_Name`) values 
-(1,'522J19C10000','SMT-A');
+(24,'522J19C10000','SMT-A');
 
 /*Table structure for table `tbl_partcodedetail` */
 
@@ -157,6 +159,7 @@ insert  into `tbl_partcodedetail`(`model_No`,`process_Name`,`partcode`,`tp`,`dec
 ('522J19C10000','SMT-A','40110000109X',2,'Connector_Spring_Top press_1.6mm_STAINLESS STEEL,T=0.08mm_EC'),
 ('522J19C10000','SMT-A','40110000119X',2,'Connector_Spring_Top press_1.6mm_SUS301,T=0.08±0.005mm_KEIRAKU_HQ12060304000_KSN-A23000104R-0400_Huaqin_J19S'),
 ('522J19C10000','SMT-A','21AG00027068',2,'TVS,protect USB port,24V 180A surge, DFN2.0×2.0-3'),
+('522J19C10000','SMT-A','21AG00027069',2,''),
 ('522J19C10000','SMT-A','21AG020330A9',2,'DIODE-ESD BLK 033 0 Will S:2020 MSL:3 P:TRAY'),
 ('522J19C10000','SMT-A','4002F1623063',2,'USB TYPE-C-Connector (16PIN)'),
 ('522J19C10000','SMT-A','4003000005AF',2,'Connector_MicroUSB TypeC_Type C_Sink Borad_16_8A_IPX4_UC40-0B0104R0_HRD');
@@ -211,6 +214,21 @@ CREATE TABLE `tbl_resultcompare` (
 
 /*Data for the table `tbl_resultcompare` */
 
+insert  into `tbl_resultcompare`(`model_No`,`process_Name`,`reel`,`partcode`,`alt_No`,`tp`,`qty`,`loc`,`dec`,`f_Type`) values 
+('522J19C10000','SMT-A','110','22DB1EA1019C','1',2,2,'C109, C102','Capacitor_General capacitor_0201_0.33 mm_100_pF_25V_±10%_COG','8 X 2 P'),
+('522J19C10000','SMT-A','209','22DB1EA3309C','1',2,3,'C108, C106, C100','Capacitor_General capacitor_0201_0.33 mm_33_pF_25V_±10%_COG(','8 X 2 P'),
+('522J19C10000','SMT-A','308','23D0000MA025','1',2,2,'R108, R106','Resistor_General resistor_0201_0.26 mm_0 ohm_±5%_1/20W_25V_N','8 X 2 P'),
+('522J19C10000','SMT-A','522','24050000179X','1',2,2,'B103, B102','Inductor_Bead_0402_0.55 mm_1000 O_300 O_0.9 O_200_Murata+HQ1','8 X 2 P'),
+('522J19C10000','SMT-A','524','22BKYAC1049A','1',2,1,'C112','Capacitor_General capacitor_0201_0.33 mm_100_nF_10V_±10%_X5R','8 X 2 P'),
+('522J19C10000','SMT-A','621','24050000199X','1',2,1,'R103','Inductor_Bead_0402_0.5 mm_1000 O_2000 O_1.25 O_250_Murata+HQ','8 X 2 P'),
+('522J19C10000','SMT-A','623','240500001L9X','1',2,2,'R110, R152','Inductor_Bead_0402_0.65 mm_30 O_60 O_0.05 O_2200_MURATA+HQ11','8 X 2 P'),
+('522J19C10000','SMT-A','710','40110000169X','1',2,2,'ANT107, ANT106','Connector_Spring_Top press_0.8mm_COPPER ALLOY,T=0.08mm_ECT_H','12 X 4 E'),
+('522J19C10000','SMT-A','809','23C0000MA025','1',2,2,'B104, B101','Resistor_General resistor_0603_0.55 mm_0 ohm_±5%_1/10W_75V_N','8 X 4 P'),
+('522J19C10000','SMT-A','1009','22BK1HC105AD','1',2,1,'C113','Capacitor_General capacitor_0603_1.0 mm_1_uF_50V_±10%_X5R_CL','8 X 4 P'),
+('522J19C10000','SMT-A','1011','40110000109X','1',2,2,'ANT104, ANT103','Connector_Spring_Top press_1.6mm_STAINLESS STEEL,T=0.08mm_EC','12 X 4 E'),
+('522J19C10000','SMT-A','1113','21AG00027068','1',2,1,'D107','TVS,protect USB port,24V 180A surge, DFN2.0×2.0-3','8 X 4 E'),
+('522J19C10000','SMT-A','1435','4002F1623063','1',2,1,'J101','USB TYPE-C-Connector (16PIN)','24 X 12 E');
+
 /*Table structure for table `tbl_user` */
 
 DROP TABLE IF EXISTS `tbl_user`;
@@ -243,12 +261,12 @@ CREATE TABLE `tbl_wo` (
   `wo_Usage` int(15) NOT NULL,
   `process_Name` varchar(15) NOT NULL,
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tbl_wo` */
 
 insert  into `tbl_wo`(`id`,`wo_PTSN`,`wo_No`,`model_No`,`model`,`wo_QTY`,`wo_Usage`,`process_Name`) values 
-(1,'XM21032208','202104-55K-SB','522J19C10000','J19C (SB)','10000',23,'SMT-A');
+(19,'XM21032208','202104-55K-SB','522J19C10000','J19C (SB)','23',10000,'SMT-A');
 
 /*Table structure for table `tbl_wodetail` */
 
@@ -258,26 +276,28 @@ CREATE TABLE `tbl_wodetail` (
   `model_No` varchar(20) NOT NULL,
   `partcode` varchar(15) NOT NULL,
   `process_Name` varchar(15) NOT NULL,
-  `qty` int(5) NOT NULL
+  `qty` int(5) NOT NULL,
+  `bom_Row` int(10) NOT NULL,
+  `issue` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tbl_wodetail` */
 
-insert  into `tbl_wodetail`(`model_No`,`partcode`,`process_Name`,`qty`) values 
-('522J19C10000','4002F1623063','SMT-A',1),
-('522J19C10000','40110000169X','SMT-A',2),
-('522J19C10000','22BK1HC105AD','SMT-A',1),
-('522J19C10000','23C0000MA025','SMT-A',2),
-('522J19C10000','24050000199X','SMT-A',1),
-('522J19C10000','22DB1EA1019C','SMT-A',2),
-('522J19C10000','24050000179X','SMT-A',2),
-('522J19C10000','22DB1EA3309C','SMT-A',3),
-('522J19C10000','40110000109X','SMT-A',2),
-('522J19C10000','23D0000MA025','SMT-A',2),
-('522J19C10000','21AG00027068','SMT-A',1),
-('522J19C10000','240500001L9X','SMT-A',2),
-('522J19C10000','22BKYAC1049A','SMT-A',1),
-('522J19C10000','354J19SP1A9X','SMT-A',1);
+insert  into `tbl_wodetail`(`model_No`,`partcode`,`process_Name`,`qty`,`bom_Row`,`issue`) values 
+('522J19C10000','4002F1623063','SMT-A',1,20,10000),
+('522J19C10000','40110000169X','SMT-A',2,30,20000),
+('522J19C10000','22BK1HC105AD','SMT-A',1,40,10000),
+('522J19C10000','23C0000MA025','SMT-A',2,50,20000),
+('522J19C10000','24050000199X','SMT-A',1,60,10000),
+('522J19C10000','22DB1EA1019C','SMT-A',2,70,20000),
+('522J19C10000','24050000179X','SMT-A',2,80,20000),
+('522J19C10000','22DB1EA3309C','SMT-A',3,90,30000),
+('522J19C10000','40110000109X','SMT-A',2,100,20000),
+('522J19C10000','23D0000MA025','SMT-A',2,110,20000),
+('522J19C10000','21AG00027068','SMT-A',1,120,10000),
+('522J19C10000','240500001L9X','SMT-A',2,130,20000),
+('522J19C10000','22BKYAC1049A','SMT-A',1,140,10000),
+('522J19C10000','354J19SP1A9X','SMT-A',1,130,10000);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
