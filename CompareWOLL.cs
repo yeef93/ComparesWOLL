@@ -293,7 +293,14 @@ namespace CompareWOLL
                     compareQty.BackColor = System.Drawing.Color.Red;
                     btnGenerate.Enabled = false;
                 }
-                
+
+                if (tbPCB.Text == "")
+                {
+                    MessageBox.Show("No any selected PCB", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+                    btnGenerate.Enabled = false;
+                }
+
+
             }
             catch (Exception ex)
             {
@@ -423,7 +430,6 @@ namespace CompareWOLL
             }
 
             conn.Close();
-
 
             //conn.Open();
             //string detailLL = "SELECT model_No, machine, pwb_Type, prog_No, process_Name, model_detail, rev, pcb_No, remarks FROM tbl_ll";

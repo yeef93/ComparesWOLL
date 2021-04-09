@@ -30,11 +30,11 @@ namespace CompareWOLL
         private void InitializeComponent()
         {
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripUsername = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
             this.dataGridViewLLList = new System.Windows.Forms.DataGridView();
             this.backButton = new System.Windows.Forms.Button();
-            this.toolStripUsername = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLLList)).BeginInit();
             this.SuspendLayout();
@@ -52,6 +52,12 @@ namespace CompareWOLL
             this.statusStrip1.Size = new System.Drawing.Size(780, 22);
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripUsername
+            // 
+            this.toolStripUsername.Name = "toolStripUsername";
+            this.toolStripUsername.Size = new System.Drawing.Size(124, 17);
+            this.toolStripUsername.Text = "toolStripStatusLabel2";
             // 
             // toolStripStatusLabel1
             // 
@@ -78,6 +84,7 @@ namespace CompareWOLL
             this.dataGridViewLLList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewLLList.Location = new System.Drawing.Point(24, 67);
             this.dataGridViewLLList.Name = "dataGridViewLLList";
+            this.dataGridViewLLList.ReadOnly = true;
             this.dataGridViewLLList.Size = new System.Drawing.Size(729, 262);
             this.dataGridViewLLList.TabIndex = 7;
             this.dataGridViewLLList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewLLList_CellContentClick);
@@ -92,12 +99,6 @@ namespace CompareWOLL
             this.backButton.Text = "Back";
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
-            // 
-            // toolStripUsername
-            // 
-            this.toolStripUsername.Name = "toolStripUsername";
-            this.toolStripUsername.Size = new System.Drawing.Size(124, 17);
-            this.toolStripUsername.Text = "toolStripStatusLabel2";
             // 
             // LoadingList
             // 

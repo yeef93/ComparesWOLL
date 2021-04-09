@@ -33,12 +33,12 @@ namespace CompareWOLL
 
 
                 //// add button detail in datagridview table
-                //DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
-                //dataGridViewLLList.Columns.Add(btn);
-                //btn.HeaderText = "";
-                //btn.Text = "Detail";
-                //btn.Name = "btnDetail";
-                //btn.UseColumnTextForButtonValue = true;
+                //DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
+                //dataGridViewLLList.Columns.Add(btnDelete);
+                //btnDelete.HeaderText = "";
+                //btnDelete.Text = "Delete";
+                //btnDelete.Name = "btnDelete";
+                //btnDelete.UseColumnTextForButtonValue = true;
 
             }
             connection.Close();
@@ -70,29 +70,63 @@ namespace CompareWOLL
         {
             if (e.ColumnIndex == 9)
             {
-                DetailLL dll = new DetailLL();
-                string modelNo = dataGridViewLLList.Rows[e.RowIndex].Cells[0].Value.ToString();
-                string processName = dataGridViewLLList.Rows[e.RowIndex].Cells[1].Value.ToString();
-                string model = dataGridViewLLList.Rows[e.RowIndex].Cells[2].Value.ToString();
-                string machine = dataGridViewLLList.Rows[e.RowIndex].Cells[3].Value.ToString();
-                string pwbType = dataGridViewLLList.Rows[e.RowIndex].Cells[4].Value.ToString();
-                string progNo = dataGridViewLLList.Rows[e.RowIndex].Cells[5].Value.ToString();
-                string rev = dataGridViewLLList.Rows[e.RowIndex].Cells[6].Value.ToString();
-                string pcbNo = dataGridViewLLList.Rows[e.RowIndex].Cells[7].Value.ToString();
-                
+                string message = "Do you want to delete this Loading List?";
+                string title = "Delete Loading List";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons);
+                if (result == DialogResult.Yes)
+                {
+                    //var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
+                    //var cmd = new MySqlCommand("", conn);
 
-                dll.tbModelNo.Text = modelNo;
-                dll.tbProcess.Text = processName;
-                dll.tbModel.Text = model;
-                dll.tbMachine.Text = machine;
-                dll.tbPWBType.Text = pwbType;
-                dll.tbProg.Text = progNo;
-                dll.tbRev.Text = rev;
-                dll.tbPcbNo.Text = pcbNo;
+                    //string querydeleteLL = "INSERT INTO tbl_wo VALUES('" + woPTSNN + "','" + woNoo + "','" + modelNoo + "','" + modell + "', '" + woqtyy + "', '" + wousagee + "','" + processs + "' )";
+                    
 
-                dll.Show();
-                this.Hide();
-                //MessageBox.Show((e.RowIndex + 1) + "  Row  " + (e.ColumnIndex + 1) + "  Column button clicked ");
+                    //conn.Open();
+                    ////Buka koneksi
+
+                    //cmd.CommandText = querydeleteLL;
+                    //cmd.ExecuteNonQuery();
+
+                    ////string[] allQuery = { query, querymodel };
+                    ////for (int i = 0; i < allQuery.Length; i++)
+                    ////{
+                    ////    cmd.CommandText = allQuery[i];
+                    ////    //Masukkan perintah/query yang akan dijalankan ke dalam CommandText
+                    ////    cmd.ExecuteNonQuery();
+                    ////    //Jalankan perintah / query dalam CommandText pada database
+                    ////}
+
+                }
+                else
+                {
+                    // Do something  
+                }
+
+
+                //DetailLL dll = new DetailLL();
+                //string modelNo = dataGridViewLLList.Rows[e.RowIndex].Cells[0].Value.ToString();
+                //string processName = dataGridViewLLList.Rows[e.RowIndex].Cells[1].Value.ToString();
+                //string model = dataGridViewLLList.Rows[e.RowIndex].Cells[2].Value.ToString();
+                //string machine = dataGridViewLLList.Rows[e.RowIndex].Cells[3].Value.ToString();
+                //string pwbType = dataGridViewLLList.Rows[e.RowIndex].Cells[4].Value.ToString();
+                //string progNo = dataGridViewLLList.Rows[e.RowIndex].Cells[5].Value.ToString();
+                //string rev = dataGridViewLLList.Rows[e.RowIndex].Cells[6].Value.ToString();
+                //string pcbNo = dataGridViewLLList.Rows[e.RowIndex].Cells[7].Value.ToString();
+
+
+                //dll.tbModelNo.Text = modelNo;
+                //dll.tbProcess.Text = processName;
+                //dll.tbModel.Text = model;
+                //dll.tbMachine.Text = machine;
+                //dll.tbPWBType.Text = pwbType;
+                //dll.tbProg.Text = progNo;
+                //dll.tbRev.Text = rev;
+                //dll.tbPcbNo.Text = pcbNo;
+
+                //dll.Show();
+                //this.Hide();
+                ////MessageBox.Show((e.RowIndex + 1) + "  Row  " + (e.ColumnIndex + 1) + "  Column button clicked ");
             }
         }
     }

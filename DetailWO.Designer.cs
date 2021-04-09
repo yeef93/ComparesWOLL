@@ -40,6 +40,8 @@ namespace CompareWOLL
             this.label2 = new System.Windows.Forms.Label();
             this.woNo = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.woQty = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.model = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,8 +52,6 @@ namespace CompareWOLL
             this.backButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.dataGridViewWoList = new System.Windows.Forms.DataGridView();
-            this.woQty = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWoList)).BeginInit();
@@ -169,6 +169,28 @@ namespace CompareWOLL
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Work Order Detail";
             // 
+            // woQty
+            // 
+            this.woQty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.woQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.woQty.Location = new System.Drawing.Point(791, 61);
+            this.woQty.Name = "woQty";
+            this.woQty.ReadOnly = true;
+            this.woQty.Size = new System.Drawing.Size(100, 47);
+            this.woQty.TabIndex = 35;
+            this.woQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(811, 42);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(60, 16);
+            this.label9.TabIndex = 34;
+            this.label9.Text = "WO Qty";
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -249,6 +271,7 @@ namespace CompareWOLL
             // dataGridViewWoList
             // 
             this.dataGridViewWoList.AllowUserToAddRows = false;
+            this.dataGridViewWoList.AllowUserToResizeColumns = false;
             this.dataGridViewWoList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -258,28 +281,6 @@ namespace CompareWOLL
             this.dataGridViewWoList.Name = "dataGridViewWoList";
             this.dataGridViewWoList.Size = new System.Drawing.Size(1045, 370);
             this.dataGridViewWoList.TabIndex = 28;
-            // 
-            // woQty
-            // 
-            this.woQty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.woQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.woQty.Location = new System.Drawing.Point(791, 61);
-            this.woQty.Name = "woQty";
-            this.woQty.ReadOnly = true;
-            this.woQty.Size = new System.Drawing.Size(100, 47);
-            this.woQty.TabIndex = 35;
-            this.woQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label9
-            // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(811, 42);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(60, 16);
-            this.label9.TabIndex = 34;
-            this.label9.Text = "WO Qty";
             // 
             // DetailWO
             // 

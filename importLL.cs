@@ -9,8 +9,6 @@ namespace CompareWOLL
 {
     public partial class ImportLL : Form
     {
-
-        WorkOrder wo = new WorkOrder();
         Helper help = new Helper();
         public ImportLL()
         {
@@ -23,7 +21,7 @@ namespace CompareWOLL
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             dataGridViewLLHide.Visible = false;
-            saveButton.Enabled = false;             
+            saveButton.Enabled = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -65,10 +63,8 @@ namespace CompareWOLL
                 queryGetAltPCB = "select * from [Sheet1$B9:B]";
                 queryGetTotal = "select * from [Sheet1$E9:E]";
 
-
                 if (fileExtLL.CompareTo(".xls") == 0 || fileExtLL.CompareTo(".xlsx") == 0)
                 {
-                    
                     try
                     {
                         // baca data utama LL
@@ -76,11 +72,11 @@ namespace CompareWOLL
                         dtExcel = help.ReadExcel(woFileName, fileExtLL, queryLL); //read excel file  
                         dataGridViewLLHide.DataSource = dtExcel;
 
-                       tbModel.Text = dataGridViewLLHide.Rows[0].Cells[0].Value.ToString().Remove(0,12);
-                       tbMachine.Text = dataGridViewLLHide.Rows[1].Cells[0].Value.ToString().Remove(0, 12);
-                       tbPWBType.Text = dataGridViewLLHide.Rows[2].Cells[0].Value.ToString().Remove(0, 12);
-                       tbProg.Text = dataGridViewLLHide.Rows[3].Cells[0].Value.ToString().Remove(0, 12);
-                       tbRev.Text = dataGridViewLLHide.Rows[4].Cells[5].Value.ToString();
+                        tbModel.Text = dataGridViewLLHide.Rows[0].Cells[0].Value.ToString().Remove(0, 12);
+                        tbMachine.Text = dataGridViewLLHide.Rows[1].Cells[0].Value.ToString().Remove(0, 12);
+                        tbPWBType.Text = dataGridViewLLHide.Rows[2].Cells[0].Value.ToString().Remove(0, 12);
+                        tbProg.Text = dataGridViewLLHide.Rows[3].Cells[0].Value.ToString().Remove(0, 12);
+                        tbRev.Text = dataGridViewLLHide.Rows[4].Cells[5].Value.ToString();
 
                         // baca data detail LL
                         DataTable dtExcel1 = new DataTable();
@@ -91,8 +87,6 @@ namespace CompareWOLL
                         dataGridViewLL.Columns.RemoveAt(6);
 
                         int rowLL = dataGridViewLL.Rows.Count;
-
-                        //dataGridViewLL.Rows.RemoveAt();
 
                         // baca pcb No
                         DataTable dtExcel2 = new DataTable();
@@ -117,24 +111,38 @@ namespace CompareWOLL
 
                         if (dataView1.Count > 0)
                         {
-                            string allPCB = dataGridAltPCB.Rows[0].Cells[0].Value.ToString();
+                            string allPCB = dataGridAltPCB.Rows[0].Cells[0].Value.ToString().Remove(0, 26);
 
-                            // Get 12 characters from the right of the string
-                            string altPCB1 = allPCB.Substring(allPCB.Length - 26, 12);
+                            //// Get 12 characters from the right of the string
+                            //string altPCB1 = allPCB.Substring(allPCB.Length - 26, 12);
 
-                            // Get 12 characters from the right of the string
-                            string altPCB2 = allPCB.Substring(allPCB.Length - 12, 12);
+                            //// Get 12 characters from the right of the string
+                            //string altPCB2 = allPCB.Substring(allPCB.Length - 12, 12);
 
-                            tbAltPcbNo1.Text = altPCB1;
-                            tbAltPcbNo2.Text = altPCB2;
-                        }                        
+                            // to split alt pcb if 2 pcb alt
+                            string str = allPCB;
+                            char ch = ',';
+
+                            int freq = str.Split(ch).Length - 1;
+                            var altpcb = str.Split(',');
+
+
+                            tbAltPcbNo1.Text = altpcb[0].Replace(" ", "");
+                            tbAltPcbNo2.Text = altpcb[1].Replace(" ", "");
+
+                            //MessageBox.Show(freq.ToString());
+                            //for (int i = 0; i < freq; i++)
+                            //{
+                            //    string a = altpcb[i];
+                            //}
+
+                        }
 
                         // buat cari batas total row
                         DataTable dtExcel4 = new DataTable();
                         dtExcel4 = help.ReadExcel(woFileName, fileExtLL, queryGetTotal); //read excel file  
                         dataGridViewGetTotalRow.DataSource = dtExcel4;
                         int totalrow = dataGridViewGetTotalRow.Rows.Count;
-
 
                         string searchingFor = " PCB NO";
                         int rowIndex = 0;
@@ -153,10 +161,9 @@ namespace CompareWOLL
                         //    MessageBox.Show("Row not found. Searching value does not exist.");
 
 
-                        for (int i = rowLL -1 ; i >= rowIndex; i--)
+                        for (int i = rowLL - 1; i >= rowIndex; i--)
                         {
                             dataGridViewLL.Rows.RemoveAt(i);
-                            
                         }
 
                     }
@@ -176,7 +183,7 @@ namespace CompareWOLL
                 {
                     dataGridViewLL.Columns[i].HeaderText = "" + titleWO[i];
                 }
-                
+
                 // not allow to sort table
                 for (int i = 0; i < dataGridViewLL.Columns.Count; i++)
                 {
@@ -193,7 +200,7 @@ namespace CompareWOLL
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            string model = tbModelNo.Text;            
+            string model = tbModelNo.Text;
             string process = tbProcess.Text;
             string modelLL = tbModel.Text;
             string machine = tbMachine.Text;
@@ -204,7 +211,7 @@ namespace CompareWOLL
             string pcb1 = tbAltPcbNo1.Text;
             string pcb2 = tbAltPcbNo2.Text;
             string remark = tbRemark.Text;
-            
+
             saveButton.Enabled = false;
 
             //show total qty component
@@ -220,7 +227,7 @@ namespace CompareWOLL
                 sum += Convert.ToInt32(dataGridViewLL.Rows[i].Cells[3].Value);
 
             }
-            sum = sum+1;
+            sum = sum + 1;
 
             string llUsage = sum.ToString();
 
@@ -237,11 +244,11 @@ namespace CompareWOLL
                     var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
                     var cmd = new MySqlCommand("", conn);
 
-                    string queryLL = "INSERT INTO tbl_ll VALUES('" + model + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','"+ llUsage + "','"+ remark +"')";
-                    string queryInputPCB = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '"+pcb+"', '1', '1');";
-                    string queryPCBAlt1 = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '"+pcb1+"', '2', '1');";
-                    string queryPCBAlt2 = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '"+pcb2+"', '3', '1');";
-                   
+                    string queryLL = "INSERT INTO tbl_ll VALUES('" + model + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','" + llUsage + "','" + remark + "')";
+                    string queryInputPCB = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '" + pcb + "', '1', '1');";
+                    string queryPCBAlt1 = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '" + pcb1 + "', '2', '1');";
+                    string queryPCBAlt2 = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '" + pcb2 + "', '3', '1');";
+
                     conn.Open();
                     //Buka koneksi
 
@@ -260,12 +267,11 @@ namespace CompareWOLL
                         cmd.ExecuteNonQuery();
                     }
 
-                    else if (queryPCBAlt2 != "")
+                    if (queryPCBAlt2 != "")
                     {
                         cmd.CommandText = queryPCBAlt2;
                         cmd.ExecuteNonQuery();
                     }
-
 
                     for (int i = 0; i < dataGridViewLL.Rows.Count; i++)
                     {
@@ -282,11 +288,11 @@ namespace CompareWOLL
                     for (int j = 0; j < dataGridViewLL.Rows.Count; j++)
                     {
                         if (dataGridViewLL.Rows[j].Cells[0].Value.ToString() != "")
-                    {
-                        string StrQueryLLDetail = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','"
-                        + dataGridViewLL.Rows[j].Cells[0].Value.ToString() + "', '"
-                        + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "', '1', '"
-                        + dataGridViewLL.Rows[j].Cells[3].Value.ToString() + "');";
+                        {
+                            string StrQueryLLDetail = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','"
+                            + dataGridViewLL.Rows[j].Cells[0].Value.ToString() + "', '"
+                            + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "', '1', '"
+                            + dataGridViewLL.Rows[j].Cells[3].Value.ToString() + "');";
                             cmd.CommandText = StrQueryLLDetail;
                             cmd.ExecuteNonQuery();
 
@@ -306,7 +312,7 @@ namespace CompareWOLL
 
                             //MessageBox.Show(dataGridViewLL.Rows[--j].Cells[0].Value.ToString(), "Loading List", MessageBoxButtons.OK, MessageBoxIcon.Information);                           
                             int l = j;
-                            int k = --j;                            
+                            int k = --j;
 
                             string StrQueryLLDetails = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','"
                         + dataGridViewLL.Rows[k].Cells[0].Value.ToString() + "', '"
