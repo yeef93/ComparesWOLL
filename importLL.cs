@@ -48,6 +48,7 @@ namespace CompareWOLL
             string queryGetPCBNo = string.Empty;
             string queryGetAltPCB = string.Empty;
             string queryGetTotal = string.Empty;
+            string queryGetStencil = string.Empty;
 
             openFileDialogLL.Title = "Please Select a File Loading List";
             openFileDialogLL.Filter = "Excel Files|*.xls;*.xlsx;";
@@ -62,6 +63,7 @@ namespace CompareWOLL
                 queryGetPCBNo = "select * from [Sheet1$E9:E]";
                 queryGetAltPCB = "select * from [Sheet1$B9:B]";
                 queryGetTotal = "select * from [Sheet1$E9:E]";
+                queryGetStencil = "select * from [Sheet1$G9:G]";
 
                 if (fileExtLL.CompareTo(".xls") == 0 || fileExtLL.CompareTo(".xlsx") == 0)
                 {
@@ -138,6 +140,16 @@ namespace CompareWOLL
 
                         }
 
+                        // baca stencil
+                        DataTable dtExcel5 = new DataTable();
+                        dtExcel5 = help.ReadExcel(woFileName, fileExtLL, queryGetStencil); //read excel file  
+
+                        DataView dataView2 = dtExcel5.DefaultView;
+                        dataView2.RowFilter = "F1 LIKE '% STENCIL NO : %'";
+                        dataGridViewStencil.DataSource = dataView2;
+
+                        tbStencil.Text = dataGridViewStencil.Rows[0].Cells[0].Value.ToString().Substring(14);
+
                         // buat cari batas total row
                         DataTable dtExcel4 = new DataTable();
                         dtExcel4 = help.ReadExcel(woFileName, fileExtLL, queryGetTotal); //read excel file  
@@ -210,6 +222,7 @@ namespace CompareWOLL
             string pcb = tbPcbNo.Text;
             string pcb1 = tbAltPcbNo1.Text;
             string pcb2 = tbAltPcbNo2.Text;
+            string stencil = tbStencil.Text;
             string remark = tbRemark.Text;
 
             saveButton.Enabled = false;
@@ -244,7 +257,7 @@ namespace CompareWOLL
                     var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
                     var cmd = new MySqlCommand("", conn);
 
-                    string queryLL = "INSERT INTO tbl_ll VALUES('','" + model + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','" + llUsage + "','" + remark + "')";
+                    string queryLL = "INSERT INTO tbl_ll VALUES('','" + model + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','" + llUsage + "','" + stencil + "','" + remark + "')";
                     string queryInputPCB = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '" + pcb + "', '1', '1');";
                     string queryPCBAlt1 = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '" + pcb1 + "', '2', '1');";
                     string queryPCBAlt2 = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '" + pcb2 + "', '3', '1');";

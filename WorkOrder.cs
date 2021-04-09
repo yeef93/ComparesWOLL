@@ -49,6 +49,15 @@ namespace CompareWOLL
                 btnImport.UseColumnTextForButtonValue = true;
 
 
+                // add button delete in datagridview table
+                DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
+                dataGridViewWoList.Columns.Add(btnDelete);
+                btnDelete.HeaderText = "";
+                btnDelete.Text = "Delete";
+                btnDelete.Name = "btnDelete";
+                btnDelete.UseColumnTextForButtonValue = true;
+
+
             }
             connection.Close();
 
@@ -78,6 +87,11 @@ namespace CompareWOLL
 
         private void dataGridViewWoList_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            int i;
+            i = dataGridViewWoList.SelectedCells[0].RowIndex;
+            string modelslctd = dataGridViewWoList.Rows[i].Cells[2].Value.ToString();
+            string processslctd = dataGridViewWoList.Rows[i].Cells[4].Value.ToString();
+
             if (e.ColumnIndex == 7)
             {
                 DetailWO dwo = new DetailWO();
@@ -114,6 +128,49 @@ namespace CompareWOLL
                 this.Hide();
 
                 //MessageBox.Show((e.RowIndex + 1) + "  Row  " + (e.ColumnIndex + 1) + "  Column button clicked "+model+"");
+            }
+
+            if (e.ColumnIndex == 9)
+            {
+                string message = "Do you want to delete this Work Order and Loading List record " + modelslctd + " " + processslctd + " ?";
+                string title = "Delete Work Order";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons);
+                if (result == DialogResult.Yes)
+                {
+                    var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
+                    var cmd = new MySqlCommand("", conn);
+
+                    string querydeleteWO = "DELETE FROM tbl_wo WHERE  model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
+                    string querydeleteWODetail = "DELETE FROM tbl_wodetail WHERE  model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
+                    string querydeleteModel = "DELETE FROM tbl_model WHERE  model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
+
+                    string querydeleteLL = "DELETE FROM tbl_ll WHERE model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
+                    string querydeleteLLDetail = "DELETE FROM tbl_lldetail WHERE model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
+                    string querydeletePartCode = "DELETE FROM tbl_partcodedetail WHERE model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
+                    string querydeleteReel = "DELETE FROM tbl_reel WHERE model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
+                    string querydeleteResult = "DELETE FROM tbl_resultcompare WHERE model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
+
+                    conn.Open();
+
+                    string[] allQuery = {querydeleteWO, querydeleteWODetail, querydeleteModel, querydeleteLL, querydeleteLLDetail, querydeletePartCode, querydeleteReel, querydeleteResult };
+                    for (int j = 0; j < allQuery.Length; j++)
+                    {
+                        cmd.CommandText = allQuery[j];
+                        //Masukkan perintah/query yang akan dijalankan ke dalam CommandText
+                        cmd.ExecuteNonQuery();
+                        //Jalankan perintah / query dalam CommandText pada database
+                    }
+
+                    conn.Close();
+                    WorkOrder wo = new WorkOrder();
+                    wo.Show();
+                    this.Hide();
+                    MessageBox.Show("Record Deleted successfully", "Work Order Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                }
             }
         }
     }

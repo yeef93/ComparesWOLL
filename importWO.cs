@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.OleDb;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
@@ -65,8 +66,7 @@ namespace CompareWOLL
             string filePathWO = string.Empty;
             string fileExtWO = string.Empty;
             string queryWO = string.Empty;
-            string queryPcbNo = string.Empty;
-            
+            string queryPcbNo = string.Empty;            
 
             openFileDialogWO.Title = "Please Select a File Work Order";
             //openFileDialogWO.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm| CSV files (*.csv)|*.csv";
@@ -97,13 +97,21 @@ namespace CompareWOLL
                         woNo.Text = dataGridViewWO.Rows[0].Cells[5].Value.ToString();
                         modelNo.Text = dataGridViewWO.Rows[0].Cells[2].Value.ToString();
                         model.Text = dataGridViewWO.Rows[0].Cells[0].Value.ToString();
-                        woQty.Text = dataGridViewWO.Rows[0].Cells[9].Value.ToString();
+                        woUsage.Text = dataGridViewWO.Rows[0].Cells[9].Value.ToString();
                         process.Text = dataGridViewWO.Rows[0].Cells[7].Value.ToString();
+                        totalPart.Text = dataGridViewWO.Rows.Count.ToString();
+
                         //bool pcbNoo = dataGridViewWO.Rows[0].Cells[2].Value.ToString().StartsWith("35");
                         //pcbNo.Text = pcbNoo.ToString();
 
                         //woUsage.Text = dataGridViewWO.Rows.Count.ToString();
 
+                        // Set table title Wo
+                        string[] titleWO = { "Model", "Part No", "Model No", "Usage", "Issue", "WO No", "BOM Row", "Process", "WO PTSN", "WO Qty" };
+                        for (int i = 0; i < titleWO.Length; i++)
+                        {
+                            dataGridViewWO.Columns[i].HeaderText = "" + titleWO[i];
+                        }
 
                         //show total qty component
                         int sum = 0;
@@ -112,8 +120,31 @@ namespace CompareWOLL
                             //get total qty component
                             sum += Convert.ToInt32(dataGridViewWO.Rows[i].Cells[3].Value);
 
+                            DataGridViewCellStyle styleOk = new DataGridViewCellStyle();
+                            styleOk.BackColor = Color.Green;
+                            styleOk.ForeColor = Color.White;
+
+                            DataGridViewCellStyle styleError = new DataGridViewCellStyle();
+                            styleError.BackColor = Color.Red;
+                            styleError.ForeColor = Color.White;
+
+                            int woQtyy = Convert.ToInt32(dataGridViewWO.Rows[i].Cells[3].Value);
+                            int usagge = Convert.ToInt32(dataGridViewWO.Rows[i].Cells[9].Value);
+                            int totalissue = woQtyy * usagge;
+
+                            if (Convert.ToInt32(dataGridViewWO.Rows[i].Cells[4].Value) !=
+                                totalissue)
+                            {
+                                dataGridViewWO.Rows[i].DefaultCellStyle = styleError;
+                                saveButton.Enabled = false;
+                                MessageBox.Show("Data Issue Part No "+ dataGridViewWO.Rows[i].Cells[1].Value + " Not Match", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+                            }
+                            else
+                            {
+                                saveButton.Enabled = true;
+                            }
                         }
-                        woUsage.Text = sum.ToString();
+                        woQty.Text = sum.ToString();
 
 
                     }
@@ -127,12 +158,12 @@ namespace CompareWOLL
                     MessageBox.Show("Please choose .xls or .xlsx file only.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
                 }
 
-                // Set table title Wo
-                string[] titleWO = { "Model", "Part No", "Model No", "Usage", "Issue", "WO No", "BOM Row", "Process", "WO PTSN", "WO Qty" };
-                for (int i = 0; i < titleWO.Length; i++)
+                // not allow to sort table
+                for (int i = 0; i < dataGridViewWO.Columns.Count; i++)
                 {
-                    dataGridViewWO.Columns[i].HeaderText = "" + titleWO[i];
+                    dataGridViewWO.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
+
             }
         }
 
@@ -162,7 +193,7 @@ namespace CompareWOLL
                     var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
                     var cmd = new MySqlCommand("", conn);
 
-                    string query = "INSERT INTO tbl_wo VALUES('" + woPTSNN + "','" + woNoo + "','" + modelNoo + "','" + modell + "', '" + woqtyy + "', '" + wousagee + "','" + processs + "' )";
+                    string query = "INSERT INTO tbl_wo VALUES('', '" + woPTSNN + "','" + woNoo + "','" + modelNoo + "','" + modell + "', '" + woqtyy + "', '" + wousagee + "','" + processs + "' )";
                     string querymodel = "INSERT INTO tbl_model VALUES('','" + modelNoo + "','" + processs + "')";
 
                     conn.Open();
@@ -187,7 +218,9 @@ namespace CompareWOLL
                             + dataGridViewWO.Rows[i].Cells[2].Value.ToString() + "', '"
                             + dataGridViewWO.Rows[i].Cells[1].Value.ToString() + "', '"
                             + dataGridViewWO.Rows[i].Cells[7].Value.ToString() + "', '"
-                            + dataGridViewWO.Rows[i].Cells[3].Value.ToString() + "');";
+                            + dataGridViewWO.Rows[i].Cells[3].Value.ToString() + "', '"
+                            + dataGridViewWO.Rows[i].Cells[6].Value.ToString() + "', '"
+                            + dataGridViewWO.Rows[i].Cells[4].Value.ToString() + "');";
                         cmd.CommandText = StrQuery;
                         cmd.ExecuteNonQuery();
                     }

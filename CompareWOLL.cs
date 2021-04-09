@@ -30,40 +30,19 @@ namespace CompareWOLL
 
             string queryModelWO = "SELECT model_No FROM tbl_model";
             string queryModelLL = "SELECT model_No FROM tbl_ll";
-            
-            
-            string queryWODropDown = "SELECT model_No, process_Name FROM tbl_wo";
 
             try
             {
-
-                using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryWODropDown, connection))
+                using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryModelWO, connection))
                 {
                     DataTable dset = new DataTable();
                     adpt.Fill(dset);
 
-                    //cmbWOModelNo.DataSource = dset;
-                    //cmbWOModelNo.ValueMember = "model_No";
-                    //cmbWOModelNo.DisplayMember = "model_No";
-
-                    for (int i = 0; i < dset.Rows.Count; i++)
-                    {
-                        cmbWOModelNo.Items.Add(dset.Rows[i][0] + " " + dset.Rows[i][1]);    
-                    }
-
+                    cmbWOModelNo.DataSource = dset;
+                    cmbWOModelNo.ValueMember = "model_No";
+                    cmbWOModelNo.DisplayMember = "model_No";
 
                 }
-
-                //using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryModelWO, connection))
-                //{
-                //    DataTable dset = new DataTable();
-                //    adpt.Fill(dset);
-
-                //    cmbWOModelNo.DataSource = dset;
-                //    cmbWOModelNo.ValueMember = "model_No";
-                //    cmbWOModelNo.DisplayMember = "model_No";
-
-                //}
 
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryModelLL, connection))
                 {
@@ -162,8 +141,27 @@ namespace CompareWOLL
 
             string queryTblWO = "SELECT partcode, qty FROM tbl_wodetail WHERE model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' AND process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
 
+            string queryDetailLL = "SELECT model_detail, machine, pwb_Type, prog_No FROM tbl_ll WHERE  model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' AND process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
+
             try
             {
+
+                // nampilin detail LL
+                using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryDetailLL, connection))
+                {
+                    DataTable dset = new DataTable();
+                    adpt.Fill(dset);
+
+                    if (dset.Rows.Count > 0)
+                    {
+                        tbModel.Text = dset.Rows[0]["model_detail"].ToString();
+                        tbMachine.Text = dset.Rows[0]["machine"].ToString();
+                        tbPWBType.Text = dset.Rows[0]["pwb_Type"].ToString();
+                        tbProgNo.Text = dset.Rows[0]["prog_No"].ToString();
+                    }
+
+                }
+
                 //nampilin qty Wo
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryWO, connection))
                 {
@@ -246,9 +244,7 @@ namespace CompareWOLL
 
                     DataGridViewCellStyle styleError = new DataGridViewCellStyle();
                     styleError.BackColor = Color.Red;
-                    styleError.ForeColor = Color.White;
-
-                    
+                    styleError.ForeColor = Color.White;                    
 
                     if (dataGridViewCompareLLWO.Rows[i].Cells[1].Value.ToString() !=
                         dataGridViewCompareLLWO.Rows[i].Cells[2].Value.ToString() ||
@@ -387,17 +383,17 @@ namespace CompareWOLL
 
 
             worksheet.Rows.Font.Name = "Courier New";
-            worksheet.Cells[3, 1] = "MODEL     : XM-522J19C10000 SB  MASTER (SMT-A)";
+            worksheet.Cells[3, 1] = "MODEL     : " + tbModel.Text;
             worksheet.Cells[3, 6] = "Rev.";
             worksheet.Cells[3, 6].Font.Color = Color.White;
             worksheet.Cells[3, 7] = "Prepared by";
             worksheet.Cells[3, 8] = "Checked by";
             worksheet.Cells[3, 9] = "Approved by";
 
-            worksheet.Cells[4, 1] = "MACHINE   : NXT3-D15MCLB (LINE #07H-LB)";
-            worksheet.Cells[5, 1] = "PWB TYPE  : J19C SB (1 PNL : 16 PCS)";
-            worksheet.Cells[6, 1] = "PROG.NO.  : 7HLB-52J19CJSB-A";
-            worksheet.Cells[7, 1] = "DATE      : 19 Dec 2020";
+            worksheet.Cells[4, 1] = "MACHINE   : " +tbMachine.Text;
+            worksheet.Cells[5, 1] = "PWB TYPE  : " +tbPWBType.Text;
+            worksheet.Cells[6, 1] = "PROG.NO.  : " +tbProgNo.Text;
+            worksheet.Cells[7, 1] = "DATE      : " + DateTime.Now.ToString("dd MMMM yyyy");
 
             worksheet.Cells[8, 1] = "REEL";
             worksheet.Cells[8, 2] = "PART CODE";
@@ -446,7 +442,7 @@ namespace CompareWOLL
                     string data = ds.Tables[0].Rows[i].ItemArray[i].ToString();
 
                     worksheet.Range[worksheet.Cells[23, 1], worksheet.Cells[23, 9]].Merge();
-                    worksheet.Cells[23, 1] = data ;
+                    worksheet.Cells[23, 1] = data ;                   
                 }
             }
 

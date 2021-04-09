@@ -29,10 +29,12 @@ namespace CompareWOLL
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.homeButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tbProcess = new System.Windows.Forms.TextBox();
@@ -71,6 +73,9 @@ namespace CompareWOLL
             this.dataGridViewPCBNo = new System.Windows.Forms.DataGridView();
             this.dataGridAltPCB = new System.Windows.Forms.DataGridView();
             this.dataGridViewGetTotalRow = new System.Windows.Forms.DataGridView();
+            this.tbStencil = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.dataGridViewStencil = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLLHide)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -78,6 +83,7 @@ namespace CompareWOLL
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPCBNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridAltPCB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGetTotalRow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStencil)).BeginInit();
             this.SuspendLayout();
             // 
             // homeButton
@@ -95,6 +101,8 @@ namespace CompareWOLL
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.tbStencil);
+            this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.tbProcess);
             this.groupBox1.Controls.Add(this.tbModelNo);
             this.groupBox1.Controls.Add(this.tbRemark);
@@ -122,7 +130,7 @@ namespace CompareWOLL
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Location = new System.Drawing.Point(12, 54);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(852, 376);
+            this.groupBox1.Size = new System.Drawing.Size(852, 414);
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Loading List Detail";
@@ -145,7 +153,7 @@ namespace CompareWOLL
             // 
             // tbRemark
             // 
-            this.tbRemark.Location = new System.Drawing.Point(115, 272);
+            this.tbRemark.Location = new System.Drawing.Point(115, 310);
             this.tbRemark.Multiline = true;
             this.tbRemark.Name = "tbRemark";
             this.tbRemark.Size = new System.Drawing.Size(652, 89);
@@ -154,7 +162,7 @@ namespace CompareWOLL
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(20, 275);
+            this.label12.Location = new System.Drawing.Point(24, 313);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(44, 13);
             this.label12.TabIndex = 50;
@@ -359,26 +367,26 @@ namespace CompareWOLL
             this.dataGridViewLLHide.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewLLHide.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewLLHide.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewLLHide.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewLLHide.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridViewLLHide.Location = new System.Drawing.Point(12, 436);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewLLHide.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewLLHide.Location = new System.Drawing.Point(12, 474);
             this.dataGridViewLLHide.Name = "dataGridViewLLHide";
-            this.dataGridViewLLHide.Size = new System.Drawing.Size(852, 227);
+            this.dataGridViewLLHide.Size = new System.Drawing.Size(852, 189);
             this.dataGridViewLLHide.TabIndex = 31;
             // 
             // statusStrip1
@@ -421,27 +429,27 @@ namespace CompareWOLL
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewLL.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewLL.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewLL.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewLL.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewLL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewLL.DefaultCellStyle = dataGridViewCellStyle8;
-            this.dataGridViewLL.Location = new System.Drawing.Point(12, 436);
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewLL.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridViewLL.Location = new System.Drawing.Point(12, 474);
             this.dataGridViewLL.Name = "dataGridViewLL";
             this.dataGridViewLL.ReadOnly = true;
-            this.dataGridViewLL.Size = new System.Drawing.Size(852, 253);
+            this.dataGridViewLL.Size = new System.Drawing.Size(852, 215);
             this.dataGridViewLL.TabIndex = 34;
             // 
             // dataGridViewPCBNo
@@ -449,9 +457,9 @@ namespace CompareWOLL
             this.dataGridViewPCBNo.AllowUserToAddRows = false;
             this.dataGridViewPCBNo.AllowUserToDeleteRows = false;
             this.dataGridViewPCBNo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewPCBNo.Location = new System.Drawing.Point(12, 436);
+            this.dataGridViewPCBNo.Location = new System.Drawing.Point(12, 474);
             this.dataGridViewPCBNo.Name = "dataGridViewPCBNo";
-            this.dataGridViewPCBNo.Size = new System.Drawing.Size(240, 150);
+            this.dataGridViewPCBNo.Size = new System.Drawing.Size(240, 112);
             this.dataGridViewPCBNo.TabIndex = 35;
             this.dataGridViewPCBNo.Visible = false;
             // 
@@ -460,9 +468,9 @@ namespace CompareWOLL
             this.dataGridAltPCB.AllowUserToAddRows = false;
             this.dataGridAltPCB.AllowUserToDeleteRows = false;
             this.dataGridAltPCB.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridAltPCB.Location = new System.Drawing.Point(12, 436);
+            this.dataGridAltPCB.Location = new System.Drawing.Point(12, 474);
             this.dataGridAltPCB.Name = "dataGridAltPCB";
-            this.dataGridAltPCB.Size = new System.Drawing.Size(240, 150);
+            this.dataGridAltPCB.Size = new System.Drawing.Size(240, 112);
             this.dataGridAltPCB.TabIndex = 36;
             this.dataGridAltPCB.Visible = false;
             // 
@@ -471,11 +479,60 @@ namespace CompareWOLL
             this.dataGridViewGetTotalRow.AllowUserToAddRows = false;
             this.dataGridViewGetTotalRow.AllowUserToDeleteRows = false;
             this.dataGridViewGetTotalRow.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewGetTotalRow.Location = new System.Drawing.Point(12, 436);
+            this.dataGridViewGetTotalRow.Location = new System.Drawing.Point(12, 474);
             this.dataGridViewGetTotalRow.Name = "dataGridViewGetTotalRow";
-            this.dataGridViewGetTotalRow.Size = new System.Drawing.Size(850, 210);
+            this.dataGridViewGetTotalRow.Size = new System.Drawing.Size(850, 172);
             this.dataGridViewGetTotalRow.TabIndex = 37;
             this.dataGridViewGetTotalRow.Visible = false;
+            // 
+            // tbStencil
+            // 
+            this.tbStencil.Location = new System.Drawing.Point(115, 271);
+            this.tbStencil.Name = "tbStencil";
+            this.tbStencil.ReadOnly = true;
+            this.tbStencil.Size = new System.Drawing.Size(223, 20);
+            this.tbStencil.TabIndex = 55;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(20, 271);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(56, 13);
+            this.label13.TabIndex = 54;
+            this.label13.Text = "Stencil No";
+            // 
+            // dataGridViewStencil
+            // 
+            this.dataGridViewStencil.AllowUserToAddRows = false;
+            this.dataGridViewStencil.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewStencil.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewStencil.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewStencil.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridViewStencil.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewStencil.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridViewStencil.Location = new System.Drawing.Point(12, 474);
+            this.dataGridViewStencil.Name = "dataGridViewStencil";
+            this.dataGridViewStencil.ReadOnly = true;
+            this.dataGridViewStencil.Size = new System.Drawing.Size(228, 215);
+            this.dataGridViewStencil.TabIndex = 38;
+            this.dataGridViewStencil.Visible = false;
             // 
             // ImportLL
             // 
@@ -491,6 +548,7 @@ namespace CompareWOLL
             this.Controls.Add(this.dataGridViewPCBNo);
             this.Controls.Add(this.dataGridAltPCB);
             this.Controls.Add(this.dataGridViewGetTotalRow);
+            this.Controls.Add(this.dataGridViewStencil);
             this.Name = "ImportLL";
             this.Text = "Import Loading List";
             this.Load += new System.EventHandler(this.importLL_Load);
@@ -503,6 +561,7 @@ namespace CompareWOLL
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPCBNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridAltPCB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGetTotalRow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStencil)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -547,5 +606,8 @@ namespace CompareWOLL
         private System.Windows.Forms.DataGridView dataGridAltPCB;
         public System.Windows.Forms.ToolStripStatusLabel toolStripUsername;
         private System.Windows.Forms.DataGridView dataGridViewGetTotalRow;
+        private System.Windows.Forms.TextBox tbStencil;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.DataGridView dataGridViewStencil;
     }
 }

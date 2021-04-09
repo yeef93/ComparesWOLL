@@ -52,6 +52,8 @@ namespace CompareWOLL
             this.backButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.dataGridViewWoList = new System.Windows.Forms.DataGridView();
+            this.totalPart = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWoList)).BeginInit();
@@ -84,7 +86,7 @@ namespace CompareWOLL
             // 
             this.woUsage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.woUsage.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.woUsage.Location = new System.Drawing.Point(914, 61);
+            this.woUsage.Location = new System.Drawing.Point(1014, 61);
             this.woUsage.Name = "woUsage";
             this.woUsage.ReadOnly = true;
             this.woUsage.Size = new System.Drawing.Size(100, 47);
@@ -96,7 +98,7 @@ namespace CompareWOLL
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(920, 39);
+            this.label8.Location = new System.Drawing.Point(1020, 39);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(94, 16);
             this.label8.TabIndex = 26;
@@ -148,6 +150,8 @@ namespace CompareWOLL
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.totalPart);
+            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.woQty);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.process);
@@ -164,7 +168,7 @@ namespace CompareWOLL
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 54);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1048, 174);
+            this.groupBox1.Size = new System.Drawing.Size(1148, 226);
             this.groupBox1.TabIndex = 31;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Work Order Detail";
@@ -173,7 +177,7 @@ namespace CompareWOLL
             // 
             this.woQty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.woQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.woQty.Location = new System.Drawing.Point(791, 61);
+            this.woQty.Location = new System.Drawing.Point(891, 61);
             this.woQty.Name = "woQty";
             this.woQty.ReadOnly = true;
             this.woQty.Size = new System.Drawing.Size(100, 47);
@@ -185,7 +189,7 @@ namespace CompareWOLL
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(811, 42);
+            this.label9.Location = new System.Drawing.Point(911, 42);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(60, 16);
             this.label9.TabIndex = 34;
@@ -220,7 +224,7 @@ namespace CompareWOLL
             // homeButton
             // 
             this.homeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.homeButton.Location = new System.Drawing.Point(901, 25);
+            this.homeButton.Location = new System.Drawing.Point(1020, 25);
             this.homeButton.Name = "homeButton";
             this.homeButton.Size = new System.Drawing.Size(75, 23);
             this.homeButton.TabIndex = 32;
@@ -237,7 +241,7 @@ namespace CompareWOLL
             this.dateTimeNow});
             this.statusStrip1.Location = new System.Drawing.Point(0, 648);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1072, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1191, 22);
             this.statusStrip1.TabIndex = 30;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -250,7 +254,7 @@ namespace CompareWOLL
             // backButton
             // 
             this.backButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.backButton.Location = new System.Drawing.Point(982, 25);
+            this.backButton.Location = new System.Drawing.Point(1101, 25);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(75, 23);
             this.backButton.TabIndex = 33;
@@ -261,7 +265,7 @@ namespace CompareWOLL
             // saveButton
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.saveButton.Location = new System.Drawing.Point(437, 717);
+            this.saveButton.Location = new System.Drawing.Point(496, 717);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 29;
@@ -277,16 +281,38 @@ namespace CompareWOLL
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewWoList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewWoList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewWoList.Location = new System.Drawing.Point(15, 252);
+            this.dataGridViewWoList.Location = new System.Drawing.Point(15, 290);
             this.dataGridViewWoList.Name = "dataGridViewWoList";
-            this.dataGridViewWoList.Size = new System.Drawing.Size(1045, 370);
+            this.dataGridViewWoList.Size = new System.Drawing.Size(1164, 332);
             this.dataGridViewWoList.TabIndex = 28;
+            // 
+            // totalPart
+            // 
+            this.totalPart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totalPart.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalPart.Location = new System.Drawing.Point(770, 61);
+            this.totalPart.Name = "totalPart";
+            this.totalPart.ReadOnly = true;
+            this.totalPart.Size = new System.Drawing.Size(100, 47);
+            this.totalPart.TabIndex = 35;
+            this.totalPart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(784, 39);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(76, 16);
+            this.label5.TabIndex = 34;
+            this.label5.Text = "Total Part";
             // 
             // DetailWO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1072, 670);
+            this.ClientSize = new System.Drawing.Size(1191, 670);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.homeButton);
             this.Controls.Add(this.statusStrip1);
@@ -331,5 +357,7 @@ namespace CompareWOLL
         public System.Windows.Forms.TextBox model;
         private System.Windows.Forms.Label label9;
         public System.Windows.Forms.TextBox woQty;
+        private System.Windows.Forms.TextBox totalPart;
+        private System.Windows.Forms.Label label5;
     }
 }

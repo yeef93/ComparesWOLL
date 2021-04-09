@@ -22,7 +22,10 @@ namespace CompareWOLL
             MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
             connection.Open();
 
-            string query = "SELECT tbl_wodetail.partcode, tbl_wodetail.qty FROM tbl_wodetail WHERE tbl_wodetail.model_No = '"+modelNo.Text+ "' AND tbl_wodetail.process_Name ='" + process.Text + "'";
+            string query = "SELECT tbl_wo.model, tbl_wodetail.partcode, tbl_wo.model_No, tbl_wodetail.qty, tbl_wodetail.issue, " +
+                "tbl_wo.wo_No, tbl_wodetail.bom_Row, tbl_wo.process_Name, tbl_wo.wo_ptsn , tbl_wo.wo_Usage FROM tbl_wodetail, " +
+                "tbl_wo WHERE tbl_wo.model_No = tbl_wodetail.model_No AND tbl_wodetail.model_No = '" + modelNo.Text + "' AND " +
+                "tbl_wodetail.process_Name = '" + process.Text + "'";
 
             using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
             {
@@ -35,11 +38,13 @@ namespace CompareWOLL
             connection.Close();
 
             // Set table title Wo
-            string[] titleWO = { "PART CODE", "QTY" };
+            string[] titleWO = { "Model", "Part No", "Model No", "Usage", "Issue", "WO No", "BOM Row", "Process","WO PTSN", "WO Qty"};
             for (int i = 0; i < titleWO.Length; i++)
             {
                 dataGridViewWoList.Columns[i].HeaderText = "" + titleWO[i];
             }
+
+            totalPart.Text = dataGridViewWoList.Rows.Count.ToString();
         }
 
         private void backButton_Click(object sender, EventArgs e)

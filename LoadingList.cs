@@ -10,7 +10,9 @@ namespace CompareWOLL
         public LoadingList()
         {
             InitializeComponent();
+
         }
+
 
         private void LoadingList_Load(object sender, EventArgs e)
         {
@@ -32,19 +34,19 @@ namespace CompareWOLL
                 dataGridViewLLList.DataSource = dset.Tables[0];
 
 
-                //// add button detail in datagridview table
-                //DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
-                //dataGridViewLLList.Columns.Add(btnDelete);
-                //btnDelete.HeaderText = "";
-                //btnDelete.Text = "Delete";
-                //btnDelete.Name = "btnDelete";
-                //btnDelete.UseColumnTextForButtonValue = true;
+                // add button delete in datagridview table
+                DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
+                dataGridViewLLList.Columns.Add(btnDelete);
+                btnDelete.HeaderText = "";
+                btnDelete.Text = "Delete";
+                btnDelete.Name = "btnDelete";
+                btnDelete.UseColumnTextForButtonValue = true;
 
             }
             connection.Close();
 
             // Set table title Wo
-            string[] titleWO = { "MODEL NO","PROCESS NAME", "MODEL DETAIL",  "MACHINE", "PWB TYPE", "PROG NO", "REV", "PCB NO", "PART COUNT" };
+            string[] titleWO = { "MODEL NO", "PROCESS NAME", "MODEL DETAIL", "MACHINE", "PWB TYPE", "PROG NO", "REV", "PCB NO", "PART COUNT" };
             for (int i = 0; i < titleWO.Length; i++)
             {
                 dataGridViewLLList.Columns[i].HeaderText = "" + titleWO[i];
@@ -68,65 +70,50 @@ namespace CompareWOLL
 
         private void dataGridViewLLList_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            int i;
+            i = dataGridViewLLList.SelectedCells[0].RowIndex;
+            string modelslctd = dataGridViewLLList.Rows[i].Cells[0].Value.ToString();
+            string processslctd = dataGridViewLLList.Rows[i].Cells[1].Value.ToString();
+
             if (e.ColumnIndex == 9)
-            {
-                string message = "Do you want to delete this Loading List?";
+            {                
+                string message = "Do you want to delete this Loading List " +modelslctd + " " +processslctd + " ?";
                 string title = "Delete Loading List";
                 MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                 DialogResult result = MessageBox.Show(message, title, buttons);
                 if (result == DialogResult.Yes)
                 {
-                    //var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
-                    //var cmd = new MySqlCommand("", conn);
+                    var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
+                    var cmd = new MySqlCommand("", conn);
 
-                    //string querydeleteLL = "INSERT INTO tbl_wo VALUES('" + woPTSNN + "','" + woNoo + "','" + modelNoo + "','" + modell + "', '" + woqtyy + "', '" + wousagee + "','" + processs + "' )";
-                    
+                    string querydeleteLL = "DELETE FROM tbl_ll WHERE model_No = '"+modelslctd+ "' AND process_Name = '" + processslctd + "'";
+                    string querydeleteLLDetail = "DELETE FROM tbl_lldetail WHERE model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
+                    string querydeletePartCode = "DELETE FROM tbl_partcodedetail WHERE model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
+                    string querydeleteReel = "DELETE FROM tbl_reel WHERE model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
+                    string querydeleteResult = "DELETE FROM tbl_resultcompare WHERE model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
 
-                    //conn.Open();
-                    ////Buka koneksi
+                    conn.Open();                    
 
-                    //cmd.CommandText = querydeleteLL;
-                    //cmd.ExecuteNonQuery();
+                    string[] allQuery = { querydeleteLL, querydeleteLLDetail, querydeletePartCode, querydeleteReel, querydeleteResult };
+                    for (int j = 0; j < allQuery.Length; j++)
+                    {
+                        cmd.CommandText = allQuery[j];
+                        //Masukkan perintah/query yang akan dijalankan ke dalam CommandText
+                        cmd.ExecuteNonQuery();
+                        //Jalankan perintah / query dalam CommandText pada database
+                    }
 
-                    ////string[] allQuery = { query, querymodel };
-                    ////for (int i = 0; i < allQuery.Length; i++)
-                    ////{
-                    ////    cmd.CommandText = allQuery[i];
-                    ////    //Masukkan perintah/query yang akan dijalankan ke dalam CommandText
-                    ////    cmd.ExecuteNonQuery();
-                    ////    //Jalankan perintah / query dalam CommandText pada database
-                    ////}
-
+                    conn.Close();
+                    LoadingList ll = new LoadingList();
+                    ll.Show();
+                    this.Hide();
+                    MessageBox.Show("Record Deleted successfully", "Loading List Record", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
-                {
-                    // Do something  
+                { 
                 }
 
 
-                //DetailLL dll = new DetailLL();
-                //string modelNo = dataGridViewLLList.Rows[e.RowIndex].Cells[0].Value.ToString();
-                //string processName = dataGridViewLLList.Rows[e.RowIndex].Cells[1].Value.ToString();
-                //string model = dataGridViewLLList.Rows[e.RowIndex].Cells[2].Value.ToString();
-                //string machine = dataGridViewLLList.Rows[e.RowIndex].Cells[3].Value.ToString();
-                //string pwbType = dataGridViewLLList.Rows[e.RowIndex].Cells[4].Value.ToString();
-                //string progNo = dataGridViewLLList.Rows[e.RowIndex].Cells[5].Value.ToString();
-                //string rev = dataGridViewLLList.Rows[e.RowIndex].Cells[6].Value.ToString();
-                //string pcbNo = dataGridViewLLList.Rows[e.RowIndex].Cells[7].Value.ToString();
-
-
-                //dll.tbModelNo.Text = modelNo;
-                //dll.tbProcess.Text = processName;
-                //dll.tbModel.Text = model;
-                //dll.tbMachine.Text = machine;
-                //dll.tbPWBType.Text = pwbType;
-                //dll.tbProg.Text = progNo;
-                //dll.tbRev.Text = rev;
-                //dll.tbPcbNo.Text = pcbNo;
-
-                //dll.Show();
-                //this.Hide();
-                ////MessageBox.Show((e.RowIndex + 1) + "  Row  " + (e.ColumnIndex + 1) + "  Column button clicked ");
             }
         }
     }
