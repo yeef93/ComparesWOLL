@@ -30,6 +30,7 @@ namespace CompareWOLL
         private void InitializeComponent()
         {
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripUsername = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
             this.label1 = new System.Windows.Forms.Label();
@@ -57,7 +58,6 @@ namespace CompareWOLL
             this.dataGridViewCompareLLWOResult = new System.Windows.Forms.DataGridView();
             this.btnHome = new System.Windows.Forms.Button();
             this.btnWO = new System.Windows.Forms.Button();
-            this.toolStripUsername = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -79,6 +79,12 @@ namespace CompareWOLL
             this.statusStrip1.Size = new System.Drawing.Size(1369, 22);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripUsername
+            // 
+            this.toolStripUsername.Name = "toolStripUsername";
+            this.toolStripUsername.Size = new System.Drawing.Size(124, 17);
+            this.toolStripUsername.Text = "toolStripStatusLabel2";
             // 
             // toolStripStatusLabel1
             // 
@@ -135,6 +141,7 @@ namespace CompareWOLL
             // 
             // llQty
             // 
+            this.llQty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.llQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F);
             this.llQty.Location = new System.Drawing.Point(1030, 73);
             this.llQty.Name = "llQty";
@@ -145,6 +152,7 @@ namespace CompareWOLL
             // 
             // label6
             // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.label6.Location = new System.Drawing.Point(1027, 38);
@@ -155,6 +163,7 @@ namespace CompareWOLL
             // 
             // woQty
             // 
+            this.woQty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.woQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F);
             this.woQty.Location = new System.Drawing.Point(897, 73);
             this.woQty.Name = "woQty";
@@ -165,6 +174,7 @@ namespace CompareWOLL
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.label4.Location = new System.Drawing.Point(894, 38);
@@ -367,12 +377,6 @@ namespace CompareWOLL
             this.btnWO.Text = "Work Order";
             this.btnWO.UseVisualStyleBackColor = true;
             this.btnWO.Click += new System.EventHandler(this.btnWO_Click);
-            // 
-            // toolStripUsername
-            // 
-            this.toolStripUsername.Name = "toolStripUsername";
-            this.toolStripUsername.Size = new System.Drawing.Size(124, 17);
-            this.toolStripUsername.Text = "toolStripStatusLabel2";
             // 
             // CompareWOLL
             // 

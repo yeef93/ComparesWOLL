@@ -88,7 +88,7 @@ namespace CompareWOLL
                 string processName = dataGridViewWoList.Rows[e.RowIndex].Cells[4].Value.ToString();
                 string woQty = dataGridViewWoList.Rows[e.RowIndex].Cells[6].Value.ToString();
                 string woUsage = dataGridViewWoList.Rows[e.RowIndex].Cells[5].Value.ToString();
-                
+
 
                 dwo.woPTSN.Text = woPtsn;
                 dwo.woNo.Text = woNo;

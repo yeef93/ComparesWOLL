@@ -244,7 +244,7 @@ namespace CompareWOLL
                     var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
                     var cmd = new MySqlCommand("", conn);
 
-                    string queryLL = "INSERT INTO tbl_ll VALUES('" + model + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','" + llUsage + "','" + remark + "')";
+                    string queryLL = "INSERT INTO tbl_ll VALUES('','" + model + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','" + llUsage + "','" + remark + "')";
                     string queryInputPCB = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '" + pcb + "', '1', '1');";
                     string queryPCBAlt1 = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '" + pcb1 + "', '2', '1');";
                     string queryPCBAlt2 = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '" + pcb2 + "', '3', '1');";
@@ -283,62 +283,52 @@ namespace CompareWOLL
 
                         cmd.CommandText = StrQuery;
                         cmd.ExecuteNonQuery();
+
+
                     }
+
+                    String reelID = "";
+                    int altNo = 1;
 
                     for (int j = 0; j < dataGridViewLL.Rows.Count; j++)
                     {
                         if (dataGridViewLL.Rows[j].Cells[0].Value.ToString() != "")
                         {
-                            string StrQueryLLDetail = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','"
-                            + dataGridViewLL.Rows[j].Cells[0].Value.ToString() + "', '"
-                            + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "', '1', '"
-                            + dataGridViewLL.Rows[j].Cells[3].Value.ToString() + "');";
-                            cmd.CommandText = StrQueryLLDetail;
-                            cmd.ExecuteNonQuery();
+                            reelID = dataGridViewLL.Rows[j].Cells[0].Value.ToString();
+                            altNo = 1;
+                            string StrQueryReelDetail = "INSERT INTO tbl_reel VALUES ('"
+                                + reelID + "', '" + model + "','" + process + "','"+ dataGridViewLL.Rows[j].Cells[3].Value.ToString() + "', '"
+                                + dataGridViewLL.Rows[j].Cells[4].Value.ToString() + "', '"
+                                + dataGridViewLL.Rows[j].Cells[6].Value.ToString() + "');";
 
-
-                            string StrQueryReelDetail = "INSERT INTO tbl_reel VALUES ('" + model + "','" + process + "','"
-                        + dataGridViewLL.Rows[j].Cells[0].Value.ToString() + "', '"
-                        + dataGridViewLL.Rows[j].Cells[3].Value.ToString() + "', '"
-                        + dataGridViewLL.Rows[j].Cells[4].Value.ToString() + "', '"
-                        + dataGridViewLL.Rows[j].Cells[6].Value.ToString() + "');";
                             cmd.CommandText = StrQueryReelDetail;
                             cmd.ExecuteNonQuery();
                         }
 
-                        else if (dataGridViewLL.Rows[j].Cells[0].Value.ToString() == "" || dataGridViewLL.Rows[--j].Cells[0].Value.ToString() != "")
-                        {
-
-
-                            //MessageBox.Show(dataGridViewLL.Rows[--j].Cells[0].Value.ToString(), "Loading List", MessageBoxButtons.OK, MessageBoxIcon.Information);                           
-                            int l = j;
-                            int k = --j;
-
-                            string StrQueryLLDetails = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','"
-                        + dataGridViewLL.Rows[k].Cells[0].Value.ToString() + "', '"
-                        + dataGridViewLL.Rows[l].Cells[1].Value.ToString() + "', '2', '"
-                        + dataGridViewLL.Rows[k].Cells[3].Value.ToString() + "');";
-
-                            cmd.CommandText = StrQueryLLDetails;
-                            cmd.ExecuteNonQuery();
-
-                            j++;
-                        }
-
-
-                        //else if (dataGridViewLL.Rows[j].Cells[0].Value.ToString() == "" || dataGridViewLL.Rows[--j].Cells[0].Value.ToString() == "" || dataGridViewLL.Rows[2-j].Cells[0].Value.ToString() != "")
-                        //{
-                        //    MessageBox.Show(dataGridViewLL.Rows[2-j].Cells[0].Value.ToString(), "Loading List", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        //    //string StrQueryLLDetails = "UPDATE tbl_lldetail SET choice3 = '" + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "' WHERE model_No = '" + model + "' AND process_Name = '" + process + "' AND reel = '" + dataGridViewLL.Rows[2-j].Cells[0].Value.ToString() + "'; ";
-
-                        //    //cmd.CommandText = StrQueryLLDetails;
-                        //    //cmd.ExecuteNonQuery();
-
-                        //    j = j + 2;
-                        //}
-
+                        string StrQueryLLDetail = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','"
+                        + reelID + "', '"
+                        + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "','" + altNo + "', '"
+                        + dataGridViewLL.Rows[j].Cells[3].Value.ToString() + "');";
+                        cmd.CommandText = StrQueryLLDetail;
+                        cmd.ExecuteNonQuery();
+                        altNo++;
                     }
+
+                    //foreach (DataGridViewRow row in dataGridViewLL.Rows)
+                    //{
+                    //    foreach (DataGridViewCell cell in row.Cells)
+                    //    {
+                    //        if (cell.Value.ToString() == "")
+                    //        {
+                    //            rowIndex = row.Index;
+                    //            if (rowIndex.ToString() != "")
+                    //            {
+                    //                break;
+                    //            }
+                    //        }
+                    //    }
+                    //    MessageBox.Show(rowIndex.ToString());
+                    //}
 
                     conn.Close();
                     //Tutup koneksi

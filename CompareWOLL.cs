@@ -30,19 +30,40 @@ namespace CompareWOLL
 
             string queryModelWO = "SELECT model_No FROM tbl_model";
             string queryModelLL = "SELECT model_No FROM tbl_ll";
+            
+            
+            string queryWODropDown = "SELECT model_No, process_Name FROM tbl_wo";
 
             try
             {
-                using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryModelWO, connection))
+
+                using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryWODropDown, connection))
                 {
                     DataTable dset = new DataTable();
                     adpt.Fill(dset);
 
-                    cmbWOModelNo.DataSource = dset;
-                    cmbWOModelNo.ValueMember = "model_No";
-                    cmbWOModelNo.DisplayMember = "model_No";
+                    //cmbWOModelNo.DataSource = dset;
+                    //cmbWOModelNo.ValueMember = "model_No";
+                    //cmbWOModelNo.DisplayMember = "model_No";
+
+                    for (int i = 0; i < dset.Rows.Count; i++)
+                    {
+                        cmbWOModelNo.Items.Add(dset.Rows[i][0] + " " + dset.Rows[i][1]);    
+                    }
+
 
                 }
+
+                //using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryModelWO, connection))
+                //{
+                //    DataTable dset = new DataTable();
+                //    adpt.Fill(dset);
+
+                //    cmbWOModelNo.DataSource = dset;
+                //    cmbWOModelNo.ValueMember = "model_No";
+                //    cmbWOModelNo.DisplayMember = "model_No";
+
+                //}
 
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryModelLL, connection))
                 {
