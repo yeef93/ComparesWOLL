@@ -350,8 +350,11 @@ namespace CompareWOLL
                     saveButton.Enabled = true;
 
                     this.Close();
-                    LoadingList ll = new LoadingList();
-                    ll.Show();
+                    //LoadingList ll = new LoadingList();
+                    //ll.Show();
+
+                    CompareWOLL cWOll = new CompareWOLL();
+                    cWOll.Show();
                 }
 
                 catch (Exception ex)

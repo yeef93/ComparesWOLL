@@ -135,9 +135,19 @@ namespace CompareWOLL
                             if (Convert.ToInt32(dataGridViewWO.Rows[i].Cells[4].Value) !=
                                 totalissue)
                             {
+                                totalPart.Text = "#Erorr";
+                                totalPart.BackColor = System.Drawing.Color.Red;
+
+                                woQty.Text = "#Erorr";
+                                woQty.BackColor = System.Drawing.Color.Red;
+
+                                woUsage.Text = "#Erorr";
+                                woUsage.BackColor = System.Drawing.Color.Red;
+
                                 dataGridViewWO.Rows[i].DefaultCellStyle = styleError;
                                 saveButton.Enabled = false;
-                                MessageBox.Show("Data Issue Part No "+ dataGridViewWO.Rows[i].Cells[1].Value + " Not Match", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+                                MessageBox.Show("Data Issue Part No "+ dataGridViewWO.Rows[i].Cells[1].Value + " Not Match, Please Check Excel File", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+                                saveButton.Enabled = false;
                             }
                             else
                             {

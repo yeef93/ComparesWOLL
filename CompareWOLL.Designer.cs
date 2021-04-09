@@ -37,6 +37,10 @@ namespace CompareWOLL
             this.btnCompare = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.tbProgNo = new System.Windows.Forms.TextBox();
+            this.tbPWBType = new System.Windows.Forms.TextBox();
+            this.tbMachine = new System.Windows.Forms.TextBox();
+            this.tbModel = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -63,10 +67,8 @@ namespace CompareWOLL
             this.dataGridViewCompareLLWOResult = new System.Windows.Forms.DataGridView();
             this.btnHome = new System.Windows.Forms.Button();
             this.btnWO = new System.Windows.Forms.Button();
-            this.tbModel = new System.Windows.Forms.TextBox();
-            this.tbMachine = new System.Windows.Forms.TextBox();
-            this.tbPWBType = new System.Windows.Forms.TextBox();
-            this.tbProgNo = new System.Windows.Forms.TextBox();
+            this.tbStencil = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -152,6 +154,8 @@ namespace CompareWOLL
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.tbStencil);
+            this.groupBox4.Controls.Add(this.label13);
             this.groupBox4.Controls.Add(this.tbProgNo);
             this.groupBox4.Controls.Add(this.tbPWBType);
             this.groupBox4.Controls.Add(this.tbMachine);
@@ -166,6 +170,38 @@ namespace CompareWOLL
             this.groupBox4.TabIndex = 45;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Detail Loading List";
+            // 
+            // tbProgNo
+            // 
+            this.tbProgNo.Location = new System.Drawing.Point(134, 128);
+            this.tbProgNo.Name = "tbProgNo";
+            this.tbProgNo.ReadOnly = true;
+            this.tbProgNo.Size = new System.Drawing.Size(231, 20);
+            this.tbProgNo.TabIndex = 7;
+            // 
+            // tbPWBType
+            // 
+            this.tbPWBType.Location = new System.Drawing.Point(134, 95);
+            this.tbPWBType.Name = "tbPWBType";
+            this.tbPWBType.ReadOnly = true;
+            this.tbPWBType.Size = new System.Drawing.Size(231, 20);
+            this.tbPWBType.TabIndex = 6;
+            // 
+            // tbMachine
+            // 
+            this.tbMachine.Location = new System.Drawing.Point(134, 60);
+            this.tbMachine.Name = "tbMachine";
+            this.tbMachine.ReadOnly = true;
+            this.tbMachine.Size = new System.Drawing.Size(231, 20);
+            this.tbMachine.TabIndex = 5;
+            // 
+            // tbModel
+            // 
+            this.tbModel.Location = new System.Drawing.Point(134, 29);
+            this.tbModel.Name = "tbModel";
+            this.tbModel.ReadOnly = true;
+            this.tbModel.Size = new System.Drawing.Size(231, 20);
+            this.tbModel.TabIndex = 4;
             // 
             // label12
             // 
@@ -438,37 +474,22 @@ namespace CompareWOLL
             this.btnWO.UseVisualStyleBackColor = true;
             this.btnWO.Click += new System.EventHandler(this.btnWO_Click);
             // 
-            // tbModel
+            // tbStencil
             // 
-            this.tbModel.Location = new System.Drawing.Point(134, 29);
-            this.tbModel.Name = "tbModel";
-            this.tbModel.ReadOnly = true;
-            this.tbModel.Size = new System.Drawing.Size(231, 20);
-            this.tbModel.TabIndex = 4;
+            this.tbStencil.Location = new System.Drawing.Point(134, 164);
+            this.tbStencil.Name = "tbStencil";
+            this.tbStencil.ReadOnly = true;
+            this.tbStencil.Size = new System.Drawing.Size(231, 20);
+            this.tbStencil.TabIndex = 47;
             // 
-            // tbMachine
+            // label13
             // 
-            this.tbMachine.Location = new System.Drawing.Point(134, 60);
-            this.tbMachine.Name = "tbMachine";
-            this.tbMachine.ReadOnly = true;
-            this.tbMachine.Size = new System.Drawing.Size(231, 20);
-            this.tbMachine.TabIndex = 5;
-            // 
-            // tbPWBType
-            // 
-            this.tbPWBType.Location = new System.Drawing.Point(134, 95);
-            this.tbPWBType.Name = "tbPWBType";
-            this.tbPWBType.ReadOnly = true;
-            this.tbPWBType.Size = new System.Drawing.Size(231, 20);
-            this.tbPWBType.TabIndex = 6;
-            // 
-            // tbProgNo
-            // 
-            this.tbProgNo.Location = new System.Drawing.Point(134, 128);
-            this.tbProgNo.Name = "tbProgNo";
-            this.tbProgNo.ReadOnly = true;
-            this.tbProgNo.Size = new System.Drawing.Size(231, 20);
-            this.tbProgNo.TabIndex = 7;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(47, 172);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(74, 13);
+            this.label13.TabIndex = 46;
+            this.label13.Text = "STENCIL. NO";
             // 
             // CompareWOLL
             // 
@@ -544,5 +565,7 @@ namespace CompareWOLL
         private System.Windows.Forms.TextBox tbPWBType;
         private System.Windows.Forms.TextBox tbMachine;
         private System.Windows.Forms.TextBox tbModel;
+        private System.Windows.Forms.TextBox tbStencil;
+        private System.Windows.Forms.Label label13;
     }
 }

@@ -25,6 +25,9 @@ namespace CompareWOLL
             btnCompare.Enabled = false;
             btnGenerate.Enabled = false;
 
+            groupBox4.Visible = false;
+
+
             MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
             connection.Open();
 
@@ -141,7 +144,7 @@ namespace CompareWOLL
 
             string queryTblWO = "SELECT partcode, qty FROM tbl_wodetail WHERE model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' AND process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
 
-            string queryDetailLL = "SELECT model_detail, machine, pwb_Type, prog_No FROM tbl_ll WHERE  model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' AND process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
+            string queryDetailLL = "SELECT model_detail, machine, pwb_Type, prog_No, stencil FROM tbl_ll WHERE  model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' AND process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
 
             try
             {
@@ -158,6 +161,7 @@ namespace CompareWOLL
                         tbMachine.Text = dset.Rows[0]["machine"].ToString();
                         tbPWBType.Text = dset.Rows[0]["pwb_Type"].ToString();
                         tbProgNo.Text = dset.Rows[0]["prog_No"].ToString();
+                        tbStencil.Text = dset.Rows[0]["stencil"].ToString();
                     }
 
                 }
@@ -308,13 +312,13 @@ namespace CompareWOLL
                 {
                     compareQty.Text = "Not Match";
                     compareQty.BackColor = System.Drawing.Color.Red;
-                    btnGenerate.Enabled = false;
+                    btnGenerate.Enabled = true;
                 }
 
                 if (tbPCB.Text == "")
                 {
                     MessageBox.Show("No any selected PCB", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
-                    btnGenerate.Enabled = false;
+                    btnGenerate.Enabled = true;
                 }
 
 
@@ -324,12 +328,18 @@ namespace CompareWOLL
                 // tampilkan pesan error
                 MessageBox.Show(ex.Message);
             }
+
+            groupBox4.Visible = true;
+
         }
 
         private void btnGenerate_Click_1(object sender, EventArgs e)
         {
             int totalpart;
-            int nextrow;
+            int totalPointRow;
+            int remarkRow;
+            int footerRow;
+
 
             // Create a new workbook with a single sheet
             excelConvert.NewFile();
@@ -427,10 +437,16 @@ namespace CompareWOLL
 
             }
 
-            nextrow = totalpart + 9;
+            totalPointRow = totalpart + 9;
+            worksheet.Range[worksheet.Cells[totalPointRow, 1], worksheet.Cells[totalPointRow, 3]].Merge();
+            worksheet.Cells[totalPointRow, 1] = "TOTAL POINT";
+            worksheet.Cells[totalPointRow, 4] = woQty.Text;
+            worksheet.Cells[totalPointRow, 5] = " PCB NO: "+tbPCB.Text;
+            worksheet.Cells[totalPointRow, 6] = " STENCIL NO : " + tbStencil.Text;
+
+            remarkRow = totalpart + 11;
 
             string remark = "SELECT remarks FROM tbl_ll";
-
 
             using (MySqlDataAdapter dscmd = new MySqlDataAdapter(remark, conn))
             {
@@ -441,12 +457,13 @@ namespace CompareWOLL
                {
                     string data = ds.Tables[0].Rows[i].ItemArray[i].ToString();
 
-                    worksheet.Range[worksheet.Cells[23, 1], worksheet.Cells[23, 9]].Merge();
-                    worksheet.Cells[23, 1] = data ;                   
+                    worksheet.Range[worksheet.Cells[remarkRow, 1], worksheet.Cells[remarkRow, 9]].Merge();
+                    worksheet.Cells[remarkRow, 1] = data ;                   
                 }
             }
-
             conn.Close();
+
+            worksheet.Cells[remarkRow+2, 1] = "FM - SMT - ENG - 011";
 
             //conn.Open();
             //string detailLL = "SELECT model_No, machine, pwb_Type, prog_No, process_Name, model_detail, rev, pcb_No, remarks FROM tbl_ll";
