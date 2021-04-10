@@ -74,6 +74,7 @@ namespace CompareWOLL
             // dataGridViewLLList
             // 
             this.dataGridViewLLList.AllowUserToAddRows = false;
+            this.dataGridViewLLList.AllowUserToDeleteRows = false;
             this.dataGridViewLLList.AllowUserToOrderColumns = true;
             this.dataGridViewLLList.AllowUserToResizeColumns = false;
             this.dataGridViewLLList.AllowUserToResizeRows = false;

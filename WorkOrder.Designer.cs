@@ -35,10 +35,10 @@ namespace CompareWOLL
             this.importWO = new System.Windows.Forms.Button();
             this.dataGridViewWoList = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripUsername = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
             this.backButton = new System.Windows.Forms.Button();
-            this.toolStripUsername = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWoList)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -57,6 +57,7 @@ namespace CompareWOLL
             // dataGridViewWoList
             // 
             this.dataGridViewWoList.AllowUserToAddRows = false;
+            this.dataGridViewWoList.AllowUserToDeleteRows = false;
             this.dataGridViewWoList.AllowUserToOrderColumns = true;
             this.dataGridViewWoList.AllowUserToResizeColumns = false;
             this.dataGridViewWoList.AllowUserToResizeRows = false;
@@ -109,6 +110,12 @@ namespace CompareWOLL
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // toolStripUsername
+            // 
+            this.toolStripUsername.Name = "toolStripUsername";
+            this.toolStripUsername.Size = new System.Drawing.Size(124, 17);
+            this.toolStripUsername.Text = "toolStripStatusLabel2";
+            // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
@@ -131,12 +138,6 @@ namespace CompareWOLL
             this.backButton.Text = "Back";
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
-            // 
-            // toolStripUsername
-            // 
-            this.toolStripUsername.Name = "toolStripUsername";
-            this.toolStripUsername.Size = new System.Drawing.Size(124, 17);
-            this.toolStripUsername.Text = "toolStripStatusLabel2";
             // 
             // WorkOrder
             // 

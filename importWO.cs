@@ -203,49 +203,64 @@ namespace CompareWOLL
                     var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
                     var cmd = new MySqlCommand("", conn);
 
+                    string cekmodel = "SELECT model_No, process_Name FROM tbl_model  WHERE model_No = '" + modelNoo + "' AND process_Name = '" + processs + "'";
                     string query = "INSERT INTO tbl_wo VALUES('', '" + woPTSNN + "','" + woNoo + "','" + modelNoo + "','" + modell + "', '" + woqtyy + "', '" + wousagee + "','" + processs + "' )";
                     string querymodel = "INSERT INTO tbl_model VALUES('','" + modelNoo + "','" + processs + "')";
 
                     conn.Open();
                     //Buka koneksi
 
-                    string[] allQuery = { query, querymodel };
-                    for (int i = 0; i < allQuery.Length; i++)
+                    using (MySqlDataAdapter dscmd = new MySqlDataAdapter(cekmodel, conn))
                     {
-                        cmd.CommandText = allQuery[i];
-                        //Masukkan perintah/query yang akan dijalankan ke dalam CommandText
-                        cmd.ExecuteNonQuery();
-                        //Jalankan perintah / query dalam CommandText pada database
+                        DataSet ds = new DataSet();
+                        dscmd.Fill(ds);
+
+                        if (ds.Tables[0].Rows.Count >= 1)
+                        {
+                            MessageBox.Show("Work Order Data "+modelNoo+"  "+processs+" already uploaded", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+                        }
+
+                        else
+                        {
+
+                            string[] allQuery = { query, querymodel };
+                            for (int i = 0; i < allQuery.Length; i++)
+                            {
+                                cmd.CommandText = allQuery[i];
+                                //Masukkan perintah/query yang akan dijalankan ke dalam CommandText
+                                cmd.ExecuteNonQuery();
+                                //Jalankan perintah / query dalam CommandText pada database
+                            }
+
+                            //cmd.CommandText = query;
+                            //cmd.CommandText = querymodel;
+                            ////Masukkan perintah/query yang akan dijalankan ke dalam CommandText  
+
+                            for (int i = 0; i < dataGridViewWO.Rows.Count; i++)
+                            {
+                                string StrQuery = "INSERT INTO tbl_wodetail VALUES ('"
+                                    + dataGridViewWO.Rows[i].Cells[2].Value.ToString() + "', '"
+                                    + dataGridViewWO.Rows[i].Cells[1].Value.ToString() + "', '"
+                                    + dataGridViewWO.Rows[i].Cells[7].Value.ToString() + "', '"
+                                    + dataGridViewWO.Rows[i].Cells[3].Value.ToString() + "', '"
+                                    + dataGridViewWO.Rows[i].Cells[6].Value.ToString() + "', '"
+                                    + dataGridViewWO.Rows[i].Cells[4].Value.ToString() + "');";
+                                cmd.CommandText = StrQuery;
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            conn.Close();
+                            //Tutup koneksi
+
+                            MessageBox.Show("Work Order Successfully saved", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            saveButton.Enabled = true;
+
+                            this.Close();
+                            WorkOrder wo = new WorkOrder();
+                            wo.Show();
+                        }
                     }
-
-                    //cmd.CommandText = query;
-                    //cmd.CommandText = querymodel;
-                    ////Masukkan perintah/query yang akan dijalankan ke dalam CommandText  
-
-                    for (int i = 0; i < dataGridViewWO.Rows.Count; i++)
-                    {
-                        string StrQuery = "INSERT INTO tbl_wodetail VALUES ('"
-                            + dataGridViewWO.Rows[i].Cells[2].Value.ToString() + "', '"
-                            + dataGridViewWO.Rows[i].Cells[1].Value.ToString() + "', '"
-                            + dataGridViewWO.Rows[i].Cells[7].Value.ToString() + "', '"
-                            + dataGridViewWO.Rows[i].Cells[3].Value.ToString() + "', '"
-                            + dataGridViewWO.Rows[i].Cells[6].Value.ToString() + "', '"
-                            + dataGridViewWO.Rows[i].Cells[4].Value.ToString() + "');";
-                        cmd.CommandText = StrQuery;
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    conn.Close();
-                    //Tutup koneksi
-                                        
-                    MessageBox.Show("Work Order Successfully saved", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    saveButton.Enabled = true;
-
-                    this.Close();
-                    WorkOrder wo = new WorkOrder();
-                    wo.Show();
                 }
-
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message.ToString());

@@ -257,6 +257,7 @@ namespace CompareWOLL
                     var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
                     var cmd = new MySqlCommand("", conn);
 
+                    string cekmodel = "SELECT model_No, process_Name FROM tbl_ll  WHERE model_No = '" + model + "' AND process_Name = '" + process + "'";
                     string queryLL = "INSERT INTO tbl_ll VALUES('','" + model + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','" + llUsage + "','" + stencil + "','" + remark + "')";
                     string queryInputPCB = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '" + pcb + "', '1', '1');";
                     string queryPCBAlt1 = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '" + pcb1 + "', '2', '1');";
@@ -265,100 +266,115 @@ namespace CompareWOLL
                     conn.Open();
                     //Buka koneksi
 
-                    string[] allQuery = { queryLL, queryInputPCB };
-                    for (int i = 0; i < allQuery.Length; i++)
+                    using (MySqlDataAdapter dscmd = new MySqlDataAdapter(cekmodel, conn))
                     {
-                        cmd.CommandText = allQuery[i];
-                        //Masukkan perintah/query yang akan dijalankan ke dalam CommandText
-                        cmd.ExecuteNonQuery();
-                        //Jalankan perintah / query dalam CommandText pada database
-                    }
+                        DataSet ds = new DataSet();
+                        dscmd.Fill(ds);
 
-                    if (queryPCBAlt1 != "")
-                    {
-                        cmd.CommandText = queryPCBAlt1;
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    if (queryPCBAlt2 != "")
-                    {
-                        cmd.CommandText = queryPCBAlt2;
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    for (int i = 0; i < dataGridViewLL.Rows.Count; i++)
-                    {
-                        // query insert data part code
-                        string StrQuery = "INSERT INTO tbl_partcodedetail VALUES ('" + model + "','" + process + "','"
-                            + dataGridViewLL.Rows[i].Cells[1].Value.ToString() + "', '"
-                            + dataGridViewLL.Rows[i].Cells[2].Value.ToString() + "', '"
-                            + dataGridViewLL.Rows[i].Cells[5].Value.ToString() + "');";
-
-                        cmd.CommandText = StrQuery;
-                        cmd.ExecuteNonQuery();
-
-
-                    }
-
-                    String reelID = "";
-                    String qty = "";
-                    int altNo = 1;
-
-                    for (int j = 0; j < dataGridViewLL.Rows.Count; j++)
-                    {
-                        if (dataGridViewLL.Rows[j].Cells[0].Value.ToString() != "")
+                        if (ds.Tables[0].Rows.Count >= 1)
                         {
-                            reelID = dataGridViewLL.Rows[j].Cells[0].Value.ToString();
-                            qty = dataGridViewLL.Rows[j].Cells[3].Value.ToString();
-                            altNo = 1;
-                            string StrQueryReelDetail = "INSERT INTO tbl_reel VALUES ('"
-                                + reelID + "', '" + model + "','" + process + "','"+ dataGridViewLL.Rows[j].Cells[3].Value.ToString() + "', '"
-                                + dataGridViewLL.Rows[j].Cells[4].Value.ToString() + "', '"
-                                + dataGridViewLL.Rows[j].Cells[6].Value.ToString() + "');";
-
-                            cmd.CommandText = StrQueryReelDetail;
-                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Loading List Data " + model + "  " + process + " already uploaded", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
                         }
 
-                        string StrQueryLLDetail = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','"
-                        + reelID + "', '"
-                        + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "','" + altNo + "', '"
-                        + qty + "');";
-                        cmd.CommandText = StrQueryLLDetail;
-                        cmd.ExecuteNonQuery();
-                        altNo++;
+                        else
+                        {
+
+
+                            string[] allQuery = { queryLL, queryInputPCB };
+                            for (int i = 0; i < allQuery.Length; i++)
+                            {
+                                cmd.CommandText = allQuery[i];
+                                //Masukkan perintah/query yang akan dijalankan ke dalam CommandText
+                                cmd.ExecuteNonQuery();
+                                //Jalankan perintah / query dalam CommandText pada database
+                            }
+
+                            if (queryPCBAlt1 != "")
+                            {
+                                cmd.CommandText = queryPCBAlt1;
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            if (queryPCBAlt2 != "")
+                            {
+                                cmd.CommandText = queryPCBAlt2;
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            for (int i = 0; i < dataGridViewLL.Rows.Count; i++)
+                            {
+                                // query insert data part code
+                                string StrQuery = "INSERT INTO tbl_partcodedetail VALUES ('" + model + "','" + process + "','"
+                                    + dataGridViewLL.Rows[i].Cells[1].Value.ToString() + "', '"
+                                    + dataGridViewLL.Rows[i].Cells[2].Value.ToString() + "', '"
+                                    + dataGridViewLL.Rows[i].Cells[5].Value.ToString() + "');";
+
+                                cmd.CommandText = StrQuery;
+                                cmd.ExecuteNonQuery();
+
+
+                            }
+
+                            String reelID = "";
+                            String qty = "";
+                            int altNo = 1;
+
+                            for (int j = 0; j < dataGridViewLL.Rows.Count; j++)
+                            {
+                                if (dataGridViewLL.Rows[j].Cells[0].Value.ToString() != "")
+                                {
+                                    reelID = dataGridViewLL.Rows[j].Cells[0].Value.ToString();
+                                    qty = dataGridViewLL.Rows[j].Cells[3].Value.ToString();
+                                    altNo = 1;
+                                    string StrQueryReelDetail = "INSERT INTO tbl_reel VALUES ('"
+                                        + reelID + "', '" + model + "','" + process + "','" + dataGridViewLL.Rows[j].Cells[3].Value.ToString() + "', '"
+                                        + dataGridViewLL.Rows[j].Cells[4].Value.ToString() + "', '"
+                                        + dataGridViewLL.Rows[j].Cells[6].Value.ToString() + "');";
+
+                                    cmd.CommandText = StrQueryReelDetail;
+                                    cmd.ExecuteNonQuery();
+                                }
+
+                                string StrQueryLLDetail = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','"
+                                + reelID + "', '"
+                                + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "','" + altNo + "', '"
+                                + qty + "');";
+                                cmd.CommandText = StrQueryLLDetail;
+                                cmd.ExecuteNonQuery();
+                                altNo++;
+                            }
+
+                            //foreach (DataGridViewRow row in dataGridViewLL.Rows)
+                            //{
+                            //    foreach (DataGridViewCell cell in row.Cells)
+                            //    {
+                            //        if (cell.Value.ToString() == "")
+                            //        {
+                            //            rowIndex = row.Index;
+                            //            if (rowIndex.ToString() != "")
+                            //            {
+                            //                break;
+                            //            }
+                            //        }
+                            //    }
+                            //    MessageBox.Show(rowIndex.ToString());
+                            //}
+
+                            conn.Close();
+                            //Tutup koneksi
+
+                            MessageBox.Show("Loading List Successfully saved", "Loading List", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            saveButton.Enabled = true;
+
+                            this.Close();
+                            //LoadingList ll = new LoadingList();
+                            //ll.Show();
+
+                            CompareWOLL cWOll = new CompareWOLL();
+                            cWOll.Show();
+                        }
                     }
-
-                    //foreach (DataGridViewRow row in dataGridViewLL.Rows)
-                    //{
-                    //    foreach (DataGridViewCell cell in row.Cells)
-                    //    {
-                    //        if (cell.Value.ToString() == "")
-                    //        {
-                    //            rowIndex = row.Index;
-                    //            if (rowIndex.ToString() != "")
-                    //            {
-                    //                break;
-                    //            }
-                    //        }
-                    //    }
-                    //    MessageBox.Show(rowIndex.ToString());
-                    //}
-
-                    conn.Close();
-                    //Tutup koneksi
-
-                    MessageBox.Show("Loading List Successfully saved", "Loading List", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    saveButton.Enabled = true;
-
-                    this.Close();
-                    //LoadingList ll = new LoadingList();
-                    //ll.Show();
-
-                    CompareWOLL cWOll = new CompareWOLL();
-                    cWOll.Show();
                 }
-
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message.ToString());
