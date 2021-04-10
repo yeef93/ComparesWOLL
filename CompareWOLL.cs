@@ -379,10 +379,10 @@ namespace CompareWOLL
             }
             conn.Close();
 
-            worksheet.Rows.Font.Name = "Times New Roman";
             worksheet.Range[worksheet.Cells[1, 1], worksheet.Cells[1, 9]].Merge();
             worksheet.Cells[1, 1] = "SMT MACHINE LOADING LIST";
-            worksheet.Cells[1, 1].Style.Font.Size = 20;            
+            worksheet.Cells[1, 1].Font.Name = "Times New Roman";            
+            worksheet.Cells[1, 1].Font.Size = 20;            
             worksheet.Cells[1, 1].Font.Color = Color.Blue;
             worksheet.Cells[1, 1].EntireRow.Font.Bold = true;
 
@@ -391,8 +391,9 @@ namespace CompareWOLL
             //worksheet.Cells.Font.Color = Color.Blue;
             worksheet.Cells[2, 9].EntireRow.Font.Italic = true;
 
-
             worksheet.Rows.Font.Name = "Courier New";
+            worksheet.Cells[3, 1].Font.FontStyle = "Bold";
+            worksheet.Cells[3, 1].Font.Size = 9;
             worksheet.Cells[3, 1] = "MODEL     : " + tbModel.Text;
             worksheet.Cells[3, 6] = "Rev.";
             worksheet.Cells[3, 6].Font.Color = Color.White;
@@ -400,11 +401,21 @@ namespace CompareWOLL
             worksheet.Cells[3, 8] = "Checked by";
             worksheet.Cells[3, 9] = "Approved by";
 
+            worksheet.Cells[4, 1].Font.FontStyle = "Bold";
+            worksheet.Cells[4, 1].Font.Size = 9;
             worksheet.Cells[4, 1] = "MACHINE   : " +tbMachine.Text;
+            worksheet.Cells[5, 1].Font.FontStyle = "Bold";
+            worksheet.Cells[5, 1].Font.Size = 9;
             worksheet.Cells[5, 1] = "PWB TYPE  : " +tbPWBType.Text;
+            worksheet.Cells[6, 1].Font.FontStyle = "Bold";
+            worksheet.Cells[6, 1].Font.Size = 9;
             worksheet.Cells[6, 1] = "PROG.NO.  : " +tbProgNo.Text;
+            worksheet.Cells[7, 1].Font.FontStyle = "Bold";
+            worksheet.Cells[7, 1].Font.Size = 9;
             worksheet.Cells[7, 1] = "DATE      : " + DateTime.Now.ToString("dd MMMM yyyy");
 
+            worksheet.Range[worksheet.Cells[8, 1], worksheet.Cells[1000, 7]].Font.Name = "Times New Roman";
+            worksheet.Range[worksheet.Cells[8, 1], worksheet.Cells[8, 7]].Font.FontStyle = "Bold";
             worksheet.Cells[8, 1] = "REEL";
             worksheet.Cells[8, 2] = "PART CODE";
             worksheet.Cells[8, 3] = "TP";

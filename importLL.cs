@@ -33,9 +33,9 @@ namespace CompareWOLL
 
         private void backButton_Click(object sender, EventArgs e)
         {
-            MainMenu mm = new MainMenu();
-            mm.toolStripUsername.Text = toolStripUsername.Text;
-            mm.Show();
+            WorkOrder wo = new WorkOrder();
+            wo.toolStripUsername.Text = toolStripUsername.Text;
+            wo.Show();
             this.Hide();
         }
 
@@ -301,6 +301,7 @@ namespace CompareWOLL
                     }
 
                     String reelID = "";
+                    String qty = "";
                     int altNo = 1;
 
                     for (int j = 0; j < dataGridViewLL.Rows.Count; j++)
@@ -308,6 +309,7 @@ namespace CompareWOLL
                         if (dataGridViewLL.Rows[j].Cells[0].Value.ToString() != "")
                         {
                             reelID = dataGridViewLL.Rows[j].Cells[0].Value.ToString();
+                            qty = dataGridViewLL.Rows[j].Cells[3].Value.ToString();
                             altNo = 1;
                             string StrQueryReelDetail = "INSERT INTO tbl_reel VALUES ('"
                                 + reelID + "', '" + model + "','" + process + "','"+ dataGridViewLL.Rows[j].Cells[3].Value.ToString() + "', '"
@@ -321,7 +323,7 @@ namespace CompareWOLL
                         string StrQueryLLDetail = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','"
                         + reelID + "', '"
                         + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "','" + altNo + "', '"
-                        + dataGridViewLL.Rows[j].Cells[3].Value.ToString() + "');";
+                        + qty + "');";
                         cmd.CommandText = StrQueryLLDetail;
                         cmd.ExecuteNonQuery();
                         altNo++;

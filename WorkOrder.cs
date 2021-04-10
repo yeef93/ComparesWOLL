@@ -40,6 +40,15 @@ namespace CompareWOLL
                 btn.UseColumnTextForButtonValue = true;
 
 
+                // add button delete in datagridview table
+                DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
+                dataGridViewWoList.Columns.Add(btnDelete);
+                btnDelete.HeaderText = "";
+                btnDelete.Text = "Delete";
+                btnDelete.Name = "btnDelete";
+                btnDelete.UseColumnTextForButtonValue = true;
+
+
                 // add button import in datagridview table
                 DataGridViewButtonColumn btnImport = new DataGridViewButtonColumn();
                 dataGridViewWoList.Columns.Add(btnImport);
@@ -49,13 +58,13 @@ namespace CompareWOLL
                 btnImport.UseColumnTextForButtonValue = true;
 
 
-                // add button delete in datagridview table
-                DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
-                dataGridViewWoList.Columns.Add(btnDelete);
-                btnDelete.HeaderText = "";
-                btnDelete.Text = "Delete";
-                btnDelete.Name = "btnDelete";
-                btnDelete.UseColumnTextForButtonValue = true;
+                // add button compare WO LL in datagridview table
+                DataGridViewButtonColumn btnCompare = new DataGridViewButtonColumn();
+                dataGridViewWoList.Columns.Add(btnCompare);
+                btnCompare.HeaderText = "";
+                btnCompare.Text = "Compare With LL";
+                btnCompare.Name = "btnCompare";
+                btnCompare.UseColumnTextForButtonValue = true;
 
 
             }
@@ -67,6 +76,7 @@ namespace CompareWOLL
             {
                 dataGridViewWoList.Columns[i].HeaderText = "" + titleWO[i];
             }
+
         }
 
         private void importWO_Click(object sender, EventArgs e)
@@ -119,19 +129,6 @@ namespace CompareWOLL
 
             if (e.ColumnIndex == 8)
             {
-                ImportLL il = new ImportLL();
-                string model = dataGridViewWoList.Rows[e.RowIndex].Cells[2].Value.ToString();
-                string processName = dataGridViewWoList.Rows[e.RowIndex].Cells[4].Value.ToString();
-                il.Show();
-                il.tbModelNo.Text = model;
-                il.tbProcess.Text = processName;
-                this.Hide();
-
-                //MessageBox.Show((e.RowIndex + 1) + "  Row  " + (e.ColumnIndex + 1) + "  Column button clicked "+model+"");
-            }
-
-            if (e.ColumnIndex == 9)
-            {
                 string message = "Do you want to delete this Work Order and Loading List record " + modelslctd + " " + processslctd + " ?";
                 string title = "Delete Work Order";
                 MessageBoxButtons buttons = MessageBoxButtons.YesNo;
@@ -153,7 +150,7 @@ namespace CompareWOLL
 
                     conn.Open();
 
-                    string[] allQuery = {querydeleteWO, querydeleteWODetail, querydeleteModel, querydeleteLL, querydeleteLLDetail, querydeletePartCode, querydeleteReel, querydeleteResult };
+                    string[] allQuery = { querydeleteWO, querydeleteWODetail, querydeleteModel, querydeleteLL, querydeleteLLDetail, querydeletePartCode, querydeleteReel, querydeleteResult };
                     for (int j = 0; j < allQuery.Length; j++)
                     {
                         cmd.CommandText = allQuery[j];
@@ -171,6 +168,20 @@ namespace CompareWOLL
                 else
                 {
                 }
+            }
+
+            if (e.ColumnIndex == 9)
+            {
+
+                ImportLL il = new ImportLL();
+                string model = dataGridViewWoList.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string processName = dataGridViewWoList.Rows[e.RowIndex].Cells[4].Value.ToString();
+                il.Show();
+                il.tbModelNo.Text = model;
+                il.tbProcess.Text = processName;
+                this.Hide();
+
+                //MessageBox.Show((e.RowIndex + 1) + "  Row  " + (e.ColumnIndex + 1) + "  Column button clicked "+model+"");
             }
         }
     }
