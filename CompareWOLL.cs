@@ -34,6 +34,7 @@ namespace CompareWOLL
             string queryModelWO = "SELECT model_No FROM tbl_model";
             string queryModelLL = "SELECT model_No FROM tbl_ll";
 
+
             try
             {
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryModelWO, connection))
@@ -340,6 +341,19 @@ namespace CompareWOLL
             int remarkRow;
             int footerRow;
 
+            //truncate result tabel
+            var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
+            var cmd = new MySqlCommand("", conn);
+            conn.Open();
+
+            for (int i = 0; i < dataGridViewCompareLLWOResult.Rows.Count; i++)
+            {
+                string queryResult = "TRUNCATE tbl_resultcompare";
+                cmd.CommandText = queryResult;
+                cmd.ExecuteNonQuery();
+            }
+            conn.Close();
+
 
             // Create a new workbook with a single sheet
             excelConvert.NewFile();
@@ -358,9 +372,9 @@ namespace CompareWOLL
             worksheet = workbook.ActiveSheet;
             // changing the name of active sheet  
 
-            //Insert result to db
-            var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
-            var cmd = new MySqlCommand("", conn);
+            // set hide gridlines
+            app.ActiveWindow.DisplayGridlines = false;
+
             conn.Open();
 
             for (int i = 0; i < dataGridViewCompareLLWOResult.Rows.Count; i++)
@@ -380,23 +394,29 @@ namespace CompareWOLL
             conn.Close();
 
             worksheet.Range[worksheet.Cells[1, 1], worksheet.Cells[1, 9]].Merge();
-            worksheet.Cells[1, 1] = "SMT MACHINE LOADING LIST";
-            worksheet.Cells[1, 1].Font.Name = "Times New Roman";            
+            worksheet.Cells[1, 1].Font.Name = "Times New Roman";
+            worksheet.Cells[1, 1].Font.FontStyle = "Bold";
             worksheet.Cells[1, 1].Font.Size = 20;            
             worksheet.Cells[1, 1].Font.Color = Color.Blue;
             worksheet.Cells[1, 1].EntireRow.Font.Bold = true;
+            worksheet.Cells[1, 1].HorizontalAlignment =  Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            worksheet.Cells[1, 1] = "SMT MACHINE LOADING LIST";
 
             worksheet.Cells[2, 9] = "Page 1 of 1";
             worksheet.Cells[2, 9].Style.Font.Size = 10;
             //worksheet.Cells.Font.Color = Color.Blue;
             worksheet.Cells[2, 9].EntireRow.Font.Italic = true;
 
-            worksheet.Rows.Font.Name = "Courier New";
+            worksheet.Range[worksheet.Cells[3, 1], worksheet.Cells[7, 1]].Font.Name = "Courier New";
             worksheet.Cells[3, 1].Font.FontStyle = "Bold";
-            worksheet.Cells[3, 1].Font.Size = 9;
+            worksheet.Cells[3, 1].Font.Size = 10;
             worksheet.Cells[3, 1] = "MODEL     : " + tbModel.Text;
+
+            worksheet.Range[worksheet.Cells[3, 6], worksheet.Cells[3, 9]].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Blue);
+            worksheet.Range[worksheet.Cells[3, 6], worksheet.Cells[3, 9]].Font.Color = Color.White;
+            worksheet.Range[worksheet.Cells[2, 6], worksheet.Cells[3, 9]].Font.Name = "Times New Roman";
+            worksheet.Range[worksheet.Cells[3, 6], worksheet.Cells[3, 9]].Style.Font.Size = 8;
             worksheet.Cells[3, 6] = "Rev.";
-            worksheet.Cells[3, 6].Font.Color = Color.White;
             worksheet.Cells[3, 7] = "Prepared by";
             worksheet.Cells[3, 8] = "Checked by";
             worksheet.Cells[3, 9] = "Approved by";
@@ -416,6 +436,7 @@ namespace CompareWOLL
 
             worksheet.Range[worksheet.Cells[8, 1], worksheet.Cells[1000, 7]].Font.Name = "Times New Roman";
             worksheet.Range[worksheet.Cells[8, 1], worksheet.Cells[8, 7]].Font.FontStyle = "Bold";
+            worksheet.Range[worksheet.Cells[8, 1], worksheet.Cells[8, 7]].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Yellow);
             worksheet.Cells[8, 1] = "REEL";
             worksheet.Cells[8, 2] = "PART CODE";
             worksheet.Cells[8, 3] = "TP";
@@ -450,6 +471,7 @@ namespace CompareWOLL
 
             totalPointRow = totalpart + 9;
             worksheet.Range[worksheet.Cells[totalPointRow, 1], worksheet.Cells[totalPointRow, 3]].Merge();
+            worksheet.Range[worksheet.Cells[totalPointRow, 1], worksheet.Cells[totalPointRow, 6]].Font.FontStyle = "Bold";
             worksheet.Cells[totalPointRow, 1] = "TOTAL POINT";
             worksheet.Cells[totalPointRow, 4] = woQty.Text;
             worksheet.Cells[totalPointRow, 5] = " PCB NO: "+tbPCB.Text;

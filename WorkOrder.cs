@@ -48,7 +48,6 @@ namespace CompareWOLL
                 btnDelete.Name = "btnDelete";
                 btnDelete.UseColumnTextForButtonValue = true;
 
-
                 // add button import in datagridview table
                 DataGridViewButtonColumn btnImport = new DataGridViewButtonColumn();
                 dataGridViewWoList.Columns.Add(btnImport);
@@ -76,6 +75,7 @@ namespace CompareWOLL
             {
                 dataGridViewWoList.Columns[i].HeaderText = "" + titleWO[i];
             }
+
 
         }
 
@@ -182,6 +182,14 @@ namespace CompareWOLL
                 this.Hide();
 
                 //MessageBox.Show((e.RowIndex + 1) + "  Row  " + (e.ColumnIndex + 1) + "  Column button clicked "+model+"");
+            }
+
+            if (e.ColumnIndex == 10)
+            {
+
+                CompareWOLL cowl = new CompareWOLL();
+                cowl.Show();
+                this.Hide();
             }
         }
     }

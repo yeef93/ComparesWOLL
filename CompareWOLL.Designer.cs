@@ -37,6 +37,8 @@ namespace CompareWOLL
             this.btnCompare = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.tbStencil = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.tbProgNo = new System.Windows.Forms.TextBox();
             this.tbPWBType = new System.Windows.Forms.TextBox();
             this.tbMachine = new System.Windows.Forms.TextBox();
@@ -67,8 +69,6 @@ namespace CompareWOLL
             this.dataGridViewCompareLLWOResult = new System.Windows.Forms.DataGridView();
             this.btnHome = new System.Windows.Forms.Button();
             this.btnWO = new System.Windows.Forms.Button();
-            this.tbStencil = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -123,7 +123,7 @@ namespace CompareWOLL
             // 
             this.btnCompare.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCompare.Location = new System.Drawing.Point(115, 228);
+            this.btnCompare.Location = new System.Drawing.Point(896, 230);
             this.btnCompare.Name = "btnCompare";
             this.btnCompare.Size = new System.Drawing.Size(234, 38);
             this.btnCompare.TabIndex = 33;
@@ -170,6 +170,23 @@ namespace CompareWOLL
             this.groupBox4.TabIndex = 45;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Detail Loading List";
+            // 
+            // tbStencil
+            // 
+            this.tbStencil.Location = new System.Drawing.Point(134, 164);
+            this.tbStencil.Name = "tbStencil";
+            this.tbStencil.ReadOnly = true;
+            this.tbStencil.Size = new System.Drawing.Size(231, 20);
+            this.tbStencil.TabIndex = 47;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(47, 172);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(74, 13);
+            this.label13.TabIndex = 46;
+            this.label13.Text = "STENCIL. NO";
             // 
             // tbProgNo
             // 
@@ -473,23 +490,6 @@ namespace CompareWOLL
             this.btnWO.Text = "Work Order";
             this.btnWO.UseVisualStyleBackColor = true;
             this.btnWO.Click += new System.EventHandler(this.btnWO_Click);
-            // 
-            // tbStencil
-            // 
-            this.tbStencil.Location = new System.Drawing.Point(134, 164);
-            this.tbStencil.Name = "tbStencil";
-            this.tbStencil.ReadOnly = true;
-            this.tbStencil.Size = new System.Drawing.Size(231, 20);
-            this.tbStencil.TabIndex = 47;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(47, 172);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(74, 13);
-            this.label13.TabIndex = 46;
-            this.label13.Text = "STENCIL. NO";
             // 
             // CompareWOLL
             // 
