@@ -479,7 +479,6 @@ namespace CompareWOLL
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridView dataGridViewCompareLLWO;
         private System.Windows.Forms.ComboBox cmbLLModel;
-        private System.Windows.Forms.ComboBox cmbWOModel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox woQty;
@@ -504,5 +503,6 @@ namespace CompareWOLL
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
+        public System.Windows.Forms.ComboBox cmbWOModel;
     }
 }

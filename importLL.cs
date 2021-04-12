@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Data.OleDb;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -99,21 +100,30 @@ namespace CompareWOLL
                         dataView.RowFilter = "F1 LIKE '%PCB NO%'";
                         dataGridViewPCBNo.DataSource = dataView;
 
-                        tbPcbNo.Text = dataGridViewPCBNo.Rows[0].Cells[0].Value.ToString().Substring(11, 12);
 
+                        if (dataView.Count > 0)
+                        {
+                            tbPcbNo.Text = dataGridViewPCBNo.Rows[0].Cells[0].Value.ToString().Substring(11, 12);
+                        }
+                        else if (dataView.Count == 0)
+                        {
+                            tbPcbNo.BackColor = Color.Red;
+                            MessageBox.Show("PCB No Not Found, Please check again the document.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            saveButton.Enabled = false;
+                        }
 
-                        // baca Alt pcb No
-                        DataTable dtExcel3 = new DataTable();
+                            // baca Alt pcb No
+                            DataTable dtExcel3 = new DataTable();
                         dtExcel3 = help.ReadExcel(woFileName, fileExtLL, queryGetAltPCB); //read excel file  
                         //dataGridViewPCBNo.DataSource = dtExcel2;
 
                         DataView dataView1 = dtExcel3.DefaultView;
-                        dataView1.RowFilter = "F1 LIKE '%PCB%'";
+                        dataView1.RowFilter = "F1 LIKE '%ALT PCB NO.:%'";
                         dataGridAltPCB.DataSource = dataView1;
 
                         if (dataView1.Count > 0)
                         {
-                            string allPCB = dataGridAltPCB.Rows[0].Cells[0].Value.ToString().Remove(0, 26);
+                            string allPCB = dataGridAltPCB.Rows[0].Cells[0].Value.ToString().Remove(0, 12);
 
                             //// Get 12 characters from the right of the string
                             //string altPCB1 = allPCB.Substring(allPCB.Length - 26, 12);
@@ -139,6 +149,31 @@ namespace CompareWOLL
                             //}
 
                         }
+                        else if (dataView1.Count == 0)
+                        {
+                            string message = "Any Alternative PCB in this Loading List Document?";
+                            string title = "Alt PCB";
+                            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                            DialogResult result = MessageBox.Show(message, title, buttons);
+                            if (result == DialogResult.Yes)
+                            {
+                                tbAltPcbNo1.BackColor = Color.Red;
+                                tbAltPcbNo2.BackColor = Color.Red;
+                                MessageBox.Show("Please Kindly Edit Document with Change Alternative PCB Text be ALT PCB NO.:");
+                                saveButton.Enabled = false;
+
+                                //filepathLL.Text = "";
+                                //tbModel.Text = "";
+                                //tbMachine.Text = "";
+                                //tbPWBType.Text = "";
+                                //tbProg.Text = "";
+                                //tbRev.Text = "";
+                                //tbPcbNo.Text = "";
+                                //tbAltPcbNo1.Text = "";
+                                //tbAltPcbNo2.Text = "";
+                                //tbStencil.Text = "";
+                            }
+                        }
 
                         // baca stencil
                         DataTable dtExcel5 = new DataTable();
@@ -148,7 +183,17 @@ namespace CompareWOLL
                         dataView2.RowFilter = "F1 LIKE '% STENCIL NO : %'";
                         dataGridViewStencil.DataSource = dataView2;
 
-                        tbStencil.Text = dataGridViewStencil.Rows[0].Cells[0].Value.ToString().Substring(14);
+                        if (dataView2.Count > 0)
+                        { 
+                            tbStencil.Text = dataGridViewStencil.Rows[0].Cells[0].Value.ToString().Substring(14); 
+                        }
+                        else if (dataView2.Count == 0)
+                        {
+                            tbStencil.BackColor = Color.Red;
+                            MessageBox.Show("Stencil No Not Found, Please check again the document.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+                            saveButton.Enabled = false;
+                        }
+                            
 
                         // buat cari batas total row
                         DataTable dtExcel4 = new DataTable();

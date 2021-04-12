@@ -61,6 +61,7 @@ namespace CompareWOLL
 
         private void cmbWOModel_SelectedIndexChanged_1(object sender, EventArgs e)
         {
+            cmbLLModel.ResetText();
             cmbLLModel.Enabled = true;
 
             // to split model and process
@@ -81,12 +82,33 @@ namespace CompareWOLL
                     DataTable dset = new DataTable();
                     adpt.Fill(dset);
 
-                    for (int i = 0; i < dset.Rows.Count; i++)
+                    if (dset.Rows.Count >0)
                     {
-                        cmbLLModel.Items.Add(dset.Rows[i][0] + " | " + dset.Rows[i][1]);
-                        cmbLLModel.ValueMember = dset.Rows[i][1].ToString();
+                        for (int i = 0; i < dset.Rows.Count; i++)
+                        {
+                            cmbLLModel.Items.Add(dset.Rows[i][0] + " | " + dset.Rows[i][1]);
+                            cmbLLModel.ValueMember = dset.Rows[i][1].ToString();
 
+                        }
                     }
+                    else
+                    {
+                        string message = "No any Loading List for selected Work Order, Do you want to upload Loading List File?";
+                        string title = "Confirmation Upload Loading List ";
+                        MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                        DialogResult result = MessageBox.Show(message, title, buttons);
+                        if (result == DialogResult.Yes)
+                        {
+                            ImportLL ill = new ImportLL();
+                            ill.tbModelNo.Text = model[0].Replace(" ", "");
+                            ill.tbProcess.Text = model[1].Replace(" ", "");
+                            ill.Show();
+                            this.Hide();
+
+                        }
+                    }
+
+                    
                 }
 
                 connection.Close();
