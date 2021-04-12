@@ -8,7 +8,7 @@ namespace CompareWOLL
 {
     public partial class CompareWOLL : Form
     {
-        
+        MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
         ExcelConvert excelConvert = new ExcelConvert();
 
         public CompareWOLL()
@@ -21,42 +21,32 @@ namespace CompareWOLL
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 
-            cmbLLModelNo.Enabled = false;
+            cmbLLModel.Enabled = false;
             btnCompare.Enabled = false;
             btnGenerate.Enabled = false;
 
             groupBox4.Visible = false;
 
-
-            MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
             connection.Open();
 
-            string queryModelWO = "SELECT model_No FROM tbl_model";
-            string queryModelLL = "SELECT model_No FROM tbl_ll";
-
+            string queryWODropDown = "SELECT model_No, process_Name FROM tbl_wo";
 
             try
             {
-                using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryModelWO, connection))
+
+                using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryWODropDown, connection))
                 {
                     DataTable dset = new DataTable();
                     adpt.Fill(dset);
 
-                    cmbWOModelNo.DataSource = dset;
-                    cmbWOModelNo.ValueMember = "model_No";
-                    cmbWOModelNo.DisplayMember = "model_No";
+                    for (int i = 0; i < dset.Rows.Count; i++)
+                    {
+                        cmbWOModel.Items.Add(dset.Rows[i][0] + " | " + dset.Rows[i][1]);
+                        cmbWOModel.ValueMember = dset.Rows[i][1].ToString();
 
+                    }
                 }
 
-                using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryModelLL, connection))
-                {
-                    DataTable dset = new DataTable();
-                    adpt.Fill(dset);
-
-                    cmbLLModelNo.DataSource = dset;
-                    cmbLLModelNo.ValueMember = "model_No";
-                    cmbLLModelNo.DisplayMember = "model_No";
-                }
                 connection.Close();
 
             }
@@ -66,54 +56,38 @@ namespace CompareWOLL
                 MessageBox.Show(ex.Message);
             }
 
-
         }
-        private void cmbWOModelNo_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void cmbWOModel_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
+            cmbLLModel.Enabled = true;
+
+            // to split model and process
+            string str = cmbWOModel.Text;
+            char ch = '|';
+
+            var model = str.Split(ch);
+
             connection.Open();
 
-            string query = "SELECT process_Name FROM tbl_wodetail WHERE model_No = '" + cmbWOModelNo.SelectedValue.ToString() + "' GROUP BY process_Name ";
+            string queryLLDropDown = "SELECT model_No, process_Name FROM tbl_ll WHERE model_No = '" + model[0].Replace(" ", "") + "' AND process_Name = '" + model[1].Replace(" ", "") + "' ";
+
             try
             {
-                using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
+
+                using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryLLDropDown, connection))
                 {
                     DataTable dset = new DataTable();
                     adpt.Fill(dset);
 
-                    cmbWOProcess.DataSource = dset;
-                    cmbWOProcess.ValueMember = "process_Name";
-                    cmbWOProcess.DisplayMember = "process_Name";
+                    for (int i = 0; i < dset.Rows.Count; i++)
+                    {
+                        cmbLLModel.Items.Add(dset.Rows[i][0] + " | " + dset.Rows[i][1]);
+                        cmbLLModel.ValueMember = dset.Rows[i][1].ToString();
 
+                    }
                 }
-                connection.Close();
 
-            }
-            catch (Exception ex)
-            {
-                // tampilkan pesan error
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
-            connection.Open();
-
-            string query = "SELECT process_Name FROM tbl_ll WHERE model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "'";
-            try
-            {
-                using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
-                {
-                    DataTable dset = new DataTable();
-                    adpt.Fill(dset);
-
-                    cmbLLProcess.DataSource = dset;
-                    cmbLLProcess.ValueMember = "process_Name";
-                    cmbLLProcess.DisplayMember = "process_Name";
-
-                }
                 connection.Close();
 
             }
@@ -124,11 +98,6 @@ namespace CompareWOLL
             }
         }
 
-
-        private void cmbWOProcess_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cmbLLModelNo.Enabled = true;
-        }
 
         private void cmbLLProcess_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -137,15 +106,20 @@ namespace CompareWOLL
 
         private void btnCompare_Click(object sender, EventArgs e)
         {
-            MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
+            // to split model and process
+            string str = cmbLLModel.Text;
+            char ch = '|';
+
+            var model = str.Split(ch);
+
             connection.Open();
 
-            string queryWO = "SELECT SUM(qty) AS totalWO FROM tbl_wodetail WHERE model_No = '" + cmbWOModelNo.SelectedValue.ToString() + "' AND process_Name = '" + cmbWOProcess.SelectedValue.ToString() + "'";
-            string queryLL = "SELECT SUM(qty) AS totalLL FROM tbl_lldetail WHERE alt_No = '1' AND model_No = '" + cmbWOModelNo.SelectedValue.ToString() + "' AND process_Name = '" + cmbWOProcess.SelectedValue.ToString() + "'";
+            //string queryWO = "SELECT SUM(qty) AS totalWO FROM tbl_wodetail WHERE model_No = '" + cmbWOModel.SelectedValue.ToString() + "' AND process_Name = '" + cmbWOProcess.SelectedValue.ToString() + "'";
+            //string queryLL = "SELECT SUM(qty) AS totalLL FROM tbl_lldetail WHERE alt_No = '1' AND model_No = '" + cmbWOModel.SelectedValue.ToString() + "' AND process_Name = '" + cmbWOProcess.SelectedValue.ToString() + "'";
 
-            string queryTblWO = "SELECT partcode, qty FROM tbl_wodetail WHERE model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' AND process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
+            //string queryTblWO = "SELECT partcode, qty FROM tbl_wodetail WHERE model_No = '" + cmbLLModel.SelectedValue.ToString() + "' AND process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
 
-            string queryDetailLL = "SELECT model_detail, machine, pwb_Type, prog_No, stencil FROM tbl_ll WHERE  model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' AND process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
+            string queryDetailLL = "SELECT model_detail, machine, pwb_Type, prog_No, stencil FROM tbl_ll WHERE  model_No = '" + model[0].Replace(" ", "") + "' AND process_Name = '" + model[1].Replace(" ", "") + "'";
 
             try
             {
@@ -167,36 +141,36 @@ namespace CompareWOLL
 
                 }
 
-                //nampilin qty Wo
-                using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryWO, connection))
-                {
-                    DataTable dset = new DataTable();
-                    adpt.Fill(dset);
+                ////nampilin qty Wo
+                //using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryWO, connection))
+                //{
+                //    DataTable dset = new DataTable();
+                //    adpt.Fill(dset);
 
-                    if (dset.Rows.Count > 0)
-                    {
-                        woQty.Text = dset.Rows[0]["totalWO"].ToString();
-                    }
+                //    if (dset.Rows.Count > 0)
+                //    {
+                //        woQty.Text = dset.Rows[0]["totalWO"].ToString();
+                //    }
 
-                }
+                //}
 
-                //nampilin qty LL
-                using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryLL, connection))
-                {
-                    DataTable dset = new DataTable();
-                    adpt.Fill(dset);
+                ////nampilin qty LL
+                //using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryLL, connection))
+                //{
+                //    DataTable dset = new DataTable();
+                //    adpt.Fill(dset);
 
-                    if (dset.Rows.Count > 0)
-                    {
-                        llQty.Text = dset.Rows[0]["totalLL"].ToString();
-                    }
+                //    if (dset.Rows.Count > 0)
+                //    {
+                //        llQty.Text = dset.Rows[0]["totalLL"].ToString();
+                //    }
 
-                }
+                //}
 
                 //nampilin selected PCB
                 string queryPCB = "SELECT tbl_wodetail.partcode FROM tbl_wodetail LEFT JOIN tbl_lldetail ON " +
-                    "tbl_wodetail.partcode = tbl_lldetail.partcode WHERE tbl_wodetail.model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' " +
-                    "AND tbl_wodetail.process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "' AND tbl_lldetail.reel = 'PCB'";
+                    "tbl_wodetail.partcode = tbl_lldetail.partcode WHERE tbl_wodetail.model_No = '" + model[0].Replace(" ", "") + "' " +
+                    "AND tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "' AND tbl_lldetail.reel = 'PCB'";
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryPCB, connection))
                 {
                     DataTable dset = new DataTable();
@@ -214,8 +188,8 @@ namespace CompareWOLL
                 string query = "SELECT tbl_lldetail.reel, tbl_wodetail.partcode, tbl_lldetail.partcode, tbl_wodetail.qty, " +
                     "tbl_lldetail.qty, tbl_lldetail.alt_No FROM tbl_wodetail LEFT JOIN tbl_lldetail " +
                     "ON tbl_wodetail.partcode = tbl_lldetail.partcode WHERE " +
-                    "tbl_wodetail.model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' AND " +
-                    "tbl_wodetail.process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "' AND tbl_lldetail.reel != 'PCB'";
+                    "tbl_wodetail.model_No = '" + model[0].Replace(" ", "") + "' AND " +
+                    "tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "' AND tbl_lldetail.reel != 'PCB'";
                     
 
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
@@ -301,8 +275,14 @@ namespace CompareWOLL
                 }
 
                 // display qty match or not
+                if (woQty.Text == "" || llQty.Text == "")
+                {
+                    compareQty.Text = "#ERROR";
+                    compareQty.BackColor = System.Drawing.Color.Red;
+                    btnGenerate.Enabled = true;
+                }
 
-                if (woQty.Text == llQty.Text)
+                else if (woQty.Text == llQty.Text)
                 {
                     compareQty.BackColor = System.Drawing.Color.Blue;
                     compareQty.Text = "Match";
@@ -322,7 +302,6 @@ namespace CompareWOLL
                     btnGenerate.Enabled = true;
                 }
 
-
             }
             catch (Exception ex)
             {
@@ -340,6 +319,13 @@ namespace CompareWOLL
             int totalPointRow;
             int remarkRow;
             int footerRow;
+
+            // to split model and process
+            string str = cmbLLModel.Text;
+            char ch = '|';
+
+            var model = str.Split(ch);
+
 
             //truncate result tabel
             var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
@@ -385,8 +371,8 @@ namespace CompareWOLL
                     "SELECT tbl_reel.model_No, tbl_reel.process_Name, tbl_reel.reel, tbl_partcodedetail.partcode,tbl_lldetail.alt_No," +
                     " tbl_partcodedetail.tp, tbl_reel.qty, tbl_reel.loc, tbl_partcodedetail.dec,tbl_reel.f_Type " +
                     "FROM tbl_reel, tbl_partcodedetail, tbl_lldetail WHERE tbl_reel.reel = '" + dataGridViewCompareLLWOResult.Rows[i].Cells[0].Value.ToString() + "' " +
-                    "AND tbl_partcodedetail.partcode = '" + dataGridViewCompareLLWOResult.Rows[i].Cells[1].Value.ToString() + "' AND tbl_reel.model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' " +
-                    "AND tbl_reel.process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "' " +
+                    "AND tbl_partcodedetail.partcode = '" + dataGridViewCompareLLWOResult.Rows[i].Cells[1].Value.ToString() + "' AND tbl_reel.model_No = '" + cmbLLModel.SelectedValue.ToString() + "' " +
+                    "AND tbl_reel.process_Name = '" + model[1].Replace(" ", "") + "' " +
                     "AND tbl_partcodedetail.partcode = tbl_lldetail.partcode";
                 cmd.CommandText = queryResult;
                 cmd.ExecuteNonQuery();
@@ -448,7 +434,7 @@ namespace CompareWOLL
             conn.Open();
             string resultPartCode = "SELECT tbl_resultcompare.reel, tbl_resultcompare.partcode, tbl_resultcompare.tp, tbl_resultcompare.qty, " +
                 "tbl_resultcompare.loc,tbl_resultcompare.dec, tbl_resultcompare.f_Type  FROM tbl_resultcompare " +
-                "WHERE tbl_resultcompare.model_No = '" + cmbLLModelNo.SelectedValue.ToString() + "' AND tbl_resultcompare.process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
+                "WHERE tbl_resultcompare.model_No = '" + cmbLLModel.SelectedValue.ToString() + "' AND tbl_resultcompare.process_Name = '" + model[1].Replace(" ", "") + "'";
                
 
             using (MySqlDataAdapter dscmd = new MySqlDataAdapter(resultPartCode, conn))
@@ -543,5 +529,11 @@ namespace CompareWOLL
             wo.Show();
             this.Hide();
         }
+
+        private void cmbLLModel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnCompare.Enabled = true;
+        }
+
     }
 }
