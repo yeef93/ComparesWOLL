@@ -13,7 +13,8 @@ namespace CompareWOLL
 
         public CompareWOLL()
         {
-            InitializeComponent();        }
+            InitializeComponent();
+        }
 
         private void CompareWOLL_Load(object sender, EventArgs e)
         {
@@ -114,10 +115,13 @@ namespace CompareWOLL
 
             connection.Open();
 
-            //string queryWO = "SELECT SUM(qty) AS totalWO FROM tbl_wodetail WHERE model_No = '" + cmbWOModel.SelectedValue.ToString() + "' AND process_Name = '" + cmbWOProcess.SelectedValue.ToString() + "'";
-            //string queryLL = "SELECT SUM(qty) AS totalLL FROM tbl_lldetail WHERE alt_No = '1' AND model_No = '" + cmbWOModel.SelectedValue.ToString() + "' AND process_Name = '" + cmbWOProcess.SelectedValue.ToString() + "'";
+            string queryTotalWO = "SELECT SUM(tbl_wodetail.qty) AS totalWO  FROM tbl_wodetail LEFT JOIN tbl_lldetail " +
+                "ON tbl_wodetail.partcode = tbl_lldetail.partcode " +
+                "WHERE tbl_wodetail.model_No = '" + model[0].Replace(" ", "") + "' AND tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "'" ;
 
-            //string queryTblWO = "SELECT partcode, qty FROM tbl_wodetail WHERE model_No = '" + cmbLLModel.SelectedValue.ToString() + "' AND process_Name = '" + cmbLLProcess.SelectedValue.ToString() + "'";
+            string queryTotalLL = "SELECT SUM(tbl_lldetail.qty) AS totalLL  FROM tbl_wodetail LEFT JOIN tbl_lldetail " +
+                "ON tbl_wodetail.partcode = tbl_lldetail.partcode " +
+                "WHERE tbl_wodetail.model_No = '" + model[0].Replace(" ", "") + "' AND tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "'";
 
             string queryDetailLL = "SELECT model_detail, machine, pwb_Type, prog_No, stencil FROM tbl_ll WHERE  model_No = '" + model[0].Replace(" ", "") + "' AND process_Name = '" + model[1].Replace(" ", "") + "'";
 
@@ -141,31 +145,32 @@ namespace CompareWOLL
 
                 }
 
-                ////nampilin qty Wo
-                //using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryWO, connection))
-                //{
-                //    DataTable dset = new DataTable();
-                //    adpt.Fill(dset);
 
-                //    if (dset.Rows.Count > 0)
-                //    {
-                //        woQty.Text = dset.Rows[0]["totalWO"].ToString();
-                //    }
+                //nampilin qty Wo
+                using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryTotalWO, connection))
+                {
+                    DataTable dset = new DataTable();
+                    adpt.Fill(dset);
 
-                //}
+                    if (dset.Rows.Count > 0)
+                    {
+                        woQty.Text = dset.Rows[0]["totalWO"].ToString();
+                    }
 
-                ////nampilin qty LL
-                //using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryLL, connection))
-                //{
-                //    DataTable dset = new DataTable();
-                //    adpt.Fill(dset);
+                }
 
-                //    if (dset.Rows.Count > 0)
-                //    {
-                //        llQty.Text = dset.Rows[0]["totalLL"].ToString();
-                //    }
+                //nampilin qty LL
+                using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryTotalLL, connection))
+                {
+                    DataTable dset = new DataTable();
+                    adpt.Fill(dset);
 
-                //}
+                    if (dset.Rows.Count > 0)
+                    {
+                        llQty.Text = dset.Rows[0]["totalLL"].ToString();
+                    }
+
+                }
 
                 //nampilin selected PCB
                 string queryPCB = "SELECT tbl_wodetail.partcode FROM tbl_wodetail LEFT JOIN tbl_lldetail ON " +
@@ -189,8 +194,15 @@ namespace CompareWOLL
                     "tbl_lldetail.qty, tbl_lldetail.alt_No FROM tbl_wodetail LEFT JOIN tbl_lldetail " +
                     "ON tbl_wodetail.partcode = tbl_lldetail.partcode WHERE " +
                     "tbl_wodetail.model_No = '" + model[0].Replace(" ", "") + "' AND " +
-                    "tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "' AND tbl_lldetail.reel != 'PCB'";
-                    
+                    "tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "'";
+
+                //            string query = "SELECT tbl_lldetail.reel, tbl_wodetail.partcode, tbl_lldetail.partcode, tbl_wodetail.qty, " +
+                //"tbl_lldetail.qty, tbl_lldetail.alt_No FROM tbl_wodetail LEFT JOIN tbl_lldetail " +
+                //"ON tbl_wodetail.partcode = tbl_lldetail.partcode WHERE " +
+                //"tbl_wodetail.model_No = '" + model[0].Replace(" ", "") + "' AND " +
+                //"tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "' AND tbl_lldetail.reel != 'PCB'";
+
+
 
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
                 {
@@ -223,7 +235,7 @@ namespace CompareWOLL
 
                     DataGridViewCellStyle styleError = new DataGridViewCellStyle();
                     styleError.BackColor = Color.Red;
-                    styleError.ForeColor = Color.White;                    
+                    styleError.ForeColor = Color.White;
 
                     if (dataGridViewCompareLLWO.Rows[i].Cells[1].Value.ToString() !=
                         dataGridViewCompareLLWO.Rows[i].Cells[2].Value.ToString() ||
@@ -371,7 +383,7 @@ namespace CompareWOLL
                     "SELECT tbl_reel.model_No, tbl_reel.process_Name, tbl_reel.reel, tbl_partcodedetail.partcode,tbl_lldetail.alt_No," +
                     " tbl_partcodedetail.tp, tbl_reel.qty, tbl_reel.loc, tbl_partcodedetail.dec,tbl_reel.f_Type " +
                     "FROM tbl_reel, tbl_partcodedetail, tbl_lldetail WHERE tbl_reel.reel = '" + dataGridViewCompareLLWOResult.Rows[i].Cells[0].Value.ToString() + "' " +
-                    "AND tbl_partcodedetail.partcode = '" + dataGridViewCompareLLWOResult.Rows[i].Cells[1].Value.ToString() + "' AND tbl_reel.model_No = '" + cmbLLModel.SelectedValue.ToString() + "' " +
+                    "AND tbl_partcodedetail.partcode = '" + dataGridViewCompareLLWOResult.Rows[i].Cells[1].Value.ToString() + "' AND tbl_reel.model_No = '" + model[0].Replace(" ", "").ToString() + "' " +
                     "AND tbl_reel.process_Name = '" + model[1].Replace(" ", "") + "' " +
                     "AND tbl_partcodedetail.partcode = tbl_lldetail.partcode";
                 cmd.CommandText = queryResult;
@@ -382,10 +394,10 @@ namespace CompareWOLL
             worksheet.Range[worksheet.Cells[1, 1], worksheet.Cells[1, 9]].Merge();
             worksheet.Cells[1, 1].Font.Name = "Times New Roman";
             worksheet.Cells[1, 1].Font.FontStyle = "Bold";
-            worksheet.Cells[1, 1].Font.Size = 20;            
+            worksheet.Cells[1, 1].Font.Size = 20;
             worksheet.Cells[1, 1].Font.Color = Color.Blue;
             worksheet.Cells[1, 1].EntireRow.Font.Bold = true;
-            worksheet.Cells[1, 1].HorizontalAlignment =  Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            worksheet.Cells[1, 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
             worksheet.Cells[1, 1] = "SMT MACHINE LOADING LIST";
 
             worksheet.Cells[2, 9] = "Page 1 of 1";
@@ -409,13 +421,13 @@ namespace CompareWOLL
 
             worksheet.Cells[4, 1].Font.FontStyle = "Bold";
             worksheet.Cells[4, 1].Font.Size = 9;
-            worksheet.Cells[4, 1] = "MACHINE   : " +tbMachine.Text;
+            worksheet.Cells[4, 1] = "MACHINE   : " + tbMachine.Text;
             worksheet.Cells[5, 1].Font.FontStyle = "Bold";
             worksheet.Cells[5, 1].Font.Size = 9;
-            worksheet.Cells[5, 1] = "PWB TYPE  : " +tbPWBType.Text;
+            worksheet.Cells[5, 1] = "PWB TYPE  : " + tbPWBType.Text;
             worksheet.Cells[6, 1].Font.FontStyle = "Bold";
             worksheet.Cells[6, 1].Font.Size = 9;
-            worksheet.Cells[6, 1] = "PROG.NO.  : " +tbProgNo.Text;
+            worksheet.Cells[6, 1] = "PROG.NO.  : " + tbProgNo.Text;
             worksheet.Cells[7, 1].Font.FontStyle = "Bold";
             worksheet.Cells[7, 1].Font.Size = 9;
             worksheet.Cells[7, 1] = "DATE      : " + DateTime.Now.ToString("dd MMMM yyyy");
@@ -434,8 +446,8 @@ namespace CompareWOLL
             conn.Open();
             string resultPartCode = "SELECT tbl_resultcompare.reel, tbl_resultcompare.partcode, tbl_resultcompare.tp, tbl_resultcompare.qty, " +
                 "tbl_resultcompare.loc,tbl_resultcompare.dec, tbl_resultcompare.f_Type  FROM tbl_resultcompare " +
-                "WHERE tbl_resultcompare.model_No = '" + cmbLLModel.SelectedValue.ToString() + "' AND tbl_resultcompare.process_Name = '" + model[1].Replace(" ", "") + "'";
-               
+                "WHERE tbl_resultcompare.model_No = '" + model[0].Replace(" ", "") + "' AND tbl_resultcompare.process_Name = '" + model[1].Replace(" ", "") + "'";
+
 
             using (MySqlDataAdapter dscmd = new MySqlDataAdapter(resultPartCode, conn))
             {
@@ -460,7 +472,7 @@ namespace CompareWOLL
             worksheet.Range[worksheet.Cells[totalPointRow, 1], worksheet.Cells[totalPointRow, 6]].Font.FontStyle = "Bold";
             worksheet.Cells[totalPointRow, 1] = "TOTAL POINT";
             worksheet.Cells[totalPointRow, 4] = woQty.Text;
-            worksheet.Cells[totalPointRow, 5] = " PCB NO: "+tbPCB.Text;
+            worksheet.Cells[totalPointRow, 5] = " PCB NO: " + tbPCB.Text;
             worksheet.Cells[totalPointRow, 6] = " STENCIL NO : " + tbStencil.Text;
 
             remarkRow = totalpart + 11;
@@ -473,47 +485,25 @@ namespace CompareWOLL
                 dscmd.Fill(ds);
 
                 for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
-               {
+                {
                     string data = ds.Tables[0].Rows[i].ItemArray[i].ToString();
 
                     worksheet.Range[worksheet.Cells[remarkRow, 1], worksheet.Cells[remarkRow, 9]].Merge();
-                    worksheet.Cells[remarkRow, 1] = data ;                   
+                    worksheet.Cells[remarkRow, 1] = data;
                 }
             }
             conn.Close();
 
-            worksheet.Cells[remarkRow+2, 1] = "FM - SMT - ENG - 011";
-
-            //conn.Open();
-            //string detailLL = "SELECT model_No, machine, pwb_Type, prog_No, process_Name, model_detail, rev, pcb_No, remarks FROM tbl_ll";
-
-
-            //using (MySqlDataAdapter dscmd = new MySqlDataAdapter(detailLL, conn))
-            //{
-            //    DataSet ds = new DataSet();
-            //    dscmd.Fill(ds);
-
-            //    for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
-            //    {
-            //        for (int j = 0; j <= ds.Tables[0].Columns.Count - 1; j++)
-            //        {
-            //            string data = ds.Tables[0].Rows[i].ItemArray[j].ToString();
-            //            worksheet.Cells[i + 3, j + 1] = "MODEL     : " + data +"" ;
-            //        }
-            //    }
-
-            //}
-            //conn.Close();
+            worksheet.Cells[remarkRow + 2, 1] = "FM - SMT - ENG - 011";
 
             // Saving the file in a speicifed path
-            // excelConvert.SaveAs(@"D:\" + cmbLLModelNo.SelectedValue.ToString() + " ( " + cmbLLProcess.SelectedValue.ToString() + " )");
+            // excelConvert.SaveAs(@"D:\" + model[0].Replace(" ", "").ToString() + " ( " + model[1].Replace(" ", "").ToString() + " )");
 
             // Closing the file
             excelConvert.Close();
 
             MessageBox.Show("Excel File Success Generated", "Generate Excel", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            btnGenerate.Enabled = false;
         }
 
         private void btnHome_Click(object sender, EventArgs e)
@@ -534,6 +524,5 @@ namespace CompareWOLL
         {
             btnCompare.Enabled = true;
         }
-
     }
 }

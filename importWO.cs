@@ -156,7 +156,6 @@ namespace CompareWOLL
                         }
                         woQty.Text = sum.ToString();
 
-
                     }
                     catch (Exception ex)
                     {
