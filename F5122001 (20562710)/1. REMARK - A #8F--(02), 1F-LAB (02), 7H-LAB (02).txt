@@ -1,0 +1,7 @@
+USING SOLDER PASTE
+'     MAIN PART :   * PART NAME   : YANKTAI
+'                              * PART NO.       : NP01-I (1G03-001K000)
+'                              * VENDOR         : YANKTAI MICROELEKTRONIC
+'     ALT PART :   * PART NAME   : SENJU
+'                              * PART NO.       : S70G-SX (1G03-001L000)
+'
