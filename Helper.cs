@@ -36,7 +36,6 @@ namespace CompareWOLL
 
         
         //for encrypt password
-
         public string encryption(String password)
         {
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();

@@ -143,7 +143,9 @@ namespace CompareWOLL
                                 }
                             } 
                         }
-                        MessageBox.Show("There is "+count.ToString()+ " cell is blank, Please revise the document ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error 
+                        if (count > 0 ) {
+                            MessageBox.Show("There is " + count.ToString() + " cell is blank, Please revise the document ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error 
+                        }                       
 
 
                         //show total qty component
@@ -221,6 +223,11 @@ namespace CompareWOLL
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            homeButton.Enabled = false;
+            backButton.Enabled = false;
+            LoadForm lf = new LoadForm();
+            lf.Show();
+
             string woPTSNN = woPTSN.Text;
             string woNoo = woNo.Text;
             string modelNoo = modelNo.Text;
@@ -260,6 +267,8 @@ namespace CompareWOLL
                         if (ds.Tables[0].Rows.Count >= 1)
                         {
                             MessageBox.Show("Work Order Data " + modelNoo + "  " + processs + " already uploaded", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+                            homeButton.Enabled = true;
+                            saveButton.Enabled = true;
                         }
 
                         else

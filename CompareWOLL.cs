@@ -63,6 +63,22 @@ namespace CompareWOLL
         {
             cmbLLModel.ResetText();
             cmbLLModel.Enabled = true;
+            tbModel.Text = "";
+            tbMachine.Text = "";
+            tbPWBType.Text = "";
+            tbProgNo.Text = "";
+            tbStencil.Text = "";
+            tbPCB.Text = "";
+            woQty.Text = "";
+            llQty.Text = "";
+            compareQty.Text = "";
+            compareQty.BackColor = SystemColors.Control;
+            while (dataGridViewCompareLLWO.Rows.Count > 0)
+            {
+                dataGridViewCompareLLWO.Rows.RemoveAt(0);
+            }
+
+            cmbLLModel.Items.Clear();
 
             // to split model and process
             string str = cmbWOModel.Text;
@@ -135,7 +151,7 @@ namespace CompareWOLL
 
             var model = str.Split(ch);
 
-            connection.Open();
+            
 
             string queryTotalWO = "SELECT SUM(tbl_wodetail.qty) AS totalWO  FROM tbl_wodetail LEFT JOIN tbl_lldetail " +
                 "ON tbl_wodetail.partcode = tbl_lldetail.partcode " +
@@ -149,7 +165,7 @@ namespace CompareWOLL
 
             try
             {
-
+                connection.Open();
                 // nampilin detail LL
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryDetailLL, connection))
                 {
@@ -166,8 +182,9 @@ namespace CompareWOLL
                     }
 
                 }
+                connection.Close();
 
-
+                connection.Open();
                 //nampilin qty Wo
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryTotalWO, connection))
                 {
@@ -180,7 +197,9 @@ namespace CompareWOLL
                     }
 
                 }
+                connection.Close();
 
+                connection.Open();
                 //nampilin qty LL
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryTotalLL, connection))
                 {
@@ -191,9 +210,10 @@ namespace CompareWOLL
                     {
                         llQty.Text = dset.Rows[0]["totalLL"].ToString();
                     }
-
                 }
+                connection.Close();
 
+                connection.Open();
                 //nampilin selected PCB
                 string queryPCB = "SELECT tbl_wodetail.partcode FROM tbl_wodetail LEFT JOIN tbl_lldetail ON " +
                     "tbl_wodetail.partcode = tbl_lldetail.partcode WHERE tbl_wodetail.model_No = '" + model[0].Replace(" ", "") + "' " +
@@ -209,6 +229,9 @@ namespace CompareWOLL
                     }
 
                 }
+                connection.Close();
+
+                connection.Open();
 
                 //nampilin data dalam datagridview compare
 
@@ -223,8 +246,6 @@ namespace CompareWOLL
                 //"ON tbl_wodetail.partcode = tbl_lldetail.partcode WHERE " +
                 //"tbl_wodetail.model_No = '" + model[0].Replace(" ", "") + "' AND " +
                 //"tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "' AND tbl_lldetail.reel != 'PCB'";
-
-
 
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
                 {
@@ -246,8 +267,8 @@ namespace CompareWOLL
 
                 connection.Close();
 
+                connection.Open();
                 //menghitung jumlah row data
-
                 int rowCount = ((DataTable)this.dataGridViewCompareLLWO.DataSource).Rows.Count;
                 for (int i = 0; i < rowCount; i++)
                 {
@@ -295,6 +316,7 @@ namespace CompareWOLL
                     }
 
                 }
+                connection.Close();
 
                 // Set table title Wo
                 string[] titleWO = { "REEL", "PART CODE WO", "PART CODE LL", "QTY WO", "QTY LL", "CHOICE NO" };

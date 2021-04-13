@@ -7,6 +7,8 @@ namespace CompareWOLL
 {
     public partial class DetailWO : Form
     {
+        MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
+
         public DetailWO()
         {
             InitializeComponent();
@@ -17,9 +19,6 @@ namespace CompareWOLL
             dateTimeNow.Text = DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:ss");
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-
-
-            MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
             connection.Open();
 
             string query = "SELECT tbl_wo.model, tbl_wodetail.partcode, tbl_wo.model_No, tbl_wodetail.qty, tbl_wodetail.issue, " +

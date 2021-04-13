@@ -80,9 +80,9 @@ namespace CompareWOLL
             this.toolStripUsername,
             this.toolStripStatusLabel1,
             this.dateTimeNow});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 728);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 724);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1369, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1366, 22);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -139,7 +139,7 @@ namespace CompareWOLL
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Location = new System.Drawing.Point(12, 54);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1344, 286);
+            this.groupBox1.Size = new System.Drawing.Size(1341, 286);
             this.groupBox1.TabIndex = 34;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Compare Work Order with Loading List";
@@ -312,7 +312,7 @@ namespace CompareWOLL
             this.compareQty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.compareQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.compareQty.ForeColor = System.Drawing.Color.White;
-            this.compareQty.Location = new System.Drawing.Point(897, 169);
+            this.compareQty.Location = new System.Drawing.Point(894, 169);
             this.compareQty.Name = "compareQty";
             this.compareQty.ReadOnly = true;
             this.compareQty.Size = new System.Drawing.Size(233, 47);
@@ -325,7 +325,7 @@ namespace CompareWOLL
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label8.Location = new System.Drawing.Point(935, 138);
+            this.label8.Location = new System.Drawing.Point(932, 138);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(145, 16);
             this.label8.TabIndex = 35;
@@ -385,16 +385,16 @@ namespace CompareWOLL
             this.dataGridViewCompareLLWO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewCompareLLWO.Location = new System.Drawing.Point(13, 378);
             this.dataGridViewCompareLLWO.Name = "dataGridViewCompareLLWO";
-            this.dataGridViewCompareLLWO.Size = new System.Drawing.Size(1344, 288);
+            this.dataGridViewCompareLLWO.Size = new System.Drawing.Size(1341, 284);
             this.dataGridViewCompareLLWO.TabIndex = 35;
             // 
             // btnGenerate
             // 
             this.btnGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGenerate.Location = new System.Drawing.Point(451, 675);
+            this.btnGenerate.Location = new System.Drawing.Point(451, 671);
             this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(234, 38);
+            this.btnGenerate.Size = new System.Drawing.Size(231, 38);
             this.btnGenerate.TabIndex = 42;
             this.btnGenerate.Text = "Generate Excel File";
             this.btnGenerate.UseVisualStyleBackColor = true;
@@ -411,14 +411,14 @@ namespace CompareWOLL
             this.dataGridViewCompareLLWOResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewCompareLLWOResult.Location = new System.Drawing.Point(13, 357);
             this.dataGridViewCompareLLWOResult.Name = "dataGridViewCompareLLWOResult";
-            this.dataGridViewCompareLLWOResult.Size = new System.Drawing.Size(1344, 309);
+            this.dataGridViewCompareLLWOResult.Size = new System.Drawing.Size(1341, 305);
             this.dataGridViewCompareLLWOResult.TabIndex = 43;
             this.dataGridViewCompareLLWOResult.Visible = false;
             // 
             // btnHome
             // 
             this.btnHome.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnHome.Location = new System.Drawing.Point(1201, 25);
+            this.btnHome.Location = new System.Drawing.Point(1198, 25);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(75, 23);
             this.btnHome.TabIndex = 44;
@@ -429,7 +429,7 @@ namespace CompareWOLL
             // btnWO
             // 
             this.btnWO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnWO.Location = new System.Drawing.Point(1282, 25);
+            this.btnWO.Location = new System.Drawing.Point(1279, 25);
             this.btnWO.Name = "btnWO";
             this.btnWO.Size = new System.Drawing.Size(75, 23);
             this.btnWO.TabIndex = 45;
@@ -441,7 +441,7 @@ namespace CompareWOLL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1369, 750);
+            this.ClientSize = new System.Drawing.Size(1366, 746);
             this.Controls.Add(this.btnWO);
             this.Controls.Add(this.btnHome);
             this.Controls.Add(this.dataGridViewCompareLLWOResult);

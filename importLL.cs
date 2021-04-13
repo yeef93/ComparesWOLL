@@ -257,6 +257,10 @@ namespace CompareWOLL
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            backButton.Enabled = false;
+            LoadForm lf = new LoadForm();
+            lf.Show();
+            
             string model = tbModelNo.Text;
             string process = tbProcess.Text;
             string modelLL = tbModel.Text;
@@ -318,7 +322,9 @@ namespace CompareWOLL
 
                         if (ds.Tables[0].Rows.Count >= 1)
                         {
+                            lf.Close();
                             MessageBox.Show("Loading List Data " + model + "  " + process + " already uploaded", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+                            backButton.Enabled = true;
                         }
 
                         else
@@ -408,6 +414,7 @@ namespace CompareWOLL
                             conn.Close();
                             //Tutup koneksi
 
+                            lf.Close();
                             MessageBox.Show("Loading List Successfully saved", "Loading List", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             saveButton.Enabled = true;
 

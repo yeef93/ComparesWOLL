@@ -35,8 +35,10 @@ namespace CompareWOLL
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.homeButton = new System.Windows.Forms.Button();
+            this.backButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tbStencil = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.tbProcess = new System.Windows.Forms.TextBox();
             this.tbModelNo = new System.Windows.Forms.TextBox();
             this.tbRemark = new System.Windows.Forms.TextBox();
@@ -73,8 +75,6 @@ namespace CompareWOLL
             this.dataGridViewPCBNo = new System.Windows.Forms.DataGridView();
             this.dataGridAltPCB = new System.Windows.Forms.DataGridView();
             this.dataGridViewGetTotalRow = new System.Windows.Forms.DataGridView();
-            this.tbStencil = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.dataGridViewStencil = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLLHide)).BeginInit();
@@ -86,16 +86,16 @@ namespace CompareWOLL
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStencil)).BeginInit();
             this.SuspendLayout();
             // 
-            // homeButton
+            // backButton
             // 
-            this.homeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.homeButton.Location = new System.Drawing.Point(787, 25);
-            this.homeButton.Name = "homeButton";
-            this.homeButton.Size = new System.Drawing.Size(75, 23);
-            this.homeButton.TabIndex = 29;
-            this.homeButton.Text = "Back";
-            this.homeButton.UseVisualStyleBackColor = true;
-            this.homeButton.Click += new System.EventHandler(this.backButton_Click);
+            this.backButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.backButton.Location = new System.Drawing.Point(787, 25);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(75, 23);
+            this.backButton.TabIndex = 29;
+            this.backButton.Text = "Back";
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
             // groupBox1
             // 
@@ -134,6 +134,23 @@ namespace CompareWOLL
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Loading List Detail";
+            // 
+            // tbStencil
+            // 
+            this.tbStencil.Location = new System.Drawing.Point(115, 271);
+            this.tbStencil.Name = "tbStencil";
+            this.tbStencil.ReadOnly = true;
+            this.tbStencil.Size = new System.Drawing.Size(223, 20);
+            this.tbStencil.TabIndex = 55;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(20, 271);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(56, 13);
+            this.label13.TabIndex = 54;
+            this.label13.Text = "Stencil No";
             // 
             // tbProcess
             // 
@@ -485,23 +502,6 @@ namespace CompareWOLL
             this.dataGridViewGetTotalRow.TabIndex = 37;
             this.dataGridViewGetTotalRow.Visible = false;
             // 
-            // tbStencil
-            // 
-            this.tbStencil.Location = new System.Drawing.Point(115, 271);
-            this.tbStencil.Name = "tbStencil";
-            this.tbStencil.ReadOnly = true;
-            this.tbStencil.Size = new System.Drawing.Size(223, 20);
-            this.tbStencil.TabIndex = 55;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(20, 271);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(56, 13);
-            this.label13.TabIndex = 54;
-            this.label13.Text = "Stencil No";
-            // 
             // dataGridViewStencil
             // 
             this.dataGridViewStencil.AllowUserToAddRows = false;
@@ -544,7 +544,7 @@ namespace CompareWOLL
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.dataGridViewLLHide);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.homeButton);
+            this.Controls.Add(this.backButton);
             this.Controls.Add(this.dataGridViewPCBNo);
             this.Controls.Add(this.dataGridAltPCB);
             this.Controls.Add(this.dataGridViewGetTotalRow);
@@ -568,7 +568,7 @@ namespace CompareWOLL
         }
 
         #endregion
-        private System.Windows.Forms.Button homeButton;
+        private System.Windows.Forms.Button backButton;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label1;

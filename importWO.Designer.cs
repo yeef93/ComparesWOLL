@@ -48,6 +48,8 @@ namespace CompareWOLL
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.totalPart = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.woQty = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.process = new System.Windows.Forms.TextBox();
@@ -55,9 +57,7 @@ namespace CompareWOLL
             this.woUsage = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.backButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.totalPart = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.homeButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWO)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -244,6 +244,28 @@ namespace CompareWOLL
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Work Order Detail";
             // 
+            // totalPart
+            // 
+            this.totalPart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totalPart.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalPart.Location = new System.Drawing.Point(804, 61);
+            this.totalPart.Name = "totalPart";
+            this.totalPart.ReadOnly = true;
+            this.totalPart.Size = new System.Drawing.Size(100, 47);
+            this.totalPart.TabIndex = 33;
+            this.totalPart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(818, 39);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(76, 16);
+            this.label5.TabIndex = 32;
+            this.label5.Text = "Total Part";
+            // 
             // woQty
             // 
             this.woQty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -316,38 +338,16 @@ namespace CompareWOLL
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
-            // button1
+            // homeButton
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(1050, 25);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 26;
-            this.button1.Text = "Home";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // totalPart
-            // 
-            this.totalPart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.totalPart.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalPart.Location = new System.Drawing.Point(804, 61);
-            this.totalPart.Name = "totalPart";
-            this.totalPart.ReadOnly = true;
-            this.totalPart.Size = new System.Drawing.Size(100, 47);
-            this.totalPart.TabIndex = 33;
-            this.totalPart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(818, 39);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(76, 16);
-            this.label5.TabIndex = 32;
-            this.label5.Text = "Total Part";
+            this.homeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.homeButton.Location = new System.Drawing.Point(1050, 25);
+            this.homeButton.Name = "homeButton";
+            this.homeButton.Size = new System.Drawing.Size(75, 23);
+            this.homeButton.TabIndex = 26;
+            this.homeButton.Text = "Home";
+            this.homeButton.UseVisualStyleBackColor = true;
+            this.homeButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // importWO
             // 
@@ -355,7 +355,7 @@ namespace CompareWOLL
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1218, 670);
             this.Controls.Add(this.backButton);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.homeButton);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.dataGridViewWO);
@@ -397,7 +397,7 @@ namespace CompareWOLL
         private System.Windows.Forms.TextBox woUsage;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button backButton;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button homeButton;
         private System.Windows.Forms.TextBox process;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox woQty;
