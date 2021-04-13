@@ -192,8 +192,7 @@ namespace CompareWOLL
                             tbStencil.BackColor = Color.Red;
                             MessageBox.Show("Stencil No Not Found, Please check again the document.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
                             saveButton.Enabled = false;
-                        }
-                            
+                        }                           
 
                         // buat cari batas total row
                         DataTable dtExcel4 = new DataTable();
@@ -217,12 +216,30 @@ namespace CompareWOLL
                         //else
                         //    MessageBox.Show("Row not found. Searching value does not exist.");
 
-
+                        //delete data start from text pcb No
                         for (int i = rowLL - 1; i >= rowIndex; i--)
                         {
                             dataGridViewLL.Rows.RemoveAt(i);
                         }
 
+                        if (tbPcbNo.Text == tbAltPcbNo1.Text)
+                        {
+                            tbPcbNo.BackColor = Color.Red;
+                            tbAltPcbNo1.BackColor = Color.Red;
+                            MessageBox.Show("There is duplicate PCB between Main PCB with Alternative 1 PCB, please edit data");
+                        }
+                        else if (tbPcbNo == tbAltPcbNo2)
+                        {
+                            tbPcbNo.BackColor = Color.Red;
+                            tbAltPcbNo2.BackColor = Color.Red;
+                            MessageBox.Show("There is duplicate PCB between Main PCB with Alternative 2 PCB, please edit data");
+                        }
+                        else if (tbAltPcbNo1 == tbAltPcbNo2)
+                        {
+                            tbAltPcbNo1.BackColor = Color.Red;
+                            tbAltPcbNo2.BackColor = Color.Red;
+                            MessageBox.Show("There is duplicate PCB between Alternative 2 PCB with Alternative 1 PCB, please edit data");
+                        }
                     }
                     catch (Exception ex)
                     {

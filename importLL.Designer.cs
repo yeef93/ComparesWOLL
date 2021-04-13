@@ -189,7 +189,6 @@ namespace CompareWOLL
             // 
             this.tbAltPcbNo2.Location = new System.Drawing.Point(544, 231);
             this.tbAltPcbNo2.Name = "tbAltPcbNo2";
-            this.tbAltPcbNo2.ReadOnly = true;
             this.tbAltPcbNo2.Size = new System.Drawing.Size(223, 20);
             this.tbAltPcbNo2.TabIndex = 49;
             // 
@@ -206,7 +205,6 @@ namespace CompareWOLL
             // 
             this.tbAltPcbNo1.Location = new System.Drawing.Point(115, 231);
             this.tbAltPcbNo1.Name = "tbAltPcbNo1";
-            this.tbAltPcbNo1.ReadOnly = true;
             this.tbAltPcbNo1.Size = new System.Drawing.Size(223, 20);
             this.tbAltPcbNo1.TabIndex = 47;
             // 
@@ -223,7 +221,6 @@ namespace CompareWOLL
             // 
             this.tbPcbNo.Location = new System.Drawing.Point(544, 194);
             this.tbPcbNo.Name = "tbPcbNo";
-            this.tbPcbNo.ReadOnly = true;
             this.tbPcbNo.Size = new System.Drawing.Size(223, 20);
             this.tbPcbNo.TabIndex = 45;
             this.tbPcbNo.TextChanged += new System.EventHandler(this.tbPcbNo_TextChanged);

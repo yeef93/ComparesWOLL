@@ -368,6 +368,12 @@ namespace CompareWOLL
 
         private void btnGenerate_Click_1(object sender, EventArgs e)
         {
+            btnHome.Enabled = false;
+            btnWO.Enabled = false;
+
+            LoadForm lf = new LoadForm();
+            lf.Show();
+
             int totalpart;
             int totalPointRow;
             int remarkRow;
@@ -502,17 +508,21 @@ namespace CompareWOLL
                     for (int j = 0; j <= ds.Tables[0].Columns.Count - 1; j++)
                     {
                         string data = ds.Tables[0].Rows[i].ItemArray[j].ToString();
-                        worksheet.Cells[i + 9, j + 1] = data;
+                        worksheet.Cells[i + 9, j + 1] = "'"+data;
                     }
                 }
 
             }
 
+            int woQtyy = Convert.ToInt32(woQty.Text);
+            int totalPoint = woQtyy - 1;
+
+
             totalPointRow = totalpart + 9;
             worksheet.Range[worksheet.Cells[totalPointRow, 1], worksheet.Cells[totalPointRow, 3]].Merge();
             worksheet.Range[worksheet.Cells[totalPointRow, 1], worksheet.Cells[totalPointRow, 6]].Font.FontStyle = "Bold";
             worksheet.Cells[totalPointRow, 1] = "TOTAL POINT";
-            worksheet.Cells[totalPointRow, 4] = woQty.Text;
+            worksheet.Cells[totalPointRow, 4] = totalPoint;
             worksheet.Cells[totalPointRow, 5] = " PCB NO: " + tbPCB.Text;
             worksheet.Cells[totalPointRow, 6] = " STENCIL NO : " + tbStencil.Text;
 
@@ -542,7 +552,7 @@ namespace CompareWOLL
 
             // Closing the file
             excelConvert.Close();
-
+            lf.Close();
             MessageBox.Show("Excel File Success Generated", "Generate Excel", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }

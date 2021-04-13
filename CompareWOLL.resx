@@ -7,7 +7,9 @@
     
     The primary goals of this format is to allow a simple XML format 
     that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+    various data types are done through the Type
+	
+er classes 
     associated with the data types.
     
     Example:
@@ -55,7 +57,8 @@
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized 
+	o a byte array 
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
