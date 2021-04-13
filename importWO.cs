@@ -146,6 +146,48 @@ namespace CompareWOLL
                             MessageBox.Show("There is " + count.ToString() + " cell is blank, Please revise the document ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error                        
                         }
 
+                        // mendadai merah jika data 1 column tidak sama
+                        for (int i = 0; i < dataGridViewWO.Rows.Count; ++i)
+                        {
+                            var cellValueModel = dataGridViewWO.Rows[i].Cells[0].Value.ToString();
+                            var cellValueModelNo = dataGridViewWO.Rows[i].Cells[2].Value.ToString();
+                            var cellValueWO = dataGridViewWO.Rows[i].Cells[5].Value.ToString();
+                            var cellValueProcess = dataGridViewWO.Rows[i].Cells[7].Value.ToString();
+                            var cellValueWoPtsn = dataGridViewWO.Rows[i].Cells[8].Value.ToString();
+                            var cellValueWoQty = dataGridViewWO.Rows[i].Cells[9].Value.ToString();
+
+                            if (cellValueModel != model.Text)
+                            {
+                                dataGridViewWO.Rows[i].Cells[0].Style.BackColor = Color.Red;
+                                count++;
+                            }
+                            if (cellValueModelNo != modelNo.Text)
+                            {
+                                dataGridViewWO.Rows[i].Cells[2].Style.BackColor = Color.Red;
+                                count++;
+                            }
+                            if (cellValueWO != woNo.Text)
+                            {
+                                dataGridViewWO.Rows[i].Cells[5].Style.BackColor = Color.Red;
+                                count++;
+                            }
+                            if (cellValueProcess != process.Text)
+                            {
+                                dataGridViewWO.Rows[i].Cells[7].Style.BackColor = Color.Red;
+                                count++;
+                            }
+                            if (cellValueWoPtsn != woPTSN.Text)
+                            {
+                                dataGridViewWO.Rows[i].Cells[8].Style.BackColor = Color.Red;
+                                count++;
+                            }
+                            if (cellValueWoQty != woUsage.Text)
+                            {
+                                dataGridViewWO.Rows[i].Cells[9].Style.BackColor = Color.Red;
+                                count++;
+                            }
+                        }
+
 
                         //show total qty component
                         int sum = 0;
