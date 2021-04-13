@@ -399,7 +399,6 @@ namespace CompareWOLL
             }
             conn.Close();
 
-
             // Create a new workbook with a single sheet
             excelConvert.NewFile();
 
@@ -554,6 +553,8 @@ namespace CompareWOLL
             excelConvert.Close();
             lf.Close();
             MessageBox.Show("Excel File Success Generated", "Generate Excel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            btnHome.Enabled = true;
+            btnWO.Enabled = true;
 
         }
 

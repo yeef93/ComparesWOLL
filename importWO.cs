@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
@@ -155,6 +156,10 @@ namespace CompareWOLL
                             var cellValueProcess = dataGridViewWO.Rows[i].Cells[7].Value.ToString();
                             var cellValueWoPtsn = dataGridViewWO.Rows[i].Cells[8].Value.ToString();
                             var cellValueWoQty = dataGridViewWO.Rows[i].Cells[9].Value.ToString();
+                            float ValueWoQty;
+
+                            var cellValueUsage = dataGridViewWO.Rows[i].Cells[3].Value.ToString();
+                            float ValueUsage;
 
                             if (cellValueModel != model.Text)
                             {
@@ -185,6 +190,17 @@ namespace CompareWOLL
                             {
                                 dataGridViewWO.Rows[i].Cells[9].Style.BackColor = Color.Red;
                                 count++;
+                            }
+
+                            if (!Single.TryParse(cellValueWoQty, NumberStyles.Any, CultureInfo.InvariantCulture, out ValueWoQty))
+                            {
+                                dataGridViewWO.Rows[i].Cells[9].Style.BackColor = Color.Red;
+                            }
+
+                            if (!Single.TryParse(cellValueUsage, NumberStyles.Any, CultureInfo.InvariantCulture, out ValueUsage))
+                            {
+                                dataGridViewWO.Rows[i].Cells[3].Style.BackColor = Color.Red;
+                                //dataGridViewWO.Rows[i].Cells[3].ToolTipText = "Change Data be Number";
                             }
                         }
 
@@ -282,8 +298,10 @@ namespace CompareWOLL
 
             if (woPTSNN == "" | woNoo == "" | modelNoo == "" | modell == "" | woqtyy == "")
             {
-                MessageBox.Show("Unable to import Work Order without fill data properly", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lf.Close();
                 saveButton.Enabled = true;
+                MessageBox.Show("Unable to import Work Order without fill data properly", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
             }
 
             else
