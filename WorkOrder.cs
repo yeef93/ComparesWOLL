@@ -21,9 +21,10 @@ namespace CompareWOLL
             MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
             connection.Open();
 
-            string query = "SELECT wo_PTSN, wo_No, model_No, model, process_Name ,wo_QTY, wo_Usage FROM tbl_wo";
+            string querywo = "SELECT wo_PTSN, wo_No, model_No, model, process_Name ,wo_QTY, wo_Usage FROM tbl_wo";
+            string queryll = "SELECT model_No, process_Name FROM tbl_ll WHERE model_No = '60B38YE10A02P' AND process_Name = 'SMT-A'";
 
-            using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
+            using (MySqlDataAdapter adpt = new MySqlDataAdapter(querywo, connection))
             {
                 DataSet dset = new DataSet();
 
@@ -38,7 +39,6 @@ namespace CompareWOLL
                 btn.Text = "Detail";
                 btn.Name = "btnDetail";
                 btn.UseColumnTextForButtonValue = true;
-
 
                 // add button delete in datagridview table
                 DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
@@ -55,6 +55,7 @@ namespace CompareWOLL
                 btnImport.Text = "Import Loading List";
                 btnImport.Name = "btnImport";
                 btnImport.UseColumnTextForButtonValue = true;
+                //btnImport.Visible = false;
 
 
                 // add button compare WO LL in datagridview table

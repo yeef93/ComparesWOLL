@@ -120,11 +120,8 @@ namespace CompareWOLL
                             ill.tbProcess.Text = model[1].Replace(" ", "");
                             ill.Show();
                             this.Hide();
-
                         }
-                    }
-
-                    
+                    }                    
                 }
 
                 connection.Close();

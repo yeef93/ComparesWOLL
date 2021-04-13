@@ -12,8 +12,6 @@ namespace CompareWOLL
             InitializeComponent();
 
         }
-
-
         private void LoadingList_Load(object sender, EventArgs e)
         {
             dateTimeNow.Text = DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:ss");
@@ -32,7 +30,6 @@ namespace CompareWOLL
                 adpt.Fill(dset);
 
                 dataGridViewLLList.DataSource = dset.Tables[0];
-
 
                 // add button delete in datagridview table
                 DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
