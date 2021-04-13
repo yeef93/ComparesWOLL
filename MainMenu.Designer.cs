@@ -38,7 +38,6 @@ namespace CompareWOLL
             this.toolStripUsername = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
-            this.fedfdfsdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -58,8 +57,7 @@ namespace CompareWOLL
             this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.workOrderToolStripMenuItem1,
             this.loadingListToolStripMenuItem,
-            this.compareWOVsLLToolStripMenuItem,
-            this.fedfdfsdToolStripMenuItem});
+            this.compareWOVsLLToolStripMenuItem});
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
             this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.menuToolStripMenuItem.Text = "Menu";
@@ -117,13 +115,6 @@ namespace CompareWOLL
             this.dateTimeNow.Size = new System.Drawing.Size(124, 17);
             this.dateTimeNow.Text = "toolStripStatusLabel2";
             // 
-            // fedfdfsdToolStripMenuItem
-            // 
-            this.fedfdfsdToolStripMenuItem.Name = "fedfdfsdToolStripMenuItem";
-            this.fedfdfsdToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.fedfdfsdToolStripMenuItem.Text = "fedfdfsd";
-            this.fedfdfsdToolStripMenuItem.Click += new System.EventHandler(this.fedfdfsdToolStripMenuItem_Click);
-            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -157,7 +148,6 @@ namespace CompareWOLL
         private System.Windows.Forms.ToolStripMenuItem compareWOVsLLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem workOrderToolStripMenuItem1;
         public System.Windows.Forms.ToolStripStatusLabel toolStripUsername;
-        private System.Windows.Forms.ToolStripMenuItem fedfdfsdToolStripMenuItem;
     }
 }
 

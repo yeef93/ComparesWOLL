@@ -159,7 +159,7 @@ namespace CompareWOLL
                             {
                                 tbAltPcbNo1.BackColor = Color.Red;
                                 tbAltPcbNo2.BackColor = Color.Red;
-                                MessageBox.Show("Please Kindly Edit Document with Change Alternative PCB Text be ALT PCB NO.:");
+                                MessageBox.Show("Please Edit Document with Change Alternative PCB Text be ALT PCB NO.:");
                                 saveButton.Enabled = false;
 
                                 //filepathLL.Text = "";
@@ -245,6 +245,28 @@ namespace CompareWOLL
                 for (int i = 0; i < dataGridViewLL.Columns.Count; i++)
                 {
                     dataGridViewLL.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+
+                int count = 0;
+                int[] slctdColumn = { 1, 2, 5 };
+                for (int i = 0; i < dataGridViewLL.Rows.Count; ++i)
+                {
+                    for (int j = 0; j < slctdColumn.Length; j++)
+                    {
+                        var cellValue = dataGridViewLL.Rows[i].Cells[slctdColumn[j]].Value;
+                        //var cellPosition = dataGridViewWO.Rows[i].Cells[j];
+
+                        if (cellValue == null ||
+                            cellValue == DBNull.Value || string.IsNullOrEmpty(cellValue.ToString()))
+                        {
+                            dataGridViewLL.Rows[i].Cells[slctdColumn[j]].Style.BackColor = Color.Red;
+                            count++;
+                        }
+                    }
+                }
+                if (count > 0)
+                {
+                    MessageBox.Show("There is " + count.ToString() + " cell is blank, Please revise the document ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error                        
                 }
 
             }
@@ -362,8 +384,6 @@ namespace CompareWOLL
 
                                 cmd.CommandText = StrQuery;
                                 cmd.ExecuteNonQuery();
-
-
                             }
 
                             String reelID = "";

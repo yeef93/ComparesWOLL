@@ -41,11 +41,5 @@ namespace CompareWOLL
             LL.Show();
             this.Hide();
         }
-
-        private void fedfdfsdToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LoadForm lf = new LoadForm();
-            lf.Show();
-        }
     }
 }

@@ -56,6 +56,7 @@ namespace CompareWOLL
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LoadForm";
+            this.Opacity = 0.7D;
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.LoadForm_Load);

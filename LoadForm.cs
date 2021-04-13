@@ -20,6 +20,7 @@ namespace CompareWOLL
         private void LoadForm_Load(object sender, EventArgs e)
         {
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
         }
     }
 }
