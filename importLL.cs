@@ -414,7 +414,7 @@ namespace CompareWOLL
                                     reelID = dataGridViewLL.Rows[j].Cells[0].Value.ToString();
                                     qty = dataGridViewLL.Rows[j].Cells[3].Value.ToString();
                                     altNo = 1;
-                                    string StrQueryReelDetail = "INSERT INTO tbl_reel VALUES ('"
+                                    string StrQueryReelDetail = "INSERT INTO tbl_reel VALUES ('','"
                                         + reelID + "', '" + model + "','" + process + "','" + dataGridViewLL.Rows[j].Cells[3].Value.ToString() + "', '"
                                         + dataGridViewLL.Rows[j].Cells[4].Value.ToString() + "', '"
                                         + dataGridViewLL.Rows[j].Cells[6].Value.ToString() + "');";

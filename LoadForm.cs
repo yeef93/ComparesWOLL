@@ -21,6 +21,7 @@ namespace CompareWOLL
         {
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            label1.Visible = true;
         }
     }
 }

@@ -125,6 +125,7 @@ namespace CompareWOLL
                             dataGridViewWO.Columns[i].HeaderText = "" + titleWO[i];
                         }
 
+                        // menandai merah jika ada  cell kosong
                         int count = 0;
                         for (int i = 0; i < dataGridViewWO.Rows.Count; ++i)
                         {
