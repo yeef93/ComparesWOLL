@@ -402,6 +402,7 @@ namespace CompareWOLL
             this.dataGridViewLLHide.Name = "dataGridViewLLHide";
             this.dataGridViewLLHide.Size = new System.Drawing.Size(852, 189);
             this.dataGridViewLLHide.TabIndex = 31;
+            this.dataGridViewLLHide.Visible = false;
             // 
             // statusStrip1
             // 
@@ -462,7 +463,6 @@ namespace CompareWOLL
             this.dataGridViewLL.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewLL.Location = new System.Drawing.Point(12, 474);
             this.dataGridViewLL.Name = "dataGridViewLL";
-            this.dataGridViewLL.ReadOnly = true;
             this.dataGridViewLL.Size = new System.Drawing.Size(852, 215);
             this.dataGridViewLL.TabIndex = 34;
             // 
@@ -475,7 +475,6 @@ namespace CompareWOLL
             this.dataGridViewPCBNo.Name = "dataGridViewPCBNo";
             this.dataGridViewPCBNo.Size = new System.Drawing.Size(240, 112);
             this.dataGridViewPCBNo.TabIndex = 35;
-            this.dataGridViewPCBNo.Visible = false;
             // 
             // dataGridAltPCB
             // 
@@ -539,13 +538,13 @@ namespace CompareWOLL
             this.Controls.Add(this.dataGridViewLL);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.saveButton);
-            this.Controls.Add(this.dataGridViewLLHide);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.backButton);
             this.Controls.Add(this.dataGridViewPCBNo);
             this.Controls.Add(this.dataGridAltPCB);
             this.Controls.Add(this.dataGridViewGetTotalRow);
             this.Controls.Add(this.dataGridViewStencil);
+            this.Controls.Add(this.dataGridViewLLHide);
             this.Name = "ImportLL";
             this.Text = "Import Loading List";
             this.Load += new System.EventHandler(this.importLL_Load);

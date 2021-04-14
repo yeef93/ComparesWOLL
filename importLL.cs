@@ -243,7 +243,8 @@ namespace CompareWOLL
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message.ToString());
+                        //MessageBox.Show(ex.Message.ToString());
+                        MessageBox.Show("Ada error ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
@@ -332,8 +333,9 @@ namespace CompareWOLL
 
             string llUsage = sum.ToString();
 
-            if (model == "" | process == "" | modelLL == "" | machine == "" | pwbType == "" | prog == "" | rev == "" | pcb == "")
+            if (model == "" | process == "" | modelLL == "" | machine == "" | pwbType == "" | prog == "" | pcb == "")
             {
+                lf.Close();
                 MessageBox.Show("Unable to import Work Order without fill data properly", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 saveButton.Enabled = true;
             }

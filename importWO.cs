@@ -88,6 +88,10 @@ namespace CompareWOLL
                 woQty.Text = "";
                 woUsage.Text = "";
 
+                totalPart.BackColor = SystemColors.Control; 
+                woQty.BackColor = SystemColors.Control; 
+                woUsage.BackColor = SystemColors.Control; 
+
                 string woFileName = openFileDialogWO.FileName;
                 filepathWO.Text = woFileName;
                 fileExtWO = Path.GetExtension(woFileName); //get the file extension  
@@ -238,11 +242,14 @@ namespace CompareWOLL
                                 woUsage.BackColor = System.Drawing.Color.Red;
 
                                 dataGridViewWO.Rows[i].DefaultCellStyle = styleError;
-                                saveButton.Enabled = false;
                                 MessageBox.Show("Data Issue Part No " + dataGridViewWO.Rows[i].Cells[1].Value + " Not Match, Please Check Excel File", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
                                 saveButton.Enabled = false;
                             }
-                            else if (process.Text == "")
+                            if (totalPart.Text == "#Erorr" || woQty.Text == "#Erorr" || woUsage.Text == "#Erorr")
+                            {
+                                saveButton.Enabled = false;
+                            }
+                            if (process.Text == "")
                             {
                                 //MessageBox.Show("Please fill process column", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
                             }
@@ -284,6 +291,8 @@ namespace CompareWOLL
             backButton.Enabled = false;
             LoadForm lf = new LoadForm();
             lf.Show();
+
+            System.Threading.Thread.Sleep(2000);
 
             string woPTSNN = woPTSN.Text;
             string woNoo = woNo.Text;

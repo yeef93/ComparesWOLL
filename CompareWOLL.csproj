@@ -111,11 +111,23 @@
       <DependentUpon>DetailWO.cs</DependentUpon>
     </Compile>
     <Compile Include="ExcelConvert.cs" />
+    <Compile Include="importExcel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="importExcel.Designer.cs">
+      <DependentUpon>importExcel.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImportLL.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ImportLL.Designer.cs">
       <DependentUpon>ImportLL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="importLLFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="importLLFile.Designer.cs">
+      <DependentUpon>importLLFile.cs</DependentUpon>
     </Compile>
     <Compile Include="importWO.cs">
       <SubType>Form</SubType>
@@ -166,8 +178,14 @@
     <EmbeddedResource Include="DetailWO.resx">
       <DependentUpon>DetailWO.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="importExcel.resx">
+      <DependentUpon>importExcel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ImportLL.resx">
       <DependentUpon>ImportLL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="importLLFile.resx">
+      <DependentUpon>importLLFile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="importWO.resx">
       <DependentUpon>importWO.cs</DependentUpon>

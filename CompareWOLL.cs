@@ -152,11 +152,13 @@ namespace CompareWOLL
 
             string queryTotalWO = "SELECT SUM(tbl_wodetail.qty) AS totalWO  FROM tbl_wodetail LEFT JOIN tbl_lldetail " +
                 "ON tbl_wodetail.partcode = tbl_lldetail.partcode " +
-                "WHERE tbl_wodetail.model_No = '" + model[0].Replace(" ", "") + "' AND tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "'" ;
+                "WHERE tbl_wodetail.model_No = '" + model[0].Replace(" ", "") + "' AND tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "'" +
+                "AND tbl_lldetail.model_No = '" + model[0].Replace(" ", "") + "' AND tbl_lldetail.process_Name = '" + model[1].Replace(" ", "") + "'";
 
             string queryTotalLL = "SELECT SUM(tbl_lldetail.qty) AS totalLL  FROM tbl_wodetail LEFT JOIN tbl_lldetail " +
                 "ON tbl_wodetail.partcode = tbl_lldetail.partcode " +
-                "WHERE tbl_wodetail.model_No = '" + model[0].Replace(" ", "") + "' AND tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "'";
+                "WHERE tbl_wodetail.model_No = '" + model[0].Replace(" ", "") + "' AND tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "'" +
+                "AND tbl_lldetail.model_No = '" + model[0].Replace(" ", "") + "' AND tbl_lldetail.process_Name = '" + model[1].Replace(" ", "") + "'";
 
             string queryDetailLL = "SELECT model_detail, machine, pwb_Type, prog_No, stencil FROM tbl_ll WHERE  model_No = '" + model[0].Replace(" ", "") + "' AND process_Name = '" + model[1].Replace(" ", "") + "'";
 
@@ -214,7 +216,8 @@ namespace CompareWOLL
                 //nampilin selected PCB
                 string queryPCB = "SELECT tbl_wodetail.partcode FROM tbl_wodetail LEFT JOIN tbl_lldetail ON " +
                     "tbl_wodetail.partcode = tbl_lldetail.partcode WHERE tbl_wodetail.model_No = '" + model[0].Replace(" ", "") + "' " +
-                    "AND tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "' AND tbl_lldetail.reel = 'PCB'";
+                    "AND tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "' AND tbl_lldetail.model_No = '" + model[0].Replace(" ", "") + "' " +
+                    "AND tbl_lldetail.process_Name = '" + model[1].Replace(" ", "") + "' AND tbl_lldetail.reel = 'PCB'";
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryPCB, connection))
                 {
                     DataTable dset = new DataTable();
@@ -236,7 +239,9 @@ namespace CompareWOLL
                     "tbl_lldetail.qty, tbl_lldetail.alt_No FROM tbl_wodetail LEFT JOIN tbl_lldetail " +
                     "ON tbl_wodetail.partcode = tbl_lldetail.partcode WHERE " +
                     "tbl_wodetail.model_No = '" + model[0].Replace(" ", "") + "' AND " +
-                    "tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "'";
+                    "tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "'" +
+                    "AND tbl_lldetail.model_No = '" + model[0].Replace(" ", "") + "' " +
+                    "AND tbl_lldetail.process_Name = '" + model[1].Replace(" ", "") + "'";
 
                 //            string query = "SELECT tbl_lldetail.reel, tbl_wodetail.partcode, tbl_lldetail.partcode, tbl_wodetail.qty, " +
                 //"tbl_lldetail.qty, tbl_lldetail.alt_No FROM tbl_wodetail LEFT JOIN tbl_lldetail " +
@@ -574,6 +579,7 @@ namespace CompareWOLL
 
         private void cmbLLModel_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.Refresh();
             btnCompare.Enabled = true;
         }
     }
