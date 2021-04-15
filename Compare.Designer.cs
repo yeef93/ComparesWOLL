@@ -42,7 +42,7 @@ namespace CompareWOLL
             this.cmbLLModel = new System.Windows.Forms.ComboBox();
             this.btnCompare = new System.Windows.Forms.Button();
             this.tbProgNo = new System.Windows.Forms.TextBox();
-            this.dataGridViewCompareLLWO = new System.Windows.Forms.DataGridView();
+            this.dataGridViewCompareWOLL = new System.Windows.Forms.DataGridView();
             this.tbPWBType = new System.Windows.Forms.TextBox();
             this.tbPCB = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -66,15 +66,15 @@ namespace CompareWOLL
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.dataGridViewLL = new System.Windows.Forms.DataGridView();
+            this.dataGridViewCompareLLWO = new System.Windows.Forms.DataGridView();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareLLWO)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareWOLL)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareLLWOResult)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLL)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareLLWO)).BeginInit();
             this.SuspendLayout();
             // 
             // woQty
@@ -200,6 +200,7 @@ namespace CompareWOLL
             this.btnCompare.TabIndex = 33;
             this.btnCompare.Text = "Compare";
             this.btnCompare.UseVisualStyleBackColor = true;
+            this.btnCompare.Click += new System.EventHandler(this.btnCompare_Click);
             // 
             // tbProgNo
             // 
@@ -209,18 +210,18 @@ namespace CompareWOLL
             this.tbProgNo.Size = new System.Drawing.Size(231, 20);
             this.tbProgNo.TabIndex = 7;
             // 
-            // dataGridViewCompareLLWO
+            // dataGridViewCompareWOLL
             // 
-            this.dataGridViewCompareLLWO.AllowUserToAddRows = false;
-            this.dataGridViewCompareLLWO.AllowUserToDeleteRows = false;
-            this.dataGridViewCompareLLWO.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.dataGridViewCompareLLWO.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewCompareLLWO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewCompareLLWO.Location = new System.Drawing.Point(28, 371);
-            this.dataGridViewCompareLLWO.Name = "dataGridViewCompareLLWO";
-            this.dataGridViewCompareLLWO.Size = new System.Drawing.Size(510, 171);
-            this.dataGridViewCompareLLWO.TabIndex = 48;
+            this.dataGridViewCompareWOLL.AllowUserToAddRows = false;
+            this.dataGridViewCompareWOLL.AllowUserToDeleteRows = false;
+            this.dataGridViewCompareWOLL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewCompareWOLL.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewCompareWOLL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewCompareWOLL.Location = new System.Drawing.Point(28, 371);
+            this.dataGridViewCompareWOLL.Name = "dataGridViewCompareWOLL";
+            this.dataGridViewCompareWOLL.Size = new System.Drawing.Size(510, 171);
+            this.dataGridViewCompareWOLL.TabIndex = 48;
             // 
             // tbPWBType
             // 
@@ -296,6 +297,7 @@ namespace CompareWOLL
             this.btnGenerate.TabIndex = 49;
             this.btnGenerate.Text = "Generate Excel File";
             this.btnGenerate.UseVisualStyleBackColor = true;
+            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
             // 
             // btnWO
             // 
@@ -449,7 +451,7 @@ namespace CompareWOLL
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.dataGridViewLL);
+            this.groupBox5.Controls.Add(this.dataGridViewCompareLLWO);
             this.groupBox5.Location = new System.Drawing.Point(573, 348);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(542, 229);
@@ -457,18 +459,18 @@ namespace CompareWOLL
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "LL Vs WO";
             // 
-            // dataGridViewLL
+            // dataGridViewCompareLLWO
             // 
-            this.dataGridViewLL.AllowUserToAddRows = false;
-            this.dataGridViewLL.AllowUserToDeleteRows = false;
-            this.dataGridViewLL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dataGridViewCompareLLWO.AllowUserToAddRows = false;
+            this.dataGridViewCompareLLWO.AllowUserToDeleteRows = false;
+            this.dataGridViewCompareLLWO.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewLL.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewLL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewLL.Location = new System.Drawing.Point(18, 23);
-            this.dataGridViewLL.Name = "dataGridViewLL";
-            this.dataGridViewLL.Size = new System.Drawing.Size(510, 171);
-            this.dataGridViewLL.TabIndex = 55;
+            this.dataGridViewCompareLLWO.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewCompareLLWO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewCompareLLWO.Location = new System.Drawing.Point(18, 23);
+            this.dataGridViewCompareLLWO.Name = "dataGridViewCompareLLWO";
+            this.dataGridViewCompareLLWO.Size = new System.Drawing.Size(510, 171);
+            this.dataGridViewCompareLLWO.TabIndex = 55;
             // 
             // Compare
             // 
@@ -477,7 +479,7 @@ namespace CompareWOLL
             this.ClientSize = new System.Drawing.Size(1366, 735);
             this.Controls.Add(this.btnGenerate);
             this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.dataGridViewCompareLLWO);
+            this.Controls.Add(this.dataGridViewCompareWOLL);
             this.Controls.Add(this.dataGridViewCompareLLWOResult);
             this.Controls.Add(this.btnWO);
             this.Controls.Add(this.btnHome);
@@ -489,7 +491,7 @@ namespace CompareWOLL
             this.Load += new System.EventHandler(this.Compare_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareLLWO)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareWOLL)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareLLWOResult)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
@@ -498,7 +500,7 @@ namespace CompareWOLL
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLL)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareLLWO)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -519,7 +521,7 @@ namespace CompareWOLL
         private System.Windows.Forms.ComboBox cmbLLModel;
         private System.Windows.Forms.Button btnCompare;
         private System.Windows.Forms.TextBox tbProgNo;
-        private System.Windows.Forms.DataGridView dataGridViewCompareLLWO;
+        private System.Windows.Forms.DataGridView dataGridViewCompareWOLL;
         private System.Windows.Forms.TextBox tbPWBType;
         private System.Windows.Forms.TextBox tbPCB;
         private System.Windows.Forms.Label label7;
@@ -543,6 +545,6 @@ namespace CompareWOLL
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.DataGridView dataGridViewLL;
+        private System.Windows.Forms.DataGridView dataGridViewCompareLLWO;
     }
 }
