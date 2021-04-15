@@ -82,7 +82,7 @@ namespace CompareWOLL
             // 
             this.compareWOVsLLToolStripMenuItem.Name = "compareWOVsLLToolStripMenuItem";
             this.compareWOVsLLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.compareWOVsLLToolStripMenuItem.Text = "Compare WO vs LL";
+            this.compareWOVsLLToolStripMenuItem.Text = "Compare";
             this.compareWOVsLLToolStripMenuItem.Click += new System.EventHandler(this.compareWOVsLLToolStripMenuItem_Click);
             // 
             // readLoadingListToolStripMenuItem

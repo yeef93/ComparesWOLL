@@ -332,13 +332,11 @@ namespace CompareWOLL
                 }
 
 
-                //nampilin data dalam datagridview compare WO LL
+                //nampilin data dalam datagridview compare LL WO
 
-                string queryLLWO = "SELECT tbl_lldetail.reel, tbl_lldetail.partcode, tbl_wodetail.partcode," +
-                    " tbl_lldetail.qty, tbl_wodetail.qty FROM tbl_lldetail LEFT JOIN tbl_wodetail ON " +
-                    "tbl_lldetail.partcode = tbl_wodetail.partcode WHERE tbl_wodetail.model_No = '" + model[0].Replace(" ", "") + "' " +
-                    "AND tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "' AND tbl_lldetail.model_No = '" + model[0].Replace(" ", "") + "' AND " +
-                    "tbl_lldetail.process_Name = '" + model[1].Replace(" ", "") + "'";
+                string queryLLWO = "SELECT tbl_lldetail.reel, tbl_lldetail.partcode, tbl_wodetail.partcode, tbl_lldetail.qty , " +
+                    "tbl_wodetail.qty FROM tbl_lldetail LEFT JOIN tbl_wodetail ON tbl_lldetail.partcode = tbl_wodetail.partcode " +
+                    "WHERE tbl_lldetail.model_No = '" + model[0].Replace(" ", "") + "' AND tbl_lldetail.process_Name = '" + model[1].Replace(" ", "") + "'";
 
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryLLWO, connection))
                 {
@@ -408,7 +406,7 @@ namespace CompareWOLL
                 string[] titleLL = { "REEL", "PART CODE WO", "PART CODE LL", "QTY WO", "QTY LL" };
                 for (int i = 0; i < titleLL.Length; i++)
                 {
-                    dataGridViewCompareWOLL.Columns[i].HeaderText = "" + titleLL[i];
+                    dataGridViewCompareLLWO.Columns[i].HeaderText = "" + titleLL[i];
                 }
 
                 for (int i = 0; i < dataGridViewCompareLLWO.Columns.Count; i++)
