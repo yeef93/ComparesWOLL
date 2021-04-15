@@ -242,8 +242,6 @@ namespace CompareWOLL
                                 woUsage.BackColor = System.Drawing.Color.Red;
 
                                 dataGridViewWO.Rows[i].DefaultCellStyle = styleError;
-                                MessageBox.Show("Data Issue Part No " + dataGridViewWO.Rows[i].Cells[1].Value + " Not Match, Please Check Excel File", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
-                                saveButton.Enabled = false;
                             }
                             if (totalPart.Text == "#Erorr" || woQty.Text == "#Erorr" || woUsage.Text == "#Erorr")
                             {
@@ -258,6 +256,8 @@ namespace CompareWOLL
                                 saveButton.Enabled = true;
                             }
                         }
+                        MessageBox.Show("Data Issue Part Not Match, Please Check Excel File", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+                        saveButton.Enabled = false;
                         woQty.Text = sum.ToString();
                     }
                     catch (Exception ex)

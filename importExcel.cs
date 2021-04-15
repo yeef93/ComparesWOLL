@@ -42,43 +42,42 @@ namespace CompareWOLL
                     if (fileExtLL.CompareTo(".xls") == 0 || fileExtLL.CompareTo(".xlsx") == 0)
                     {
                         try
-                        {                            
+                        {
+                            // open the excel file
+                            OleDbConnection objConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + openFileDialog.FileName + ";Extended Properties='Excel 8.0;HDR=Yes;IMEX=1'");
 
-                            OleDbcon = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + openFileDialog.FileName + ";Extended Properties=Excel 12.0;");
+                            // connect
+                            objConn.Open();
 
-                            OleDbcon.Open();
+                            DataSet ds = new DataSet();
+                            OleDbDataAdapter da = new OleDbDataAdapter();
 
-                            DataTable dt = OleDbcon.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+                            // get the schema of the "database"
+                            DataTable dtTables = objConn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
 
-                            OleDbcon.Close();
-
-                            label2.Text = dt.Rows.Count.ToString();
-
-                            for (int i = 0; i < dt.Rows.Count; i++)
-
+                            // loop through the list of the tables...
+                            foreach (DataRow dr in dtTables.Rows)
                             {
-                                String sheetName = dt.Rows[i]["TABLE_NAME"].ToString();
+                                string nSheet = dr["TABLE_NAME"].ToString(); // the name of the sheet
+                                da = new OleDbDataAdapter("SELECT * FROM [" + nSheet + "]", objConn); // get the data
+                                da.Fill(ds, nSheet.Replace("$", "")); // fill the table
+                            }
 
-                                sheetName = sheetName.Substring(0, sheetName.Length - 1).Replace("'", "");
-
-                                OleDbDataAdapter oledbDa = new OleDbDataAdapter("Select * from [" + sheetName + "A8:I55]", OleDbcon);
-
-                                DataTable data = new DataTable();
-
-                                //data.Rows.Add();
-                                oledbDa.Fill(data);
-
-                                dataGridViewLL.DataSource = data;
-
-                                dataGridViewLL.Columns.RemoveAt(5);
-                                dataGridViewLL.Columns.RemoveAt(6);
-
-                                // not allow to sort table
-                                for (int j = 0; j < dataGridViewLL.Columns.Count; j++)
+                            // an then you can navigate through the dataset....
+                            foreach (DataTable dt in ds.Tables)
+                            {
+                                foreach (DataColumn dc in dt.Columns)
                                 {
-                                    dataGridViewLL.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                                    foreach (DataRow dr in dt.AsEnumerable())
+                                    {
+                                        dataGridViewLL.DataSource = ds.Tables[0];
+                                       //MessageBox.Show(dt.TableName + " - " + dc.ColumnName + " - " + dr[dc.ColumnName].ToString()); // for example 
+
+                                    }
                                 }
                             }
+
+                            objConn.Close();
                         }
                         catch (Exception ex)
                         {
