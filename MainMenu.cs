@@ -20,9 +20,9 @@ namespace CompareWOLL
 
         private void compareWOVsLLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CompareWOLL cwl = new CompareWOLL();
-            cwl.toolStripUsername.Text = toolStripUsername.Text;
-            cwl.Show();
+            Compare compare = new Compare();
+            compare.toolStripUsername.Text = toolStripUsername.Text;
+            compare.Show();
             this.Hide();
         }
 

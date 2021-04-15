@@ -92,6 +92,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compare.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compare.Designer.cs">
+      <DependentUpon>Compare.cs</DependentUpon>
+    </Compile>
     <Compile Include="CompareWOLL.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,6 +175,9 @@
     <Compile Include="WorkOrder.Designer.cs">
       <DependentUpon>WorkOrder.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Compare.resx">
+      <DependentUpon>Compare.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CompareWOLL.resx">
       <DependentUpon>CompareWOLL.cs</DependentUpon>
     </EmbeddedResource>
