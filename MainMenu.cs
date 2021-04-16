@@ -48,5 +48,13 @@ namespace CompareWOLL
             importExcel.Show();
             this.Hide();
         }
+
+        private void importExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            importExcel import = new importExcel();
+            import.Show();
+            this.Hide();
+
+        }
     }
 }

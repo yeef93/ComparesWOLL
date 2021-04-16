@@ -88,9 +88,9 @@ namespace CompareWOLL
                 woQty.Text = "";
                 woUsage.Text = "";
 
-                totalPart.BackColor = SystemColors.Control; 
-                woQty.BackColor = SystemColors.Control; 
-                woUsage.BackColor = SystemColors.Control; 
+                totalPart.BackColor = SystemColors.Control;
+                woQty.BackColor = SystemColors.Control;
+                woUsage.BackColor = SystemColors.Control;
 
                 string woFileName = openFileDialogWO.FileName;
                 filepathWO.Text = woFileName;
@@ -145,9 +145,10 @@ namespace CompareWOLL
                                     dataGridViewWO.Rows[i].Cells[j].Style.BackColor = Color.Red;
                                     count++;
                                 }
-                            } 
+                            }
                         }
-                        if (count > 0 ) {
+                        if (count > 0)
+                        {
                             MessageBox.Show("There is " + count.ToString() + " cell is blank, Please revise the document ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error                        
                         }
 
@@ -207,6 +208,21 @@ namespace CompareWOLL
                                 //dataGridViewWO.Rows[i].Cells[3].ToolTipText = "Change Data be Number";
                             }
                         }
+                        for (int i = 0; i < dataGridViewWO.Rows.Count; ++i)
+                        {
+                            if (dataGridViewWO.Rows[i].Cells[0].Style.BackColor == Color.Red ||
+                                dataGridViewWO.Rows[i].Cells[2].Style.BackColor == Color.Red ||
+                                dataGridViewWO.Rows[i].Cells[5].Style.BackColor == Color.Red ||
+                                dataGridViewWO.Rows[i].Cells[7].Style.BackColor == Color.Red ||
+                                dataGridViewWO.Rows[i].Cells[8].Style.BackColor == Color.Red ||
+                                dataGridViewWO.Rows[i].Cells[9].Style.BackColor == Color.Red ||
+                                dataGridViewWO.Rows[i].Cells[3].Style.BackColor == Color.Red
+                               )
+                            {
+                                MessageBox.Show("Data Issue Part Not Match, Please Check Excel File", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+                                saveButton.Enabled = false;
+                            }
+                        }
 
 
                         //show total qty component
@@ -256,8 +272,7 @@ namespace CompareWOLL
                                 saveButton.Enabled = true;
                             }
                         }
-                        MessageBox.Show("Data Issue Part Not Match, Please Check Excel File", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
-                        saveButton.Enabled = false;
+
                         woQty.Text = sum.ToString();
                     }
                     catch (Exception ex)
@@ -310,7 +325,7 @@ namespace CompareWOLL
                 lf.Close();
                 saveButton.Enabled = true;
                 MessageBox.Show("Unable to import Work Order without fill data properly", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                
+
             }
 
             else

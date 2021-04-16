@@ -180,6 +180,12 @@ namespace CompareWOLL
                 il.Show();
                 il.tbModelNo.Text = model;
                 il.tbProcess.Text = processName;
+                //importExcel il = new importExcel();
+                //string model = dataGridViewWoList.Rows[e.RowIndex].Cells[2].Value.ToString();
+                //string processName = dataGridViewWoList.Rows[e.RowIndex].Cells[4].Value.ToString();
+                //il.Show();
+                //il.tbModelNo.Text = model;
+                //il.tbProcess.Text = processName;
                 this.Hide();
 
                 //MessageBox.Show((e.RowIndex + 1) + "  Row  " + (e.ColumnIndex + 1) + "  Column button clicked "+model+"");

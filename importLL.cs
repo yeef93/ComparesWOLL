@@ -59,8 +59,8 @@ namespace CompareWOLL
                 string woFileName = openFileDialogLL.FileName;
                 filepathLL.Text = woFileName;
                 fileExtLL = Path.GetExtension(woFileName); //get the file extension  
-                queryLL = "select * from [Sheet1$A3:I]";
-                queryLLDetail = "select * from [Sheet1$A9:I]";
+                queryLL = "select * from [Sheet1$A2:I]";
+                queryLLDetail = "select * from [Sheet1$A8:I]";
                 queryGetPCBNo = "select * from [Sheet1$E9:E]";
                 queryGetAltPCB = "select * from [Sheet1$B9:B]";
                 queryGetTotal = "select * from [Sheet1$E9:E]";
@@ -94,9 +94,10 @@ namespace CompareWOLL
                         // baca pcb No
                         DataTable dtExcel2 = new DataTable();
                         dtExcel2 = help.ReadExcel(woFileName, fileExtLL, queryGetPCBNo); //read excel file  
-                        //dataGridViewPCBNo.DataSource = dtExcel2;
+                        
 
                         DataView dataView = dtExcel2.DefaultView;
+                        dataView.Table.Columns[0].ColumnName = "F1";
                         dataView.RowFilter = "F1 LIKE '%PCB NO%'";
                         dataGridViewPCBNo.DataSource = dataView;
 
@@ -112,24 +113,19 @@ namespace CompareWOLL
                             saveButton.Enabled = false;
                         }
 
-                            // baca Alt pcb No
-                            DataTable dtExcel3 = new DataTable();
+                        // baca Alt pcb No
+                        DataTable dtExcel3 = new DataTable();
                         dtExcel3 = help.ReadExcel(woFileName, fileExtLL, queryGetAltPCB); //read excel file  
                         //dataGridViewPCBNo.DataSource = dtExcel2;
 
                         DataView dataView1 = dtExcel3.DefaultView;
+                        dataView1.Table.Columns[0].ColumnName = "F1";
                         dataView1.RowFilter = "F1 LIKE '%ALT PCB NO.:%'";
                         dataGridAltPCB.DataSource = dataView1;
 
                         if (dataView1.Count > 0)
                         {
                             string allPCB = dataGridAltPCB.Rows[0].Cells[0].Value.ToString().Remove(0, 12);
-
-                            //// Get 12 characters from the right of the string
-                            //string altPCB1 = allPCB.Substring(allPCB.Length - 26, 12);
-
-                            //// Get 12 characters from the right of the string
-                            //string altPCB2 = allPCB.Substring(allPCB.Length - 12, 12);
 
                             // to split alt pcb if 2 pcb alt
                             string str = allPCB;
@@ -180,6 +176,7 @@ namespace CompareWOLL
                         dtExcel5 = help.ReadExcel(woFileName, fileExtLL, queryGetStencil); //read excel file  
 
                         DataView dataView2 = dtExcel5.DefaultView;
+                        dataView2.Table.Columns[0].ColumnName = "F1";
                         dataView2.RowFilter = "F1 LIKE '% STENCIL NO : %'";
                         dataGridViewStencil.DataSource = dataView2;
 
@@ -243,8 +240,8 @@ namespace CompareWOLL
                     }
                     catch (Exception ex)
                     {
-                        //MessageBox.Show(ex.Message.ToString());
-                        MessageBox.Show("Ada error ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(ex.Message.ToString());
+                        //MessageBox.Show("Ada error ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else

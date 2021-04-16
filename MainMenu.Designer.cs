@@ -34,7 +34,6 @@ namespace CompareWOLL
             this.workOrderToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.loadingListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compareWOVsLLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.readLoadingListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripUsername = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -58,8 +57,7 @@ namespace CompareWOLL
             this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.workOrderToolStripMenuItem1,
             this.loadingListToolStripMenuItem,
-            this.compareWOVsLLToolStripMenuItem,
-            this.readLoadingListToolStripMenuItem});
+            this.compareWOVsLLToolStripMenuItem});
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
             this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.menuToolStripMenuItem.Text = "Menu";
@@ -84,13 +82,6 @@ namespace CompareWOLL
             this.compareWOVsLLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.compareWOVsLLToolStripMenuItem.Text = "Compare";
             this.compareWOVsLLToolStripMenuItem.Click += new System.EventHandler(this.compareWOVsLLToolStripMenuItem_Click);
-            // 
-            // readLoadingListToolStripMenuItem
-            // 
-            this.readLoadingListToolStripMenuItem.Name = "readLoadingListToolStripMenuItem";
-            this.readLoadingListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.readLoadingListToolStripMenuItem.Text = "Read Loading List";
-            this.readLoadingListToolStripMenuItem.Click += new System.EventHandler(this.readLoadingListToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -157,7 +148,6 @@ namespace CompareWOLL
         private System.Windows.Forms.ToolStripMenuItem compareWOVsLLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem workOrderToolStripMenuItem1;
         public System.Windows.Forms.ToolStripStatusLabel toolStripUsername;
-        private System.Windows.Forms.ToolStripMenuItem readLoadingListToolStripMenuItem;
     }
 }
 
