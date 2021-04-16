@@ -263,7 +263,7 @@ namespace CompareWOLL
                 }
 
                 int count = 0;
-                int[] slctdColumn = { 1, 2, 5 };
+                int[] slctdColumn = { 4 };
                 for (int i = 0; i < dataGridViewLL.Rows.Count; ++i)
                 {
                     for (int j = 0; j < slctdColumn.Length; j++)
