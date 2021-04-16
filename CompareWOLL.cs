@@ -117,7 +117,6 @@ namespace CompareWOLL
                         {
                             ImportLL ill = new ImportLL();
                             ill.tbModelNo.Text = model[0].Replace(" ", "");
-                            ill.tbProcess.Text = model[1].Replace(" ", "");
                             ill.Show();
                             this.Hide();
                         }

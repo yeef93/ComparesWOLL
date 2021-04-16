@@ -21,7 +21,7 @@ namespace CompareWOLL
             MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
             connection.Open();
 
-            string querywo = "SELECT wo_PTSN, wo_No, model_No, model, process_Name ,wo_QTY, wo_Usage FROM tbl_wo";
+            string querywo = "SELECT wo_PTSN, wo_No, model_No, model, wo_QTY, wo_Usage FROM tbl_wo";
             string queryll = "SELECT model_No, process_Name FROM tbl_ll WHERE model_No = '60B38YE10A02P' AND process_Name = 'SMT-A'";
 
             using (MySqlDataAdapter adpt = new MySqlDataAdapter(querywo, connection))
@@ -71,13 +71,11 @@ namespace CompareWOLL
             connection.Close();
 
             // Set table title Wo
-            string[] titleWO = { "WO PTSN", "WO NO", "MODEL NO", "MODEL", "PROCESS NAME", "WO QTY", "WO USAGE" };
+            string[] titleWO = { "WO PTSN", "WO NO", "MODEL NO", "MODEL", "WO QTY", "WO USAGE" };
             for (int i = 0; i < titleWO.Length; i++)
             {
                 dataGridViewWoList.Columns[i].HeaderText = "" + titleWO[i];
             }
-
-
         }
 
         private void importWO_Click(object sender, EventArgs e)
@@ -103,7 +101,7 @@ namespace CompareWOLL
             string modelslctd = dataGridViewWoList.Rows[i].Cells[2].Value.ToString();
             string processslctd = dataGridViewWoList.Rows[i].Cells[4].Value.ToString();
 
-            if (e.ColumnIndex == 7)
+            if (e.ColumnIndex == 6)
             {
                 DetailWO dwo = new DetailWO();
                 string woPtsn = dataGridViewWoList.Rows[e.RowIndex].Cells[0].Value.ToString();
@@ -119,18 +117,17 @@ namespace CompareWOLL
                 dwo.woNo.Text = woNo;
                 dwo.modelNo.Text = modelNo;
                 dwo.model.Text = model;
-                dwo.woQty.Text = woQty;
-                dwo.woUsage.Text = woUsage;
-                dwo.process.Text = processName;
+                dwo.totalUsage.Text = woQty;
+                dwo.woQty.Text = woUsage;
 
                 dwo.Show();
                 this.Hide();
                 //MessageBox.Show((e.RowIndex + 1) + "  Row  " + (e.ColumnIndex + 1) + "  Column button clicked ");
             }
 
-            if (e.ColumnIndex == 8)
+            if (e.ColumnIndex == 7)
             {
-                string message = "Do you want to delete this Work Order and Loading List record " + modelslctd + " " + processslctd + " ?";
+                string message = "Do you want to delete this Work Order and Loading List record model " + modelslctd + " ?";
                 string title = "Delete Work Order";
                 MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                 DialogResult result = MessageBox.Show(message, title, buttons);
@@ -139,15 +136,15 @@ namespace CompareWOLL
                     var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
                     var cmd = new MySqlCommand("", conn);
 
-                    string querydeleteWO = "DELETE FROM tbl_wo WHERE  model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
-                    string querydeleteWODetail = "DELETE FROM tbl_wodetail WHERE  model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
-                    string querydeleteModel = "DELETE FROM tbl_model WHERE  model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
+                    string querydeleteWO = "DELETE FROM tbl_wo WHERE  model_No = '" + modelslctd + "'";
+                    string querydeleteWODetail = "DELETE FROM tbl_wodetail WHERE  model_No = '" + modelslctd + "'";
+                    string querydeleteModel = "DELETE FROM tbl_model WHERE  model_No = '" + modelslctd + "'";
 
-                    string querydeleteLL = "DELETE FROM tbl_ll WHERE model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
-                    string querydeleteLLDetail = "DELETE FROM tbl_lldetail WHERE model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
-                    string querydeletePartCode = "DELETE FROM tbl_partcodedetail WHERE model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
-                    string querydeleteReel = "DELETE FROM tbl_reel WHERE model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
-                    string querydeleteResult = "DELETE FROM tbl_resultcompare WHERE model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
+                    string querydeleteLL = "DELETE FROM tbl_ll WHERE model_No = '" + modelslctd + "'";
+                    string querydeleteLLDetail = "DELETE FROM tbl_lldetail WHERE model_No = '" + modelslctd + "'";
+                    string querydeletePartCode = "DELETE FROM tbl_partcodedetail WHERE model_No = '" + modelslctd + "'";
+                    string querydeleteReel = "DELETE FROM tbl_reel WHERE model_No = '" + modelslctd + "'";
+                    string querydeleteResult = "DELETE FROM tbl_resultcompare WHERE model_No = '" + modelslctd + "'";
 
                     conn.Open();
 
@@ -171,7 +168,7 @@ namespace CompareWOLL
                 }
             }
 
-            if (e.ColumnIndex == 9)
+            if (e.ColumnIndex == 8)
             {
 
                 ImportLL il = new ImportLL();
@@ -179,7 +176,6 @@ namespace CompareWOLL
                 string processName = dataGridViewWoList.Rows[e.RowIndex].Cells[4].Value.ToString();
                 il.Show();
                 il.tbModelNo.Text = model;
-                il.tbProcess.Text = processName;
                 //importExcel il = new importExcel();
                 //string model = dataGridViewWoList.Rows[e.RowIndex].Cells[2].Value.ToString();
                 //string processName = dataGridViewWoList.Rows[e.RowIndex].Cells[4].Value.ToString();
@@ -191,7 +187,7 @@ namespace CompareWOLL
                 //MessageBox.Show((e.RowIndex + 1) + "  Row  " + (e.ColumnIndex + 1) + "  Column button clicked "+model+"");
             }
 
-            if (e.ColumnIndex == 10)
+            if (e.ColumnIndex == 9)
             {
 
                 CompareWOLL cowl = new CompareWOLL();

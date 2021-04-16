@@ -30,9 +30,7 @@ namespace CompareWOLL
         private void InitializeComponent()
         {
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
-            this.process = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.woUsage = new System.Windows.Forms.TextBox();
+            this.woQty = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.woPTSN = new System.Windows.Forms.TextBox();
             this.modelNo = new System.Windows.Forms.TextBox();
@@ -42,7 +40,7 @@ namespace CompareWOLL
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.totalPart = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.woQty = new System.Windows.Forms.TextBox();
+            this.totalUsage = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.model = new System.Windows.Forms.TextBox();
@@ -65,40 +63,23 @@ namespace CompareWOLL
             this.dateTimeNow.Size = new System.Drawing.Size(124, 17);
             this.dateTimeNow.Text = "toolStripStatusLabel2";
             // 
-            // process
+            // woQty
             // 
-            this.process.Location = new System.Drawing.Point(115, 120);
-            this.process.Name = "process";
-            this.process.ReadOnly = true;
-            this.process.Size = new System.Drawing.Size(223, 20);
-            this.process.TabIndex = 29;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(20, 127);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(45, 13);
-            this.label7.TabIndex = 28;
-            this.label7.Text = "Process";
-            // 
-            // woUsage
-            // 
-            this.woUsage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.woUsage.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.woUsage.Location = new System.Drawing.Point(1014, 61);
-            this.woUsage.Name = "woUsage";
-            this.woUsage.ReadOnly = true;
-            this.woUsage.Size = new System.Drawing.Size(100, 47);
-            this.woUsage.TabIndex = 27;
-            this.woUsage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.woQty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.woQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.woQty.Location = new System.Drawing.Point(1033, 61);
+            this.woQty.Name = "woQty";
+            this.woQty.ReadOnly = true;
+            this.woQty.Size = new System.Drawing.Size(100, 47);
+            this.woQty.TabIndex = 27;
+            this.woQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label8
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(1020, 39);
+            this.label8.Location = new System.Drawing.Point(913, 39);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(94, 16);
             this.label8.TabIndex = 26;
@@ -152,11 +133,9 @@ namespace CompareWOLL
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.totalPart);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.woQty);
+            this.groupBox1.Controls.Add(this.totalUsage);
             this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.process);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.woUsage);
+            this.groupBox1.Controls.Add(this.woQty);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.woPTSN);
             this.groupBox1.Controls.Add(this.modelNo);
@@ -168,7 +147,7 @@ namespace CompareWOLL
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 54);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1148, 226);
+            this.groupBox1.Size = new System.Drawing.Size(1167, 179);
             this.groupBox1.TabIndex = 31;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Work Order Detail";
@@ -177,7 +156,7 @@ namespace CompareWOLL
             // 
             this.totalPart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.totalPart.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalPart.Location = new System.Drawing.Point(770, 61);
+            this.totalPart.Location = new System.Drawing.Point(789, 61);
             this.totalPart.Name = "totalPart";
             this.totalPart.ReadOnly = true;
             this.totalPart.Size = new System.Drawing.Size(100, 47);
@@ -189,29 +168,29 @@ namespace CompareWOLL
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(784, 39);
+            this.label5.Location = new System.Drawing.Point(803, 39);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(76, 16);
             this.label5.TabIndex = 34;
             this.label5.Text = "Total Part";
             // 
-            // woQty
+            // totalUsage
             // 
-            this.woQty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.woQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.woQty.Location = new System.Drawing.Point(891, 61);
-            this.woQty.Name = "woQty";
-            this.woQty.ReadOnly = true;
-            this.woQty.Size = new System.Drawing.Size(100, 47);
-            this.woQty.TabIndex = 35;
-            this.woQty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.totalUsage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.totalUsage.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalUsage.Location = new System.Drawing.Point(910, 61);
+            this.totalUsage.Name = "totalUsage";
+            this.totalUsage.ReadOnly = true;
+            this.totalUsage.Size = new System.Drawing.Size(100, 47);
+            this.totalUsage.TabIndex = 35;
+            this.totalUsage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label9
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(911, 42);
+            this.label9.Location = new System.Drawing.Point(1055, 39);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(60, 16);
             this.label9.TabIndex = 34;
@@ -304,10 +283,10 @@ namespace CompareWOLL
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewWoList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewWoList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewWoList.Location = new System.Drawing.Point(15, 290);
+            this.dataGridViewWoList.Location = new System.Drawing.Point(12, 239);
             this.dataGridViewWoList.Name = "dataGridViewWoList";
             this.dataGridViewWoList.ReadOnly = true;
-            this.dataGridViewWoList.Size = new System.Drawing.Size(1164, 332);
+            this.dataGridViewWoList.Size = new System.Drawing.Size(1167, 367);
             this.dataGridViewWoList.TabIndex = 28;
             // 
             // DetailWO
@@ -337,7 +316,6 @@ namespace CompareWOLL
         #endregion
 
         private System.Windows.Forms.ToolStripStatusLabel dateTimeNow;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
@@ -351,14 +329,13 @@ namespace CompareWOLL
         private System.Windows.Forms.Button backButton;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.DataGridView dataGridViewWoList;
-        public System.Windows.Forms.TextBox process;
-        public System.Windows.Forms.TextBox woUsage;
+        public System.Windows.Forms.TextBox woQty;
         public System.Windows.Forms.TextBox woPTSN;
         public System.Windows.Forms.TextBox modelNo;
         public System.Windows.Forms.TextBox woNo;
         public System.Windows.Forms.TextBox model;
         private System.Windows.Forms.Label label9;
-        public System.Windows.Forms.TextBox woQty;
+        public System.Windows.Forms.TextBox totalUsage;
         private System.Windows.Forms.TextBox totalPart;
         private System.Windows.Forms.Label label5;
     }

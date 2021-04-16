@@ -47,21 +47,6 @@ namespace CompareWOLL
 
             saveButton.Enabled = false;
 
-            //MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
-            //connection.Open();
-
-            //string query = "SELECT * FROM tbl_wo";
-
-            //using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
-            //{
-            //    DataSet dset = new DataSet();
-
-            //    adpt.Fill(dset);
-
-            //    dataGridViewWO.DataSource = dset.Tables[0];
-            //}
-            //connection.Close();
-
         }
 
         private void browseWO_Click(object sender, EventArgs e)
@@ -72,7 +57,6 @@ namespace CompareWOLL
             string queryPcbNo = string.Empty;
 
             openFileDialogWO.Title = "Please Select a File Work Order";
-            //openFileDialogWO.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm| CSV files (*.csv)|*.csv";
             openFileDialogWO.Filter = "Excel Files|*.xls;*.xlsx;";
             openFileDialogWO.InitialDirectory = @"D:\";
             if (openFileDialogWO.ShowDialog() == DialogResult.OK)
@@ -83,14 +67,13 @@ namespace CompareWOLL
                 woNo.Text = "";
                 modelNo.Text = "";
                 model.Text = "";
-                process.Text = "";
                 totalPart.Text = "";
+                totalUsage.Text = "";
                 woQty.Text = "";
-                woUsage.Text = "";
 
                 totalPart.BackColor = SystemColors.Control;
+                totalUsage.BackColor = SystemColors.Control;
                 woQty.BackColor = SystemColors.Control;
-                woUsage.BackColor = SystemColors.Control;
 
                 string woFileName = openFileDialogWO.FileName;
                 filepathWO.Text = woFileName;
@@ -115,8 +98,7 @@ namespace CompareWOLL
                         woNo.Text = dataGridViewWO.Rows[0].Cells[5].Value.ToString();
                         modelNo.Text = dataGridViewWO.Rows[0].Cells[2].Value.ToString();
                         model.Text = dataGridViewWO.Rows[0].Cells[0].Value.ToString();
-                        woUsage.Text = dataGridViewWO.Rows[0].Cells[9].Value.ToString();
-                        process.Text = dataGridViewWO.Rows[0].Cells[7].Value.ToString();
+                        woQty.Text = dataGridViewWO.Rows[0].Cells[9].Value.ToString();
                         totalPart.Text = dataGridViewWO.Rows.Count.ToString();
 
                         //bool pcbNoo = dataGridViewWO.Rows[0].Cells[2].Value.ToString().StartsWith("35");
@@ -181,17 +163,17 @@ namespace CompareWOLL
                                 dataGridViewWO.Rows[i].Cells[5].Style.BackColor = Color.Red;
                                 count++;
                             }
-                            if (cellValueProcess != process.Text)
-                            {
-                                dataGridViewWO.Rows[i].Cells[7].Style.BackColor = Color.Red;
-                                count++;
-                            }
+                            //if (cellValueProcess != process.Text)
+                            //{
+                            //    dataGridViewWO.Rows[i].Cells[7].Style.BackColor = Color.Red;
+                            //    count++;
+                            //}
                             if (cellValueWoPtsn != woPTSN.Text)
                             {
                                 dataGridViewWO.Rows[i].Cells[8].Style.BackColor = Color.Red;
                                 count++;
                             }
-                            if (cellValueWoQty != woUsage.Text)
+                            if (cellValueWoQty != woQty.Text)
                             {
                                 dataGridViewWO.Rows[i].Cells[9].Style.BackColor = Color.Red;
                                 count++;
@@ -208,22 +190,6 @@ namespace CompareWOLL
                                 //dataGridViewWO.Rows[i].Cells[3].ToolTipText = "Change Data be Number";
                             }
                         }
-                        for (int i = 0; i < dataGridViewWO.Rows.Count; ++i)
-                        {
-                            if (dataGridViewWO.Rows[i].Cells[0].Style.BackColor == Color.Red ||
-                                dataGridViewWO.Rows[i].Cells[2].Style.BackColor == Color.Red ||
-                                dataGridViewWO.Rows[i].Cells[5].Style.BackColor == Color.Red ||
-                                dataGridViewWO.Rows[i].Cells[7].Style.BackColor == Color.Red ||
-                                dataGridViewWO.Rows[i].Cells[8].Style.BackColor == Color.Red ||
-                                dataGridViewWO.Rows[i].Cells[9].Style.BackColor == Color.Red ||
-                                dataGridViewWO.Rows[i].Cells[3].Style.BackColor == Color.Red
-                               )
-                            {
-                                MessageBox.Show("Data Issue Part Not Match, Please Check Excel File", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
-                                saveButton.Enabled = false;
-                            }
-                        }
-
 
                         //show total qty component
                         int sum = 0;
@@ -251,21 +217,17 @@ namespace CompareWOLL
                                 totalPart.Text = "#Erorr";
                                 totalPart.BackColor = System.Drawing.Color.Red;
 
-                                woQty.Text = "#Erorr";
-                                woQty.BackColor = System.Drawing.Color.Red;
+                                totalUsage.Text = "#Erorr";
+                                totalUsage.BackColor = System.Drawing.Color.Red;
 
-                                woUsage.Text = "#Erorr";
-                                woUsage.BackColor = System.Drawing.Color.Red;
+                                this.woQty.Text = "#Erorr";
+                                this.woQty.BackColor = System.Drawing.Color.Red;
 
                                 dataGridViewWO.Rows[i].DefaultCellStyle = styleError;
                             }
-                            if (totalPart.Text == "#Erorr" || woQty.Text == "#Erorr" || woUsage.Text == "#Erorr")
+                            if (totalPart.Text == "#Erorr" || totalUsage.Text == "#Erorr" || this.woQty.Text == "#Erorr")
                             {
                                 saveButton.Enabled = false;
-                            }
-                            if (process.Text == "")
-                            {
-                                //MessageBox.Show("Please fill process column", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
                             }
                             else
                             {
@@ -273,7 +235,7 @@ namespace CompareWOLL
                             }
                         }
 
-                        woQty.Text = sum.ToString();
+                        totalUsage.Text = sum.ToString();
                     }
                     catch (Exception ex)
                     {
@@ -295,7 +257,6 @@ namespace CompareWOLL
                 {
                     dataGridViewWO.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
-
             }
             saveButton.Enabled = true;
         }
@@ -313,10 +274,8 @@ namespace CompareWOLL
             string woNoo = woNo.Text;
             string modelNoo = modelNo.Text;
             string modell = model.Text;
-            string woqtyy = woQty.Text;
-            string wousagee = woUsage.Text;
-            string processs = process.Text;
-            //string pcbNoo = pcbNo.Text;
+            string woqtyy = totalUsage.Text;
+            string wousagee = woQty.Text;
             saveButton.Enabled = false;
 
 
@@ -335,12 +294,16 @@ namespace CompareWOLL
                     var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
                     var cmd = new MySqlCommand("", conn);
 
-                    string cekmodel = "SELECT model_No, process_Name FROM tbl_model  WHERE model_No = '" + modelNoo + "' AND process_Name = '" + processs + "'";
-                    string query = "INSERT INTO tbl_wo VALUES('', '" + woPTSNN + "','" + woNoo + "','" + modelNoo + "','" + modell + "', '" + woqtyy + "', '" + wousagee + "','" + processs + "' )";
-                    string querymodel = "INSERT INTO tbl_model VALUES('','" + modelNoo + "','" + processs + "')";
-
                     conn.Open();
                     //Buka koneksi
+
+                    string trncteModel = "TRUNCATE tbl_model";
+                    cmd.CommandText = trncteModel;
+                    cmd.ExecuteNonQuery();
+
+                    string cekmodel = "SELECT model_No, process_Name FROM tbl_model  WHERE model_No = '" + modelNoo + "'";
+                    string query = "INSERT INTO tbl_wo VALUES('', '" + woPTSNN + "','" + woNoo + "','" + modelNoo + "','" + modell + "', '" + woqtyy + "', '" + wousagee + "')";
+                    string querymodel = "INSERT INTO tbl_model ( model_No, process_Name ) SELECT model_No, process_Name FROM tbl_wodetail GROUP BY process_Name, model_No";
 
                     using (MySqlDataAdapter dscmd = new MySqlDataAdapter(cekmodel, conn))
                     {
@@ -350,26 +313,16 @@ namespace CompareWOLL
                         if (ds.Tables[0].Rows.Count >= 1)
                         {
                             lf.Close();
-                            MessageBox.Show("Work Order Data " + modelNoo + "  " + processs + " already uploaded", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+                            MessageBox.Show("Work Order Data " + modelNoo + "  already uploaded", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
                             homeButton.Enabled = true;
                             backButton.Enabled = true;
                         }
 
                         else
                         {
+                            cmd.CommandText = query;
+                            cmd.ExecuteNonQuery();
 
-                            string[] allQuery = { query, querymodel };
-                            for (int i = 0; i < allQuery.Length; i++)
-                            {
-                                cmd.CommandText = allQuery[i];
-                                //Masukkan perintah/query yang akan dijalankan ke dalam CommandText
-                                cmd.ExecuteNonQuery();
-                                //Jalankan perintah / query dalam CommandText pada database
-                            }
-
-                            //cmd.CommandText = query;
-                            //cmd.CommandText = querymodel;
-                            ////Masukkan perintah/query yang akan dijalankan ke dalam CommandText  
 
                             for (int i = 0; i < dataGridViewWO.Rows.Count; i++)
                             {
@@ -383,6 +336,9 @@ namespace CompareWOLL
                                 cmd.CommandText = StrQuery;
                                 cmd.ExecuteNonQuery();
                             }
+
+                            cmd.CommandText = querymodel;
+                            cmd.ExecuteNonQuery();
 
                             conn.Close();
                             //Tutup koneksi

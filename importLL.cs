@@ -11,6 +11,9 @@ namespace CompareWOLL
     public partial class ImportLL : Form
     {
         Helper help = new Helper();
+        MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
+
+
         public ImportLL()
         {
             InitializeComponent();
@@ -23,6 +26,49 @@ namespace CompareWOLL
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             dataGridViewLLHide.Visible = false;
             saveButton.Enabled = false;
+
+
+            string model = tbModelNo.Text;
+
+            label14.Text = model;
+
+
+            connection.Open();
+
+            string queryProcessDropDown = "SELECT model_No, process_Name FROM tbl_ll WHERE model_No = '" + model + "' ";
+
+            try
+            {
+
+                using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryProcessDropDown, connection))
+                {
+                    DataTable dset = new DataTable();
+                    adpt.Fill(dset);
+
+                    if (dset.Rows.Count > 0)
+                    {
+                        for (int i = 0; i < dset.Rows.Count; i++)
+                        {
+                            cmbProcess.Items.Add(dset.Rows[i][0] + " | " + dset.Rows[i][1]);
+                            cmbProcess.ValueMember = dset.Rows[i][1].ToString();
+
+                        }
+                    }
+                    else
+                    {
+                    }
+                }
+
+                connection.Close();
+
+            }
+            catch (Exception ex)
+            {
+                // tampilkan pesan error
+                MessageBox.Show(ex.Message);
+            }
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -42,6 +88,7 @@ namespace CompareWOLL
 
         private void browseWO_Click(object sender, EventArgs e)
         {
+
             string filePathLL = string.Empty;
             string fileExtLL = string.Empty;
             string queryLL = string.Empty;
@@ -299,7 +346,6 @@ namespace CompareWOLL
             lf.Show();
             
             string model = tbModelNo.Text;
-            string process = tbProcess.Text;
             string modelLL = tbModel.Text;
             string machine = tbMachine.Text;
             string pwbType = tbPWBType.Text;
@@ -330,7 +376,7 @@ namespace CompareWOLL
 
             string llUsage = sum.ToString();
 
-            if (model == "" | process == "" | modelLL == "" | machine == "" | pwbType == "" | prog == "" | pcb == "")
+            if (model == "" |  modelLL == "" | machine == "" | pwbType == "" | prog == "" | pcb == "")
             {
                 lf.Close();
                 MessageBox.Show("Unable to import Work Order without fill data properly", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -344,11 +390,11 @@ namespace CompareWOLL
                     var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
                     var cmd = new MySqlCommand("", conn);
 
-                    string cekmodel = "SELECT model_No, process_Name FROM tbl_ll  WHERE model_No = '" + model + "' AND process_Name = '" + process + "'";
-                    string queryLL = "INSERT INTO tbl_ll VALUES('','" + model + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','" + llUsage + "','" + stencil + "','" + remark + "')";
-                    string queryInputPCB = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '" + pcb + "', '1', '1');";
-                    string queryPCBAlt1 = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '" + pcb1 + "', '2', '1');";
-                    string queryPCBAlt2 = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '" + pcb2 + "', '3', '1');";
+                    string cekmodel = "SELECT model_No, process_Name FROM tbl_ll  WHERE model_No = '" + model + "'";
+                    string queryLL = "INSERT INTO tbl_ll VALUES('','" + model + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','" + llUsage + "','" + stencil + "','" + remark + "')";
+                    string queryInputPCB = "INSERT INTO tbl_lldetail VALUES ('" + model + "','PCB', '" + pcb + "', '1', '1');";
+                    string queryPCBAlt1 = "INSERT INTO tbl_lldetail VALUES ('" + model + "','PCB', '" + pcb1 + "', '2', '1');";
+                    string queryPCBAlt2 = "INSERT INTO tbl_lldetail VALUES ('" + model + "','PCB', '" + pcb2 + "', '3', '1');";
 
                     conn.Open();
                     //Buka koneksi
@@ -361,14 +407,12 @@ namespace CompareWOLL
                         if (ds.Tables[0].Rows.Count >= 1)
                         {
                             lf.Close();
-                            MessageBox.Show("Loading List Data " + model + "  " + process + " already uploaded", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+                            MessageBox.Show("Loading List Data " + model + "  already uploaded", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
                             backButton.Enabled = true;
                         }
 
                         else
                         {
-
-
                             string[] allQuery = { queryLL, queryInputPCB };
                             for (int i = 0; i < allQuery.Length; i++)
                             {
@@ -393,7 +437,7 @@ namespace CompareWOLL
                             for (int i = 0; i < dataGridViewLL.Rows.Count; i++)
                             {
                                 // query insert data part code
-                                string StrQuery = "INSERT INTO tbl_partcodedetail VALUES ('" + model + "','" + process + "','"
+                                string StrQuery = "INSERT INTO tbl_partcodedetail VALUES ('" + model + "'"
                                     + dataGridViewLL.Rows[i].Cells[1].Value.ToString() + "', '"
                                     + dataGridViewLL.Rows[i].Cells[2].Value.ToString() + "', '"
                                     + dataGridViewLL.Rows[i].Cells[5].Value.ToString() + "');";
@@ -404,6 +448,8 @@ namespace CompareWOLL
 
                             String reelID = "";
                             String qty = "";
+                            String loc = "";
+
                             int altNo = 1;
 
                             for (int j = 0; j < dataGridViewLL.Rows.Count; j++)
@@ -414,7 +460,7 @@ namespace CompareWOLL
                                     qty = dataGridViewLL.Rows[j].Cells[3].Value.ToString();
                                     altNo = 1;
                                     string StrQueryReelDetail = "INSERT INTO tbl_reel VALUES ('','"
-                                        + reelID + "', '" + model + "','" + process + "','" + dataGridViewLL.Rows[j].Cells[3].Value.ToString() + "', '"
+                                        + reelID + "', '" + model + "','" + dataGridViewLL.Rows[j].Cells[3].Value.ToString() + "', '"
                                         + dataGridViewLL.Rows[j].Cells[4].Value.ToString() + "', '"
                                         + dataGridViewLL.Rows[j].Cells[6].Value.ToString() + "');";
 
@@ -422,30 +468,25 @@ namespace CompareWOLL
                                     cmd.ExecuteNonQuery();
                                 }
 
-                                string StrQueryLLDetail = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','"
+                                string StrQueryLLDetail = "INSERT INTO tbl_lldetail VALUES ('" + model + "','"
                                 + reelID + "', '"
                                 + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "','" + altNo + "', '"
                                 + qty + "');";
                                 cmd.CommandText = StrQueryLLDetail;
                                 cmd.ExecuteNonQuery();
                                 altNo++;
+
+
+                                //update location
+                                loc = dataGridViewLL.Rows[j].Cells[4].Value.ToString();
+
+                                string StrQueryAddLoc = "UPDATE tbl_reel SET loc = CONCAT(loc,'" + loc + "') " +
+                                    "WHERE reel = '" + reelID + "' AND tbl_reel.model_No = '" + model + "'";
+                                cmd.CommandText = StrQueryAddLoc;
+                                cmd.ExecuteNonQuery();
+
                             }
 
-                            //foreach (DataGridViewRow row in dataGridViewLL.Rows)
-                            //{
-                            //    foreach (DataGridViewCell cell in row.Cells)
-                            //    {
-                            //        if (cell.Value.ToString() == "")
-                            //        {
-                            //            rowIndex = row.Index;
-                            //            if (rowIndex.ToString() != "")
-                            //            {
-                            //                break;
-                            //            }
-                            //        }
-                            //    }
-                            //    MessageBox.Show(rowIndex.ToString());
-                            //}
 
                             conn.Close();
                             //Tutup koneksi
