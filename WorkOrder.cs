@@ -7,6 +7,8 @@ namespace CompareWOLL
 {
     public partial class WorkOrder : Form
     {
+        MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
+
         public WorkOrder()
         {
             InitializeComponent();
@@ -176,12 +178,42 @@ namespace CompareWOLL
                 string processName = dataGridViewWoList.Rows[e.RowIndex].Cells[4].Value.ToString();
                 il.Show();
                 il.tbModelNo.Text = model;
-                //importExcel il = new importExcel();
-                //string model = dataGridViewWoList.Rows[e.RowIndex].Cells[2].Value.ToString();
-                //string processName = dataGridViewWoList.Rows[e.RowIndex].Cells[4].Value.ToString();
-                //il.Show();
-                //il.tbModelNo.Text = model;
-                //il.tbProcess.Text = processName;
+
+                connection.Open();
+
+                string queryProcessDropDown = "SELECT process_Name FROM tbl_model WHERE model_No = '" + model + "' ORDER BY process_Name DESC ";
+
+                try
+                {
+
+                    using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryProcessDropDown, connection))
+                    {
+                        DataTable dset = new DataTable();
+                        adpt.Fill(dset);
+
+                        if (dset.Rows.Count > 0)
+                        {
+                            for (int j = 0; j < dset.Rows.Count; j++)
+                            {
+                                il.cmbProcess.Items.Add(dset.Rows[j][0]);
+                                il.cmbProcess.ValueMember = dset.Rows[j][0].ToString();
+                            }
+                        }
+                        else
+                        {
+                        }
+                    }
+
+                    connection.Close();
+
+                }
+                catch (Exception ex)
+                {
+                    // tampilkan pesan error
+                    MessageBox.Show(ex.Message);
+                }
+
+
                 this.Hide();
 
                 //MessageBox.Show((e.RowIndex + 1) + "  Row  " + (e.ColumnIndex + 1) + "  Column button clicked "+model+"");

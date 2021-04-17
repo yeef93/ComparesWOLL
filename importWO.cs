@@ -77,7 +77,7 @@ namespace CompareWOLL
 
                 string woFileName = openFileDialogWO.FileName;
                 filepathWO.Text = woFileName;
-                fileExtWO = Path.GetExtension(woFileName); //get the file extension  
+                fileExtWO = Path.GetExtension(woFileName).ToLower(); //get the file extension  
                 queryWO = "select * from [Sheet1$A3:M]";
 
 

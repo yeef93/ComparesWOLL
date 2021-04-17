@@ -12,7 +12,7 @@ namespace CompareWOLL
     {
         Helper help = new Helper();
         MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
-
+        LoadForm lf = new LoadForm();
 
         public ImportLL()
         {
@@ -26,49 +26,7 @@ namespace CompareWOLL
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             dataGridViewLLHide.Visible = false;
             saveButton.Enabled = false;
-
-
-            string model = tbModelNo.Text;
-
-            label14.Text = model;
-
-
-            connection.Open();
-
-            string queryProcessDropDown = "SELECT model_No, process_Name FROM tbl_ll WHERE model_No = '" + model + "' ";
-
-            try
-            {
-
-                using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryProcessDropDown, connection))
-                {
-                    DataTable dset = new DataTable();
-                    adpt.Fill(dset);
-
-                    if (dset.Rows.Count > 0)
-                    {
-                        for (int i = 0; i < dset.Rows.Count; i++)
-                        {
-                            cmbProcess.Items.Add(dset.Rows[i][0] + " | " + dset.Rows[i][1]);
-                            cmbProcess.ValueMember = dset.Rows[i][1].ToString();
-
-                        }
-                    }
-                    else
-                    {
-                    }
-                }
-
-                connection.Close();
-
-            }
-            catch (Exception ex)
-            {
-                // tampilkan pesan error
-                MessageBox.Show(ex.Message);
-            }
-
-
+            browseLL.Enabled = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -80,11 +38,14 @@ namespace CompareWOLL
 
         private void backButton_Click(object sender, EventArgs e)
         {
+            lf.Close();
             WorkOrder wo = new WorkOrder();
             wo.toolStripUsername.Text = toolStripUsername.Text;
             wo.Show();
             this.Hide();
         }
+
+
 
         private void browseWO_Click(object sender, EventArgs e)
         {
@@ -97,12 +58,16 @@ namespace CompareWOLL
             string queryGetAltPCB = string.Empty;
             string queryGetTotal = string.Empty;
             string queryGetStencil = string.Empty;
+            tbPcbNo.BackColor = SystemColors.Control;
+            tbAltPcbNo1.BackColor = SystemColors.Control;
+            tbAltPcbNo2.BackColor = SystemColors.Control;
 
             openFileDialogLL.Title = "Please Select a File Loading List";
             openFileDialogLL.Filter = "Excel Files|*.xls;*.xlsx;";
             openFileDialogLL.InitialDirectory = @"D:\";
             if (openFileDialogLL.ShowDialog() == DialogResult.OK)
             {
+                saveButton.Enabled = true;
                 string woFileName = openFileDialogLL.FileName;
                 filepathLL.Text = woFileName;
                 fileExtLL = Path.GetExtension(woFileName); //get the file extension  
@@ -141,7 +106,7 @@ namespace CompareWOLL
                         // baca pcb No
                         DataTable dtExcel2 = new DataTable();
                         dtExcel2 = help.ReadExcel(woFileName, fileExtLL, queryGetPCBNo); //read excel file  
-                        
+
 
                         DataView dataView = dtExcel2.DefaultView;
                         dataView.Table.Columns[0].ColumnName = "F1";
@@ -228,15 +193,15 @@ namespace CompareWOLL
                         dataGridViewStencil.DataSource = dataView2;
 
                         if (dataView2.Count > 0)
-                        { 
-                            tbStencil.Text = dataGridViewStencil.Rows[0].Cells[0].Value.ToString().Substring(14); 
+                        {
+                            tbStencil.Text = dataGridViewStencil.Rows[0].Cells[0].Value.ToString().Substring(14);
                         }
                         else if (dataView2.Count == 0)
                         {
                             tbStencil.BackColor = Color.Red;
                             MessageBox.Show("Stencil No Not Found, Please check again the document.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
                             saveButton.Enabled = false;
-                        }                           
+                        }
 
                         // buat cari batas total row
                         DataTable dtExcel4 = new DataTable();
@@ -339,182 +304,212 @@ namespace CompareWOLL
             browseLL.Enabled = true;
         }
 
-        private void saveButton_Click(object sender, EventArgs e)
-        {
-            backButton.Enabled = false;
-            LoadForm lf = new LoadForm();
-            lf.Show();
-            
-            string model = tbModelNo.Text;
-            string modelLL = tbModel.Text;
-            string machine = tbMachine.Text;
-            string pwbType = tbPWBType.Text;
-            string prog = tbProg.Text;
-            string rev = tbRev.Text;
-            string pcb = tbPcbNo.Text;
-            string pcb1 = tbAltPcbNo1.Text;
-            string pcb2 = tbAltPcbNo2.Text;
-            string stencil = tbStencil.Text;
-            string remark = tbRemark.Text;
-
-            saveButton.Enabled = false;
-
-            //show total qty component
-            int sum = 0;
-            for (int i = 0; i < dataGridViewLL.Rows.Count; ++i)
-            {
-                if (dataGridViewLL.Rows[i].Cells[3].Value == System.DBNull.Value)
-                {
-                    dataGridViewLL.Rows[i].Cells[3].Value = "0";
-                }
-
-                //get total qty component
-                sum += Convert.ToInt32(dataGridViewLL.Rows[i].Cells[3].Value);
-
-            }
-            sum = sum + 1;
-
-            string llUsage = sum.ToString();
-
-            if (model == "" |  modelLL == "" | machine == "" | pwbType == "" | prog == "" | pcb == "")
-            {
-                lf.Close();
-                MessageBox.Show("Unable to import Work Order without fill data properly", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                saveButton.Enabled = true;
-            }
-
-            else
-            {
-                try
-                {
-                    var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
-                    var cmd = new MySqlCommand("", conn);
-
-                    string cekmodel = "SELECT model_No, process_Name FROM tbl_ll  WHERE model_No = '" + model + "'";
-                    string queryLL = "INSERT INTO tbl_ll VALUES('','" + model + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','" + llUsage + "','" + stencil + "','" + remark + "')";
-                    string queryInputPCB = "INSERT INTO tbl_lldetail VALUES ('" + model + "','PCB', '" + pcb + "', '1', '1');";
-                    string queryPCBAlt1 = "INSERT INTO tbl_lldetail VALUES ('" + model + "','PCB', '" + pcb1 + "', '2', '1');";
-                    string queryPCBAlt2 = "INSERT INTO tbl_lldetail VALUES ('" + model + "','PCB', '" + pcb2 + "', '3', '1');";
-
-                    conn.Open();
-                    //Buka koneksi
-
-                    using (MySqlDataAdapter dscmd = new MySqlDataAdapter(cekmodel, conn))
-                    {
-                        DataSet ds = new DataSet();
-                        dscmd.Fill(ds);
-
-                        if (ds.Tables[0].Rows.Count >= 1)
-                        {
-                            lf.Close();
-                            MessageBox.Show("Loading List Data " + model + "  already uploaded", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
-                            backButton.Enabled = true;
-                        }
-
-                        else
-                        {
-                            string[] allQuery = { queryLL, queryInputPCB };
-                            for (int i = 0; i < allQuery.Length; i++)
-                            {
-                                cmd.CommandText = allQuery[i];
-                                //Masukkan perintah/query yang akan dijalankan ke dalam CommandText
-                                cmd.ExecuteNonQuery();
-                                //Jalankan perintah / query dalam CommandText pada database
-                            }
-
-                            if (queryPCBAlt1 != "")
-                            {
-                                cmd.CommandText = queryPCBAlt1;
-                                cmd.ExecuteNonQuery();
-                            }
-
-                            if (queryPCBAlt2 != "")
-                            {
-                                cmd.CommandText = queryPCBAlt2;
-                                cmd.ExecuteNonQuery();
-                            }
-
-                            for (int i = 0; i < dataGridViewLL.Rows.Count; i++)
-                            {
-                                // query insert data part code
-                                string StrQuery = "INSERT INTO tbl_partcodedetail VALUES ('" + model + "'"
-                                    + dataGridViewLL.Rows[i].Cells[1].Value.ToString() + "', '"
-                                    + dataGridViewLL.Rows[i].Cells[2].Value.ToString() + "', '"
-                                    + dataGridViewLL.Rows[i].Cells[5].Value.ToString() + "');";
-
-                                cmd.CommandText = StrQuery;
-                                cmd.ExecuteNonQuery();
-                            }
-
-                            String reelID = "";
-                            String qty = "";
-                            String loc = "";
-
-                            int altNo = 1;
-
-                            for (int j = 0; j < dataGridViewLL.Rows.Count; j++)
-                            {
-                                if (dataGridViewLL.Rows[j].Cells[0].Value.ToString() != "")
-                                {
-                                    reelID = dataGridViewLL.Rows[j].Cells[0].Value.ToString();
-                                    qty = dataGridViewLL.Rows[j].Cells[3].Value.ToString();
-                                    altNo = 1;
-                                    string StrQueryReelDetail = "INSERT INTO tbl_reel VALUES ('','"
-                                        + reelID + "', '" + model + "','" + dataGridViewLL.Rows[j].Cells[3].Value.ToString() + "', '"
-                                        + dataGridViewLL.Rows[j].Cells[4].Value.ToString() + "', '"
-                                        + dataGridViewLL.Rows[j].Cells[6].Value.ToString() + "');";
-
-                                    cmd.CommandText = StrQueryReelDetail;
-                                    cmd.ExecuteNonQuery();
-                                }
-
-                                string StrQueryLLDetail = "INSERT INTO tbl_lldetail VALUES ('" + model + "','"
-                                + reelID + "', '"
-                                + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "','" + altNo + "', '"
-                                + qty + "');";
-                                cmd.CommandText = StrQueryLLDetail;
-                                cmd.ExecuteNonQuery();
-                                altNo++;
-
-
-                                //update location
-                                loc = dataGridViewLL.Rows[j].Cells[4].Value.ToString();
-
-                                string StrQueryAddLoc = "UPDATE tbl_reel SET loc = CONCAT(loc,'" + loc + "') " +
-                                    "WHERE reel = '" + reelID + "' AND tbl_reel.model_No = '" + model + "'";
-                                cmd.CommandText = StrQueryAddLoc;
-                                cmd.ExecuteNonQuery();
-
-                            }
-
-
-                            conn.Close();
-                            //Tutup koneksi
-
-                            lf.Close();
-                            MessageBox.Show("Loading List Successfully saved", "Loading List", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            saveButton.Enabled = true;
-
-                            this.Close();
-                            //LoadingList ll = new LoadingList();
-                            //ll.Show();
-
-                            CompareWOLL cWOll = new CompareWOLL();
-                            cWOll.Show();
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message.ToString());
-                    saveButton.Enabled = true;
-                }
-            }
-        }
-
         private void tbPcbNo_TextChanged(object sender, EventArgs e)
         {
             saveButton.Enabled = true;
         }
+
+        private void cmbProcess_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            browseLL.Enabled = true;
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                backButton.Enabled = false;
+                lf.Show();
+
+                string model = tbModelNo.Text;
+                string modelLL = tbModel.Text;
+                string machine = tbMachine.Text;
+                string pwbType = tbPWBType.Text;
+                string prog = tbProg.Text;
+                string rev = tbRev.Text;
+                string pcb = tbPcbNo.Text;
+                string pcb1 = tbAltPcbNo1.Text;
+                string pcb2 = tbAltPcbNo2.Text;
+                string stencil = tbStencil.Text;
+                string remark = tbRemark.Text;
+                string process = cmbProcess.Text;
+
+                saveButton.Enabled = false;
+
+                //show total qty component
+                int sum = 0;
+                for (int i = 0; i < dataGridViewLL.Rows.Count; ++i)
+                {
+                    if (dataGridViewLL.Rows[i].Cells[3].Value == System.DBNull.Value)
+                    {
+                        dataGridViewLL.Rows[i].Cells[3].Value = "0";
+                    }
+
+                    //get total qty component
+                    sum += Convert.ToInt32(dataGridViewLL.Rows[i].Cells[3].Value);
+
+                }
+                sum = sum + 1;
+
+                string llUsage = sum.ToString();
+
+                if (model == "" | process == "" | modelLL == "" | machine == "" | pwbType == "" | prog == "" | pcb == "")
+                {
+                    lf.Hide();
+                    MessageBox.Show("Unable to import Work Order without fill data properly", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    saveButton.Enabled = true;
+                    backButton.Enabled = true;
+                }
+
+                else
+                {
+                    try
+                    {
+                        var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
+                        var cmd = new MySqlCommand("", conn);
+
+                        string cekmodel = "SELECT model_No, process_Name FROM tbl_ll  WHERE model_No = '" + model + "'AND process_Name ='" + modelLL + "'";
+                        string queryLL = "INSERT INTO tbl_ll VALUES('','" + model + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','" + llUsage + "','" + stencil + "','" + remark + "')";
+                        string queryInputPCB = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '" + pcb + "', '1', '1');";
+                        string queryAddPartCodePCB = "INSERT INTO tbl_partcodedetail VALUES ('" + model + "','" + process + "','PCB',  '" + pcb + "', '','PCB' ); ";
+                        string queryPCBAlt1 = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '" + pcb1 + "', '2', '1');";
+                        string queryPCBAlt2 = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '" + pcb2 + "', '3', '1');";
+
+                        conn.Open();
+                        //Buka koneksi
+
+                        using (MySqlDataAdapter dscmd = new MySqlDataAdapter(cekmodel, conn))
+                        {
+                            DataSet ds = new DataSet();
+                            dscmd.Fill(ds);
+
+                            if (ds.Tables[0].Rows.Count >= 1)
+                            {
+                                lf.Hide();
+                                MessageBox.Show("Loading List Data " + model + "  already uploaded", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+                                backButton.Enabled = true;
+                            }
+
+                            else
+                            {
+                                string[] allQuery = { queryLL, queryInputPCB, queryAddPartCodePCB };
+                                for (int i = 0; i < allQuery.Length; i++)
+                                {
+                                    cmd.CommandText = allQuery[i];
+                                    //Masukkan perintah/query yang akan dijalankan ke dalam CommandText
+                                    cmd.ExecuteNonQuery();
+                                    //Jalankan perintah / query dalam CommandText pada database
+                                }
+
+                                if (pcb1 != "")
+                                {
+                                    cmd.CommandText = queryPCBAlt1;
+                                    cmd.ExecuteNonQuery();
+                                }
+
+                                if (pcb2 != "")
+                                {
+                                    cmd.CommandText = queryPCBAlt2;
+                                    cmd.ExecuteNonQuery();
+                                }
+
+                                for (int i = 0; i < dataGridViewLL.Rows.Count; i++)
+                                {
+                                    string prtCode = dataGridViewLL.Rows[i].Cells[1].Value.ToString();
+
+                                    if (prtCode != "")
+                                    {
+                                        // query insert data part code
+                                        string StrQuery = "INSERT INTO tbl_partcodedetail VALUES ('" + model + "','" + process + "','"
+                                            + dataGridViewLL.Rows[i].Cells[0].Value.ToString() + "','"
+                                            + dataGridViewLL.Rows[i].Cells[1].Value.ToString() + "', '"
+                                            + dataGridViewLL.Rows[i].Cells[2].Value.ToString() + "', '"
+                                            + dataGridViewLL.Rows[i].Cells[5].Value.ToString() + "');";
+
+                                        cmd.CommandText = StrQuery;
+                                        cmd.ExecuteNonQuery();
+                                    }
+                                }
+
+                                String reelID = "";
+                                String qty = "";
+                                String loc = "";
+
+                                int altNo = 1;
+
+                                for (int j = 0; j < dataGridViewLL.Rows.Count; j++)
+                                {
+                                    if (dataGridViewLL.Rows[j].Cells[0].Value.ToString() != "")
+                                    {
+                                        reelID = dataGridViewLL.Rows[j].Cells[0].Value.ToString();
+                                        qty = dataGridViewLL.Rows[j].Cells[3].Value.ToString();
+                                        altNo = 1;
+                                        string StrQueryReelDetail = "INSERT INTO tbl_reel VALUES ('','"
+                                            + reelID + "', '" + model + "','" + process + "','" + dataGridViewLL.Rows[j].Cells[3].Value.ToString() + "', '"
+                                            + dataGridViewLL.Rows[j].Cells[4].Value.ToString() + "', '"
+                                            + dataGridViewLL.Rows[j].Cells[6].Value.ToString() + "');";
+
+                                        cmd.CommandText = StrQueryReelDetail;
+                                        cmd.ExecuteNonQuery();
+
+                                        string StrQueryLLDetail = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','"
+                                   + reelID + "', '"
+                                   + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "','" + altNo + "', '"
+                                   + qty + "');";
+                                        cmd.CommandText = StrQueryLLDetail;
+                                        cmd.ExecuteNonQuery();
+                                    }
+
+                                    //update location
+                                    loc = dataGridViewLL.Rows[j].Cells[4].Value.ToString();
+
+                                    string StrQueryAddLoc = "UPDATE tbl_reel SET loc = CONCAT(loc,'" + loc + "') " +
+                                        "WHERE reel = '" + reelID + "' AND tbl_reel.model_No = '" + model + "'";
+                                    cmd.CommandText = StrQueryAddLoc;
+                                    cmd.ExecuteNonQuery();
+
+                                }
+
+
+                                conn.Close();
+                                //Tutup koneksi
+
+                                lf.Hide();
+                                MessageBox.Show("Loading List Successfully saved", "Loading List", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                saveButton.Enabled = true;
+                                backButton.Enabled = true;
+
+                                cmbProcess.Items.Remove(cmbProcess.SelectedItem);
+                                filepathLL.Text = "";
+                                tbModel.Text = "";
+                                tbPWBType.Text = "";
+                                tbMachine.Text = "";
+                                tbProg.Text = "";
+                                tbRev.Text = "";
+                                tbPcbNo.Text = "";
+                                tbAltPcbNo1.Text = "";
+                                tbAltPcbNo2.Text = "";
+                                tbStencil.Text = "";
+                                dataGridViewLL.DataSource = null;
+                                dataGridViewLL.Refresh();
+
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message.ToString());
+                        backButton.Enabled = true;
+                        saveButton.Enabled = true;
+                        lf.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
     }
 }

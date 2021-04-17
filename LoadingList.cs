@@ -31,6 +31,15 @@ namespace CompareWOLL
 
                 dataGridViewLLList.DataSource = dset.Tables[0];
 
+                // add button detail in datagridview table
+                DataGridViewButtonColumn btnDetail = new DataGridViewButtonColumn();
+                dataGridViewLLList.Columns.Add(btnDetail);
+                btnDetail.HeaderText = "";
+                btnDetail.Text = "Detail";
+                btnDetail.Name = "btnDetail";
+                btnDetail.UseColumnTextForButtonValue = true;
+
+
                 // add button delete in datagridview table
                 DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
                 dataGridViewLLList.Columns.Add(btnDelete);
@@ -73,6 +82,32 @@ namespace CompareWOLL
             string processslctd = dataGridViewLLList.Rows[i].Cells[1].Value.ToString();
 
             if (e.ColumnIndex == 9)
+            {
+                DetailLL dll = new DetailLL();
+                string modelNo = dataGridViewLLList.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string process = dataGridViewLLList.Rows[e.RowIndex].Cells[1].Value.ToString();
+                string model = dataGridViewLLList.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string machine = dataGridViewLLList.Rows[e.RowIndex].Cells[3].Value.ToString();
+                string pwbType = dataGridViewLLList.Rows[e.RowIndex].Cells[4].Value.ToString();
+                string prog = dataGridViewLLList.Rows[e.RowIndex].Cells[5].Value.ToString();
+                string rev = dataGridViewLLList.Rows[e.RowIndex].Cells[6].Value.ToString();
+                string mainpcb = dataGridViewLLList.Rows[e.RowIndex].Cells[7].Value.ToString();
+
+
+                dll.tbModelNo.Text = modelNo;
+                dll.tbProcess.Text = process;
+                dll.tbModel.Text =model;
+                dll.tbPWBType.Text = pwbType;
+                dll.tbMachine.Text = machine;
+                dll.tbProg.Text = prog;
+                dll.tbRev.Text = rev;
+                dll.tbPcbNo.Text = mainpcb;
+
+                dll.Show();
+                this.Hide();
+            }
+
+                if (e.ColumnIndex == 10)
             {                
                 string message = "Do you want to delete this Loading List " +modelslctd + " " +processslctd + " ?";
                 string title = "Delete Loading List";
