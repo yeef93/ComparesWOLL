@@ -44,7 +44,7 @@ namespace CompareWOLL
 
             connection.Open();
 
-            string queryWODropDown = "SELECT model_No FROM tbl_wo";
+            string queryWODropDown = "SELECT model_No FROM tbl_wo ";
 
             try
             {
@@ -57,7 +57,7 @@ namespace CompareWOLL
                     for (int i = 0; i < dset.Rows.Count; i++)
                     {
                         cmbWOModel.Items.Add(dset.Rows[i][0]);
-                        cmbWOModel.ValueMember = dset.Rows[i][1].ToString();
+                        cmbWOModel.ValueMember = dset.Rows[i][0].ToString();
                     }
                 }
 
@@ -85,9 +85,9 @@ namespace CompareWOLL
             llQty.Text = "";
             compareQty.Text = "";
             compareQty.BackColor = SystemColors.Control;
-            while (dataGridViewCompareWOLL.Rows.Count > 0)
+            while (dataGridViewCompareLLWO.Rows.Count > 0)
             {
-                dataGridViewCompareWOLL.Rows.RemoveAt(0);
+                dataGridViewCompareLLWO.Rows.RemoveAt(0);
             }
 
             cmbLLModel.Items.Clear();
@@ -100,7 +100,7 @@ namespace CompareWOLL
 
             connection.Open();
 
-            string queryLLDropDown = "SELECT model_No, process_Name FROM tbl_ll WHERE model_No = '" + model[0].Replace(" ", "") + "' AND process_Name = '" + model[1].Replace(" ", "") + "' ";
+            string queryLLDropDown = "SELECT model_No FROM tbl_ll WHERE model_No = '" + model[0].Replace(" ", "") + "'GROUP BY model_No";
 
             try
             {
@@ -114,8 +114,8 @@ namespace CompareWOLL
                     {
                         for (int i = 0; i < dset.Rows.Count; i++)
                         {
-                            cmbLLModel.Items.Add(dset.Rows[i][0] + " | " + dset.Rows[i][1]);
-                            cmbLLModel.ValueMember = dset.Rows[i][1].ToString();
+                            cmbLLModel.Items.Add(dset.Rows[i][0]);
+                            cmbLLModel.ValueMember = dset.Rows[i][0].ToString();
 
                         }
                     }
@@ -152,25 +152,18 @@ namespace CompareWOLL
 
         private void btnCompare_Click(object sender, EventArgs e)
         {
-            // to split model and process
-            string str = cmbLLModel.Text;
-            char ch = '|';
-
-            var model = str.Split(ch);
 
 
+            string queryCompareLLWO = "SELECT tbl_lldetail.partcode, SUM(tbl_lldetail.qty) AS total_qtyll, COUNT(tbl_lldetail.partcode) AS total_partll," +
+                " SUM(tbl_wodetail.qty) AS total_qtywo, COUNT(tbl_wodetail.partcode) AS total_partwo FROM tbl_lldetail, tbl_wodetail " +
+                "WHERE tbl_lldetail.partcode = tbl_wodetail.partcode AND tbl_lldetail.model_No = tbl_wodetail.model_No " +
+                "AND tbl_lldetail.model_No = '" + cmbLLModel.Text + "' GROUP BY tbl_lldetail.partcode , tbl_wodetail.partcode";
 
-            string queryTotalWO = "SELECT SUM(tbl_wodetail.qty) AS totalWO  FROM tbl_wodetail LEFT JOIN tbl_lldetail " +
-                "ON tbl_wodetail.partcode = tbl_lldetail.partcode " +
-                "WHERE tbl_wodetail.model_No = '" + model[0].Replace(" ", "") + "' AND tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "'" +
-                "AND tbl_lldetail.model_No = '" + model[0].Replace(" ", "") + "' AND tbl_lldetail.process_Name = '" + model[1].Replace(" ", "") + "'";
+            string queryTotalLL = "SELECT SUM(tbl_lldetail.qty) AS totalLL FROM tbl_lldetail WHERE model_No = '" + cmbLLModel.Text + "'";
 
-            string queryTotalLL = "SELECT SUM(tbl_lldetail.qty) AS totalLL  FROM tbl_wodetail LEFT JOIN tbl_lldetail " +
-                "ON tbl_wodetail.partcode = tbl_lldetail.partcode " +
-                "WHERE tbl_wodetail.model_No = '" + model[0].Replace(" ", "") + "' AND tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "'" +
-                "AND tbl_lldetail.model_No = '" + model[0].Replace(" ", "") + "' AND tbl_lldetail.process_Name = '" + model[1].Replace(" ", "") + "'";
+            string queryTotalWO = "SELECT SUM(tbl_wodetail.qty) AS totalWO FROM tbl_wodetail WHERE model_No = '" + cmbLLModel.Text + "'";
 
-            string queryDetailLL = "SELECT model_detail, machine, pwb_Type, prog_No, stencil FROM tbl_ll WHERE  model_No = '" + model[0].Replace(" ", "") + "' AND process_Name = '" + model[1].Replace(" ", "") + "'";
+            string queryDetailLL = "SELECT model_detail, machine, pwb_Type, prog_No, stencil FROM tbl_ll WHERE  model_No = '" + cmbLLModel.Text + "'";
 
             try
             {
@@ -224,10 +217,10 @@ namespace CompareWOLL
 
                 connection.Open();
                 //nampilin selected PCB
-                string queryPCB = "SELECT tbl_wodetail.partcode FROM tbl_wodetail LEFT JOIN tbl_lldetail ON " +
-                    "tbl_wodetail.partcode = tbl_lldetail.partcode WHERE tbl_wodetail.model_No = '" + model[0].Replace(" ", "") + "' " +
-                    "AND tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "' AND tbl_lldetail.model_No = '" + model[0].Replace(" ", "") + "' " +
-                    "AND tbl_lldetail.process_Name = '" + model[1].Replace(" ", "") + "' AND tbl_lldetail.reel = 'PCB'";
+                string queryPCB = "SELECT tbl_wodetail.partcode FROM tbl_wodetail LEFT JOIN tbl_lldetail " +
+                    "ON tbl_wodetail.partcode = tbl_lldetail.partcode  " +
+                    "WHERE tbl_wodetail.model_No = '" + cmbLLModel.Text + "' AND tbl_lldetail.model_No = '" + cmbLLModel.Text + "' " +
+                    "AND tbl_lldetail.reel = 'PCB' GROUP BY tbl_wodetail.partcode";
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryPCB, connection))
                 {
                     DataTable dset = new DataTable();
@@ -245,10 +238,10 @@ namespace CompareWOLL
 
                 //nampilin data dalam datagridview compare WO LL
 
-                string query = "SELECT tbl_lldetail.reel, tbl_wodetail.partcode, tbl_lldetail.partcode, tbl_wodetail.qty, tbl_lldetail.qty " +
-                    "FROM tbl_wodetail LEFT JOIN tbl_lldetail ON tbl_wodetail.partcode = tbl_lldetail.partcode WHERE " +
-                    "tbl_wodetail.model_No = '" + model[0].Replace(" ", "") + "' AND tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "' AND " +
-                    "tbl_lldetail.model_No = '" + model[0].Replace(" ", "") + "' AND tbl_lldetail.process_Name = '" + model[1].Replace(" ", "") + "'";
+                string query = "SELECT tbl_lldetail.partcode, SUM(tbl_lldetail.qty) AS total_qtyll, COUNT(tbl_lldetail.partcode) AS total_partll, " +
+                    "SUM(tbl_wodetail.qty) AS total_qtywo, COUNT(tbl_wodetail.partcode) AS total_partwo FROM tbl_lldetail, tbl_wodetail" +
+                    " WHERE tbl_lldetail.partcode = tbl_wodetail.partcode AND tbl_lldetail.model_No = tbl_wodetail.model_No " +
+                    "AND tbl_lldetail.model_No = '" + cmbLLModel.Text + "' GROUP BY tbl_lldetail.partcode , tbl_wodetail.partcode";
 
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
                 {
@@ -256,8 +249,8 @@ namespace CompareWOLL
 
                     adpt.Fill(dset);
 
-                    dataGridViewCompareWOLL.DataSource = dset.Tables[0];
-                    dataGridViewCompareWOLL.Columns.Add("columnPartStatus", "Status");
+                    dataGridViewCompareLLWO.DataSource = dset.Tables[0];
+                    dataGridViewCompareLLWO.Columns.Add("columnPartStatus", "Status");
 
                     //tampilin data temporary result
                     dataGridViewCompareLLWOResult.DataSource = dset.Tables[0];
@@ -268,90 +261,7 @@ namespace CompareWOLL
 
                 connection.Open();
                 //menghitung jumlah row data
-                int rowCount = ((DataTable)this.dataGridViewCompareWOLL.DataSource).Rows.Count;
-                for (int i = 0; i < rowCount; i++)
-                {
-                    DataGridViewCellStyle styleOk = new DataGridViewCellStyle();
-                    styleOk.BackColor = Color.Green;
-                    styleOk.ForeColor = Color.White;
-
-                    DataGridViewCellStyle styleError = new DataGridViewCellStyle();
-                    styleError.BackColor = Color.Red;
-                    styleError.ForeColor = Color.White;
-
-                    if (dataGridViewCompareWOLL.Rows[i].Cells[1].Value.ToString() !=
-                        dataGridViewCompareWOLL.Rows[i].Cells[2].Value.ToString() ||
-                        dataGridViewCompareWOLL.Rows[i].Cells[3].Value.ToString() !=
-                        dataGridViewCompareWOLL.Rows[i].Cells[4].Value.ToString())
-                    {
-                        dataGridViewCompareWOLL.Rows[i].Cells[5].Value = "Part Code and Qty Not Match with Loading List";
-                        dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleError;
-
-                        btnWO.Enabled = true;
-                    }
-
-                    else if (dataGridViewCompareWOLL.Rows[i].Cells[1].Value.ToString() !=
-                        dataGridViewCompareWOLL.Rows[i].Cells[2].Value.ToString())
-                    {
-                        dataGridViewCompareWOLL.Rows[i].Cells[5].Value = "Part Code Not Found in Loading List";
-                        dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleError;
-                    }
-
-                    else if (dataGridViewCompareWOLL.Rows[i].Cells[3].Value.ToString() !=
-                        dataGridViewCompareWOLL.Rows[i].Cells[4].Value.ToString())
-                    {
-                        dataGridViewCompareWOLL.Rows[i].Cells[5].Value = "Qty Not Match with Loading List";
-                        dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleError;
-                    }
-
-                    //compare partcode
-                    else if (dataGridViewCompareWOLL.Rows[i].Cells[1].Value.ToString() ==
-                        dataGridViewCompareWOLL.Rows[i].Cells[2].Value.ToString() ||
-                        dataGridViewCompareWOLL.Rows[i].Cells[3].Value.ToString() ==
-                        dataGridViewCompareWOLL.Rows[i].Cells[4].Value.ToString())
-                    {
-                        dataGridViewCompareWOLL.Rows[i].Cells[5].Value = "Match";
-                        dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleOk;
-                    }
-
-                }
-                connection.Close();
-
-                // Set table title Wo
-                string[] titleWO = { "REEL", "PART CODE WO", "PART CODE LL", "QTY WO", "QTY LL"};
-                for (int i = 0; i < titleWO.Length; i++)
-                {
-                    dataGridViewCompareWOLL.Columns[i].HeaderText = "" + titleWO[i];
-                }
-
-                for (int i = 0; i < dataGridViewCompareWOLL.Columns.Count; i++)
-                {
-                    dataGridViewCompareWOLL.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
-                }
-
-
-                //nampilin data dalam datagridview compare LL WO
-
-                string queryLLWO = "SELECT tbl_lldetail.reel, tbl_lldetail.partcode, tbl_wodetail.partcode, tbl_lldetail.qty , " +
-                    "tbl_wodetail.qty FROM tbl_lldetail LEFT JOIN tbl_wodetail ON tbl_lldetail.partcode = tbl_wodetail.partcode " +
-                    "WHERE tbl_lldetail.model_No = '" + model[0].Replace(" ", "") + "' AND tbl_lldetail.process_Name = '" + model[1].Replace(" ", "") + "'";
-
-                using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryLLWO, connection))
-                {
-                    DataSet dset = new DataSet();
-
-                    adpt.Fill(dset);
-
-                    dataGridViewCompareLLWO.DataSource = dset.Tables[0];
-                    dataGridViewCompareLLWO.Columns.Add("columnPartStatus", "Status");
-
-                }
-
-                connection.Close();
-
-                connection.Open();
-                //menghitung jumlah row data
-                int rowCounts = ((DataTable)this.dataGridViewCompareLLWO.DataSource).Rows.Count;
+                int rowCount = ((DataTable)this.dataGridViewCompareLLWO.DataSource).Rows.Count;
                 for (int i = 0; i < rowCount; i++)
                 {
                     DataGridViewCellStyle styleOk = new DataGridViewCellStyle();
@@ -363,8 +273,8 @@ namespace CompareWOLL
                     styleError.ForeColor = Color.White;
 
                     if (dataGridViewCompareLLWO.Rows[i].Cells[1].Value.ToString() !=
-                        dataGridViewCompareLLWO.Rows[i].Cells[2].Value.ToString() ||
-                        dataGridViewCompareLLWO.Rows[i].Cells[3].Value.ToString() !=
+                        dataGridViewCompareLLWO.Rows[i].Cells[3].Value.ToString() ||
+                        dataGridViewCompareLLWO.Rows[i].Cells[2].Value.ToString() !=
                         dataGridViewCompareLLWO.Rows[i].Cells[4].Value.ToString())
                     {
                         dataGridViewCompareLLWO.Rows[i].Cells[5].Value = "Part Code and Qty Not Match with Loading List";
@@ -374,13 +284,13 @@ namespace CompareWOLL
                     }
 
                     else if (dataGridViewCompareLLWO.Rows[i].Cells[1].Value.ToString() !=
-                        dataGridViewCompareLLWO.Rows[i].Cells[2].Value.ToString())
+                        dataGridViewCompareLLWO.Rows[i].Cells[3].Value.ToString())
                     {
                         dataGridViewCompareLLWO.Rows[i].Cells[5].Value = "Part Code Not Found in Loading List";
                         dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleError;
                     }
 
-                    else if (dataGridViewCompareLLWO.Rows[i].Cells[3].Value.ToString() !=
+                    else if (dataGridViewCompareLLWO.Rows[i].Cells[2].Value.ToString() !=
                         dataGridViewCompareLLWO.Rows[i].Cells[4].Value.ToString())
                     {
                         dataGridViewCompareLLWO.Rows[i].Cells[5].Value = "Qty Not Match with Loading List";
@@ -389,8 +299,8 @@ namespace CompareWOLL
 
                     //compare partcode
                     else if (dataGridViewCompareLLWO.Rows[i].Cells[1].Value.ToString() ==
-                        dataGridViewCompareLLWO.Rows[i].Cells[2].Value.ToString() ||
-                        dataGridViewCompareLLWO.Rows[i].Cells[3].Value.ToString() ==
+                        dataGridViewCompareLLWO.Rows[i].Cells[3].Value.ToString() ||
+                        dataGridViewCompareLLWO.Rows[i].Cells[2].Value.ToString() ==
                         dataGridViewCompareLLWO.Rows[i].Cells[4].Value.ToString())
                     {
                         dataGridViewCompareLLWO.Rows[i].Cells[5].Value = "Match";
@@ -401,15 +311,99 @@ namespace CompareWOLL
                 connection.Close();
 
                 // Set table title Wo
-                string[] titleLL = { "REEL", "PART CODE WO", "PART CODE LL", "QTY WO", "QTY LL" };
-                for (int i = 0; i < titleLL.Length; i++)
+                string[] titleWO = { "PART CODE ", "QTY LL","PART LL", "QTY WO", "PART WO" };
+                for (int i = 0; i < titleWO.Length; i++)
                 {
-                    dataGridViewCompareLLWO.Columns[i].HeaderText = "" + titleLL[i];
+                    dataGridViewCompareLLWO.Columns[i].HeaderText = "" + titleWO[i];
                 }
 
                 for (int i = 0; i < dataGridViewCompareLLWO.Columns.Count; i++)
                 {
                     dataGridViewCompareLLWO.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+
+
+                //nampilin data dalam datagridview compare LL WO
+
+                string queryLLWO = "SELECT tbl_wodetail.partcode, SUM(tbl_wodetail.qty) AS total_qtywo, COUNT(tbl_wodetail.partcode) AS total_partwo, " +
+                    "SUM(tbl_lldetail.qty) AS total_qtyll, COUNT(tbl_lldetail.partcode) AS total_partll FROM tbl_wodetail, tbl_lldetail" +
+                    " WHERE tbl_wodetail.partcode = tbl_lldetail.partcode AND tbl_wodetail.model_No = tbl_lldetail.model_No " +
+                    "AND tbl_wodetail.model_No = '" + cmbLLModel.Text + "' GROUP BY tbl_lldetail.partcode , tbl_wodetail.partcode";
+
+                using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryLLWO, connection))
+                {
+                    DataSet dset = new DataSet();
+
+                    adpt.Fill(dset);
+
+                    dataGridViewCompareWOLL.DataSource = dset.Tables[0];
+                    dataGridViewCompareWOLL.Columns.Add("columnPartStatus", "Status");
+
+                }
+
+                connection.Close();
+
+                connection.Open();
+                //menghitung jumlah row data
+                int rowCounts = ((DataTable)this.dataGridViewCompareWOLL.DataSource).Rows.Count;
+                for (int i = 0; i < rowCount; i++)
+                {
+                    DataGridViewCellStyle styleOk = new DataGridViewCellStyle();
+                    styleOk.BackColor = Color.Green;
+                    styleOk.ForeColor = Color.White;
+
+                    DataGridViewCellStyle styleError = new DataGridViewCellStyle();
+                    styleError.BackColor = Color.Red;
+                    styleError.ForeColor = Color.White;
+
+                     if (dataGridViewCompareWOLL.Rows[i].Cells[1].Value.ToString() !=
+                        dataGridViewCompareWOLL.Rows[i].Cells[3].Value.ToString() ||
+                        dataGridViewCompareWOLL.Rows[i].Cells[2].Value.ToString() !=
+                        dataGridViewCompareWOLL.Rows[i].Cells[4].Value.ToString())
+                    {
+                        dataGridViewCompareWOLL.Rows[i].Cells[5].Value = "Part Code and Qty Not Match with Loading List";
+                        dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleError;
+
+                        btnWO.Enabled = true;
+                    }
+
+                    else if (dataGridViewCompareWOLL.Rows[i].Cells[1].Value.ToString() !=
+                        dataGridViewCompareWOLL.Rows[i].Cells[3].Value.ToString())
+                    {
+                        dataGridViewCompareWOLL.Rows[i].Cells[5].Value = "Part Code Not Found in Loading List";
+                        dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleError;
+                    }
+
+                    else if (dataGridViewCompareWOLL.Rows[i].Cells[2].Value.ToString() !=
+                        dataGridViewCompareWOLL.Rows[i].Cells[4].Value.ToString())
+                    {
+                        dataGridViewCompareWOLL.Rows[i].Cells[5].Value = "Qty Not Match with Loading List";
+                        dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleError;
+                    }
+
+                    //compare partcode
+                    else if (dataGridViewCompareWOLL.Rows[i].Cells[1].Value.ToString() ==
+                        dataGridViewCompareWOLL.Rows[i].Cells[3].Value.ToString() ||
+                        dataGridViewCompareWOLL.Rows[i].Cells[2].Value.ToString() ==
+                        dataGridViewCompareWOLL.Rows[i].Cells[4].Value.ToString())
+                    {
+                        dataGridViewCompareWOLL.Rows[i].Cells[5].Value = "Match";
+                        dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleOk;
+                    }
+
+                }
+                connection.Close();
+
+                // Set table title Wo
+                string[] titleLL = { "PART CODE ", "QTY LL", "PART LL", "QTY WO", "PART WO" };
+                for (int i = 0; i < titleLL.Length; i++)
+                {
+                    dataGridViewCompareWOLL.Columns[i].HeaderText = "" + titleLL[i];
+                }
+
+                for (int i = 0; i < dataGridViewCompareWOLL.Columns.Count; i++)
+                {
+                    dataGridViewCompareWOLL.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
 
 

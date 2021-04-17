@@ -73,7 +73,7 @@ namespace CompareWOLL
                 saveButton.Enabled = true;
                 string woFileName = openFileDialogLL.FileName;
                 filepathLL.Text = woFileName;
-                fileExtLL = Path.GetExtension(woFileName); //get the file extension  
+                fileExtLL = Path.GetExtension(woFileName).ToLower(); //get the file extension  
                 queryLL = "select * from [Sheet1$A2:I]";
                 queryLLDetail = "select * from [Sheet1$A8:I]";
                 queryGetPCBNo = "select * from [Sheet1$E9:E]";
