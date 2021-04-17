@@ -40,7 +40,32 @@ namespace CompareWOLL
             for (int i = 0; i < titleWO.Length; i++)
             {
                 dataGridViewLL.Columns[i].HeaderText = "" + titleWO[i];
-            }         
+            }
+
+            int sum = 0;
+            int totalPartCode = 0;
+            for (int i = 0; i < dataGridViewLL.Rows.Count; ++i)
+            {
+                //show total qty component
+                if (dataGridViewLL.Rows[i].Cells[3].Value == System.DBNull.Value)
+                {
+                    dataGridViewLL.Rows[i].Cells[3].Value = "0";
+                }
+
+                if (dataGridViewLL.Rows[i].Cells[1].Value.ToString() != "")
+                {
+                    totalPartCode++;
+                }
+                //get total qty component
+                sum += Convert.ToInt32(dataGridViewLL.Rows[i].Cells[3].Value);
+
+            }
+            sum = sum + 1;
+
+            totalPoint.Text = sum.ToString();
+            totalPart.Text = totalPartCode.ToString();
+
+
         }
 
         private void backButton_Click(object sender, EventArgs e)

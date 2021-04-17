@@ -14,6 +14,17 @@ namespace CompareWOLL
         MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
         LoadForm lf = new LoadForm();
 
+        string filePathLL = string.Empty;
+        string fileExtLL = string.Empty;
+        string queryLL = string.Empty;
+        string queryLLDetail = string.Empty;
+        string queryGetPCBNo = string.Empty;
+        string queryGetAltPCB = string.Empty;
+        string queryGetTotal = string.Empty;
+        string queryGetStencil = string.Empty;
+        string llUsage = string.Empty;
+        string llPartTotal = string.Empty;
+
         public ImportLL()
         {
             InitializeComponent();
@@ -49,15 +60,7 @@ namespace CompareWOLL
 
         private void browseWO_Click(object sender, EventArgs e)
         {
-
-            string filePathLL = string.Empty;
-            string fileExtLL = string.Empty;
-            string queryLL = string.Empty;
-            string queryLLDetail = string.Empty;
-            string queryGetPCBNo = string.Empty;
-            string queryGetAltPCB = string.Empty;
-            string queryGetTotal = string.Empty;
-            string queryGetStencil = string.Empty;
+            
             tbPcbNo.BackColor = SystemColors.Control;
             tbAltPcbNo1.BackColor = SystemColors.Control;
             tbAltPcbNo2.BackColor = SystemColors.Control;
@@ -249,6 +252,33 @@ namespace CompareWOLL
                             tbAltPcbNo2.BackColor = Color.Red;
                             MessageBox.Show("There is duplicate PCB between Alternative 2 PCB with Alternative 1 PCB, please edit data");
                         }
+
+                        
+                        int sum = 0;
+                        int totalPartCode = 0;
+                        for (int i = 0; i < dataGridViewLL.Rows.Count; ++i)
+                        {
+                            //show total qty component
+                            if (dataGridViewLL.Rows[i].Cells[3].Value == System.DBNull.Value)
+                            {
+                                dataGridViewLL.Rows[i].Cells[3].Value = "0";
+                            }
+
+                            if (dataGridViewLL.Rows[i].Cells[1].Value.ToString() != "")
+                            {
+                                totalPartCode++;
+                            }
+                                //get total qty component
+                                sum += Convert.ToInt32(dataGridViewLL.Rows[i].Cells[3].Value);
+
+                        }
+                        sum = sum + 1;
+
+                        llUsage = sum.ToString();
+                        totalPoint.Text = llUsage;
+                        totalPart.Text = totalPartCode.ToString();
+
+
                     }
                     catch (Exception ex)
                     {
@@ -334,24 +364,7 @@ namespace CompareWOLL
                 string remark = tbRemark.Text;
                 string process = cmbProcess.Text;
 
-                saveButton.Enabled = false;
-
-                //show total qty component
-                int sum = 0;
-                for (int i = 0; i < dataGridViewLL.Rows.Count; ++i)
-                {
-                    if (dataGridViewLL.Rows[i].Cells[3].Value == System.DBNull.Value)
-                    {
-                        dataGridViewLL.Rows[i].Cells[3].Value = "0";
-                    }
-
-                    //get total qty component
-                    sum += Convert.ToInt32(dataGridViewLL.Rows[i].Cells[3].Value);
-
-                }
-                sum = sum + 1;
-
-                string llUsage = sum.ToString();
+                saveButton.Enabled = false;                
 
                 if (model == "" | process == "" | modelLL == "" | machine == "" | pwbType == "" | prog == "" | pcb == "")
                 {
@@ -368,7 +381,7 @@ namespace CompareWOLL
                         var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
                         var cmd = new MySqlCommand("", conn);
 
-                        string cekmodel = "SELECT model_No, process_Name FROM tbl_ll  WHERE model_No = '" + model + "'AND process_Name ='" + modelLL + "'";
+                        string cekmodel = "SELECT model_No, process_Name FROM tbl_ll  WHERE model_No = '" + model + "'AND process_Name ='" + process + "'";
                         string queryLL = "INSERT INTO tbl_ll VALUES('','" + model + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','" + llUsage + "','" + stencil + "','" + remark + "')";
                         string queryInputPCB = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '" + pcb + "', '1', '1');";
                         string queryAddPartCodePCB = "INSERT INTO tbl_partcodedetail VALUES ('" + model + "','" + process + "','PCB',  '" + pcb + "', '','PCB' ); ";
@@ -386,7 +399,7 @@ namespace CompareWOLL
                             if (ds.Tables[0].Rows.Count >= 1)
                             {
                                 lf.Hide();
-                                MessageBox.Show("Loading List Data " + model + "  already uploaded", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+                                MessageBox.Show("Loading List Data Model " + model + " and Process " + process + "  already uploaded", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
                                 backButton.Enabled = true;
                             }
 

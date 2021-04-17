@@ -221,8 +221,7 @@ namespace CompareWOLL
 
             if (e.ColumnIndex == 9)
             {
-
-                CompareWOLL cowl = new CompareWOLL();
+                Compare cowl = new Compare();
                 cowl.Show();
                 this.Hide();
             }

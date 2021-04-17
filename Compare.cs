@@ -44,7 +44,7 @@ namespace CompareWOLL
 
             connection.Open();
 
-            string queryWODropDown = "SELECT model_No, process_Name FROM tbl_wo";
+            string queryWODropDown = "SELECT model_No FROM tbl_wo";
 
             try
             {
@@ -56,9 +56,8 @@ namespace CompareWOLL
 
                     for (int i = 0; i < dset.Rows.Count; i++)
                     {
-                        cmbWOModel.Items.Add(dset.Rows[i][0] + " | " + dset.Rows[i][1]);
+                        cmbWOModel.Items.Add(dset.Rows[i][0]);
                         cmbWOModel.ValueMember = dset.Rows[i][1].ToString();
-
                     }
                 }
 
