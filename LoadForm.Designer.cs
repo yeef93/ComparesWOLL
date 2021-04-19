@@ -52,7 +52,7 @@ namespace CompareWOLL
             this.ClientSize = new System.Drawing.Size(580, 352);
             this.ControlBox = false;
             this.Controls.Add(this.pictureBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LoadForm";
