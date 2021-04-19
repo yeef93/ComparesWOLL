@@ -34,7 +34,7 @@ namespace CompareWOLL
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
             this.dataGridViewLLList = new System.Windows.Forms.DataGridView();
-            this.backButton = new System.Windows.Forms.Button();
+            this.homeButton = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLLList)).BeginInit();
             this.SuspendLayout();
@@ -90,23 +90,23 @@ namespace CompareWOLL
             this.dataGridViewLLList.TabIndex = 7;
             this.dataGridViewLLList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewLLList_CellContentClick);
             // 
-            // backButton
+            // homeButton
             // 
-            this.backButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.backButton.Location = new System.Drawing.Point(658, 25);
-            this.backButton.Name = "backButton";
-            this.backButton.Size = new System.Drawing.Size(75, 23);
-            this.backButton.TabIndex = 9;
-            this.backButton.Text = "Back";
-            this.backButton.UseVisualStyleBackColor = true;
-            this.backButton.Click += new System.EventHandler(this.backButton_Click);
+            this.homeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.homeButton.Location = new System.Drawing.Point(658, 25);
+            this.homeButton.Name = "homeButton";
+            this.homeButton.Size = new System.Drawing.Size(75, 23);
+            this.homeButton.TabIndex = 9;
+            this.homeButton.Text = "Home";
+            this.homeButton.UseVisualStyleBackColor = true;
+            this.homeButton.Click += new System.EventHandler(this.backButton_Click);
             // 
             // LoadingList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(780, 368);
-            this.Controls.Add(this.backButton);
+            this.Controls.Add(this.homeButton);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.dataGridViewLLList);
             this.Name = "LoadingList";
@@ -126,7 +126,7 @@ namespace CompareWOLL
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel dateTimeNow;
         private System.Windows.Forms.DataGridView dataGridViewLLList;
-        private System.Windows.Forms.Button backButton;
+        private System.Windows.Forms.Button homeButton;
         public System.Windows.Forms.ToolStripStatusLabel toolStripUsername;
     }
 }

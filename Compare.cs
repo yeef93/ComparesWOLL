@@ -93,14 +93,11 @@ namespace CompareWOLL
             cmbLLModel.Items.Clear();
 
             // to split model and process
-            string str = cmbWOModel.Text;
-            char ch = '|';
-
-            var model = str.Split(ch);
+            string model = cmbWOModel.Text;
 
             connection.Open();
 
-            string queryLLDropDown = "SELECT model_No FROM tbl_ll WHERE model_No = '" + model[0].Replace(" ", "") + "'GROUP BY model_No";
+            string queryLLDropDown = "SELECT model_No FROM tbl_ll WHERE model_No = '" + model + "'GROUP BY model_No";
 
             try
             {
@@ -128,7 +125,37 @@ namespace CompareWOLL
                         if (result == DialogResult.Yes)
                         {
                             ImportLL ill = new ImportLL();
-                            ill.tbModelNo.Text = model[0].Replace(" ", "");
+                            ill.tbModelNo.Text = model;
+
+                            string queryProcessDropDown = "SELECT process_Name FROM tbl_model WHERE model_No = '" + model + "' ORDER BY process_Name DESC ";
+
+                            try
+                            {
+
+                                using (MySqlDataAdapter adpter = new MySqlDataAdapter(queryProcessDropDown, connection))
+                                {
+                                    DataTable dst = new DataTable();
+                                    adpter.Fill(dst);
+
+                                    if (dst.Rows.Count > 0)
+                                    {
+                                        for (int j = 0; j < dst.Rows.Count; j++)
+                                        {
+                                            ill.cmbProcess.Items.Add(dst.Rows[j][0]);
+                                            ill.cmbProcess.ValueMember = dst.Rows[j][0].ToString();
+                                        }
+                                    }
+                                    else
+                                    {
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                // tampilkan pesan error
+                                MessageBox.Show(ex.Message);
+                            }
+
                             ill.Show();
                             this.Hide();
                         }
@@ -395,7 +422,7 @@ namespace CompareWOLL
                 connection.Close();
 
                 // Set table title Wo
-                string[] titleLL = { "PART CODE ", "QTY LL", "PART LL", "QTY WO", "PART WO" };
+                string[] titleLL = { "PART CODE ", "QTY WO", "PART WO", "QTY LL", "PART LL" };
                 for (int i = 0; i < titleLL.Length; i++)
                 {
                     dataGridViewCompareWOLL.Columns[i].HeaderText = "" + titleLL[i];
@@ -434,6 +461,47 @@ namespace CompareWOLL
                     MessageBox.Show("No any selected PCB", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
                     btnGenerate.Enabled = true;
                 }
+
+
+
+                //connection.Open();
+
+                ////nampilin data dalam datagridview compare
+
+                //string queryResult = "SELECT tbl_lldetail.reel, tbl_wodetail.partcode, tbl_lldetail.partcode, tbl_wodetail.qty, " +
+                //    "tbl_lldetail.qty, tbl_lldetail.alt_No FROM tbl_wodetail LEFT JOIN tbl_lldetail " +
+                //    "ON tbl_wodetail.partcode = tbl_lldetail.partcode WHERE " +
+                //    "tbl_wodetail.model_No = '" + cmbLLModel.Text + "' AND " +
+                //    "tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "'" +
+                //    "AND tbl_lldetail.model_No = '" + cmbLLModel.Text + "' " +
+                //    "AND tbl_lldetail.process_Name = '" + model[1].Replace(" ", "") + "'";
+
+                ////            string query = "SELECT tbl_lldetail.reel, tbl_wodetail.partcode, tbl_lldetail.partcode, tbl_wodetail.qty, " +
+                ////"tbl_lldetail.qty, tbl_lldetail.alt_No FROM tbl_wodetail LEFT JOIN tbl_lldetail " +
+                ////"ON tbl_wodetail.partcode = tbl_lldetail.partcode WHERE " +
+                ////"tbl_wodetail.model_No = '" + model[0].Replace(" ", "") + "' AND " +
+                ////"tbl_wodetail.process_Name = '" + model[1].Replace(" ", "") + "' AND tbl_lldetail.reel != 'PCB'";
+
+                //using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
+                //{
+                //    DataSet dset = new DataSet();
+
+                //    adpt.Fill(dset);
+
+                //    dataGridViewCompareLLWO.DataSource = dset.Tables[0];
+                //    dataGridViewCompareLLWO.Columns.Add("columnPartStatus", "Status");
+
+                //    //tampilin data temporary result
+                //    dataGridViewCompareLLWOResult.DataSource = dset.Tables[0];
+
+                //}
+
+                //dataGridViewCompareLLWOResult.Columns.RemoveAt(2);
+                //dataGridViewCompareLLWOResult.Columns.RemoveAt(4);
+                //dataGridViewCompareLLWOResult.Columns.RemoveAt(3);
+
+                //connection.Close();
+
 
             }
             catch (Exception ex)

@@ -67,6 +67,7 @@ namespace CompareWOLL
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.dataGridViewCompareWOLL = new System.Windows.Forms.DataGridView();
+            this.dataGridViewCompareResult = new System.Windows.Forms.DataGridView();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareLLWO)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareLLWOResult)).BeginInit();
@@ -75,6 +76,7 @@ namespace CompareWOLL
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareWOLL)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareResult)).BeginInit();
             this.SuspendLayout();
             // 
             // woQty
@@ -297,6 +299,7 @@ namespace CompareWOLL
             this.btnGenerate.TabIndex = 49;
             this.btnGenerate.Text = "Generate Excel File";
             this.btnGenerate.UseVisualStyleBackColor = true;
+            this.btnGenerate.Visible = false;
             this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
             // 
             // btnWO
@@ -472,6 +475,21 @@ namespace CompareWOLL
             this.dataGridViewCompareWOLL.Size = new System.Drawing.Size(510, 171);
             this.dataGridViewCompareWOLL.TabIndex = 55;
             // 
+            // dataGridViewCompareResult
+            // 
+            this.dataGridViewCompareResult.AllowUserToAddRows = false;
+            this.dataGridViewCompareResult.AllowUserToDeleteRows = false;
+            this.dataGridViewCompareResult.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewCompareResult.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewCompareResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewCompareResult.Location = new System.Drawing.Point(13, 334);
+            this.dataGridViewCompareResult.Name = "dataGridViewCompareResult";
+            this.dataGridViewCompareResult.Size = new System.Drawing.Size(1341, 305);
+            this.dataGridViewCompareResult.TabIndex = 55;
+            this.dataGridViewCompareResult.Visible = false;
+            // 
             // Compare
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -486,6 +504,7 @@ namespace CompareWOLL
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.dataGridViewCompareResult);
             this.Name = "Compare";
             this.Text = "Compare";
             this.Load += new System.EventHandler(this.Compare_Load);
@@ -501,6 +520,7 @@ namespace CompareWOLL
             this.groupBox1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareWOLL)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareResult)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -546,5 +566,6 @@ namespace CompareWOLL
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.DataGridView dataGridViewCompareWOLL;
+        private System.Windows.Forms.DataGridView dataGridViewCompareResult;
     }
 }
