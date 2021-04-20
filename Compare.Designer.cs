@@ -222,7 +222,7 @@ namespace CompareWOLL
             this.dataGridViewCompareLLWO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewCompareLLWO.Location = new System.Drawing.Point(28, 371);
             this.dataGridViewCompareLLWO.Name = "dataGridViewCompareLLWO";
-            this.dataGridViewCompareLLWO.Size = new System.Drawing.Size(510, 171);
+            this.dataGridViewCompareLLWO.Size = new System.Drawing.Size(594, 223);
             this.dataGridViewCompareLLWO.TabIndex = 48;
             // 
             // tbPWBType
@@ -447,17 +447,18 @@ namespace CompareWOLL
             // 
             this.groupBox3.Location = new System.Drawing.Point(12, 347);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(542, 230);
+            this.groupBox3.Size = new System.Drawing.Size(630, 267);
             this.groupBox3.TabIndex = 53;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "LL vs WO";
             // 
             // groupBox5
             // 
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.Controls.Add(this.dataGridViewCompareWOLL);
-            this.groupBox5.Location = new System.Drawing.Point(573, 348);
+            this.groupBox5.Location = new System.Drawing.Point(672, 348);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(542, 229);
+            this.groupBox5.Size = new System.Drawing.Size(678, 266);
             this.groupBox5.TabIndex = 54;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "WO vs LL";
@@ -472,7 +473,7 @@ namespace CompareWOLL
             this.dataGridViewCompareWOLL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewCompareWOLL.Location = new System.Drawing.Point(18, 23);
             this.dataGridViewCompareWOLL.Name = "dataGridViewCompareWOLL";
-            this.dataGridViewCompareWOLL.Size = new System.Drawing.Size(510, 171);
+            this.dataGridViewCompareWOLL.Size = new System.Drawing.Size(646, 223);
             this.dataGridViewCompareWOLL.TabIndex = 55;
             // 
             // dataGridViewCompareResult

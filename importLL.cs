@@ -13,7 +13,6 @@ namespace CompareWOLL
     {
         Helper help = new Helper();
         MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
-
         LoadForm lf = new LoadForm();
 
         string filePathLL = string.Empty;
