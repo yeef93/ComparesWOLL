@@ -62,7 +62,6 @@ namespace CompareWOLL
                 }
 
                 connection.Close();
-
             }
             catch (Exception ex)
             {

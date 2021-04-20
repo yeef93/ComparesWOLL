@@ -5,14 +5,18 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using Microsoft.Office.Interop.Excel;
 using MySql.Data.MySqlClient;
 
 namespace CompareWOLL
 {
+
     public class Helper
     {
+        LoadForm lf = new LoadForm();
+
         // for read excel file
         public System.Data.DataTable ReadExcel(string fileName, string fileExt, string query)
         {
@@ -111,5 +115,6 @@ namespace CompareWOLL
             }
             return encryptdata.ToString();
         }
+
     }
 }

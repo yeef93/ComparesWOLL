@@ -4,6 +4,7 @@ using System.Data.OleDb;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
@@ -11,10 +12,49 @@ namespace CompareWOLL
 {
     public partial class importWO : Form
     {
+        LoadForm lf = new LoadForm();
 
         public importWO()
         {
             InitializeComponent();
+        }
+
+        //The below is the key for showing Progress bar
+        private void StartProgress(String strStatusText)
+        {
+            LoadForm lf = new LoadForm();
+            ShowProgress();
+        }
+        private void CloseProgress()
+        {
+            //Thread.Sleep(200);
+            while (!this.IsHandleCreated)
+                System.Threading.Thread.Sleep(200);
+            lf.Invoke(new Action(lf.Close));
+        }
+        private void ShowProgress()
+        {
+            try
+            {
+                if (this.InvokeRequired)
+                {
+                    try
+                    {
+                        lf.ShowDialog();
+                    }
+                    catch (Exception ex) { }
+                }
+                else
+                {
+                    Thread th = new Thread(ShowProgress);
+                    th.IsBackground = false;
+                    th.Start();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         // for read excel file
@@ -263,10 +303,10 @@ namespace CompareWOLL
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            
             homeButton.Enabled = false;
             backButton.Enabled = false;
-            LoadForm lf = new LoadForm();
-            lf.Show();
+            StartProgress("Loading...");
 
             System.Threading.Thread.Sleep(2000);
 
@@ -281,7 +321,7 @@ namespace CompareWOLL
 
             if (woPTSNN == "" | woNoo == "" | modelNoo == "" | modell == "" | woqtyy == "")
             {
-                lf.Close();
+                CloseProgress();
                 saveButton.Enabled = true;
                 MessageBox.Show("Unable to import Work Order without fill data properly", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -312,7 +352,7 @@ namespace CompareWOLL
 
                         if (ds.Tables[0].Rows.Count >= 1)
                         {
-                            lf.Close();
+                            CloseProgress();
                             MessageBox.Show("Work Order Data " + modelNoo + "  already uploaded", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
                             homeButton.Enabled = true;
                             backButton.Enabled = true;
@@ -342,7 +382,7 @@ namespace CompareWOLL
 
                             conn.Close();
                             //Tutup koneksi
-                            lf.Close();
+                            CloseProgress();
                             MessageBox.Show("Work Order Successfully saved", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             saveButton.Enabled = true;
 
@@ -354,6 +394,7 @@ namespace CompareWOLL
                 }
                 catch (Exception ex)
                 {
+                    CloseProgress();
                     MessageBox.Show(ex.Message.ToString());
                     saveButton.Enabled = true;
                 }

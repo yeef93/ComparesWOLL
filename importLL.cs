@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace CompareWOLL
@@ -12,6 +13,7 @@ namespace CompareWOLL
     {
         Helper help = new Helper();
         MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
+
         LoadForm lf = new LoadForm();
 
         string filePathLL = string.Empty;
@@ -28,6 +30,44 @@ namespace CompareWOLL
         public ImportLL()
         {
             InitializeComponent();
+        }
+
+        //The below is the key for showing Progress bar
+        private void StartProgress(String strStatusText)
+        {
+            LoadForm lf = new LoadForm();
+            ShowProgress();
+        }
+        private void CloseProgress()
+        {
+            //Thread.Sleep(200);
+            while (!this.IsHandleCreated)
+                System.Threading.Thread.Sleep(200);
+            lf.Invoke(new Action(lf.Close));
+        }
+        private void ShowProgress()
+        {
+            try
+            {
+                if (this.InvokeRequired)
+                {
+                    try
+                    {
+                        lf.ShowDialog();
+                    }
+                    catch (Exception ex) { }
+                }
+                else
+                {
+                    Thread th = new Thread(ShowProgress);
+                    th.IsBackground = false;
+                    th.Start();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void importLL_Load(object sender, EventArgs e)
@@ -59,7 +99,7 @@ namespace CompareWOLL
         private void cmbProcess_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             browseLL.Enabled = true;
-            lengthProcess = cmbProcess.Text.Length +1;
+            lengthProcess = cmbProcess.Text.Length + 1;
         }
 
         private void browseWO_Click(object sender, EventArgs e)
@@ -284,7 +324,8 @@ namespace CompareWOLL
             try
             {
                 backButton.Enabled = false;
-                lf.Show();
+                StartProgress("Loading...");
+                //lf.Show();
 
                 string model = tbModelNo.Text;
                 string modelLL = tbModel.Text;
@@ -301,7 +342,7 @@ namespace CompareWOLL
 
                 if (model == "" | process == "" | modelLL == "" | machine == "" | pwbType == "" | prog == "" | pcb == "")
                 {
-                    lf.Hide();
+                    CloseProgress();
                     MessageBox.Show("Unable to import Work Order without fill data properly", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     saveButton.Enabled = true;
                     backButton.Enabled = true;
@@ -399,13 +440,12 @@ namespace CompareWOLL
                                         "WHERE reel = '" + reelID + "' AND tbl_reel.model_No = '" + model + "'";
                                     cmd.CommandText = StrQueryAddLoc;
                                     cmd.ExecuteNonQuery();
-
                                 }
 
                                 conn.Close();
                                 //Tutup koneksi
+                                CloseProgress();
 
-                                lf.Hide();
                                 MessageBox.Show("Loading List Successfully saved", "Loading List", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 saveButton.Enabled = true;
                                 backButton.Enabled = true;
@@ -457,12 +497,14 @@ namespace CompareWOLL
                     }
                     catch (Exception ex)
                     {
+                        CloseProgress();
                         MessageBox.Show(ex.Message.ToString());
                         backButton.Enabled = true;
                         saveButton.Enabled = true;
-                        lf.Close();
+
                     }
                 }
+
             }
             catch (Exception ex)
             {
