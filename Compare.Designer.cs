@@ -67,7 +67,8 @@ namespace CompareWOLL
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.dataGridViewCompareWOLL = new System.Windows.Forms.DataGridView();
-            this.dataGridViewCompareResult = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareLLWO)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareLLWOResult)).BeginInit();
@@ -76,7 +77,6 @@ namespace CompareWOLL
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareWOLL)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareResult)).BeginInit();
             this.SuspendLayout();
             // 
             // woQty
@@ -293,7 +293,7 @@ namespace CompareWOLL
             // 
             this.btnGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGenerate.Location = new System.Drawing.Point(451, 620);
+            this.btnGenerate.Location = new System.Drawing.Point(536, 635);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(231, 38);
             this.btnGenerate.TabIndex = 49;
@@ -476,26 +476,31 @@ namespace CompareWOLL
             this.dataGridViewCompareWOLL.Size = new System.Drawing.Size(646, 223);
             this.dataGridViewCompareWOLL.TabIndex = 55;
             // 
-            // dataGridViewCompareResult
+            // label2
             // 
-            this.dataGridViewCompareResult.AllowUserToAddRows = false;
-            this.dataGridViewCompareResult.AllowUserToDeleteRows = false;
-            this.dataGridViewCompareResult.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewCompareResult.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewCompareResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewCompareResult.Location = new System.Drawing.Point(13, 334);
-            this.dataGridViewCompareResult.Name = "dataGridViewCompareResult";
-            this.dataGridViewCompareResult.Size = new System.Drawing.Size(1341, 305);
-            this.dataGridViewCompareResult.TabIndex = 55;
-            this.dataGridViewCompareResult.Visible = false;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(155, 635);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 55;
+            this.label2.Text = "label2";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(364, 635);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 56;
+            this.label3.Text = "label3";
             // 
             // Compare
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1366, 735);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnGenerate);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.dataGridViewCompareLLWO);
@@ -505,7 +510,6 @@ namespace CompareWOLL
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.dataGridViewCompareResult);
             this.Name = "Compare";
             this.Text = "Compare";
             this.Load += new System.EventHandler(this.Compare_Load);
@@ -521,7 +525,6 @@ namespace CompareWOLL
             this.groupBox1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareWOLL)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareResult)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -567,6 +570,7 @@ namespace CompareWOLL
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.DataGridView dataGridViewCompareWOLL;
-        private System.Windows.Forms.DataGridView dataGridViewCompareResult;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -285,6 +285,8 @@ namespace CompareWOLL
                 int rowCount = ((DataTable)this.dataGridViewCompareLLWO.DataSource).Rows.Count;
                 for (int i = 0; i < rowCount; i++)
                 {
+                    label3.Text = rowCount.ToString();
+
                     DataGridViewCellStyle styleOk = new DataGridViewCellStyle();
                     styleOk.BackColor = Color.Green;
                     styleOk.ForeColor = Color.White;
@@ -352,10 +354,10 @@ namespace CompareWOLL
                     dataGridViewCompareLLWO.Columns[i].HeaderText = "" + titleWO[i];
                 }
 
-                //for (int i = 0; i < dataGridViewCompareLLWO.Columns.Count; i++)
-                //{
-                //    dataGridViewCompareLLWO.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
-                //}
+                for (int i = 0; i < dataGridViewCompareLLWO.Columns.Count; i++)
+                {
+                    dataGridViewCompareLLWO.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
 
 
                 //nampilin data dalam datagridview compare WO LL
@@ -383,8 +385,10 @@ namespace CompareWOLL
                 connection.Open();
                 //menghitung jumlah row data
                 int rowCounts = ((DataTable)this.dataGridViewCompareWOLL.DataSource).Rows.Count;
-                for (int i = 0; i < rowCount; i++)
+                for (int i = 0; i < rowCounts; i++)
                 {
+                    label2.Text = rowCounts.ToString();
+
                     DataGridViewCellStyle styleOk = new DataGridViewCellStyle();
                     styleOk.BackColor = Color.Green;
                     styleOk.ForeColor = Color.White;
@@ -446,16 +450,16 @@ namespace CompareWOLL
                 connection.Close();
 
                 // Set table title Wo
-                string[] titleLL = { "PART CODE WO ", "QTY WO", "PART WO USED", "PART CODE LL", "QTY LL", "PART LL USED" };
+                string[] titleLL = { "PART CODE LL", "QTY LL", "PART LL USED", "PART CODE WO", "QTY WO", "PART WO USED" };
                 for (int i = 0; i < titleLL.Length; i++)
                 {
                     dataGridViewCompareWOLL.Columns[i].HeaderText = "" + titleLL[i];
                 }
 
-                //for (int i = 0; i < dataGridViewCompareWOLL.Columns.Count; i++)
-                //{
-                //    dataGridViewCompareWOLL.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
-                //}
+                for (int i = 0; i < dataGridViewCompareWOLL.Columns.Count; i++)
+                {
+                    dataGridViewCompareWOLL.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
 
 
                 // display qty match or not
