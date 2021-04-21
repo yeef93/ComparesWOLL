@@ -281,7 +281,7 @@ namespace CompareWOLL
                         }
                         else if (modelLL != tbModelNo.Text || processLL != cmbProcess.Text)
                         {
-                            MessageBox.Show("Excel file contain Model " + modelLLNO + " and Process " + processLL + " not match with selected Model No and Process, Please check again the document.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+                            MessageBox.Show("Excel file not contain with Model " + modelLLNO + " and Process " + cmbProcess.Text + ", Please check again the document.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
                             filepathLL.Text = "";
                             tbModel.Text = "";
                             tbMachine.Text = "";
@@ -455,11 +455,10 @@ namespace CompareWOLL
                                         loc = dataGridViewLL.Rows[j].Cells[4].Value.ToString();
 
                                         string StrQueryAddLoc = "UPDATE tbl_reel SET loc = CONCAT(loc,'" + loc + "') " +
-                                            "WHERE reel = '" + reelID + "' AND tbl_reel.model_No = '" + model + "'";
+                                            "WHERE reel = '" + reelID + "' AND tbl_reel.model_No = '" + model + "' and tbl_reel.process_Name = '" + process + "'";
                                         cmd.CommandText = StrQueryAddLoc;
                                         cmd.ExecuteNonQuery();
                                     }
-
                                     
                                 }
 

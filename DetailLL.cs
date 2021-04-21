@@ -20,10 +20,9 @@ namespace CompareWOLL
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 
-            string query = "SELECT tbl_reel.reel, tbl_partcodedetail.partcode, tbl_partcodedetail.tp,  tbl_reel.qty, tbl_reel.loc, " +
-                "tbl_partcodedetail.dec, tbl_reel.f_Type FROM tbl_partcodedetail, tbl_reel WHERE " +
-                "tbl_partcodedetail.reel =  tbl_reel.reel AND tbl_partcodedetail.model_No = '" + tbModelNo.Text + "' " +
-                "AND tbl_partcodedetail.process_Name ='" + tbProcess.Text + "'";
+            string query = "SELECT tbl_reel.reel, tbl_partcodedetail.partcode, tbl_partcodedetail.tp,  tbl_reel.qty, tbl_reel.loc, tbl_partcodedetail.dec, tbl_reel.f_Type " +
+                "FROM tbl_partcodedetail, tbl_reel WHERE tbl_partcodedetail.reel = tbl_reel.reel AND tbl_partcodedetail.process_Name = tbl_reel.process_Name " +
+                "AND tbl_partcodedetail.model_No = '" + tbModelNo.Text + "' AND tbl_partcodedetail.process_Name = '" + tbProcess.Text + "'";
 
             using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
             {
