@@ -101,10 +101,10 @@ namespace CompareWOLL
             {
                 DetailWO dwo = new DetailWO();
                 string cust = dataGridViewWoList.Rows[e.RowIndex].Cells[0].Value.ToString();
-                string woPtsn = dataGridViewWoList.Rows[e.RowIndex].Cells[1].Value.ToString();
-                string woNo = dataGridViewWoList.Rows[e.RowIndex].Cells[2].Value.ToString();
-                string modelNo = dataGridViewWoList.Rows[e.RowIndex].Cells[3].Value.ToString();
-                string model = dataGridViewWoList.Rows[e.RowIndex].Cells[4].Value.ToString();
+                string modelNo = dataGridViewWoList.Rows[e.RowIndex].Cells[1].Value.ToString();
+                string model = dataGridViewWoList.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string woPtsn = dataGridViewWoList.Rows[e.RowIndex].Cells[3].Value.ToString();
+                string woNo = dataGridViewWoList.Rows[e.RowIndex].Cells[4].Value.ToString();
                 //string processName = dataGridViewWoList.Rows[e.RowIndex].Cells[4].Value.ToString();
                 string woQty = dataGridViewWoList.Rows[e.RowIndex].Cells[5].Value.ToString();
                 string woUsage = dataGridViewWoList.Rows[e.RowIndex].Cells[6].Value.ToString();
@@ -169,7 +169,7 @@ namespace CompareWOLL
             {
 
                 ImportLL il = new ImportLL();
-                string model = dataGridViewWoList.Rows[e.RowIndex].Cells[3].Value.ToString();
+                string model = dataGridViewWoList.Rows[e.RowIndex].Cells[1].Value.ToString();
                 string cust = dataGridViewWoList.Rows[e.RowIndex].Cells[0].Value.ToString();
 
                 il.Show();

@@ -122,9 +122,6 @@ namespace CompareWOLL
                 // tampilkan pesan error
                 MessageBox.Show(ex.Message);
             }
-
-
-
         }
 
         private void browseWO_Click(object sender, EventArgs e)
@@ -140,23 +137,23 @@ namespace CompareWOLL
             if (openFileDialogWO.ShowDialog() == DialogResult.OK)
             {
 
-                filepathWO.Text = "";
-                woPTSN.Text = "";
-                woNo.Text = "";
-                modelNo.Text = "";
-                model.Text = "";
-                totalPart.Text = "";
-                totalUsage.Text = "";
-                woQty.Text = "";
+                tbfilepathWO.Text = "";
+                tbwoPTSN.Text = "";
+                tbwoNo.Text = "";
+                tbmodelNo.Text = "";
+                tbmodel.Text = "";
+                tbtotalPart.Text = "";
+                tbtotalUsage.Text = "";
+                tbwoQty.Text = "";
 
-                totalPart.BackColor = SystemColors.Control;
-                totalUsage.BackColor = SystemColors.Control;
-                woQty.BackColor = SystemColors.Control;
+                tbtotalPart.BackColor = SystemColors.Control;
+                tbtotalUsage.BackColor = SystemColors.Control;
+                tbwoQty.BackColor = SystemColors.Control;
 
                 string woFileName = openFileDialogWO.FileName;
-                filepathWO.Text = woFileName;
+                tbfilepathWO.Text = woFileName;
                 fileExtWO = Path.GetExtension(woFileName).ToLower(); //get the file extension  
-                queryWO = "select * from [Sheet1$A3:M]";
+                queryWO = "select * from [Sheet1$A2:M]";
 
 
                 if (fileExtWO.CompareTo(".xls") == 0 || fileExtWO.CompareTo(".xlsx") == 0)
@@ -172,12 +169,12 @@ namespace CompareWOLL
                         dataGridViewWO.Columns.RemoveAt(5);
                         dataGridViewWO.Columns.RemoveAt(8);
 
-                        woPTSN.Text = dataGridViewWO.Rows[0].Cells[8].Value.ToString();
-                        woNo.Text = dataGridViewWO.Rows[0].Cells[5].Value.ToString();
-                        modelNo.Text = dataGridViewWO.Rows[0].Cells[2].Value.ToString();
-                        model.Text = dataGridViewWO.Rows[0].Cells[0].Value.ToString();
-                        woQty.Text = dataGridViewWO.Rows[0].Cells[9].Value.ToString();
-                        totalPart.Text = dataGridViewWO.Rows.Count.ToString();
+                        tbwoPTSN.Text = dataGridViewWO.Rows[0].Cells[8].Value.ToString();
+                        tbwoNo.Text = dataGridViewWO.Rows[0].Cells[5].Value.ToString();
+                        tbmodelNo.Text = dataGridViewWO.Rows[0].Cells[2].Value.ToString();
+                        tbmodel.Text = dataGridViewWO.Rows[0].Cells[0].Value.ToString();
+                        tbwoQty.Text = dataGridViewWO.Rows[0].Cells[9].Value.ToString();
+                        tbtotalPart.Text = dataGridViewWO.Rows.Count.ToString();
 
                         //bool pcbNoo = dataGridViewWO.Rows[0].Cells[2].Value.ToString().StartsWith("35");
                         //pcbNo.Text = pcbNoo.ToString();
@@ -226,17 +223,17 @@ namespace CompareWOLL
                             var cellValueUsage = dataGridViewWO.Rows[i].Cells[3].Value.ToString();
                             float ValueUsage;
 
-                            if (cellValueModel != model.Text)
+                            if (cellValueModel != tbmodel.Text)
                             {
                                 dataGridViewWO.Rows[i].Cells[0].Style.BackColor = Color.Red;
                                 count++;
                             }
-                            if (cellValueModelNo != modelNo.Text)
+                            if (cellValueModelNo != tbmodelNo.Text)
                             {
                                 dataGridViewWO.Rows[i].Cells[2].Style.BackColor = Color.Red;
                                 count++;
                             }
-                            if (cellValueWO != woNo.Text)
+                            if (cellValueWO != tbwoNo.Text)
                             {
                                 dataGridViewWO.Rows[i].Cells[5].Style.BackColor = Color.Red;
                                 count++;
@@ -246,12 +243,12 @@ namespace CompareWOLL
                             //    dataGridViewWO.Rows[i].Cells[7].Style.BackColor = Color.Red;
                             //    count++;
                             //}
-                            if (cellValueWoPtsn != woPTSN.Text)
+                            if (cellValueWoPtsn != tbwoPTSN.Text)
                             {
                                 dataGridViewWO.Rows[i].Cells[8].Style.BackColor = Color.Red;
                                 count++;
                             }
-                            if (cellValueWoQty != woQty.Text)
+                            if (cellValueWoQty != tbwoQty.Text)
                             {
                                 dataGridViewWO.Rows[i].Cells[9].Style.BackColor = Color.Red;
                                 count++;
@@ -292,18 +289,18 @@ namespace CompareWOLL
                             if (Convert.ToInt32(dataGridViewWO.Rows[i].Cells[4].Value) !=
                                 totalissue)
                             {
-                                totalPart.Text = "#Erorr";
-                                totalPart.BackColor = System.Drawing.Color.Red;
+                                tbtotalPart.Text = "#Erorr";
+                                tbtotalPart.BackColor = System.Drawing.Color.Red;
 
-                                totalUsage.Text = "#Erorr";
-                                totalUsage.BackColor = System.Drawing.Color.Red;
+                                tbtotalUsage.Text = "#Erorr";
+                                tbtotalUsage.BackColor = System.Drawing.Color.Red;
 
-                                this.woQty.Text = "#Erorr";
-                                this.woQty.BackColor = System.Drawing.Color.Red;
+                                this.tbwoQty.Text = "#Erorr";
+                                this.tbwoQty.BackColor = System.Drawing.Color.Red;
 
                                 dataGridViewWO.Rows[i].DefaultCellStyle = styleError;
                             }
-                            if (totalPart.Text == "#Erorr" || totalUsage.Text == "#Erorr" || this.woQty.Text == "#Erorr")
+                            if (tbtotalPart.Text == "#Erorr" || tbtotalUsage.Text == "#Erorr" || this.tbwoQty.Text == "#Erorr")
                             {
                                 saveButton.Enabled = false;
                             }
@@ -313,7 +310,7 @@ namespace CompareWOLL
                             }
                         }
 
-                        totalUsage.Text = sum.ToString();
+                        tbtotalUsage.Text = sum.ToString();
                     }
                     catch (Exception ex)
                     {
@@ -348,12 +345,12 @@ namespace CompareWOLL
 
             System.Threading.Thread.Sleep(2000);
 
-            string woPTSNN = woPTSN.Text;
-            string woNoo = woNo.Text;
-            string modelNoo = modelNo.Text;
-            string modell = model.Text;
-            string woqtyy = totalUsage.Text;
-            string wousagee = woQty.Text;
+            string woPTSNN = tbwoPTSN.Text;
+            string woNoo = tbwoNo.Text;
+            string modelNoo = tbmodelNo.Text;
+            string modell = tbmodel.Text;
+            string woqtyy = tbtotalUsage.Text;
+            string wousagee = tbwoQty.Text;
             string customer = cmbCustomer.Text;
             saveButton.Enabled = false;
 
@@ -370,10 +367,10 @@ namespace CompareWOLL
                 try
                 {
 
-                    var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
-                    var cmd = new MySqlCommand("", conn);
+                    
+                    var cmd = new MySqlCommand("", connection);
 
-                    conn.Open();
+                    connection.Open();
                     //Buka koneksi
 
                     string cekmodel = "SELECT model_No, process_Name FROM tbl_model  WHERE model_No = '" + modelNoo + "'";
@@ -381,7 +378,7 @@ namespace CompareWOLL
                     string querymodel = "INSERT INTO tbl_model ( model_No, process_Name ) SELECT model_No, process_Name FROM tbl_wodetail GROUP BY process_Name, model_No";
                     string trncteModel = "TRUNCATE tbl_model";
 
-                    using (MySqlDataAdapter dscmd = new MySqlDataAdapter(cekmodel, conn))
+                    using (MySqlDataAdapter dscmd = new MySqlDataAdapter(cekmodel, connection))
                     {
                         DataSet ds = new DataSet();
                         dscmd.Fill(ds);
@@ -390,6 +387,17 @@ namespace CompareWOLL
                         {
                             CloseProgress();
                             MessageBox.Show("Work Order Data " + modelNoo + "  already uploaded", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+                            tbfilepathWO.Text = "";
+                            tbwoPTSN.Text = "";
+                            tbwoNo.Text = "";
+                            tbmodelNo.Text = "";
+                            tbmodel.Text = "";
+                            tbtotalPart.Text = "";
+                            tbtotalUsage.Text = "";
+                            tbwoQty.Text = "";
+                            dataGridViewWO.DataSource = null;
+                            dataGridViewWO.Refresh();
+
                             homeButton.Enabled = true;
                             backButton.Enabled = true;
                         }
@@ -419,7 +427,7 @@ namespace CompareWOLL
                             cmd.CommandText = querymodel;
                             cmd.ExecuteNonQuery();
 
-                            conn.Close();
+                            connection.Close();
                             //Tutup koneksi
                             CloseProgress();
                             MessageBox.Show("Work Order Successfully saved", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -60,7 +60,7 @@ namespace CompareWOLL
                 sum += Convert.ToInt32(dataGridViewLL.Rows[i].Cells[3].Value);
 
             }
-            sum = sum + 1;
+            sum = sum;
 
             totalPoint.Text = sum.ToString();
             totalPart.Text = totalPartCode.ToString();

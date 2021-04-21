@@ -127,28 +127,48 @@ namespace CompareWOLL
                             ImportLL ill = new ImportLL();
                             ill.tbModelNo.Text = model;
 
-                            string queryProcessDropDown = "SELECT process_Name FROM tbl_model WHERE model_No = '" + model + "' ORDER BY process_Name DESC ";
-
                             try
                             {
+                                
+                                string queryCustName = "SELECT customer FROM tbl_wo WHERE model_No = '" + model + "'";
 
-                                using (MySqlDataAdapter adpter = new MySqlDataAdapter(queryProcessDropDown, connection))
+                                using (MySqlDataAdapter adt = new MySqlDataAdapter(queryCustName, connection))
                                 {
                                     DataTable dst = new DataTable();
-                                    adpter.Fill(dst);
+                                    adt.Fill(dst);
 
                                     if (dst.Rows.Count > 0)
                                     {
-                                        for (int j = 0; j < dst.Rows.Count; j++)
+                                        ill.tbCust.Text = dst.Rows[0]["customer"].ToString();
+                                    }
+
+                                }
+
+                                string queryProcessDropDown = "SELECT tbl_customer.process_Name FROM tbl_wo, tbl_customer WHERE tbl_wo.customer =  tbl_customer.custname AND tbl_wo.model_No = '" + model + "'";
+                                using (MySqlDataAdapter adpts = new MySqlDataAdapter(queryProcessDropDown, connection))
+                                {
+                                    DataTable dsets = new DataTable();
+                                    adpts.Fill(dsets);
+
+                                    if (dsets.Rows.Count > 0)
+                                    {
+                                        string process = dsets.Rows[0][0].ToString().Replace(" ", String.Empty); ;
+                                        int totalProcess = process.Split(',').Length;
+                                        var processName = process.Split(',');
+
+                                        for (int j = 0; j < totalProcess; j++)
                                         {
-                                            ill.cmbProcess.Items.Add(dst.Rows[j][0]);
-                                            ill.cmbProcess.ValueMember = dst.Rows[j][0].ToString();
+                                            ill.cmbProcess.Items.Add(processName[j]);
+                                            ill.cmbProcess.ValueMember = processName[j].ToString();
                                         }
                                     }
                                     else
                                     {
                                     }
                                 }
+
+                                
+
                             }
                             catch (Exception ex)
                             {
@@ -184,7 +204,7 @@ namespace CompareWOLL
 
             string queryTotalWO = "SELECT SUM(tbl_wodetail.qty) AS totalWO FROM tbl_wodetail WHERE model_No = '" + cmbLLModel.Text + "'";
 
-            string queryDetailLL = "SELECT model_detail, machine, pwb_Type, prog_No, stencil FROM tbl_ll WHERE  model_No = '" + cmbLLModel.Text + "'";
+            string queryDetailLL = "SELECT customer, model_detail, machine, pwb_Type, prog_No, stencil FROM tbl_ll WHERE  model_No = '" + cmbLLModel.Text + "' GROUP BY model_No";
 
             try
             {
@@ -197,6 +217,7 @@ namespace CompareWOLL
 
                     if (dset.Rows.Count > 0)
                     {
+                        tbCustomer.Text = dset.Rows[0]["customer"].ToString();
                         tbModel.Text = dset.Rows[0]["model_detail"].ToString();
                         tbMachine.Text = dset.Rows[0]["machine"].ToString();
                         tbPWBType.Text = dset.Rows[0]["pwb_Type"].ToString();
@@ -257,7 +278,7 @@ namespace CompareWOLL
 
                 connection.Open();
 
-                //nampilin data dalam datagridview compare WO LL
+                //nampilin data dalam datagridview compare LL WO 
 
                 string queryLLWO = "SELECT  t1.partcode, t1.llQty, t1.partUsed, t2.partcode, t2.woQty, t2.partUsed " +
                     "FROM (SELECT tbl_lldetail.partcode, COUNT(tbl_lldetail.partcode) AS partUsed, SUM(tbl_lldetail.qty) AS llQty" +
@@ -297,6 +318,10 @@ namespace CompareWOLL
                     styleError.BackColor = Color.Red;
                     styleError.ForeColor = Color.White;
 
+                    DataGridViewCellStyle styleWarning = new DataGridViewCellStyle();
+                    styleWarning.BackColor = Color.Yellow;
+                    styleWarning.ForeColor = Color.Black;
+
                     if (dataGridViewCompareLLWO.Rows[i].Cells[0].Value.ToString() !=
                         dataGridViewCompareLLWO.Rows[i].Cells[3].Value.ToString() )
                     {
@@ -331,7 +356,7 @@ namespace CompareWOLL
                        dataGridViewCompareLLWO.Rows[i].Cells[5].Value.ToString())
                     {
                         dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Part Code Used Qty Not Match with Loading List";
-                        dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleError;
+                        dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleWarning;
                     }
 
                     //compare partcode
@@ -345,12 +370,11 @@ namespace CompareWOLL
                         dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Match";
                         dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleOk;
                     }
-
                 }
                 connection.Close();
 
                 // Set table title Wo
-                string[] titleWO = { "PART CODE WO ", "QTY WO", "PART WO USED", "PART CODE LL", "QTY LL", "PART LL USED" };
+                string[] titleWO = { "PART CODE LL ", "QTY LL", "PART LL USED", "PART CODE WO", "QTY WO", "PART WO USED" };
                 for (int i = 0; i < titleWO.Length; i++)
                 {
                     dataGridViewCompareLLWO.Columns[i].HeaderText = "" + titleWO[i];
@@ -400,7 +424,11 @@ namespace CompareWOLL
                     styleError.BackColor = Color.Red;
                     styleError.ForeColor = Color.White;
 
-                     if (dataGridViewCompareWOLL.Rows[i].Cells[0].Value.ToString() !=
+                    DataGridViewCellStyle styleWarning = new DataGridViewCellStyle();
+                    styleWarning.BackColor = Color.Yellow;
+                    styleWarning.ForeColor = Color.Black;
+
+                    if (dataGridViewCompareWOLL.Rows[i].Cells[0].Value.ToString() !=
                         dataGridViewCompareWOLL.Rows[i].Cells[3].Value.ToString() )
                     {
                         dataGridViewCompareWOLL.Rows[i].Cells[6].Value = "Part Code Not Match with Work Order";
@@ -434,7 +462,7 @@ namespace CompareWOLL
                        dataGridViewCompareWOLL.Rows[i].Cells[5].Value.ToString())
                     {
                         dataGridViewCompareWOLL.Rows[i].Cells[6].Value = "Part Code Used Qty Not Match with Work Order";
-                        dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleError;
+                        dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleWarning;
                     }
 
                     //compare partcode
@@ -453,7 +481,7 @@ namespace CompareWOLL
                 connection.Close();
 
                 // Set table title Wo
-                string[] titleLL = { "PART CODE LL", "QTY LL", "PART LL USED", "PART CODE WO", "QTY WO", "PART WO USED" };
+                string[] titleLL = { "PART CODE WO", "QTY WO", "PART WO USED", "PART CODE LL", "QTY LL", "PART LL USED" };
                 for (int i = 0; i < titleLL.Length; i++)
                 {
                     dataGridViewCompareWOLL.Columns[i].HeaderText = "" + titleLL[i];
@@ -490,7 +518,7 @@ namespace CompareWOLL
                 {
                     MessageBox.Show("No any selected PCB", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
                     btnGenerate.Enabled = true;
-                }
+                }                
             }
             catch (Exception ex)
             {
@@ -500,6 +528,11 @@ namespace CompareWOLL
 
             groupBox4.Visible = true;
             btnCompare.Enabled = false;
+
+            if (tbCustomer.Text == "PEGATRON")
+            {
+                MessageBox.Show("Don't Forget to Checksum", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information); //custom messageBox to show error  
+            }
         }
 
         private void btnGenerate_Click(object sender, EventArgs e)
@@ -523,9 +556,8 @@ namespace CompareWOLL
 
 
             //truncate result tabel
-            var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
-            var cmd = new MySqlCommand("", conn);
-            conn.Open();
+            var cmd = new MySqlCommand("", connection);
+            connection.Open();
 
             for (int i = 0; i < dataGridViewCompareLLWOResult.Rows.Count; i++)
             {
@@ -533,7 +565,7 @@ namespace CompareWOLL
                 cmd.CommandText = queryResult;
                 cmd.ExecuteNonQuery();
             }
-            conn.Close();
+            connection.Close();
 
             // Create a new workbook with a single sheet
             excelConvert.NewFile();
@@ -555,7 +587,7 @@ namespace CompareWOLL
             // set hide gridlines
             app.ActiveWindow.DisplayGridlines = false;
 
-            conn.Open();
+            connection.Open();
 
             for (int i = 0; i < dataGridViewCompareLLWOResult.Rows.Count; i++)
             {
@@ -571,7 +603,7 @@ namespace CompareWOLL
                 cmd.CommandText = queryResult;
                 cmd.ExecuteNonQuery();
             }
-            conn.Close();
+            connection.Close();
 
             worksheet.Range[worksheet.Cells[1, 1], worksheet.Cells[1, 9]].Merge();
             worksheet.Cells[1, 1].Font.Name = "Times New Roman";
@@ -625,13 +657,13 @@ namespace CompareWOLL
             worksheet.Cells[8, 6] = "DEC.";
             worksheet.Cells[8, 7] = "F. TYPE";
 
-            conn.Open();
+            connection.Open();
             string resultPartCode = "SELECT tbl_resultcompare.reel, tbl_resultcompare.partcode, tbl_resultcompare.tp, tbl_resultcompare.qty, " +
                 "tbl_resultcompare.loc,tbl_resultcompare.dec, tbl_resultcompare.f_Type  FROM tbl_resultcompare " +
                 "WHERE tbl_resultcompare.model_No = '" + model[0].Replace(" ", "") + "' AND tbl_resultcompare.process_Name = '" + model[1].Replace(" ", "") + "'";
 
 
-            using (MySqlDataAdapter dscmd = new MySqlDataAdapter(resultPartCode, conn))
+            using (MySqlDataAdapter dscmd = new MySqlDataAdapter(resultPartCode, connection))
             {
                 DataSet ds = new DataSet();
                 dscmd.Fill(ds);
@@ -665,7 +697,7 @@ namespace CompareWOLL
 
             string remark = "SELECT remarks FROM tbl_ll";
 
-            using (MySqlDataAdapter dscmd = new MySqlDataAdapter(remark, conn))
+            using (MySqlDataAdapter dscmd = new MySqlDataAdapter(remark, connection))
             {
                 DataSet ds = new DataSet();
                 dscmd.Fill(ds);
@@ -678,7 +710,7 @@ namespace CompareWOLL
                     worksheet.Cells[remarkRow, 1] = data;
                 }
             }
-            conn.Close();
+            connection.Close();
 
             worksheet.Cells[remarkRow + 2, 1] = "FM - SMT - ENG - 011";
 

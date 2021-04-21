@@ -7,6 +7,8 @@ namespace CompareWOLL
 {
     public partial class LoadingList : Form
     {
+        MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
+
         public LoadingList()
         {
             InitializeComponent();
@@ -17,8 +19,7 @@ namespace CompareWOLL
             dateTimeNow.Text = DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:ss");
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-
-            MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
+            
             connection.Open();
 
             string queryLL = "SELECT customer, model_No, process_Name, model_detail, machine, pwb_Type, prog_No, rev, pcb_No, part_Count FROM tbl_ll";
@@ -38,7 +39,6 @@ namespace CompareWOLL
                 btnDetail.Text = "Detail";
                 btnDetail.Name = "btnDetail";
                 btnDetail.UseColumnTextForButtonValue = true;
-
 
                 // add button delete in datagridview table
                 DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
@@ -84,16 +84,17 @@ namespace CompareWOLL
             if (e.ColumnIndex == 10)
             {
                 DetailLL dll = new DetailLL();
-                string modelNo = dataGridViewLLList.Rows[e.RowIndex].Cells[0].Value.ToString();
-                string process = dataGridViewLLList.Rows[e.RowIndex].Cells[1].Value.ToString();
-                string model = dataGridViewLLList.Rows[e.RowIndex].Cells[2].Value.ToString();
-                string machine = dataGridViewLLList.Rows[e.RowIndex].Cells[3].Value.ToString();
-                string pwbType = dataGridViewLLList.Rows[e.RowIndex].Cells[4].Value.ToString();
-                string prog = dataGridViewLLList.Rows[e.RowIndex].Cells[5].Value.ToString();
-                string rev = dataGridViewLLList.Rows[e.RowIndex].Cells[6].Value.ToString();
-                string mainpcb = dataGridViewLLList.Rows[e.RowIndex].Cells[7].Value.ToString();
+                string cust = dataGridViewLLList.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string modelNo = dataGridViewLLList.Rows[e.RowIndex].Cells[1].Value.ToString();
+                string process = dataGridViewLLList.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string model = dataGridViewLLList.Rows[e.RowIndex].Cells[3].Value.ToString();
+                string machine = dataGridViewLLList.Rows[e.RowIndex].Cells[4].Value.ToString();
+                string pwbType = dataGridViewLLList.Rows[e.RowIndex].Cells[5].Value.ToString();
+                string prog = dataGridViewLLList.Rows[e.RowIndex].Cells[6].Value.ToString();
+                string rev = dataGridViewLLList.Rows[e.RowIndex].Cells[7].Value.ToString();
+                string mainpcb = dataGridViewLLList.Rows[e.RowIndex].Cells[8].Value.ToString();
 
-
+                dll.tbCustomer.Text = cust;
                 dll.tbModelNo.Text = modelNo;
                 dll.tbProcess.Text = process;
                 dll.tbModel.Text =model;
@@ -115,8 +116,8 @@ namespace CompareWOLL
                 DialogResult result = MessageBox.Show(message, title, buttons);
                 if (result == DialogResult.Yes)
                 {
-                    var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
-                    var cmd = new MySqlCommand("", conn);
+                    
+                    var cmd = new MySqlCommand("", connection);
 
                     string querydeleteLL = "DELETE FROM tbl_ll WHERE model_No = '"+modelslctd+ "' AND process_Name = '" + processslctd + "'";
                     string querydeleteLLDetail = "DELETE FROM tbl_lldetail WHERE model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
@@ -124,7 +125,7 @@ namespace CompareWOLL
                     string querydeleteReel = "DELETE FROM tbl_reel WHERE model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
                     string querydeleteResult = "DELETE FROM tbl_resultcompare WHERE model_No = '" + modelslctd + "' AND process_Name = '" + processslctd + "'";
 
-                    conn.Open();                    
+                    connection.Open();                    
 
                     string[] allQuery = { querydeleteLL, querydeleteLLDetail, querydeletePartCode, querydeleteReel, querydeleteResult };
                     for (int j = 0; j < allQuery.Length; j++)
@@ -135,7 +136,7 @@ namespace CompareWOLL
                         //Jalankan perintah / query dalam CommandText pada database
                     }
 
-                    conn.Close();
+                    connection.Close();
                     LoadingList ll = new LoadingList();
                     ll.Show();
                     this.Hide();
@@ -144,8 +145,6 @@ namespace CompareWOLL
                 else
                 { 
                 }
-
-
             }
         }
     }

@@ -53,6 +53,8 @@ namespace CompareWOLL
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tbCustomer = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.totalPart = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.totalPoint = new System.Windows.Forms.TextBox();
@@ -71,7 +73,7 @@ namespace CompareWOLL
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.dateTimeNow});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 728);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 720);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1094, 22);
             this.statusStrip1.TabIndex = 39;
@@ -91,7 +93,7 @@ namespace CompareWOLL
             // 
             // tbProcess
             // 
-            this.tbProcess.Location = new System.Drawing.Point(544, 40);
+            this.tbProcess.Location = new System.Drawing.Point(115, 80);
             this.tbProcess.Name = "tbProcess";
             this.tbProcess.ReadOnly = true;
             this.tbProcess.Size = new System.Drawing.Size(223, 20);
@@ -99,7 +101,7 @@ namespace CompareWOLL
             // 
             // tbModelNo
             // 
-            this.tbModelNo.Location = new System.Drawing.Point(115, 40);
+            this.tbModelNo.Location = new System.Drawing.Point(546, 47);
             this.tbModelNo.Name = "tbModelNo";
             this.tbModelNo.ReadOnly = true;
             this.tbModelNo.Size = new System.Drawing.Size(223, 20);
@@ -107,7 +109,7 @@ namespace CompareWOLL
             // 
             // tbRemark
             // 
-            this.tbRemark.Location = new System.Drawing.Point(115, 194);
+            this.tbRemark.Location = new System.Drawing.Point(115, 241);
             this.tbRemark.Multiline = true;
             this.tbRemark.Name = "tbRemark";
             this.tbRemark.ReadOnly = true;
@@ -117,7 +119,7 @@ namespace CompareWOLL
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(20, 197);
+            this.label12.Location = new System.Drawing.Point(20, 244);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(44, 13);
             this.label12.TabIndex = 50;
@@ -126,7 +128,7 @@ namespace CompareWOLL
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(447, 153);
+            this.label10.Location = new System.Drawing.Point(447, 200);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(45, 13);
             this.label10.TabIndex = 44;
@@ -134,7 +136,7 @@ namespace CompareWOLL
             // 
             // tbRev
             // 
-            this.tbRev.Location = new System.Drawing.Point(115, 153);
+            this.tbRev.Location = new System.Drawing.Point(115, 200);
             this.tbRev.Name = "tbRev";
             this.tbRev.ReadOnly = true;
             this.tbRev.Size = new System.Drawing.Size(223, 20);
@@ -143,7 +145,7 @@ namespace CompareWOLL
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(18, 153);
+            this.label9.Location = new System.Drawing.Point(18, 200);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(27, 13);
             this.label9.TabIndex = 42;
@@ -151,7 +153,7 @@ namespace CompareWOLL
             // 
             // tbProg
             // 
-            this.tbProg.Location = new System.Drawing.Point(546, 117);
+            this.tbProg.Location = new System.Drawing.Point(546, 164);
             this.tbProg.Name = "tbProg";
             this.tbProg.ReadOnly = true;
             this.tbProg.Size = new System.Drawing.Size(223, 20);
@@ -159,7 +161,7 @@ namespace CompareWOLL
             // 
             // tbPWBType
             // 
-            this.tbPWBType.Location = new System.Drawing.Point(544, 79);
+            this.tbPWBType.Location = new System.Drawing.Point(544, 126);
             this.tbPWBType.Name = "tbPWBType";
             this.tbPWBType.ReadOnly = true;
             this.tbPWBType.Size = new System.Drawing.Size(223, 20);
@@ -167,7 +169,7 @@ namespace CompareWOLL
             // 
             // tbPcbNo
             // 
-            this.tbPcbNo.Location = new System.Drawing.Point(544, 153);
+            this.tbPcbNo.Location = new System.Drawing.Point(544, 200);
             this.tbPcbNo.Name = "tbPcbNo";
             this.tbPcbNo.ReadOnly = true;
             this.tbPcbNo.Size = new System.Drawing.Size(223, 20);
@@ -199,16 +201,16 @@ namespace CompareWOLL
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewLL.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewLL.Location = new System.Drawing.Point(12, 364);
+            this.dataGridViewLL.Location = new System.Drawing.Point(12, 394);
             this.dataGridViewLL.Name = "dataGridViewLL";
             this.dataGridViewLL.ReadOnly = true;
-            this.dataGridViewLL.Size = new System.Drawing.Size(1070, 313);
+            this.dataGridViewLL.Size = new System.Drawing.Size(1070, 275);
             this.dataGridViewLL.TabIndex = 40;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(449, 117);
+            this.label4.Location = new System.Drawing.Point(449, 164);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(49, 13);
             this.label4.TabIndex = 39;
@@ -217,7 +219,7 @@ namespace CompareWOLL
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(449, 79);
+            this.label7.Location = new System.Drawing.Point(449, 126);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(59, 13);
             this.label7.TabIndex = 38;
@@ -225,7 +227,7 @@ namespace CompareWOLL
             // 
             // tbMachine
             // 
-            this.tbMachine.Location = new System.Drawing.Point(117, 117);
+            this.tbMachine.Location = new System.Drawing.Point(117, 164);
             this.tbMachine.Name = "tbMachine";
             this.tbMachine.ReadOnly = true;
             this.tbMachine.Size = new System.Drawing.Size(223, 20);
@@ -233,7 +235,7 @@ namespace CompareWOLL
             // 
             // tbModel
             // 
-            this.tbModel.Location = new System.Drawing.Point(115, 79);
+            this.tbModel.Location = new System.Drawing.Point(115, 126);
             this.tbModel.Name = "tbModel";
             this.tbModel.ReadOnly = true;
             this.tbModel.Size = new System.Drawing.Size(223, 20);
@@ -242,7 +244,7 @@ namespace CompareWOLL
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 79);
+            this.label2.Location = new System.Drawing.Point(20, 126);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 13);
             this.label2.TabIndex = 34;
@@ -251,7 +253,7 @@ namespace CompareWOLL
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(453, 40);
+            this.label1.Location = new System.Drawing.Point(24, 80);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(45, 13);
             this.label1.TabIndex = 29;
@@ -260,7 +262,7 @@ namespace CompareWOLL
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(20, 40);
+            this.label5.Location = new System.Drawing.Point(451, 47);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 13);
             this.label5.TabIndex = 0;
@@ -270,6 +272,8 @@ namespace CompareWOLL
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.tbCustomer);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.totalPart);
             this.groupBox1.Controls.Add(this.tbProcess);
             this.groupBox1.Controls.Add(this.label15);
@@ -294,10 +298,27 @@ namespace CompareWOLL
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Location = new System.Drawing.Point(12, 42);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1070, 302);
+            this.groupBox1.Size = new System.Drawing.Size(1070, 346);
             this.groupBox1.TabIndex = 36;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Loading List Detail";
+            // 
+            // tbCustomer
+            // 
+            this.tbCustomer.Location = new System.Drawing.Point(115, 40);
+            this.tbCustomer.Name = "tbCustomer";
+            this.tbCustomer.ReadOnly = true;
+            this.tbCustomer.Size = new System.Drawing.Size(223, 20);
+            this.tbCustomer.TabIndex = 64;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(20, 40);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(51, 13);
+            this.label6.TabIndex = 63;
+            this.label6.Text = "Customer";
             // 
             // totalPart
             // 
@@ -346,7 +367,7 @@ namespace CompareWOLL
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 117);
+            this.label3.Location = new System.Drawing.Point(20, 164);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 35;
@@ -367,7 +388,7 @@ namespace CompareWOLL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1094, 750);
+            this.ClientSize = new System.Drawing.Size(1094, 742);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.dataGridViewLL);
             this.Controls.Add(this.groupBox1);
@@ -415,5 +436,7 @@ namespace CompareWOLL
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox totalPoint;
         private System.Windows.Forms.Label label14;
+        public System.Windows.Forms.TextBox tbCustomer;
+        private System.Windows.Forms.Label label6;
     }
 }
