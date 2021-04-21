@@ -457,8 +457,7 @@ namespace CompareWOLL
                                             "WHERE reel = '" + reelID + "' AND tbl_reel.model_No = '" + model + "' and tbl_reel.process_Name = '" + process + "'";
                                         cmd.CommandText = StrQueryAddLoc;
                                         cmd.ExecuteNonQuery();
-                                    }
-                                    
+                                    }                                    
                                 }
 
                                 connection.Close();
@@ -523,13 +522,11 @@ namespace CompareWOLL
 
                     }
                 }
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
             }
         }
-
     }
 }

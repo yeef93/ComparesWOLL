@@ -58,6 +58,8 @@ namespace CompareWOLL
             this.label9 = new System.Windows.Forms.Label();
             this.btnHome = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.tbCustomer = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripUsername = new System.Windows.Forms.ToolStripStatusLabel();
@@ -69,8 +71,8 @@ namespace CompareWOLL
             this.dataGridViewCompareWOLL = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.tbCustomer = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareLLWO)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareLLWOResult)).BeginInit();
@@ -386,6 +388,23 @@ namespace CompareWOLL
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Detail Loading List";
             // 
+            // tbCustomer
+            // 
+            this.tbCustomer.Location = new System.Drawing.Point(171, 19);
+            this.tbCustomer.Name = "tbCustomer";
+            this.tbCustomer.ReadOnly = true;
+            this.tbCustomer.Size = new System.Drawing.Size(231, 20);
+            this.tbCustomer.TabIndex = 49;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(47, 21);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(68, 13);
+            this.label14.TabIndex = 48;
+            this.label14.Text = "CUSTOMER";
+            // 
             // dateTimeNow
             // 
             this.dateTimeNow.Name = "dateTimeNow";
@@ -499,28 +518,31 @@ namespace CompareWOLL
             this.label3.TabIndex = 56;
             this.label3.Text = "label3";
             // 
-            // tbCustomer
+            // label15
             // 
-            this.tbCustomer.Location = new System.Drawing.Point(171, 19);
-            this.tbCustomer.Name = "tbCustomer";
-            this.tbCustomer.ReadOnly = true;
-            this.tbCustomer.Size = new System.Drawing.Size(231, 20);
-            this.tbCustomer.TabIndex = 49;
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(306, 648);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(41, 13);
+            this.label15.TabIndex = 57;
+            this.label15.Text = "label15";
             // 
-            // label14
+            // label16
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(47, 21);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(68, 13);
-            this.label14.TabIndex = 48;
-            this.label14.Text = "CUSTOMER";
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(1101, 648);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(41, 13);
+            this.label16.TabIndex = 58;
+            this.label16.Text = "label16";
             // 
             // Compare
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1362, 742);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.label15);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnGenerate);
@@ -596,5 +618,7 @@ namespace CompareWOLL
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbCustomer;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
     }
 }

@@ -203,9 +203,6 @@ namespace CompareWOLL
         private void btnCompare_Click(object sender, EventArgs e)
         {
 
-            dataGridViewCompareLLWO.AllowUserToAddRows = false;
-            dataGridViewCompareWOLL.AllowUserToAddRows = false;
-
             string queryTotalLL = "SELECT SUM(tbl_lldetail.qty) AS totalLL FROM tbl_lldetail WHERE model_No = '" + cmbLLModel.Text + "'";
 
             string queryTotalWO = "SELECT SUM(tbl_wodetail.qty) AS totalWO FROM tbl_wodetail WHERE model_No = '" + cmbLLModel.Text + "'";
@@ -309,6 +306,8 @@ namespace CompareWOLL
                 connection.Close();
 
                 connection.Open();
+
+                int errorLLWO = 0;
                 //menghitung jumlah row data
                 int rowCount = ((DataTable)this.dataGridViewCompareLLWO.DataSource).Rows.Count;
                 for (int i = 0; i < rowCount; i++)
@@ -335,6 +334,8 @@ namespace CompareWOLL
                         dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleError;
 
                         btnWO.Enabled = true;
+
+                        errorLLWO++;
                     }
 
                     else if (dataGridViewCompareLLWO.Rows[i].Cells[1].Value.ToString() !=
@@ -342,6 +343,8 @@ namespace CompareWOLL
                     {
                         dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Qty Not Match with Loading List";
                         dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleError;
+
+                        errorLLWO++;
                     }
 
                     else if (dataGridViewCompareLLWO.Rows[i].Cells[0].Value.ToString() !=
@@ -349,6 +352,8 @@ namespace CompareWOLL
                     {
                         dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Part Code Not Found in Loading List";
                         dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleError;
+
+                        errorLLWO++;
                     }
 
                     else if (dataGridViewCompareLLWO.Rows[i].Cells[1].Value.ToString() !=
@@ -356,6 +361,8 @@ namespace CompareWOLL
                     {
                         dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Qty Not Match with Loading List";
                         dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleError;
+
+                        errorLLWO++;
                     }
 
                     else if (dataGridViewCompareLLWO.Rows[i].Cells[2].Value.ToString() !=
@@ -363,6 +370,7 @@ namespace CompareWOLL
                     {
                         dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Part Code Used Qty Not Match with Loading List";
                         dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleWarning;
+                        errorLLWO++;
                     }
 
                     //compare partcode
@@ -376,6 +384,9 @@ namespace CompareWOLL
                         dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Match";
                         dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleOk;
                     }
+
+                    errorLLWO = errorLLWO;
+                    label15.Text = "Total Not Match Data LL VS WO:" +errorLLWO.ToString();
                 }
                 connection.Close();
 
@@ -415,6 +426,8 @@ namespace CompareWOLL
                 connection.Close();
 
                 connection.Open();
+
+                int errorWOLL = 0;
                 //menghitung jumlah row data
                 int rowCounts = ((DataTable)this.dataGridViewCompareWOLL.DataSource).Rows.Count;
                 for (int i = 0; i < rowCounts; i++)
@@ -441,6 +454,8 @@ namespace CompareWOLL
                         dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleError;
 
                         btnWO.Enabled = true;
+
+                        errorWOLL++;
                     }
 
                     else if (dataGridViewCompareWOLL.Rows[i].Cells[1].Value.ToString() !=
@@ -448,6 +463,7 @@ namespace CompareWOLL
                     {
                         dataGridViewCompareWOLL.Rows[i].Cells[6].Value = "Qty Not Match with Work Order";
                         dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleError;
+                        errorWOLL++;
                     }
 
                     else if (dataGridViewCompareWOLL.Rows[i].Cells[0].Value.ToString() !=
@@ -455,6 +471,7 @@ namespace CompareWOLL
                     {
                         dataGridViewCompareWOLL.Rows[i].Cells[6].Value = "Part Code Not Found in Work Order";
                         dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleError;
+                        errorWOLL++;
                     }
 
                     else if (dataGridViewCompareWOLL.Rows[i].Cells[1].Value.ToString() !=
@@ -462,6 +479,7 @@ namespace CompareWOLL
                     {
                         dataGridViewCompareWOLL.Rows[i].Cells[6].Value = "Qty Not Match with Work Order";
                         dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleError;
+                        errorWOLL++;
                     }
 
                     else if (dataGridViewCompareWOLL.Rows[i].Cells[2].Value.ToString() !=
@@ -469,6 +487,7 @@ namespace CompareWOLL
                     {
                         dataGridViewCompareWOLL.Rows[i].Cells[6].Value = "Part Code Used Qty Not Match with Work Order";
                         dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleWarning;
+                        errorWOLL++;
                     }
 
                     //compare partcode
@@ -482,6 +501,9 @@ namespace CompareWOLL
                         dataGridViewCompareWOLL.Rows[i].Cells[6].Value = "Match";
                         dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleOk;
                     }
+
+                    errorWOLL = errorWOLL;
+                    label16.Text = "Total Not Match Data WO vs LL :" + errorWOLL.ToString();
 
                 }
                 connection.Close();
