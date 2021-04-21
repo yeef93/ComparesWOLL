@@ -32,18 +32,18 @@ namespace CompareWOLL
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
             this.woQty = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.woPTSN = new System.Windows.Forms.TextBox();
-            this.modelNo = new System.Windows.Forms.TextBox();
+            this.tbwoPTSN = new System.Windows.Forms.TextBox();
+            this.tbmodelNo = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.woNo = new System.Windows.Forms.TextBox();
+            this.tbwoNo = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.totalPart = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.totalUsage = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.model = new System.Windows.Forms.TextBox();
+            this.tbmodel = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.homeButton = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -52,6 +52,8 @@ namespace CompareWOLL
             this.backButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.dataGridViewWoList = new System.Windows.Forms.DataGridView();
+            this.tbCustomer = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWoList)).BeginInit();
@@ -85,26 +87,26 @@ namespace CompareWOLL
             this.label8.TabIndex = 26;
             this.label8.Text = "Total Usage";
             // 
-            // woPTSN
+            // tbwoPTSN
             // 
-            this.woPTSN.Location = new System.Drawing.Point(115, 32);
-            this.woPTSN.Name = "woPTSN";
-            this.woPTSN.ReadOnly = true;
-            this.woPTSN.Size = new System.Drawing.Size(223, 20);
-            this.woPTSN.TabIndex = 14;
+            this.tbwoPTSN.Location = new System.Drawing.Point(115, 81);
+            this.tbwoPTSN.Name = "tbwoPTSN";
+            this.tbwoPTSN.ReadOnly = true;
+            this.tbwoPTSN.Size = new System.Drawing.Size(223, 20);
+            this.tbwoPTSN.TabIndex = 14;
             // 
-            // modelNo
+            // tbmodelNo
             // 
-            this.modelNo.Location = new System.Drawing.Point(115, 77);
-            this.modelNo.Name = "modelNo";
-            this.modelNo.ReadOnly = true;
-            this.modelNo.Size = new System.Drawing.Size(223, 20);
-            this.modelNo.TabIndex = 16;
+            this.tbmodelNo.Location = new System.Drawing.Point(115, 126);
+            this.tbmodelNo.Name = "tbmodelNo";
+            this.tbmodelNo.ReadOnly = true;
+            this.tbmodelNo.Size = new System.Drawing.Size(223, 20);
+            this.tbmodelNo.TabIndex = 16;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(20, 35);
+            this.label4.Location = new System.Drawing.Point(20, 84);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 13);
             this.label4.TabIndex = 3;
@@ -113,37 +115,39 @@ namespace CompareWOLL
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 80);
+            this.label2.Location = new System.Drawing.Point(20, 129);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Model No";
             // 
-            // woNo
+            // tbwoNo
             // 
-            this.woNo.Location = new System.Drawing.Point(481, 32);
-            this.woNo.Name = "woNo";
-            this.woNo.ReadOnly = true;
-            this.woNo.Size = new System.Drawing.Size(223, 20);
-            this.woNo.TabIndex = 13;
+            this.tbwoNo.Location = new System.Drawing.Point(481, 81);
+            this.tbwoNo.Name = "tbwoNo";
+            this.tbwoNo.ReadOnly = true;
+            this.tbwoNo.Size = new System.Drawing.Size(223, 20);
+            this.tbwoNo.TabIndex = 13;
             // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.tbCustomer);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.totalPart);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.totalUsage);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.woQty);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.woPTSN);
-            this.groupBox1.Controls.Add(this.modelNo);
+            this.groupBox1.Controls.Add(this.tbwoPTSN);
+            this.groupBox1.Controls.Add(this.tbmodelNo);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.woNo);
+            this.groupBox1.Controls.Add(this.tbwoNo);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.model);
+            this.groupBox1.Controls.Add(this.tbmodel);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 54);
             this.groupBox1.Name = "groupBox1";
@@ -199,24 +203,24 @@ namespace CompareWOLL
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(386, 35);
+            this.label3.Location = new System.Drawing.Point(386, 84);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "WO No";
             // 
-            // model
+            // tbmodel
             // 
-            this.model.Location = new System.Drawing.Point(481, 79);
-            this.model.Name = "model";
-            this.model.ReadOnly = true;
-            this.model.Size = new System.Drawing.Size(223, 20);
-            this.model.TabIndex = 15;
+            this.tbmodel.Location = new System.Drawing.Point(481, 128);
+            this.tbmodel.Name = "tbmodel";
+            this.tbmodel.ReadOnly = true;
+            this.tbmodel.Size = new System.Drawing.Size(223, 20);
+            this.tbmodel.TabIndex = 15;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(386, 84);
+            this.label1.Location = new System.Drawing.Point(386, 133);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(36, 13);
             this.label1.TabIndex = 0;
@@ -289,6 +293,23 @@ namespace CompareWOLL
             this.dataGridViewWoList.Size = new System.Drawing.Size(1167, 367);
             this.dataGridViewWoList.TabIndex = 28;
             // 
+            // tbCustomer
+            // 
+            this.tbCustomer.Location = new System.Drawing.Point(115, 35);
+            this.tbCustomer.Name = "tbCustomer";
+            this.tbCustomer.ReadOnly = true;
+            this.tbCustomer.Size = new System.Drawing.Size(223, 20);
+            this.tbCustomer.TabIndex = 37;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(20, 38);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(51, 13);
+            this.label6.TabIndex = 36;
+            this.label6.Text = "Customer";
+            // 
             // DetailWO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -330,13 +351,15 @@ namespace CompareWOLL
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.DataGridView dataGridViewWoList;
         public System.Windows.Forms.TextBox woQty;
-        public System.Windows.Forms.TextBox woPTSN;
-        public System.Windows.Forms.TextBox modelNo;
-        public System.Windows.Forms.TextBox woNo;
-        public System.Windows.Forms.TextBox model;
+        public System.Windows.Forms.TextBox tbwoPTSN;
+        public System.Windows.Forms.TextBox tbmodelNo;
+        public System.Windows.Forms.TextBox tbwoNo;
+        public System.Windows.Forms.TextBox tbmodel;
         private System.Windows.Forms.Label label9;
         public System.Windows.Forms.TextBox totalUsage;
         private System.Windows.Forms.TextBox totalPart;
         private System.Windows.Forms.Label label5;
+        public System.Windows.Forms.TextBox tbCustomer;
+        private System.Windows.Forms.Label label6;
     }
 }

@@ -14,6 +14,7 @@ namespace CompareWOLL
     public partial class importWO : Form
     {
         LoadForm lf = new LoadForm();
+        MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
 
         public importWO()
         {
@@ -86,7 +87,43 @@ namespace CompareWOLL
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             dataGridViewWO.ReadOnly = true;
 
+            browseWO.Enabled = false;
             saveButton.Enabled = false;
+
+            connection.Open();
+
+            string queryCustDropDown = "SELECT custname FROM tbl_customer";
+
+            try
+            {
+                using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryCustDropDown, connection))
+                {
+                    DataTable dset = new DataTable();
+                    adpt.Fill(dset);
+
+                    if (dset.Rows.Count > 0)
+                    {
+                        for (int j = 0; j < dset.Rows.Count; j++)
+                        {
+                            cmbCustomer.Items.Add(dset.Rows[j][0]);
+                            cmbCustomer.ValueMember = dset.Rows[j][0].ToString();
+                        }
+                    }
+                    else
+                    {
+                    }
+                }
+
+                connection.Close();
+
+            }
+            catch (Exception ex)
+            {
+                // tampilkan pesan error
+                MessageBox.Show(ex.Message);
+            }
+
+
 
         }
 
@@ -304,10 +341,10 @@ namespace CompareWOLL
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            
+            StartProgress("Loading...");
+
             homeButton.Enabled = false;
             backButton.Enabled = false;
-            StartProgress("Loading...");
 
             System.Threading.Thread.Sleep(2000);
 
@@ -317,6 +354,7 @@ namespace CompareWOLL
             string modell = model.Text;
             string woqtyy = totalUsage.Text;
             string wousagee = woQty.Text;
+            string customer = cmbCustomer.Text;
             saveButton.Enabled = false;
 
 
@@ -325,26 +363,23 @@ namespace CompareWOLL
                 CloseProgress();
                 saveButton.Enabled = true;
                 MessageBox.Show("Unable to import Work Order without fill data properly", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
 
             else
             {
                 try
                 {
+
                     var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
                     var cmd = new MySqlCommand("", conn);
 
                     conn.Open();
                     //Buka koneksi
 
-                    string trncteModel = "TRUNCATE tbl_model";
-                    cmd.CommandText = trncteModel;
-                    cmd.ExecuteNonQuery();
-
                     string cekmodel = "SELECT model_No, process_Name FROM tbl_model  WHERE model_No = '" + modelNoo + "'";
-                    string query = "INSERT INTO tbl_wo VALUES('', '" + woPTSNN + "','" + woNoo + "','" + modelNoo + "','" + modell + "', '" + woqtyy + "', '" + wousagee + "')";
+                    string query = "INSERT INTO tbl_wo VALUES('', '" + woPTSNN + "','" + woNoo + "','" + modelNoo + "','" + modell + "', '" + woqtyy + "', '" + wousagee + "', '" + customer + "')";
                     string querymodel = "INSERT INTO tbl_model ( model_No, process_Name ) SELECT model_No, process_Name FROM tbl_wodetail GROUP BY process_Name, model_No";
+                    string trncteModel = "TRUNCATE tbl_model";
 
                     using (MySqlDataAdapter dscmd = new MySqlDataAdapter(cekmodel, conn))
                     {
@@ -361,9 +396,12 @@ namespace CompareWOLL
 
                         else
                         {
-                            cmd.CommandText = query;
+
+                            cmd.CommandText = trncteModel;
                             cmd.ExecuteNonQuery();
 
+                            cmd.CommandText = query;
+                            cmd.ExecuteNonQuery();
 
                             for (int i = 0; i < dataGridViewWO.Rows.Count; i++)
                             {
@@ -417,6 +455,11 @@ namespace CompareWOLL
             wo.toolStripUsername.Text = toolStripUsername.Text;
             wo.Show();
             this.Hide();
+        }
+
+        private void cmbCustomer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            browseWO.Enabled = true;
         }
     }
 }

@@ -39,6 +39,8 @@ namespace CompareWOLL
             cmbLLModel.Enabled = false;
             btnCompare.Enabled = false;
             btnGenerate.Enabled = false;
+            label2.Visible = false;
+            label3.Visible = false;
 
             groupBox4.Visible = false;
 
@@ -91,7 +93,6 @@ namespace CompareWOLL
 
             cmbLLModel.Items.Clear();
 
-            // to split model and process
             string model = cmbWOModel.Text;
 
             connection.Open();
@@ -285,7 +286,8 @@ namespace CompareWOLL
                 int rowCount = ((DataTable)this.dataGridViewCompareLLWO.DataSource).Rows.Count;
                 for (int i = 0; i < rowCount; i++)
                 {
-                    label3.Text = rowCount.ToString();
+                    label3.Text = "Total Part "+rowCount.ToString();
+                    label3.Visible = true;
 
                     DataGridViewCellStyle styleOk = new DataGridViewCellStyle();
                     styleOk.BackColor = Color.Green;
@@ -387,7 +389,8 @@ namespace CompareWOLL
                 int rowCounts = ((DataTable)this.dataGridViewCompareWOLL.DataSource).Rows.Count;
                 for (int i = 0; i < rowCounts; i++)
                 {
-                    label2.Text = rowCounts.ToString();
+                    label2.Text = "Total Part "+rowCounts.ToString();
+                    label2.Visible = true;
 
                     DataGridViewCellStyle styleOk = new DataGridViewCellStyle();
                     styleOk.BackColor = Color.Green;
@@ -460,7 +463,6 @@ namespace CompareWOLL
                 {
                     dataGridViewCompareWOLL.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
-
 
                 // display qty match or not
                 if (woQty.Text == "" || llQty.Text == "")

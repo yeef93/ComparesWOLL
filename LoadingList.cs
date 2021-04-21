@@ -21,9 +21,9 @@ namespace CompareWOLL
             MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
             connection.Open();
 
-            string query = "SELECT model_No, process_Name, model_detail, machine, pwb_Type, prog_No, rev, pcb_No, part_Count FROM tbl_ll";
+            string queryLL = "SELECT customer, model_No, process_Name, model_detail, machine, pwb_Type, prog_No, rev, pcb_No, part_Count FROM tbl_ll";
 
-            using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
+            using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryLL, connection))
             {
                 DataSet dset = new DataSet();
 
@@ -52,7 +52,7 @@ namespace CompareWOLL
             connection.Close();
 
             // Set table title Wo
-            string[] titleWO = { "MODEL NO", "PROCESS NAME", "MODEL DETAIL", "MACHINE", "PWB TYPE", "PROG NO", "REV", "PCB NO", "PART COUNT" };
+            string[] titleWO = { "CUSTOMER", "MODEL NO", "PROCESS NAME", "MODEL DETAIL", "MACHINE", "PWB TYPE", "PROG NO", "REV", "PCB NO", "PART COUNT" };
             for (int i = 0; i < titleWO.Length; i++)
             {
                 dataGridViewLLList.Columns[i].HeaderText = "" + titleWO[i];
@@ -78,10 +78,10 @@ namespace CompareWOLL
         {
             int i;
             i = dataGridViewLLList.SelectedCells[0].RowIndex;
-            string modelslctd = dataGridViewLLList.Rows[i].Cells[0].Value.ToString();
-            string processslctd = dataGridViewLLList.Rows[i].Cells[1].Value.ToString();
+            string modelslctd = dataGridViewLLList.Rows[i].Cells[1].Value.ToString();
+            string processslctd = dataGridViewLLList.Rows[i].Cells[2].Value.ToString();
 
-            if (e.ColumnIndex == 9)
+            if (e.ColumnIndex == 10)
             {
                 DetailLL dll = new DetailLL();
                 string modelNo = dataGridViewLLList.Rows[e.RowIndex].Cells[0].Value.ToString();
@@ -107,7 +107,7 @@ namespace CompareWOLL
                 this.Hide();
             }
 
-                if (e.ColumnIndex == 10)
+                if (e.ColumnIndex == 11)
             {                
                 string message = "Do you want to delete this Loading List " +modelslctd + " " +processslctd + " ?";
                 string title = "Delete Loading List";

@@ -326,6 +326,7 @@ namespace CompareWOLL
                 StartProgress("Loading...");
                 //lf.Show();
 
+                string cust = tbCust.Text;
                 string model = tbModelNo.Text;
                 string modelLL = tbModel.Text;
                 string machine = tbMachine.Text;
@@ -355,7 +356,8 @@ namespace CompareWOLL
                         var cmd = new MySqlCommand("", conn);
 
                         string cekmodel = "SELECT model_No, process_Name FROM tbl_ll  WHERE model_No = '" + model + "'AND process_Name ='" + process + "'";
-                        string queryLL = "INSERT INTO tbl_ll VALUES('','" + model + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','" + llUsage + "','" + stencil + "','" + remark + "')";
+                        string cekPCB = "SELECT * FROM tbl_lldetail WHERE partcode = '" + pcb + "' AND model_No = '" + model + "' AND reel = 'PCB'";
+                        string queryLL = "INSERT INTO tbl_ll VALUES('','" + cust + "','" + model + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','" + llUsage + "','" + stencil + "','" + remark + "')";
                         string queryInputPCB = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '" + pcb + "', '1', '1');";
                         string queryAddPartCodePCB = "INSERT INTO tbl_partcodedetail VALUES ('" + model + "','" + process + "','PCB',  '" + pcb + "', '','PCB' ); ";
 
@@ -376,14 +378,33 @@ namespace CompareWOLL
 
                             else
                             {
-                                string[] allQuery = { queryLL, queryInputPCB, queryAddPartCodePCB };
-                                for (int i = 0; i < allQuery.Length; i++)
+                                MySqlCommand cmddb = new MySqlCommand(cekPCB, conn);
+                                MySqlDataAdapter da = new MySqlDataAdapter(cmddb);
+                                DataSet ds1 = new DataSet();
+                                da.Fill(ds1);
+                                int l = ds1.Tables[0].Rows.Count;
+                                if (l == 0)
                                 {
-                                    cmd.CommandText = allQuery[i];
-                                    //Masukkan perintah/query yang akan dijalankan ke dalam CommandText
-                                    cmd.ExecuteNonQuery();
-                                    //Jalankan perintah / query dalam CommandText pada database
+                                    string[] allQuery = { queryLL, queryInputPCB, queryAddPartCodePCB };
+                                    for (int i = 0; i < allQuery.Length; i++)
+                                    {
+                                        cmd.CommandText = allQuery[i];
+                                        //Masukkan perintah/query yang akan dijalankan ke dalam CommandText
+                                        cmd.ExecuteNonQuery();
+                                        //Jalankan perintah / query dalam CommandText pada database
+                                    }
                                 }
+                                else
+                                {
+                                    string[] allQuery = { queryLL, queryAddPartCodePCB };
+                                    for (int i = 0; i < allQuery.Length; i++)
+                                    {
+                                        cmd.CommandText = allQuery[i];
+                                        //Masukkan perintah/query yang akan dijalankan ke dalam CommandText
+                                        cmd.ExecuteNonQuery();
+                                        //Jalankan perintah / query dalam CommandText pada database
+                                    }
+                                }                                
 
                                 for (int i = 0; i < dataGridViewLL.Rows.Count; i++)
                                 {

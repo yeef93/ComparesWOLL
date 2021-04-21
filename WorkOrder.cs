@@ -19,12 +19,10 @@ namespace CompareWOLL
             dateTimeNow.Text = DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:ss");
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-
-            MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
+            
             connection.Open();
 
-            string querywo = "SELECT wo_PTSN, wo_No, model_No, model, wo_QTY, wo_Usage FROM tbl_wo";
-            string queryll = "SELECT model_No, process_Name FROM tbl_ll WHERE model_No = '60B38YE10A02P' AND process_Name = 'SMT-A'";
+            string querywo = "SELECT customer, model_No, model, wo_PTSN, wo_No, wo_QTY, wo_Usage FROM tbl_wo ORDER BY id DESC";
 
             using (MySqlDataAdapter adpt = new MySqlDataAdapter(querywo, connection))
             {
@@ -57,8 +55,6 @@ namespace CompareWOLL
                 btnImport.Text = "Import Loading List";
                 btnImport.Name = "btnImport";
                 btnImport.UseColumnTextForButtonValue = true;
-                //btnImport.Visible = false;
-
 
                 // add button compare WO LL in datagridview table
                 DataGridViewButtonColumn btnCompare = new DataGridViewButtonColumn();
@@ -68,12 +64,11 @@ namespace CompareWOLL
                 btnCompare.Name = "btnCompare";
                 btnCompare.UseColumnTextForButtonValue = true;
 
-
             }
             connection.Close();
 
             // Set table title Wo
-            string[] titleWO = { "WO PTSN", "WO NO", "MODEL NO", "MODEL", "WO QTY", "WO USAGE" };
+            string[] titleWO = { "CUSTOMER", "MODEL NO", "MODEL", "WO PTSN", "WO NO", "WO USAGE", "WO QTY" };
             for (int i = 0; i < titleWO.Length; i++)
             {
                 dataGridViewWoList.Columns[i].HeaderText = "" + titleWO[i];
@@ -100,25 +95,25 @@ namespace CompareWOLL
         {
             int i;
             i = dataGridViewWoList.SelectedCells[0].RowIndex;
-            string modelslctd = dataGridViewWoList.Rows[i].Cells[2].Value.ToString();
-            string processslctd = dataGridViewWoList.Rows[i].Cells[4].Value.ToString();
+            string modelslctd = dataGridViewWoList.Rows[i].Cells[1].Value.ToString();
 
-            if (e.ColumnIndex == 6)
+            if (e.ColumnIndex == 7)
             {
                 DetailWO dwo = new DetailWO();
-                string woPtsn = dataGridViewWoList.Rows[e.RowIndex].Cells[0].Value.ToString();
-                string woNo = dataGridViewWoList.Rows[e.RowIndex].Cells[1].Value.ToString();
-                string modelNo = dataGridViewWoList.Rows[e.RowIndex].Cells[2].Value.ToString();
-                string model = dataGridViewWoList.Rows[e.RowIndex].Cells[3].Value.ToString();
-                string processName = dataGridViewWoList.Rows[e.RowIndex].Cells[4].Value.ToString();
-                string woQty = dataGridViewWoList.Rows[e.RowIndex].Cells[6].Value.ToString();
-                string woUsage = dataGridViewWoList.Rows[e.RowIndex].Cells[5].Value.ToString();
+                string cust = dataGridViewWoList.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string woPtsn = dataGridViewWoList.Rows[e.RowIndex].Cells[1].Value.ToString();
+                string woNo = dataGridViewWoList.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string modelNo = dataGridViewWoList.Rows[e.RowIndex].Cells[3].Value.ToString();
+                string model = dataGridViewWoList.Rows[e.RowIndex].Cells[4].Value.ToString();
+                //string processName = dataGridViewWoList.Rows[e.RowIndex].Cells[4].Value.ToString();
+                string woQty = dataGridViewWoList.Rows[e.RowIndex].Cells[5].Value.ToString();
+                string woUsage = dataGridViewWoList.Rows[e.RowIndex].Cells[6].Value.ToString();
 
-
-                dwo.woPTSN.Text = woPtsn;
-                dwo.woNo.Text = woNo;
-                dwo.modelNo.Text = modelNo;
-                dwo.model.Text = model;
+                dwo.tbCustomer.Text = cust;
+                dwo.tbwoPTSN.Text = woPtsn;
+                dwo.tbwoNo.Text = woNo;
+                dwo.tbmodelNo.Text = modelNo;
+                dwo.tbmodel.Text = model;
                 dwo.totalUsage.Text = woQty;
                 dwo.woQty.Text = woUsage;
 
@@ -127,7 +122,7 @@ namespace CompareWOLL
                 //MessageBox.Show((e.RowIndex + 1) + "  Row  " + (e.ColumnIndex + 1) + "  Column button clicked ");
             }
 
-            if (e.ColumnIndex == 7)
+            if (e.ColumnIndex == 8)
             {
                 string message = "Do you want to delete this Work Order and Loading List record model " + modelslctd + " ?";
                 string title = "Delete Work Order";
@@ -138,7 +133,7 @@ namespace CompareWOLL
                     var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
                     var cmd = new MySqlCommand("", conn);
 
-                    string querydeleteWO = "DELETE FROM tbl_wo WHERE  model_No = '" + modelslctd + "'";
+                    string querydeleteWO = "DELETE FROM tbl_wo WHERE model_No = '" + modelslctd + "'";
                     string querydeleteWODetail = "DELETE FROM tbl_wodetail WHERE  model_No = '" + modelslctd + "'";
                     string querydeleteModel = "DELETE FROM tbl_model WHERE  model_No = '" + modelslctd + "'";
 
@@ -170,18 +165,20 @@ namespace CompareWOLL
                 }
             }
 
-            if (e.ColumnIndex == 8)
+            if (e.ColumnIndex == 9)
             {
 
                 ImportLL il = new ImportLL();
-                string model = dataGridViewWoList.Rows[e.RowIndex].Cells[2].Value.ToString();
-                string processName = dataGridViewWoList.Rows[e.RowIndex].Cells[4].Value.ToString();
+                string model = dataGridViewWoList.Rows[e.RowIndex].Cells[3].Value.ToString();
+                string cust = dataGridViewWoList.Rows[e.RowIndex].Cells[0].Value.ToString();
+
                 il.Show();
                 il.tbModelNo.Text = model;
+                il.tbCust.Text = cust;
 
                 connection.Open();
 
-                string queryProcessDropDown = "SELECT process_Name FROM tbl_model WHERE model_No = '" + model + "' ORDER BY process_Name DESC ";
+                string queryProcessDropDown = "SELECT process_Name FROM tbl_customer WHERE custname = '" + cust + "'";
 
                 try
                 {
@@ -190,13 +187,17 @@ namespace CompareWOLL
                     {
                         DataTable dset = new DataTable();
                         adpt.Fill(dset);
-
+                        
                         if (dset.Rows.Count > 0)
                         {
-                            for (int j = 0; j < dset.Rows.Count; j++)
+                            string process = dset.Rows[0][0].ToString().Replace(" ", String.Empty); ;
+                            int totalProcess = process.Split(',').Length;
+                            var processName = process.Split(',');
+
+                            for (int j = 0; j < totalProcess; j++)
                             {
-                                il.cmbProcess.Items.Add(dset.Rows[j][0]);
-                                il.cmbProcess.ValueMember = dset.Rows[j][0].ToString();
+                                il.cmbProcess.Items.Add(processName[j]);
+                                il.cmbProcess.ValueMember = processName[j].ToString();
                             }
                         }
                         else
@@ -213,13 +214,12 @@ namespace CompareWOLL
                     MessageBox.Show(ex.Message);
                 }
 
-
                 this.Hide();
 
                 //MessageBox.Show((e.RowIndex + 1) + "  Row  " + (e.ColumnIndex + 1) + "  Column button clicked "+model+"");
             }
 
-            if (e.ColumnIndex == 9)
+            if (e.ColumnIndex == 10)
             {
                 Compare cowl = new Compare();
                 cowl.Show();
