@@ -240,7 +240,6 @@ namespace CompareWOLL
                             }
 
                             //sum = sum + 1;
-
                             llUsage = sum.ToString();
                             totalPoint.Text = llUsage;
                             totalPart.Text = totalPartCode.ToString();
@@ -279,7 +278,6 @@ namespace CompareWOLL
                             {
                                 MessageBox.Show("There is " + count.ToString() + " cell is blank, Please revise the document ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error                        
                             }
-
                         }
                         else if (modelLL != tbModelNo.Text || processLL != cmbProcess.Text)
                         {
@@ -293,7 +291,6 @@ namespace CompareWOLL
                             tbPcbNo.Text = "";
                             tbStencil.Text = "";
                         }
-
                     }
                     catch (Exception ex)
                     {
@@ -352,8 +349,8 @@ namespace CompareWOLL
                 {
                     try
                     {
-                        var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
-                        var cmd = new MySqlCommand("", conn);
+                        
+                        var cmd = new MySqlCommand("", connection);
 
                         string cekmodel = "SELECT model_No, process_Name FROM tbl_ll  WHERE model_No = '" + model + "'AND process_Name ='" + process + "'";
                         string cekPCB = "SELECT * FROM tbl_lldetail WHERE partcode = '" + pcb + "' AND model_No = '" + model + "' AND reel = 'PCB'";
@@ -361,10 +358,10 @@ namespace CompareWOLL
                         string queryInputPCB = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '" + pcb + "', '1', '1');";
                         string queryAddPartCodePCB = "INSERT INTO tbl_partcodedetail VALUES ('" + model + "','" + process + "','PCB',  '" + pcb + "', '','PCB' ); ";
 
-                        conn.Open();
+                        connection.Open();
                         //Buka koneksi
 
-                        using (MySqlDataAdapter dscmd = new MySqlDataAdapter(cekmodel, conn))
+                        using (MySqlDataAdapter dscmd = new MySqlDataAdapter(cekmodel, connection))
                         {
                             DataSet ds = new DataSet();
                             dscmd.Fill(ds);
@@ -378,7 +375,7 @@ namespace CompareWOLL
 
                             else
                             {
-                                MySqlCommand cmddb = new MySqlCommand(cekPCB, conn);
+                                MySqlCommand cmddb = new MySqlCommand(cekPCB, connection);
                                 MySqlDataAdapter da = new MySqlDataAdapter(cmddb);
                                 DataSet ds1 = new DataSet();
                                 da.Fill(ds1);
@@ -452,17 +449,21 @@ namespace CompareWOLL
                                         cmd.CommandText = StrQueryLLDetail;
                                         cmd.ExecuteNonQuery();
                                     }
+                                    else
+                                    {
+                                        //update location
+                                        loc = dataGridViewLL.Rows[j].Cells[4].Value.ToString();
 
-                                    //update location
-                                    loc = dataGridViewLL.Rows[j].Cells[4].Value.ToString();
+                                        string StrQueryAddLoc = "UPDATE tbl_reel SET loc = CONCAT(loc,'" + loc + "') " +
+                                            "WHERE reel = '" + reelID + "' AND tbl_reel.model_No = '" + model + "'";
+                                        cmd.CommandText = StrQueryAddLoc;
+                                        cmd.ExecuteNonQuery();
+                                    }
 
-                                    string StrQueryAddLoc = "UPDATE tbl_reel SET loc = CONCAT(loc,'" + loc + "') " +
-                                        "WHERE reel = '" + reelID + "' AND tbl_reel.model_No = '" + model + "'";
-                                    cmd.CommandText = StrQueryAddLoc;
-                                    cmd.ExecuteNonQuery();
+                                    
                                 }
 
-                                conn.Close();
+                                connection.Close();
                                 //Tutup koneksi
                                 CloseProgress();
 

@@ -50,7 +50,6 @@ namespace CompareWOLL
 
             try
             {
-
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryWODropDown, connection))
                 {
                     DataTable dset = new DataTable();
@@ -113,7 +112,6 @@ namespace CompareWOLL
                         {
                             cmbLLModel.Items.Add(dset.Rows[i][0]);
                             cmbLLModel.ValueMember = dset.Rows[i][0].ToString();
-
                         }
                     }
                     else
@@ -165,10 +163,7 @@ namespace CompareWOLL
                                     else
                                     {
                                     }
-                                }
-
-                                
-
+                                }     
                             }
                             catch (Exception ex)
                             {
