@@ -75,6 +75,9 @@ namespace CompareWOLL
         {
             cmbLLModel.ResetText();
             cmbLLModel.Enabled = true;
+            label2.Visible = false;
+            label3.Visible = false;
+            tbCustomer.Text = "";
             tbModel.Text = "";
             tbMachine.Text = "";
             tbPWBType.Text = "";
@@ -88,6 +91,11 @@ namespace CompareWOLL
             while (dataGridViewCompareLLWO.Rows.Count > 0)
             {
                 dataGridViewCompareLLWO.Rows.RemoveAt(0);
+            }
+
+            while (dataGridViewCompareWOLL.Rows.Count > 0)
+            {
+                dataGridViewCompareWOLL.Rows.RemoveAt(0);
             }
 
             cmbLLModel.Items.Clear();
@@ -194,6 +202,9 @@ namespace CompareWOLL
 
         private void btnCompare_Click(object sender, EventArgs e)
         {
+
+            dataGridViewCompareLLWO.AllowUserToAddRows = false;
+            dataGridViewCompareWOLL.AllowUserToAddRows = false;
 
             string queryTotalLL = "SELECT SUM(tbl_lldetail.qty) AS totalLL FROM tbl_lldetail WHERE model_No = '" + cmbLLModel.Text + "'";
 

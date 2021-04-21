@@ -236,7 +236,6 @@ namespace CompareWOLL
                                 }
                                 //get total qty component
                                 sum += Convert.ToInt32(dataGridViewLL.Rows[i].Cells[3].Value);
-
                             }
 
                             //sum = sum + 1;
