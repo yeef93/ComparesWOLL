@@ -298,8 +298,8 @@ namespace CompareWOLL
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message.ToString());
-                        //MessageBox.Show("Ada error ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //MessageBox.Show(ex.Message.ToString());
+                        MessageBox.Show("Please select Loading List file with correct format", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
@@ -347,6 +347,7 @@ namespace CompareWOLL
                     MessageBox.Show("Unable to import Work Order without fill data properly", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     saveButton.Enabled = true;
                     backButton.Enabled = true;
+                    
                 }
 
                 else

@@ -316,10 +316,7 @@ namespace CompareWOLL
                     {
                         //MessageBox.Show(ex.Message.ToString());
 
-                        if (ex.Message.ToString() == "Object cannot be cast from DBNull to Other types.")
-                        {
-                            MessageBox.Show("Selected file not match with WO template", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
-                        }
+                            MessageBox.Show("Please select Work Order file with correct format", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error 
                     }
                 }
                 else
@@ -360,6 +357,8 @@ namespace CompareWOLL
                 CloseProgress();
                 saveButton.Enabled = true;
                 MessageBox.Show("Unable to import Work Order without fill data properly", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                homeButton.Enabled = true;
+                backButton.Enabled = true;
             }
 
             else

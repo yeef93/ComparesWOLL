@@ -246,6 +246,7 @@ namespace CompareWOLL
             // 
             // cmbCustomer
             // 
+            this.cmbCustomer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.cmbCustomer.FormattingEnabled = true;
             this.cmbCustomer.Location = new System.Drawing.Point(115, 34);
             this.cmbCustomer.Name = "cmbCustomer";
