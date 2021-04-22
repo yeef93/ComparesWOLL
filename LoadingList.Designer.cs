@@ -35,6 +35,8 @@ namespace CompareWOLL
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
             this.dataGridViewLLList = new System.Windows.Forms.DataGridView();
             this.homeButton = new System.Windows.Forms.Button();
+            this.tbSearch = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLLList)).BeginInit();
             this.SuspendLayout();
@@ -101,11 +103,30 @@ namespace CompareWOLL
             this.homeButton.UseVisualStyleBackColor = true;
             this.homeButton.Click += new System.EventHandler(this.backButton_Click);
             // 
+            // tbSearch
+            // 
+            this.tbSearch.Location = new System.Drawing.Point(84, 25);
+            this.tbSearch.Name = "tbSearch";
+            this.tbSearch.Size = new System.Drawing.Size(200, 20);
+            this.tbSearch.TabIndex = 11;
+            this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(30, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Search";
+            // 
             // LoadingList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(780, 368);
+            this.Controls.Add(this.tbSearch);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.homeButton);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.dataGridViewLLList);
@@ -128,5 +149,7 @@ namespace CompareWOLL
         private System.Windows.Forms.DataGridView dataGridViewLLList;
         private System.Windows.Forms.Button homeButton;
         public System.Windows.Forms.ToolStripStatusLabel toolStripUsername;
+        private System.Windows.Forms.TextBox tbSearch;
+        private System.Windows.Forms.Label label1;
     }
 }

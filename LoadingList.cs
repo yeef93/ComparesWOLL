@@ -147,5 +147,18 @@ namespace CompareWOLL
                 }
             }
         }
+
+        private void tbSearch_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                (dataGridViewLLList.DataSource as DataTable).DefaultView.RowFilter =
+                    string.Format("customer LIKE '{0}%' or model_No LIKE '{0}%' or process_Name LIKE '{0}%' or model_detail LIKE '{0}%' or machine LIKE '{0}%'or pwb_Type LIKE '{0}%' or prog_No LIKE '{0}%'or pcb_No LIKE '{0}%'", tbSearch.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
