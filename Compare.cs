@@ -39,18 +39,17 @@ namespace CompareWOLL
             cmbLLModel.Enabled = false;
             btnCompare.Enabled = false;
             btnGenerate.Enabled = false;
-            label2.Visible = false;
             label3.Visible = false;
+            label16.Visible = false;
             gbSummary.Visible = false;
 
             groupBox4.Visible = false;
-
-            connection.Open();
 
             string queryWODropDown = "SELECT model_No FROM tbl_wo ";
 
             try
             {
+                connection.Open();
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryWODropDown, connection))
                 {
                     DataTable dset = new DataTable();
@@ -88,7 +87,9 @@ namespace CompareWOLL
             woQty.Text = "";
             llQty.Text = "";
             compareQty.Text = "";
+            gbSummary.Visible = false;
             compareQty.BackColor = SystemColors.Control;
+
             while (dataGridViewCompareLLWO.Rows.Count > 0)
             {
                 dataGridViewCompareLLWO.Rows.RemoveAt(0);
@@ -103,13 +104,11 @@ namespace CompareWOLL
 
             string model = cmbWOModel.Text;
 
-            connection.Open();
-
             string queryLLDropDown = "SELECT model_No FROM tbl_ll WHERE model_No = '" + model + "'GROUP BY model_No";
 
             try
             {
-
+                connection.Open();
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryLLDropDown, connection))
                 {
                     DataTable dset = new DataTable();
@@ -136,7 +135,7 @@ namespace CompareWOLL
 
                             try
                             {
-                                
+
                                 string queryCustName = "SELECT customer FROM tbl_wo WHERE model_No = '" + model + "'";
 
                                 using (MySqlDataAdapter adt = new MySqlDataAdapter(queryCustName, connection))
@@ -172,7 +171,7 @@ namespace CompareWOLL
                                     else
                                     {
                                     }
-                                }     
+                                }
                             }
                             catch (Exception ex)
                             {
@@ -185,12 +184,12 @@ namespace CompareWOLL
                         }
                     }
                 }
-
                 connection.Close();
 
             }
             catch (Exception ex)
             {
+                connection.Close();
                 // tampilkan pesan error
                 MessageBox.Show(ex.Message);
             }
@@ -230,9 +229,6 @@ namespace CompareWOLL
                         tbStencil.Text = dset.Rows[0]["stencil"].ToString();
                     }
                 }
-                connection.Close();
-
-                connection.Open();
                 //nampilin qty Wo
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryTotalWO, connection))
                 {
@@ -245,9 +241,6 @@ namespace CompareWOLL
                     }
 
                 }
-                connection.Close();
-
-                connection.Open();
                 //nampilin qty LL
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryTotalLL, connection))
                 {
@@ -259,9 +252,7 @@ namespace CompareWOLL
                         llQty.Text = dset.Rows[0]["totalLL"].ToString();
                     }
                 }
-                connection.Close();
 
-                connection.Open();
                 //nampilin selected PCB
                 string queryPCB = "SELECT tbl_wodetail.partcode FROM tbl_wodetail LEFT JOIN tbl_lldetail " +
                     "ON tbl_wodetail.partcode = tbl_lldetail.partcode  " +
@@ -278,9 +269,6 @@ namespace CompareWOLL
                     }
 
                 }
-                connection.Close();
-
-                connection.Open();
 
                 //nampilin data dalam datagridview compare LL WO 
 
@@ -304,20 +292,17 @@ namespace CompareWOLL
 
                 }
 
-                connection.Close();
-
-                connection.Open();
-
                 int partCodeNotMatchLLWO = 0;
                 int qtyNotMatchLLWO = 0;
                 int partCodeNotFoundLLWO = 0;
                 int partCodeUsedNotMatchLLWO = 0;
 
+
                 //menghitung jumlah row data
                 int rowCount = ((DataTable)this.dataGridViewCompareLLWO.DataSource).Rows.Count;
                 for (int i = 0; i < rowCount; i++)
                 {
-                    label3.Text = "Total Part Loading List : "+rowCount.ToString();
+                    label3.Text = "Total Part Loading List : " + rowCount.ToString();
                     label3.Visible = true;
 
                     DataGridViewCellStyle styleOk = new DataGridViewCellStyle();
@@ -333,7 +318,7 @@ namespace CompareWOLL
                     styleWarning.ForeColor = Color.Black;
 
                     if (dataGridViewCompareLLWO.Rows[i].Cells[0].Value.ToString() !=
-                        dataGridViewCompareLLWO.Rows[i].Cells[3].Value.ToString() )
+                        dataGridViewCompareLLWO.Rows[i].Cells[3].Value.ToString())
                     {
                         dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Part Code Not Match with Loading List";
                         dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleError;
@@ -381,13 +366,17 @@ namespace CompareWOLL
                         dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleOk;
                     }
 
+                    int LLWONMPartCode = partCodeNotMatchLLWO;
+                    int LLWONMQty = qtyNotMatchLLWO;
+                    int LLWONFPartCode = partCodeNotFoundLLWO;
+                    int LLWONMPartCodeUsed = partCodeUsedNotMatchLLWO;
+
                     lbPartCodeNotMatchLLWO.Text = "Partcode Not Match LL VS WO : " + partCodeNotMatchLLWO.ToString();
                     lbQtyNotMatchLLWO.Text = "Qty Not Match LL VS WO : " + qtyNotMatchLLWO.ToString();
                     lbPartCodeNotFoundLLWO.Text = "Partcode Not Found LL VS WO : " + partCodeNotFoundLLWO.ToString();
                     lbPartCodeUsedNotMatchLLWO.Text = "Partcode Used Not Match LL VS WO : " + partCodeUsedNotMatchLLWO.ToString();
 
                 }
-                connection.Close();
 
                 // Set table title Wo
                 string[] titleWO = { "PART CODE LL ", "QTY LL", "PART LL USED", "PART CODE WO", "QTY WO", "PART WO USED" };
@@ -422,10 +411,6 @@ namespace CompareWOLL
 
                 }
 
-                connection.Close();
-
-                connection.Open();
-
                 int partCodeNotMatchWOLL = 0;
                 int qtyNotMatchWOLL = 0;
                 int partCodeNotFoundWOLL = 0;
@@ -436,7 +421,7 @@ namespace CompareWOLL
                 int rowCounts = ((DataTable)this.dataGridViewCompareWOLL.DataSource).Rows.Count;
                 for (int i = 0; i < rowCounts; i++)
                 {
-                    label16.Text = "Total Part Work Order "+rowCounts.ToString();
+                    label16.Text = "Total Part Work Order " + rowCounts.ToString();
                     label16.Visible = true;
 
                     DataGridViewCellStyle styleOk = new DataGridViewCellStyle();
@@ -452,11 +437,10 @@ namespace CompareWOLL
                     styleWarning.ForeColor = Color.Black;
 
                     if (dataGridViewCompareWOLL.Rows[i].Cells[0].Value.ToString() !=
-                        dataGridViewCompareWOLL.Rows[i].Cells[3].Value.ToString() )
+                        dataGridViewCompareWOLL.Rows[i].Cells[3].Value.ToString())
                     {
                         dataGridViewCompareWOLL.Rows[i].Cells[6].Value = "Part Code Not Match with Work Order";
                         dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleError;
-
                         btnWO.Enabled = true;
 
                         partCodeNotMatchWOLL++;
@@ -467,7 +451,7 @@ namespace CompareWOLL
                     {
                         dataGridViewCompareWOLL.Rows[i].Cells[6].Value = "Qty Not Match with Work Order";
                         dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleError;
-                        qtyNotMatchWOLL++; 
+                        qtyNotMatchWOLL++;
                     }
 
                     else if (dataGridViewCompareWOLL.Rows[i].Cells[0].Value.ToString() !=
@@ -513,7 +497,6 @@ namespace CompareWOLL
                     lbPartCodeUsedNotMatchWOLL.Text = "Partcode Used Not Match WO VS LL : " + partCodeUsedNotMatchWOLL.ToString();
 
                 }
-                connection.Close();
 
                 // Set table title Wo
                 string[] titleLL = { "PART CODE WO", "QTY WO", "PART WO USED", "PART CODE LL", "QTY LL", "PART LL USED" };
@@ -553,10 +536,12 @@ namespace CompareWOLL
                 {
                     MessageBox.Show("No any selected PCB", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
                     btnGenerate.Enabled = true;
-                }                
+                }
+                connection.Close();
             }
             catch (Exception ex)
             {
+                connection.Close();
                 // tampilkan pesan error
                 MessageBox.Show(ex.Message);
             }

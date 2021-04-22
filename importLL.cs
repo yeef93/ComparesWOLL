@@ -353,8 +353,7 @@ namespace CompareWOLL
                 else
                 {
                     try
-                    {
-                        
+                    {                        
                         var cmd = new MySqlCommand("", connection);
 
                         string cekmodel = "SELECT model_No, process_Name FROM tbl_ll  WHERE model_No = '" + model + "'AND process_Name ='" + process + "'";
