@@ -391,9 +391,8 @@ namespace CompareWOLL
 
 
             //truncate result tabel
-            var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
-            var cmd = new MySqlCommand("", conn);
-            conn.Open();
+            var cmd = new MySqlCommand("", connection);
+            connection.Open();
 
             for (int i = 0; i < dataGridViewCompareLLWOResult.Rows.Count; i++)
             {
@@ -401,7 +400,7 @@ namespace CompareWOLL
                 cmd.CommandText = queryResult;
                 cmd.ExecuteNonQuery();
             }
-            conn.Close();
+            connection.Close();
 
             // Create a new workbook with a single sheet
             excelConvert.NewFile();
@@ -423,7 +422,7 @@ namespace CompareWOLL
             // set hide gridlines
             app.ActiveWindow.DisplayGridlines = false;
 
-            conn.Open();
+            connection.Open();
 
             for (int i = 0; i < dataGridViewCompareLLWOResult.Rows.Count; i++)
             {
@@ -439,7 +438,7 @@ namespace CompareWOLL
                 cmd.CommandText = queryResult;
                 cmd.ExecuteNonQuery();
             }
-            conn.Close();
+            connection.Close();
 
             worksheet.Range[worksheet.Cells[1, 1], worksheet.Cells[1, 9]].Merge();
             worksheet.Cells[1, 1].Font.Name = "Times New Roman";
@@ -493,13 +492,13 @@ namespace CompareWOLL
             worksheet.Cells[8, 6] = "DEC.";
             worksheet.Cells[8, 7] = "F. TYPE";
 
-            conn.Open();
+            connection.Open();
             string resultPartCode = "SELECT tbl_resultcompare.reel, tbl_resultcompare.partcode, tbl_resultcompare.tp, tbl_resultcompare.qty, " +
                 "tbl_resultcompare.loc,tbl_resultcompare.dec, tbl_resultcompare.f_Type  FROM tbl_resultcompare " +
                 "WHERE tbl_resultcompare.model_No = '" + model[0].Replace(" ", "") + "' AND tbl_resultcompare.process_Name = '" + model[1].Replace(" ", "") + "'";
 
 
-            using (MySqlDataAdapter dscmd = new MySqlDataAdapter(resultPartCode, conn))
+            using (MySqlDataAdapter dscmd = new MySqlDataAdapter(resultPartCode, connection))
             {
                 DataSet ds = new DataSet();
                 dscmd.Fill(ds);
@@ -533,7 +532,7 @@ namespace CompareWOLL
 
             string remark = "SELECT remarks FROM tbl_ll";
 
-            using (MySqlDataAdapter dscmd = new MySqlDataAdapter(remark, conn))
+            using (MySqlDataAdapter dscmd = new MySqlDataAdapter(remark, connection))
             {
                 DataSet ds = new DataSet();
                 dscmd.Fill(ds);
@@ -546,7 +545,7 @@ namespace CompareWOLL
                     worksheet.Cells[remarkRow, 1] = data;
                 }
             }
-            conn.Close();
+            connection.Close();
 
             worksheet.Cells[remarkRow + 2, 1] = "FM - SMT - ENG - 011";
 

@@ -74,6 +74,7 @@ namespace CompareWOLL
             dateTimeNow.Text = DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:ss");
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+
             dataGridViewLLHide.Visible = false;
             saveButton.Enabled = false;
             browseLL.Enabled = false;
@@ -176,7 +177,6 @@ namespace CompareWOLL
                                 saveButton.Enabled = false;
                             }
 
-
                             // baca stencil
                             DataTable dtExcel5 = new DataTable();
                             dtExcel5 = help.ReadExcel(woFileName, fileExtLL, queryGetStencil); //read excel file  
@@ -278,9 +278,9 @@ namespace CompareWOLL
                                 MessageBox.Show("There is " + count.ToString() + " cell is blank, Please revise the document ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error                        
                             }
                         }
-                        else if (modelLL != tbModelNo.Text || processLL != cmbProcess.Text)
+                        if (modelLLNO != tbModelNo.Text || processLL != cmbProcess.Text)
                         {
-                            MessageBox.Show("Excel file not contain with Model " + modelLLNO + " and Process " + cmbProcess.Text + ", Please check again the document.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+                            MessageBox.Show("Excel file not contain with Model " + tbModelNo.Text + " and Process " + cmbProcess.Text + ", Please check again the document.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
                             filepathLL.Text = "";
                             tbModel.Text = "";
                             tbMachine.Text = "";
@@ -289,6 +289,11 @@ namespace CompareWOLL
                             tbRev.Text = "";
                             tbPcbNo.Text = "";
                             tbStencil.Text = "";
+                            totalPoint.Text = "";
+                            totalPart.Text = "";
+
+                            dataGridViewLL.DataSource = null;
+                            dataGridViewLL.Refresh();
                         }
                     }
                     catch (Exception ex)

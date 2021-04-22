@@ -288,7 +288,7 @@ namespace CompareWOLL
                     " FROM tbl_lldetail WHERE tbl_lldetail.model_No = '" + cmbLLModel.Text + "' GROUP BY tbl_lldetail.partcode ) t1 " +
                     "LEFT JOIN ( SELECT tbl_wodetail.partcode, COUNT(tbl_wodetail.partcode) AS partUsed, " +
                     "SUM(tbl_wodetail.qty) AS woQty     FROM tbl_wodetail WHERE tbl_wodetail.model_No = '" + cmbLLModel.Text + "' " +
-                    "GROUP BY tbl_wodetail.partcode ) t2 ON t1.partcode = t2.partcode";
+                    "GROUP BY tbl_wodetail.partcode ) t2 ON t1.partcode = t2.partcode ORDER BY t2.partcode";
 
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryLLWO, connection))
                 {
@@ -410,7 +410,7 @@ namespace CompareWOLL
                     " FROM tbl_wodetail WHERE tbl_wodetail.model_No = '" + cmbLLModel.Text + "' GROUP BY tbl_wodetail.partcode ) t1  " +
                     "LEFT JOIN ( SELECT tbl_lldetail.partcode, COUNT(tbl_lldetail.partcode) AS partUsed, SUM(tbl_lldetail.qty) AS llQty " +
                     "FROM tbl_lldetail WHERE tbl_lldetail.model_No = '" + cmbLLModel.Text + "' GROUP BY tbl_lldetail.partcode ) t2 " +
-                    "ON t1.partcode = t2.partcode ";
+                    "ON t1.partcode = t2.partcode ORDER BY t2.partcode";
 
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryWOLL, connection))
                 {

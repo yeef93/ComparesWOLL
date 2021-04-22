@@ -19,7 +19,7 @@ namespace CompareWOLL
             dateTimeNow.Text = DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:ss");
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            
+
             connection.Open();
 
             string querywo = "SELECT customer, model_No, model, wo_PTSN, wo_No, wo_QTY, wo_Usage FROM tbl_wo ORDER BY id DESC";
@@ -130,8 +130,7 @@ namespace CompareWOLL
                 DialogResult result = MessageBox.Show(message, title, buttons);
                 if (result == DialogResult.Yes)
                 {
-                    var conn = new MySqlConnection("Host=localhost;Uid=root;Pwd=;Database=pe");
-                    var cmd = new MySqlCommand("", conn);
+                    var cmd = new MySqlCommand("", connection);
 
                     string querydeleteWO = "DELETE FROM tbl_wo WHERE model_No = '" + modelslctd + "'";
                     string querydeleteWODetail = "DELETE FROM tbl_wodetail WHERE  model_No = '" + modelslctd + "'";
@@ -143,7 +142,7 @@ namespace CompareWOLL
                     string querydeleteReel = "DELETE FROM tbl_reel WHERE model_No = '" + modelslctd + "'";
                     string querydeleteResult = "DELETE FROM tbl_resultcompare WHERE model_No = '" + modelslctd + "'";
 
-                    conn.Open();
+                    connection.Open();
 
                     string[] allQuery = { querydeleteWO, querydeleteWODetail, querydeleteModel, querydeleteLL, querydeleteLLDetail, querydeletePartCode, querydeleteReel, querydeleteResult };
                     for (int j = 0; j < allQuery.Length; j++)
@@ -154,7 +153,7 @@ namespace CompareWOLL
                         //Jalankan perintah / query dalam CommandText pada database
                     }
 
-                    conn.Close();
+                    connection.Close();
                     WorkOrder wo = new WorkOrder();
                     wo.Show();
                     this.Hide();
@@ -187,7 +186,7 @@ namespace CompareWOLL
                     {
                         DataTable dset = new DataTable();
                         adpt.Fill(dset);
-                        
+
                         if (dset.Rows.Count > 0)
                         {
                             string process = dset.Rows[0][0].ToString().Replace(" ", String.Empty); ;
@@ -224,6 +223,18 @@ namespace CompareWOLL
                 Compare cowl = new Compare();
                 cowl.Show();
                 this.Hide();
+            }
+        }
+        private void tbSearch_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                (dataGridViewWoList.DataSource as DataTable).DefaultView.RowFilter = 
+                    string.Format("customer LIKE '{0}%' or model_No LIKE '{0}%' or model LIKE '{0}%' or wo_PTSN LIKE '{0}%' or wo_No LIKE '{0}%'", tbSearch.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }
