@@ -16,6 +16,9 @@ namespace CompareWOLL
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 
+            label1.Visible = false;
+            //label1.Text = "Hello,\nHow are you?\nI'm fine!";
+
         }
 
         private void compareWOVsLLToolStripMenuItem_Click(object sender, EventArgs e)

@@ -10,6 +10,15 @@ namespace CompareWOLL
     {
         MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
         ExcelConvert excelConvert = new ExcelConvert();
+        string LLWONMPartCodes = string.Empty;
+        string LLWONMQtys = string.Empty;
+        string LLWONFPartCodes = string.Empty;
+        string LLWONMPartCodeUseds = string.Empty;
+
+        string WOLLNMPartCodes = string.Empty;
+        string WOLLNMQtys = string.Empty;
+        string WOLLNFPartCodes = string.Empty;
+        string WOLLNMPartCodeUseds = string.Empty;
 
         public Compare()
         {
@@ -371,12 +380,32 @@ namespace CompareWOLL
                     int LLWONFPartCode = partCodeNotFoundLLWO;
                     int LLWONMPartCodeUsed = partCodeUsedNotMatchLLWO;
 
-                    lbPartCodeNotMatchLLWO.Text = "Partcode Not Match LL VS WO : " + partCodeNotMatchLLWO.ToString();
-                    lbQtyNotMatchLLWO.Text = "Qty Not Match LL VS WO : " + qtyNotMatchLLWO.ToString();
-                    lbPartCodeNotFoundLLWO.Text = "Partcode Not Found LL VS WO : " + partCodeNotFoundLLWO.ToString();
-                    lbPartCodeUsedNotMatchLLWO.Text = "Partcode Used Not Match LL VS WO : " + partCodeUsedNotMatchLLWO.ToString();
-
+                    if (LLWONMPartCode > 0)
+                    {
+                        LLWONMPartCodes = "Partcode Not Match LL VS WO : " + partCodeNotMatchLLWO.ToString();
+                    }
+                    else if (LLWONMQty > 0)
+                    {
+                        LLWONMQtys = "\nQty Not Match LL VS WO : " + qtyNotMatchLLWO.ToString();
+                    }
+                    else if (LLWONFPartCode > 0)
+                    {
+                        LLWONFPartCodes = "\nPartcode Not Found LL VS WO : " + partCodeNotFoundLLWO.ToString();
+                    }
+                    else if (LLWONMPartCodeUsed > 0)
+                    {
+                        LLWONMPartCodeUseds = "\nPartcode Used Not Match LL VS WO : " + partCodeUsedNotMatchLLWO.ToString();
+                    }
                 }
+
+                if (LLWONMPartCodes == "" && LLWONMQtys == "" && LLWONFPartCodes =="" && LLWONMPartCodeUseds =="")
+                {
+                    lbSummaryLLWO.Text = "All Data Match";
+                }
+                else
+                {
+                    lbSummaryLLWO.Text = LLWONMPartCodes + LLWONMQtys + LLWONFPartCodes + LLWONMPartCodeUseds;
+                }                
 
                 // Set table title Wo
                 string[] titleWO = { "PART CODE LL ", "QTY LL", "PART LL USED", "PART CODE WO", "QTY WO", "PART WO USED" };
@@ -490,11 +519,36 @@ namespace CompareWOLL
                         dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleOk;
                     }
 
+                    int WOLLNMPartCode = partCodeNotMatchWOLL;
+                    int WOLLNMQty = qtyNotMatchWOLL;
+                    int WOLLNFPartCode = partCodeNotFoundWOLL;
+                    int WOLLNMPartCodeUsed = partCodeUsedNotMatchWOLL;
 
-                    lbPartCodeNotMatchWOLL.Text = "Partcode Not Match WO VS LL : " + partCodeNotMatchWOLL.ToString();
-                    lbQtyNotMatchWOLL.Text = "Qty Not Match WO VS LL : " + qtyNotMatchWOLL.ToString();
-                    lbPartCodeNotFoundWOLL.Text = "Partcode Not Found WO VS LL : " + partCodeNotFoundWOLL.ToString();
-                    lbPartCodeUsedNotMatchWOLL.Text = "Partcode Used Not Match WO VS LL : " + partCodeUsedNotMatchWOLL.ToString();
+                    if (WOLLNMPartCode > 0)
+                    {
+                        WOLLNMPartCodes = "Partcode Not Match WO VS LL : " + partCodeNotMatchWOLL.ToString();
+                    }
+                    else if (WOLLNMQty > 0)
+                    {
+                        WOLLNMQtys = "\nQty Not Match WO VS LL : " + qtyNotMatchWOLL.ToString();
+                    }
+                    else if (WOLLNFPartCode > 0)
+                    {
+                        WOLLNFPartCodes = "\nPartcode Not Found WO VS LL : " + partCodeNotFoundWOLL.ToString();
+                    }
+                    else if (WOLLNMPartCodeUsed > 0)
+                    {
+                        WOLLNMPartCodeUseds = "\nPartcode Used Not Match WO VS LL : " + partCodeUsedNotMatchWOLL.ToString();
+                    }
+
+                    if (WOLLNMPartCodes == "" && WOLLNMQtys == "" && WOLLNFPartCodes == "" && WOLLNMPartCodeUseds == "")
+                    {
+                        lbSummaryWOLL.Text = "All Data Match";
+                    }
+                    else
+                    {
+                        lbSummaryWOLL.Text = WOLLNMPartCodes + WOLLNMQtys + WOLLNFPartCodes + WOLLNMPartCodeUseds;
+                    }
 
                 }
 

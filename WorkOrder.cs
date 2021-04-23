@@ -214,13 +214,15 @@ namespace CompareWOLL
                 }
 
                 this.Hide();
-
                 //MessageBox.Show((e.RowIndex + 1) + "  Row  " + (e.ColumnIndex + 1) + "  Column button clicked "+model+"");
             }
 
             if (e.ColumnIndex == 10)
             {
+                string model = dataGridViewWoList.Rows[e.RowIndex].Cells[1].Value.ToString();
+
                 Compare cowl = new Compare();
+                cowl.cmbWOModel.Text = model;
                 cowl.Show();
                 this.Hide();
             }

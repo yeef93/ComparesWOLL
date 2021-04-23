@@ -67,21 +67,15 @@ namespace CompareWOLL
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gbSummary = new System.Windows.Forms.GroupBox();
-            this.lbPartCodeNotFoundWOLL = new System.Windows.Forms.Label();
-            this.lbPartCodeUsedNotMatchWOLL = new System.Windows.Forms.Label();
-            this.lbQtyNotMatchWOLL = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.lbPartCodeNotMatchWOLL = new System.Windows.Forms.Label();
-            this.lbPartCodeNotFoundLLWO = new System.Windows.Forms.Label();
-            this.lbPartCodeUsedNotMatchLLWO = new System.Windows.Forms.Label();
-            this.lbPartCodeNotMatchLLWO = new System.Windows.Forms.Label();
-            this.lbQtyNotMatchLLWO = new System.Windows.Forms.Label();
+            this.lbSummaryWOLL = new System.Windows.Forms.Label();
+            this.lbSummaryLLWO = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.dataGridViewCompareWOLL = new System.Windows.Forms.DataGridView();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareLLWO)).BeginInit();
@@ -483,49 +477,16 @@ namespace CompareWOLL
             // 
             // gbSummary
             // 
-            this.gbSummary.Controls.Add(this.lbPartCodeNotFoundWOLL);
-            this.gbSummary.Controls.Add(this.lbPartCodeUsedNotMatchWOLL);
-            this.gbSummary.Controls.Add(this.lbQtyNotMatchWOLL);
             this.gbSummary.Controls.Add(this.label17);
             this.gbSummary.Controls.Add(this.label15);
-            this.gbSummary.Controls.Add(this.lbPartCodeNotMatchWOLL);
-            this.gbSummary.Controls.Add(this.lbPartCodeNotFoundLLWO);
-            this.gbSummary.Controls.Add(this.lbPartCodeUsedNotMatchLLWO);
-            this.gbSummary.Controls.Add(this.lbPartCodeNotMatchLLWO);
-            this.gbSummary.Controls.Add(this.lbQtyNotMatchLLWO);
+            this.gbSummary.Controls.Add(this.lbSummaryWOLL);
+            this.gbSummary.Controls.Add(this.lbSummaryLLWO);
             this.gbSummary.Location = new System.Drawing.Point(816, 132);
             this.gbSummary.Name = "gbSummary";
             this.gbSummary.Size = new System.Drawing.Size(497, 173);
             this.gbSummary.TabIndex = 61;
             this.gbSummary.TabStop = false;
             this.gbSummary.Text = "Summary";
-            // 
-            // lbPartCodeNotFoundWOLL
-            // 
-            this.lbPartCodeNotFoundWOLL.AutoSize = true;
-            this.lbPartCodeNotFoundWOLL.Location = new System.Drawing.Point(258, 108);
-            this.lbPartCodeNotFoundWOLL.Name = "lbPartCodeNotFoundWOLL";
-            this.lbPartCodeNotFoundWOLL.Size = new System.Drawing.Size(41, 13);
-            this.lbPartCodeNotFoundWOLL.TabIndex = 65;
-            this.lbPartCodeNotFoundWOLL.Text = "label17";
-            // 
-            // lbPartCodeUsedNotMatchWOLL
-            // 
-            this.lbPartCodeUsedNotMatchWOLL.AutoSize = true;
-            this.lbPartCodeUsedNotMatchWOLL.Location = new System.Drawing.Point(259, 135);
-            this.lbPartCodeUsedNotMatchWOLL.Name = "lbPartCodeUsedNotMatchWOLL";
-            this.lbPartCodeUsedNotMatchWOLL.Size = new System.Drawing.Size(41, 13);
-            this.lbPartCodeUsedNotMatchWOLL.TabIndex = 66;
-            this.lbPartCodeUsedNotMatchWOLL.Text = "label18";
-            // 
-            // lbQtyNotMatchWOLL
-            // 
-            this.lbQtyNotMatchWOLL.AutoSize = true;
-            this.lbQtyNotMatchWOLL.Location = new System.Drawing.Point(259, 82);
-            this.lbQtyNotMatchWOLL.Name = "lbQtyNotMatchWOLL";
-            this.lbQtyNotMatchWOLL.Size = new System.Drawing.Size(41, 13);
-            this.lbQtyNotMatchWOLL.TabIndex = 64;
-            this.lbQtyNotMatchWOLL.Text = "label15";
             // 
             // label17
             // 
@@ -551,50 +512,23 @@ namespace CompareWOLL
             this.label15.TabIndex = 62;
             this.label15.Text = "LL Vs WO";
             // 
-            // lbPartCodeNotMatchWOLL
+            // lbSummaryWOLL
             // 
-            this.lbPartCodeNotMatchWOLL.AutoSize = true;
-            this.lbPartCodeNotMatchWOLL.Location = new System.Drawing.Point(258, 56);
-            this.lbPartCodeNotMatchWOLL.Name = "lbPartCodeNotMatchWOLL";
-            this.lbPartCodeNotMatchWOLL.Size = new System.Drawing.Size(41, 13);
-            this.lbPartCodeNotMatchWOLL.TabIndex = 58;
-            this.lbPartCodeNotMatchWOLL.Text = "label16";
+            this.lbSummaryWOLL.AutoSize = true;
+            this.lbSummaryWOLL.Location = new System.Drawing.Point(258, 56);
+            this.lbSummaryWOLL.Name = "lbSummaryWOLL";
+            this.lbSummaryWOLL.Size = new System.Drawing.Size(41, 13);
+            this.lbSummaryWOLL.TabIndex = 58;
+            this.lbSummaryWOLL.Text = "label16";
             // 
-            // lbPartCodeNotFoundLLWO
+            // lbSummaryLLWO
             // 
-            this.lbPartCodeNotFoundLLWO.AutoSize = true;
-            this.lbPartCodeNotFoundLLWO.Location = new System.Drawing.Point(19, 113);
-            this.lbPartCodeNotFoundLLWO.Name = "lbPartCodeNotFoundLLWO";
-            this.lbPartCodeNotFoundLLWO.Size = new System.Drawing.Size(41, 13);
-            this.lbPartCodeNotFoundLLWO.TabIndex = 59;
-            this.lbPartCodeNotFoundLLWO.Text = "label17";
-            // 
-            // lbPartCodeUsedNotMatchLLWO
-            // 
-            this.lbPartCodeUsedNotMatchLLWO.AutoSize = true;
-            this.lbPartCodeUsedNotMatchLLWO.Location = new System.Drawing.Point(20, 140);
-            this.lbPartCodeUsedNotMatchLLWO.Name = "lbPartCodeUsedNotMatchLLWO";
-            this.lbPartCodeUsedNotMatchLLWO.Size = new System.Drawing.Size(41, 13);
-            this.lbPartCodeUsedNotMatchLLWO.TabIndex = 60;
-            this.lbPartCodeUsedNotMatchLLWO.Text = "label18";
-            // 
-            // lbPartCodeNotMatchLLWO
-            // 
-            this.lbPartCodeNotMatchLLWO.AutoSize = true;
-            this.lbPartCodeNotMatchLLWO.Location = new System.Drawing.Point(20, 61);
-            this.lbPartCodeNotMatchLLWO.Name = "lbPartCodeNotMatchLLWO";
-            this.lbPartCodeNotMatchLLWO.Size = new System.Drawing.Size(41, 13);
-            this.lbPartCodeNotMatchLLWO.TabIndex = 57;
-            this.lbPartCodeNotMatchLLWO.Text = "label15";
-            // 
-            // lbQtyNotMatchLLWO
-            // 
-            this.lbQtyNotMatchLLWO.AutoSize = true;
-            this.lbQtyNotMatchLLWO.Location = new System.Drawing.Point(20, 87);
-            this.lbQtyNotMatchLLWO.Name = "lbQtyNotMatchLLWO";
-            this.lbQtyNotMatchLLWO.Size = new System.Drawing.Size(41, 13);
-            this.lbQtyNotMatchLLWO.TabIndex = 58;
-            this.lbQtyNotMatchLLWO.Text = "label15";
+            this.lbSummaryLLWO.AutoSize = true;
+            this.lbSummaryLLWO.Location = new System.Drawing.Point(20, 61);
+            this.lbSummaryLLWO.Name = "lbSummaryLLWO";
+            this.lbSummaryLLWO.Size = new System.Drawing.Size(41, 13);
+            this.lbSummaryLLWO.TabIndex = 57;
+            this.lbSummaryLLWO.Text = "label15";
             // 
             // groupBox3
             // 
@@ -608,15 +542,6 @@ namespace CompareWOLL
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "LL vs WO";
             // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(15, 270);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(41, 13);
-            this.label16.TabIndex = 56;
-            this.label16.Text = "label16";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -625,6 +550,25 @@ namespace CompareWOLL
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 56;
             this.label2.Text = "label2";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 270);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 57;
+            this.label3.Text = "label3";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(15, 270);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(41, 13);
+            this.label16.TabIndex = 56;
+            this.label16.Text = "label16";
             // 
             // groupBox5
             // 
@@ -637,16 +581,6 @@ namespace CompareWOLL
             this.groupBox5.TabIndex = 54;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "WO vs LL";
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 270);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 57;
-            this.label3.Text = "label3";
             // 
             // dataGridViewCompareWOLL
             // 
@@ -741,17 +675,11 @@ namespace CompareWOLL
         private System.Windows.Forms.DataGridView dataGridViewCompareWOLL;
         private System.Windows.Forms.TextBox tbCustomer;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label lbPartCodeNotMatchLLWO;
-        private System.Windows.Forms.Label lbPartCodeNotMatchWOLL;
-        private System.Windows.Forms.Label lbQtyNotMatchLLWO;
-        private System.Windows.Forms.Label lbPartCodeUsedNotMatchLLWO;
-        private System.Windows.Forms.Label lbPartCodeNotFoundLLWO;
+        private System.Windows.Forms.Label lbSummaryLLWO;
+        private System.Windows.Forms.Label lbSummaryWOLL;
         private System.Windows.Forms.GroupBox gbSummary;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label lbPartCodeNotFoundWOLL;
-        private System.Windows.Forms.Label lbPartCodeUsedNotMatchWOLL;
-        private System.Windows.Forms.Label lbQtyNotMatchWOLL;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
