@@ -25,14 +25,14 @@ namespace CompareWOLL
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string passwords = help.encryption(txtPassword.Text);
+            //string passwords = help.encryption(txtPassword.Text);
             try
             {
                 if (txtUsername.Text != "" && txtPassword.Text != "")
                 {
 
                     con.Open();
-                    string query = "SELECT id,username,pass,NAME,ROLE FROM tbl_user WHERE username = '" + txtUsername.Text + "' AND pass = '" + passwords + "'";
+                    string query = "SELECT id,username,pass,NAME,ROLE FROM tbl_user WHERE username = '" + txtUsername.Text + "' AND pass = '" + txtPassword.Text + "'";
                     MySqlDataReader row;
                     row = con.ExecuteReader(query);
                     if (row.HasRows)

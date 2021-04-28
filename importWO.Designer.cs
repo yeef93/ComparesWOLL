@@ -168,15 +168,16 @@ namespace CompareWOLL
             this.dataGridViewWO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewWO.Location = new System.Drawing.Point(12, 239);
             this.dataGridViewWO.Name = "dataGridViewWO";
-            this.dataGridViewWO.Size = new System.Drawing.Size(1222, 367);
+            this.dataGridViewWO.Size = new System.Drawing.Size(1222, 377);
             this.dataGridViewWO.TabIndex = 18;
             // 
             // saveButton
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.saveButton.Location = new System.Drawing.Point(581, 617);
+            this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveButton.Location = new System.Drawing.Point(564, 632);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.Size = new System.Drawing.Size(80, 30);
             this.saveButton.TabIndex = 19;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -190,7 +191,7 @@ namespace CompareWOLL
             this.toolStripUsername,
             this.toolStripStatusLabel1,
             this.dateTimeNow});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 648);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 676);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1246, 22);
             this.statusStrip1.TabIndex = 20;
@@ -355,7 +356,7 @@ namespace CompareWOLL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1246, 670);
+            this.ClientSize = new System.Drawing.Size(1246, 698);
             this.Controls.Add(this.backButton);
             this.Controls.Add(this.homeButton);
             this.Controls.Add(this.statusStrip1);

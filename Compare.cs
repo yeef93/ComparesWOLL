@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -19,6 +20,7 @@ namespace CompareWOLL
         string WOLLNMQtys = string.Empty;
         string WOLLNFPartCodes = string.Empty;
         string WOLLNMPartCodeUseds = string.Empty;
+        string partcodeLLCheckSum = string.Empty;
 
         public Compare()
         {
@@ -96,8 +98,10 @@ namespace CompareWOLL
             woQty.Text = "";
             llQty.Text = "";
             compareQty.Text = "";
+            comparePartcode.Text = "";
             gbSummary.Visible = false;
             compareQty.BackColor = SystemColors.Control;
+            comparePartcode.BackColor = SystemColors.Control;
 
             while (dataGridViewCompareLLWO.Rows.Count > 0)
             {
@@ -384,15 +388,15 @@ namespace CompareWOLL
                     {
                         LLWONMPartCodes = "Partcode Not Match LL VS WO : " + partCodeNotMatchLLWO.ToString();
                     }
-                    else if (LLWONMQty > 0)
+                    if (LLWONMQty > 0)
                     {
                         LLWONMQtys = "\nQty Not Match LL VS WO : " + qtyNotMatchLLWO.ToString();
                     }
-                    else if (LLWONFPartCode > 0)
+                    if (LLWONFPartCode > 0)
                     {
                         LLWONFPartCodes = "\nPartcode Not Found LL VS WO : " + partCodeNotFoundLLWO.ToString();
                     }
-                    else if (LLWONMPartCodeUsed > 0)
+                    if (LLWONMPartCodeUsed > 0)
                     {
                         LLWONMPartCodeUseds = "\nPartcode Used Not Match LL VS WO : " + partCodeUsedNotMatchLLWO.ToString();
                     }
@@ -406,6 +410,23 @@ namespace CompareWOLL
                 {
                     lbSummaryLLWO.Text = LLWONMPartCodes + LLWONMQtys + LLWONFPartCodes + LLWONMPartCodeUseds;
                 }                
+
+                if (lbSummaryLLWO.Text.Contains("Partcode Not Match LL VS WO : ") || lbSummaryWOLL.Text.Contains("Partcode Not Match WO VS LL: "))
+                {
+                    comparePartcode.Text = "Part Code Not Match";
+                    comparePartcode.BackColor = System.Drawing.Color.Red;
+                }
+                else if (lbSummaryLLWO.Text.Contains("Partcode Used Not Match LL VS WO : ") || lbSummaryWOLL.Text.Contains("Partcode Used Not Match WO VS LL : "))
+                {
+                    comparePartcode.Text = "Part Used Not Match";
+                    comparePartcode.BackColor = System.Drawing.Color.Yellow;
+                    comparePartcode.ForeColor = Color.Black;
+                }
+                else if (lbSummaryLLWO.Text == "All Data Match" && lbSummaryWOLL.Text == "All Data Match")
+                {
+                    comparePartcode.Text = "Match";
+                    comparePartcode.BackColor = System.Drawing.Color.Blue;
+                }
 
                 // Set table title Wo
                 string[] titleWO = { "PART CODE LL ", "QTY LL", "PART LL USED", "PART CODE WO", "QTY WO", "PART WO USED" };
@@ -444,7 +465,6 @@ namespace CompareWOLL
                 int qtyNotMatchWOLL = 0;
                 int partCodeNotFoundWOLL = 0;
                 int partCodeUsedNotMatchWOLL = 0;
-
 
                 //menghitung jumlah row data
                 int rowCounts = ((DataTable)this.dataGridViewCompareWOLL.DataSource).Rows.Count;
@@ -528,15 +548,15 @@ namespace CompareWOLL
                     {
                         WOLLNMPartCodes = "Partcode Not Match WO VS LL : " + partCodeNotMatchWOLL.ToString();
                     }
-                    else if (WOLLNMQty > 0)
+                    if (WOLLNMQty > 0)
                     {
                         WOLLNMQtys = "\nQty Not Match WO VS LL : " + qtyNotMatchWOLL.ToString();
                     }
-                    else if (WOLLNFPartCode > 0)
+                    if (WOLLNFPartCode > 0)
                     {
                         WOLLNFPartCodes = "\nPartcode Not Found WO VS LL : " + partCodeNotFoundWOLL.ToString();
                     }
-                    else if (WOLLNMPartCodeUsed > 0)
+                    if (WOLLNMPartCodeUsed > 0)
                     {
                         WOLLNMPartCodeUseds = "\nPartcode Used Not Match WO VS LL : " + partCodeUsedNotMatchWOLL.ToString();
                     }
@@ -605,7 +625,19 @@ namespace CompareWOLL
 
             if (tbCustomer.Text == "PEGATRON")
             {
-                MessageBox.Show("Don't Forget to Checksum", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information); //custom messageBox to show error  
+                //nampilin part yang perlu check sum
+                string queryPartcodeLL = "SELECT * FROM tbl_lldetail WHERE partcode LIKE '0500%'";
+                using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryPartcodeLL, connection))
+                {
+                    DataTable dset = new DataTable();
+                    adpt.Fill(dset);
+                    NotifCheckSum notif = new NotifCheckSum();
+                    for (int i = 0; i < dset.Rows.Count; i++)
+                    {
+                        notif.tbChecksum.Text += "\r\n" + dset.Rows[i]["partcode"].ToString()+ " ";
+                    }
+                    notif.Show();
+                }             
             }
         }
 
@@ -613,9 +645,6 @@ namespace CompareWOLL
         {
             btnHome.Enabled = false;
             btnWO.Enabled = false;
-
-            LoadForm lf = new LoadForm();
-            lf.Show();
 
             int totalpart;
             int totalPointRow;
@@ -793,7 +822,6 @@ namespace CompareWOLL
 
             // Closing the file
             excelConvert.Close();
-            lf.Close();
             MessageBox.Show("Excel File Success Generated", "Generate Excel", MessageBoxButtons.OK, MessageBoxIcon.Information);
             btnHome.Enabled = true;
             btnWO.Enabled = true;

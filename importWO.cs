@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Threading;
+using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
@@ -14,8 +17,8 @@ namespace CompareWOLL
     public partial class importWO : Form
     {
         LoadForm lf = new LoadForm();
+        Helper help = new Helper();
         MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
-
         public importWO()
         {
             InitializeComponent();
@@ -59,26 +62,6 @@ namespace CompareWOLL
             }
         }
 
-        // for read excel file
-        public DataTable ReadExcel(string fileName, string fileExt, string query)
-        {
-            string conn = string.Empty;
-            DataTable dtexcel = new DataTable();
-            if (fileExt.CompareTo(".xls") == 0)
-                conn = @"provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + fileName + ";Extended Properties='Excel 8.0;HRD=Yes;IMEX=1';"; //for below excel 2007  
-            else
-                conn = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties='Excel 12.0;HDR=NO';"; //for above excel 2007  
-            using (OleDbConnection con = new OleDbConnection(conn))
-            {
-                try
-                {
-                    OleDbDataAdapter oleAdpt = new OleDbDataAdapter(query, con); //here we read data from sheet1  
-                    oleAdpt.Fill(dtexcel); //fill excel data into dataTable  
-                }
-                catch { }
-            }
-            return dtexcel;
-        }
 
         private void addWO_Load(object sender, EventArgs e)
         {
@@ -133,7 +116,7 @@ namespace CompareWOLL
 
             openFileDialogWO.Title = "Please Select a File Work Order";
             openFileDialogWO.Filter = "Excel Files|*.xls;*.xlsx;";
-            openFileDialogWO.InitialDirectory = @"D:\";
+            //openFileDialogWO.InitialDirectory = @"D:\";
             if (openFileDialogWO.ShowDialog() == DialogResult.OK)
             {
 
@@ -161,7 +144,7 @@ namespace CompareWOLL
                     try
                     {
                         DataTable dtExcel = new DataTable();
-                        dtExcel = ReadExcel(woFileName, fileExtWO, queryWO); //read excel file  
+                        dtExcel = help.ReadExcel(woFileName, fileExtWO, queryWO); //read excel file  
                         dataGridViewWO.Visible = true;
                         dataGridViewWO.DataSource = dtExcel;
 
@@ -204,9 +187,26 @@ namespace CompareWOLL
                                 }
                             }
                         }
+                        //notif message cell blank
                         if (count > 0)
                         {
                             MessageBox.Show("There is " + count.ToString() + " cell is blank, Please revise the document ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error                        
+                        }
+
+                        //menandai merah jika cell partcode sama dengan cell model
+                        for (int i = 0; i < dataGridViewWO.Rows.Count; ++i)
+                        {
+                            for (int j = 0; j < 3; j++)
+                            {
+                                string cellPartNo = dataGridViewWO.Rows[i].Cells[1].Value.ToString();
+                                string cellModelNo = dataGridViewWO.Rows[i].Cells[2].Value.ToString();
+
+                                if (cellPartNo == cellModelNo)
+                                {
+                                    dataGridViewWO.Rows[i].Cells[1].Style.BackColor = Color.Red;
+                                    dataGridViewWO.Rows[i].Cells[2].Style.BackColor = Color.Red;
+                                }
+                            }                            
                         }
 
                         // mendadai merah jika data 1 column tidak sama
@@ -238,11 +238,7 @@ namespace CompareWOLL
                                 dataGridViewWO.Rows[i].Cells[5].Style.BackColor = Color.Red;
                                 count++;
                             }
-                            //if (cellValueProcess != process.Text)
-                            //{
-                            //    dataGridViewWO.Rows[i].Cells[7].Style.BackColor = Color.Red;
-                            //    count++;
-                            //}
+
                             if (cellValueWoPtsn != tbwoPTSN.Text)
                             {
                                 dataGridViewWO.Rows[i].Cells[8].Style.BackColor = Color.Red;
@@ -310,13 +306,14 @@ namespace CompareWOLL
                             }
                         }
 
-                        tbtotalUsage.Text = sum.ToString();
+                        string totalUsage = sum.ToString();
+                        tbtotalUsage.Text = totalUsage;
                     }
                     catch (Exception ex)
                     {
                         //MessageBox.Show(ex.Message.ToString());
 
-                            MessageBox.Show("Please select Work Order file with correct format", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error 
+                        MessageBox.Show("Please select Work Order file with correct format", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error 
                     }
                 }
                 else
@@ -365,8 +362,6 @@ namespace CompareWOLL
             {
                 try
                 {
-
-                    
                     var cmd = new MySqlCommand("", connection);
 
                     connection.Open();

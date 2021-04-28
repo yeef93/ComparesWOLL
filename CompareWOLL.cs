@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -55,6 +56,7 @@ namespace CompareWOLL
             {
                 // tampilkan pesan error
                 MessageBox.Show(ex.Message);
+                MessageBox.Show("problemmmmmm");
             }
 
         }
@@ -145,9 +147,7 @@ namespace CompareWOLL
             string str = cmbLLModel.Text;
             char ch = '|';
 
-            var model = str.Split(ch);
-
-            
+            var model = str.Split(ch);            
 
             string queryTotalWO = "SELECT SUM(tbl_wodetail.qty) AS totalWO  FROM tbl_wodetail LEFT JOIN tbl_lldetail " +
                 "ON tbl_wodetail.partcode = tbl_lldetail.partcode " +
@@ -364,6 +364,7 @@ namespace CompareWOLL
             {
                 // tampilkan pesan error
                 MessageBox.Show(ex.Message);
+                MessageBox.Show("problemmmmm");
             }
 
             groupBox4.Visible = true;

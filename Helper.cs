@@ -14,8 +14,7 @@ namespace CompareWOLL
 {
 
     public class Helper
-    {
-        LoadForm lf = new LoadForm();
+    {        
 
         // for read excel file
         public System.Data.DataTable ReadExcel(string fileName, string fileExt, string query)

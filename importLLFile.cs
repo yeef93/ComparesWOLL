@@ -40,7 +40,7 @@ namespace CompareWOLL
 
             openFileDialogLL.Title = "Please Select a File Loading List";
             openFileDialogLL.Filter = "Excel Files|*.xls;*.xlsx;";
-            openFileDialogLL.InitialDirectory = @"D:\";
+            //openFileDialogLL.InitialDirectory = @"D:\";
             if (openFileDialogLL.ShowDialog() == DialogResult.OK)
             {
                 string woFileName = openFileDialogLL.FileName;

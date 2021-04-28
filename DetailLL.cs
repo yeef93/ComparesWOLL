@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -9,6 +10,7 @@ namespace CompareWOLL
     public partial class DetailLL : Form
     {
         MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
+
         public DetailLL()
         {
             InitializeComponent();
@@ -63,7 +65,6 @@ namespace CompareWOLL
 
             totalPoint.Text = sum.ToString();
             totalPart.Text = totalPartCode.ToString();
-
 
         }
 

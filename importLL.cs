@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
@@ -532,6 +533,11 @@ namespace CompareWOLL
             {
                 MessageBox.Show(ex.Message.ToString());
             }
+        }
+
+        private void tbRemark_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
