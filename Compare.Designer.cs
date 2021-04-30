@@ -41,20 +41,15 @@ namespace CompareWOLL
             this.label1 = new System.Windows.Forms.Label();
             this.cmbLLModel = new System.Windows.Forms.ComboBox();
             this.btnCompare = new System.Windows.Forms.Button();
-            this.tbProgNo = new System.Windows.Forms.TextBox();
             this.dataGridViewCompareLLWO = new System.Windows.Forms.DataGridView();
             this.tbPWBType = new System.Windows.Forms.TextBox();
             this.tbPCB = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.tbMachine = new System.Windows.Forms.TextBox();
             this.tbModel = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.dataGridViewCompareLLWOResult = new System.Windows.Forms.DataGridView();
-            this.btnGenerate = new System.Windows.Forms.Button();
             this.btnWO = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.llQty = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.btnHome = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -69,6 +64,7 @@ namespace CompareWOLL
             this.comparePartcode = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.gbSummary = new System.Windows.Forms.GroupBox();
+            this.btnReport = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.lbSummaryWOLL = new System.Windows.Forms.Label();
@@ -79,6 +75,18 @@ namespace CompareWOLL
             this.label16 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.dataGridViewCompareWOLL = new System.Windows.Forms.DataGridView();
+            this.LblPartcodeNMLLWO = new System.Windows.Forms.Label();
+            this.LblPartcodeUsedQtyNMLLWO = new System.Windows.Forms.Label();
+            this.LblQtyPartcodeNMLLWO = new System.Windows.Forms.Label();
+            this.LblQtyPartcodeUsedQtyNMLLWO = new System.Windows.Forms.Label();
+            this.LblQtyPartcodeQtyNMLLWO = new System.Windows.Forms.Label();
+            this.LblPartcodeQtyNMLLWO = new System.Windows.Forms.Label();
+            this.LblQtyPartcodeNMWOLL = new System.Windows.Forms.Label();
+            this.LblPartcodeNMWOLL = new System.Windows.Forms.Label();
+            this.LblQtyPartcodeUsedQtyNMWOLL = new System.Windows.Forms.Label();
+            this.LblPartcodeUsedQtyNMWOLL = new System.Windows.Forms.Label();
+            this.LblQtyPartcodeQtyNMWOLL = new System.Windows.Forms.Label();
+            this.LblPartcodeQtyNMWOLL = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareLLWO)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareLLWOResult)).BeginInit();
@@ -94,7 +102,7 @@ namespace CompareWOLL
             // woQty
             // 
             this.woQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.woQty.Location = new System.Drawing.Point(134, 227);
+            this.woQty.Location = new System.Drawing.Point(134, 203);
             this.woQty.Name = "woQty";
             this.woQty.ReadOnly = true;
             this.woQty.Size = new System.Drawing.Size(231, 20);
@@ -104,7 +112,7 @@ namespace CompareWOLL
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label4.Location = new System.Drawing.Point(21, 234);
+            this.label4.Location = new System.Drawing.Point(21, 210);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(81, 13);
             this.label4.TabIndex = 41;
@@ -115,7 +123,7 @@ namespace CompareWOLL
             this.compareQty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.compareQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.compareQty.ForeColor = System.Drawing.Color.White;
-            this.compareQty.Location = new System.Drawing.Point(816, 67);
+            this.compareQty.Location = new System.Drawing.Point(808, 67);
             this.compareQty.Name = "compareQty";
             this.compareQty.ReadOnly = true;
             this.compareQty.Size = new System.Drawing.Size(233, 35);
@@ -128,7 +136,7 @@ namespace CompareWOLL
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label8.Location = new System.Drawing.Point(854, 36);
+            this.label8.Location = new System.Drawing.Point(846, 36);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(145, 16);
             this.label8.TabIndex = 35;
@@ -136,7 +144,7 @@ namespace CompareWOLL
             // 
             // tbStencil
             // 
-            this.tbStencil.Location = new System.Drawing.Point(134, 169);
+            this.tbStencil.Location = new System.Drawing.Point(134, 132);
             this.tbStencil.Name = "tbStencil";
             this.tbStencil.ReadOnly = true;
             this.tbStencil.Size = new System.Drawing.Size(231, 20);
@@ -145,7 +153,7 @@ namespace CompareWOLL
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(20, 178);
+            this.label13.Location = new System.Drawing.Point(20, 141);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(56, 13);
             this.label13.TabIndex = 46;
@@ -217,14 +225,6 @@ namespace CompareWOLL
             this.btnCompare.UseVisualStyleBackColor = true;
             this.btnCompare.Click += new System.EventHandler(this.btnCompare_Click);
             // 
-            // tbProgNo
-            // 
-            this.tbProgNo.Location = new System.Drawing.Point(134, 138);
-            this.tbProgNo.Name = "tbProgNo";
-            this.tbProgNo.ReadOnly = true;
-            this.tbProgNo.Size = new System.Drawing.Size(231, 20);
-            this.tbProgNo.TabIndex = 7;
-            // 
             // dataGridViewCompareLLWO
             // 
             this.dataGridViewCompareLLWO.AllowUserToAddRows = false;
@@ -235,12 +235,12 @@ namespace CompareWOLL
             this.dataGridViewCompareLLWO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewCompareLLWO.Location = new System.Drawing.Point(28, 397);
             this.dataGridViewCompareLLWO.Name = "dataGridViewCompareLLWO";
-            this.dataGridViewCompareLLWO.Size = new System.Drawing.Size(598, 236);
+            this.dataGridViewCompareLLWO.Size = new System.Drawing.Size(590, 236);
             this.dataGridViewCompareLLWO.TabIndex = 48;
             // 
             // tbPWBType
             // 
-            this.tbPWBType.Location = new System.Drawing.Point(134, 108);
+            this.tbPWBType.Location = new System.Drawing.Point(134, 95);
             this.tbPWBType.Name = "tbPWBType";
             this.tbPWBType.ReadOnly = true;
             this.tbPWBType.Size = new System.Drawing.Size(231, 20);
@@ -248,7 +248,7 @@ namespace CompareWOLL
             // 
             // tbPCB
             // 
-            this.tbPCB.Location = new System.Drawing.Point(134, 200);
+            this.tbPCB.Location = new System.Drawing.Point(134, 168);
             this.tbPCB.Name = "tbPCB";
             this.tbPCB.ReadOnly = true;
             this.tbPCB.Size = new System.Drawing.Size(231, 20);
@@ -257,36 +257,19 @@ namespace CompareWOLL
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(20, 208);
+            this.label7.Location = new System.Drawing.Point(20, 176);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(90, 13);
             this.label7.TabIndex = 40;
             this.label7.Text = "Selected PCB No";
             // 
-            // tbMachine
-            // 
-            this.tbMachine.Location = new System.Drawing.Point(134, 79);
-            this.tbMachine.Name = "tbMachine";
-            this.tbMachine.ReadOnly = true;
-            this.tbMachine.Size = new System.Drawing.Size(231, 20);
-            this.tbMachine.TabIndex = 5;
-            // 
             // tbModel
             // 
-            this.tbModel.Location = new System.Drawing.Point(134, 51);
+            this.tbModel.Location = new System.Drawing.Point(134, 59);
             this.tbModel.Name = "tbModel";
             this.tbModel.ReadOnly = true;
             this.tbModel.Size = new System.Drawing.Size(231, 20);
             this.tbModel.TabIndex = 4;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(20, 147);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(49, 13);
-            this.label12.TabIndex = 3;
-            this.label12.Text = "Prog. No";
             // 
             // dataGridViewCompareLLWOResult
             // 
@@ -302,23 +285,10 @@ namespace CompareWOLL
             this.dataGridViewCompareLLWOResult.TabIndex = 50;
             this.dataGridViewCompareLLWOResult.Visible = false;
             // 
-            // btnGenerate
-            // 
-            this.btnGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGenerate.Location = new System.Drawing.Point(536, 680);
-            this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(235, 38);
-            this.btnGenerate.TabIndex = 49;
-            this.btnGenerate.Text = "Export Result";
-            this.btnGenerate.UseVisualStyleBackColor = true;
-            this.btnGenerate.Visible = false;
-            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
-            // 
             // btnWO
             // 
             this.btnWO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnWO.Location = new System.Drawing.Point(1283, 13);
+            this.btnWO.Location = new System.Drawing.Point(1275, 13);
             this.btnWO.Name = "btnWO";
             this.btnWO.Size = new System.Drawing.Size(75, 23);
             this.btnWO.TabIndex = 52;
@@ -329,7 +299,7 @@ namespace CompareWOLL
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(20, 115);
+            this.label11.Location = new System.Drawing.Point(20, 102);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(54, 13);
             this.label11.TabIndex = 2;
@@ -338,25 +308,16 @@ namespace CompareWOLL
             // llQty
             // 
             this.llQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.llQty.Location = new System.Drawing.Point(134, 255);
+            this.llQty.Location = new System.Drawing.Point(134, 238);
             this.llQty.Name = "llQty";
             this.llQty.ReadOnly = true;
             this.llQty.Size = new System.Drawing.Size(231, 20);
             this.llQty.TabIndex = 43;
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(21, 86);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(48, 13);
-            this.label10.TabIndex = 1;
-            this.label10.Text = "Machine";
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(20, 54);
+            this.label9.Location = new System.Drawing.Point(20, 62);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(36, 13);
             this.label9.TabIndex = 0;
@@ -365,7 +326,7 @@ namespace CompareWOLL
             // btnHome
             // 
             this.btnHome.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnHome.Location = new System.Drawing.Point(1202, 13);
+            this.btnHome.Location = new System.Drawing.Point(1194, 13);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(75, 23);
             this.btnHome.TabIndex = 51;
@@ -382,16 +343,12 @@ namespace CompareWOLL
             this.groupBox4.Controls.Add(this.label6);
             this.groupBox4.Controls.Add(this.label13);
             this.groupBox4.Controls.Add(this.woQty);
-            this.groupBox4.Controls.Add(this.tbProgNo);
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Controls.Add(this.tbPWBType);
             this.groupBox4.Controls.Add(this.tbPCB);
             this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Controls.Add(this.tbMachine);
             this.groupBox4.Controls.Add(this.tbModel);
-            this.groupBox4.Controls.Add(this.label12);
             this.groupBox4.Controls.Add(this.label11);
-            this.groupBox4.Controls.Add(this.label10);
             this.groupBox4.Controls.Add(this.label9);
             this.groupBox4.Location = new System.Drawing.Point(387, 25);
             this.groupBox4.Name = "groupBox4";
@@ -421,7 +378,7 @@ namespace CompareWOLL
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label6.Location = new System.Drawing.Point(21, 261);
+            this.label6.Location = new System.Drawing.Point(21, 244);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(83, 13);
             this.label6.TabIndex = 42;
@@ -453,9 +410,9 @@ namespace CompareWOLL
             this.toolStripUsername,
             this.toolStripStatusLabel1,
             this.dateTimeNow});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 728);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 720);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1370, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1362, 22);
             this.statusStrip1.TabIndex = 46;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -472,7 +429,7 @@ namespace CompareWOLL
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Location = new System.Drawing.Point(12, 42);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1345, 326);
+            this.groupBox1.Size = new System.Drawing.Size(1337, 326);
             this.groupBox1.TabIndex = 47;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Compare Work Order with Loading List";
@@ -482,7 +439,7 @@ namespace CompareWOLL
             this.comparePartcode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comparePartcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comparePartcode.ForeColor = System.Drawing.Color.White;
-            this.comparePartcode.Location = new System.Drawing.Point(1080, 67);
+            this.comparePartcode.Location = new System.Drawing.Point(1072, 67);
             this.comparePartcode.Name = "comparePartcode";
             this.comparePartcode.ReadOnly = true;
             this.comparePartcode.Size = new System.Drawing.Size(233, 35);
@@ -495,7 +452,7 @@ namespace CompareWOLL
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label18.Location = new System.Drawing.Point(1105, 36);
+            this.label18.Location = new System.Drawing.Point(1097, 36);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(185, 16);
             this.label18.TabIndex = 62;
@@ -503,6 +460,7 @@ namespace CompareWOLL
             // 
             // gbSummary
             // 
+            this.gbSummary.Controls.Add(this.btnReport);
             this.gbSummary.Controls.Add(this.label17);
             this.gbSummary.Controls.Add(this.label15);
             this.gbSummary.Controls.Add(this.lbSummaryWOLL);
@@ -513,6 +471,17 @@ namespace CompareWOLL
             this.gbSummary.TabIndex = 61;
             this.gbSummary.TabStop = false;
             this.gbSummary.Text = "Summary";
+            // 
+            // btnReport
+            // 
+            this.btnReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReport.Location = new System.Drawing.Point(184, 144);
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Size = new System.Drawing.Size(75, 23);
+            this.btnReport.TabIndex = 55;
+            this.btnReport.Text = "Report";
+            this.btnReport.UseVisualStyleBackColor = true;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
             // label17
             // 
@@ -601,7 +570,7 @@ namespace CompareWOLL
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.Controls.Add(this.label16);
             this.groupBox5.Controls.Add(this.dataGridViewCompareWOLL);
-            this.groupBox5.Location = new System.Drawing.Point(676, 374);
+            this.groupBox5.Location = new System.Drawing.Point(668, 374);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(678, 300);
             this.groupBox5.TabIndex = 54;
@@ -621,12 +590,143 @@ namespace CompareWOLL
             this.dataGridViewCompareWOLL.Size = new System.Drawing.Size(646, 236);
             this.dataGridViewCompareWOLL.TabIndex = 55;
             // 
+            // LblPartcodeNMLLWO
+            // 
+            this.LblPartcodeNMLLWO.AutoSize = true;
+            this.LblPartcodeNMLLWO.Location = new System.Drawing.Point(25, 2);
+            this.LblPartcodeNMLLWO.Name = "LblPartcodeNMLLWO";
+            this.LblPartcodeNMLLWO.Size = new System.Drawing.Size(112, 13);
+            this.LblPartcodeNMLLWO.TabIndex = 59;
+            this.LblPartcodeNMLLWO.Text = "LblPartcodeNMLLWO";
+            this.LblPartcodeNMLLWO.Visible = false;
+            // 
+            // LblPartcodeUsedQtyNMLLWO
+            // 
+            this.LblPartcodeUsedQtyNMLLWO.AutoSize = true;
+            this.LblPartcodeUsedQtyNMLLWO.Location = new System.Drawing.Point(25, 15);
+            this.LblPartcodeUsedQtyNMLLWO.Name = "LblPartcodeUsedQtyNMLLWO";
+            this.LblPartcodeUsedQtyNMLLWO.Size = new System.Drawing.Size(153, 13);
+            this.LblPartcodeUsedQtyNMLLWO.TabIndex = 60;
+            this.LblPartcodeUsedQtyNMLLWO.Text = "LblPartcodeUsedQtyNMLLWO";
+            this.LblPartcodeUsedQtyNMLLWO.Visible = false;
+            // 
+            // LblQtyPartcodeNMLLWO
+            // 
+            this.LblQtyPartcodeNMLLWO.AutoSize = true;
+            this.LblQtyPartcodeNMLLWO.Location = new System.Drawing.Point(200, 2);
+            this.LblQtyPartcodeNMLLWO.Name = "LblQtyPartcodeNMLLWO";
+            this.LblQtyPartcodeNMLLWO.Size = new System.Drawing.Size(128, 13);
+            this.LblQtyPartcodeNMLLWO.TabIndex = 61;
+            this.LblQtyPartcodeNMLLWO.Text = "LblQtyPartcodeNMLLWO";
+            this.LblQtyPartcodeNMLLWO.Visible = false;
+            // 
+            // LblQtyPartcodeUsedQtyNMLLWO
+            // 
+            this.LblQtyPartcodeUsedQtyNMLLWO.AutoSize = true;
+            this.LblQtyPartcodeUsedQtyNMLLWO.Location = new System.Drawing.Point(200, 15);
+            this.LblQtyPartcodeUsedQtyNMLLWO.Name = "LblQtyPartcodeUsedQtyNMLLWO";
+            this.LblQtyPartcodeUsedQtyNMLLWO.Size = new System.Drawing.Size(169, 13);
+            this.LblQtyPartcodeUsedQtyNMLLWO.TabIndex = 62;
+            this.LblQtyPartcodeUsedQtyNMLLWO.Text = "LblQtyPartcodeUsedQtyNMLLWO";
+            this.LblQtyPartcodeUsedQtyNMLLWO.Visible = false;
+            // 
+            // LblQtyPartcodeQtyNMLLWO
+            // 
+            this.LblQtyPartcodeQtyNMLLWO.AutoSize = true;
+            this.LblQtyPartcodeQtyNMLLWO.Location = new System.Drawing.Point(200, 28);
+            this.LblQtyPartcodeQtyNMLLWO.Name = "LblQtyPartcodeQtyNMLLWO";
+            this.LblQtyPartcodeQtyNMLLWO.Size = new System.Drawing.Size(144, 13);
+            this.LblQtyPartcodeQtyNMLLWO.TabIndex = 64;
+            this.LblQtyPartcodeQtyNMLLWO.Text = "LblQtyPartcodeQtyNMLLWO";
+            this.LblQtyPartcodeQtyNMLLWO.Visible = false;
+            // 
+            // LblPartcodeQtyNMLLWO
+            // 
+            this.LblPartcodeQtyNMLLWO.AutoSize = true;
+            this.LblPartcodeQtyNMLLWO.Location = new System.Drawing.Point(25, 28);
+            this.LblPartcodeQtyNMLLWO.Name = "LblPartcodeQtyNMLLWO";
+            this.LblPartcodeQtyNMLLWO.Size = new System.Drawing.Size(128, 13);
+            this.LblPartcodeQtyNMLLWO.TabIndex = 63;
+            this.LblPartcodeQtyNMLLWO.Text = "LblPartcodeQtyNMLLWO";
+            this.LblPartcodeQtyNMLLWO.Visible = false;
+            // 
+            // LblQtyPartcodeNMWOLL
+            // 
+            this.LblQtyPartcodeNMWOLL.AutoSize = true;
+            this.LblQtyPartcodeNMWOLL.Location = new System.Drawing.Point(654, 2);
+            this.LblQtyPartcodeNMWOLL.Name = "LblQtyPartcodeNMWOLL";
+            this.LblQtyPartcodeNMWOLL.Size = new System.Drawing.Size(128, 13);
+            this.LblQtyPartcodeNMWOLL.TabIndex = 66;
+            this.LblQtyPartcodeNMWOLL.Text = "LblQtyPartcodeNMWOLL";
+            this.LblQtyPartcodeNMWOLL.Visible = false;
+            // 
+            // LblPartcodeNMWOLL
+            // 
+            this.LblPartcodeNMWOLL.AutoSize = true;
+            this.LblPartcodeNMWOLL.Location = new System.Drawing.Point(479, 2);
+            this.LblPartcodeNMWOLL.Name = "LblPartcodeNMWOLL";
+            this.LblPartcodeNMWOLL.Size = new System.Drawing.Size(112, 13);
+            this.LblPartcodeNMWOLL.TabIndex = 65;
+            this.LblPartcodeNMWOLL.Text = "LblPartcodeNMWOLL";
+            this.LblPartcodeNMWOLL.Visible = false;
+            // 
+            // LblQtyPartcodeUsedQtyNMWOLL
+            // 
+            this.LblQtyPartcodeUsedQtyNMWOLL.AutoSize = true;
+            this.LblQtyPartcodeUsedQtyNMWOLL.Location = new System.Drawing.Point(654, 17);
+            this.LblQtyPartcodeUsedQtyNMWOLL.Name = "LblQtyPartcodeUsedQtyNMWOLL";
+            this.LblQtyPartcodeUsedQtyNMWOLL.Size = new System.Drawing.Size(169, 13);
+            this.LblQtyPartcodeUsedQtyNMWOLL.TabIndex = 68;
+            this.LblQtyPartcodeUsedQtyNMWOLL.Text = "LblQtyPartcodeUsedQtyNMWOLL";
+            this.LblQtyPartcodeUsedQtyNMWOLL.Visible = false;
+            // 
+            // LblPartcodeUsedQtyNMWOLL
+            // 
+            this.LblPartcodeUsedQtyNMWOLL.AutoSize = true;
+            this.LblPartcodeUsedQtyNMWOLL.Location = new System.Drawing.Point(479, 17);
+            this.LblPartcodeUsedQtyNMWOLL.Name = "LblPartcodeUsedQtyNMWOLL";
+            this.LblPartcodeUsedQtyNMWOLL.Size = new System.Drawing.Size(153, 13);
+            this.LblPartcodeUsedQtyNMWOLL.TabIndex = 67;
+            this.LblPartcodeUsedQtyNMWOLL.Text = "LblPartcodeUsedQtyNMWOLL";
+            this.LblPartcodeUsedQtyNMWOLL.Visible = false;
+            // 
+            // LblQtyPartcodeQtyNMWOLL
+            // 
+            this.LblQtyPartcodeQtyNMWOLL.AutoSize = true;
+            this.LblQtyPartcodeQtyNMWOLL.Location = new System.Drawing.Point(656, 30);
+            this.LblQtyPartcodeQtyNMWOLL.Name = "LblQtyPartcodeQtyNMWOLL";
+            this.LblQtyPartcodeQtyNMWOLL.Size = new System.Drawing.Size(144, 13);
+            this.LblQtyPartcodeQtyNMWOLL.TabIndex = 70;
+            this.LblQtyPartcodeQtyNMWOLL.Text = "LblQtyPartcodeQtyNMWOLL";
+            this.LblQtyPartcodeQtyNMWOLL.Visible = false;
+            // 
+            // LblPartcodeQtyNMWOLL
+            // 
+            this.LblPartcodeQtyNMWOLL.AutoSize = true;
+            this.LblPartcodeQtyNMWOLL.Location = new System.Drawing.Point(479, 30);
+            this.LblPartcodeQtyNMWOLL.Name = "LblPartcodeQtyNMWOLL";
+            this.LblPartcodeQtyNMWOLL.Size = new System.Drawing.Size(128, 13);
+            this.LblPartcodeQtyNMWOLL.TabIndex = 69;
+            this.LblPartcodeQtyNMWOLL.Text = "LblPartcodeQtyNMWOLL";
+            this.LblPartcodeQtyNMWOLL.Visible = false;
+            // 
             // Compare
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 750);
-            this.Controls.Add(this.btnGenerate);
+            this.ClientSize = new System.Drawing.Size(1362, 742);
+            this.Controls.Add(this.LblQtyPartcodeQtyNMWOLL);
+            this.Controls.Add(this.LblPartcodeQtyNMWOLL);
+            this.Controls.Add(this.LblQtyPartcodeUsedQtyNMWOLL);
+            this.Controls.Add(this.LblPartcodeUsedQtyNMWOLL);
+            this.Controls.Add(this.LblQtyPartcodeNMWOLL);
+            this.Controls.Add(this.LblPartcodeNMWOLL);
+            this.Controls.Add(this.LblQtyPartcodeQtyNMLLWO);
+            this.Controls.Add(this.LblPartcodeQtyNMLLWO);
+            this.Controls.Add(this.LblQtyPartcodeUsedQtyNMLLWO);
+            this.Controls.Add(this.LblQtyPartcodeNMLLWO);
+            this.Controls.Add(this.LblPartcodeUsedQtyNMLLWO);
+            this.Controls.Add(this.LblPartcodeNMLLWO);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.dataGridViewCompareLLWO);
             this.Controls.Add(this.btnWO);
@@ -673,20 +773,15 @@ namespace CompareWOLL
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbLLModel;
         private System.Windows.Forms.Button btnCompare;
-        private System.Windows.Forms.TextBox tbProgNo;
         private System.Windows.Forms.DataGridView dataGridViewCompareLLWO;
         private System.Windows.Forms.TextBox tbPWBType;
         private System.Windows.Forms.TextBox tbPCB;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox tbMachine;
         private System.Windows.Forms.TextBox tbModel;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.DataGridView dataGridViewCompareLLWOResult;
-        private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.Button btnWO;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox llQty;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnHome;
         private System.Windows.Forms.GroupBox groupBox4;
@@ -711,5 +806,18 @@ namespace CompareWOLL
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox comparePartcode;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Button btnReport;
+        private System.Windows.Forms.Label LblPartcodeNMLLWO;
+        private System.Windows.Forms.Label LblPartcodeUsedQtyNMLLWO;
+        private System.Windows.Forms.Label LblQtyPartcodeNMLLWO;
+        private System.Windows.Forms.Label LblQtyPartcodeUsedQtyNMLLWO;
+        private System.Windows.Forms.Label LblQtyPartcodeQtyNMLLWO;
+        private System.Windows.Forms.Label LblPartcodeQtyNMLLWO;
+        private System.Windows.Forms.Label LblQtyPartcodeNMWOLL;
+        private System.Windows.Forms.Label LblPartcodeNMWOLL;
+        private System.Windows.Forms.Label LblQtyPartcodeUsedQtyNMWOLL;
+        private System.Windows.Forms.Label LblPartcodeUsedQtyNMWOLL;
+        private System.Windows.Forms.Label LblQtyPartcodeQtyNMWOLL;
+        private System.Windows.Forms.Label LblPartcodeQtyNMWOLL;
     }
 }

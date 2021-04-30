@@ -1,6 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -21,6 +20,28 @@ namespace CompareWOLL
         string WOLLNFPartCodes = string.Empty;
         string WOLLNMPartCodeUseds = string.Empty;
         string partcodeLLCheckSum = string.Empty;
+
+        int LLWONMPartCode;
+        int LLWONMQty;
+        int LLWONFPartCode;
+        int LLWONMPartCodeUsed;
+
+        int WOLLNMPartCode;
+        int WOLLNMQty;
+        int WOLLNFPartCode;
+        int WOLLNMPartCodeUsed;
+
+        string notMatchPartCodeLLWO = string.Empty;
+
+        int partCodeNotMatchLLWO;
+        int qtyNotMatchLLWO;
+        int partCodeUsedNotMatchLLWO;
+
+        int partCodeNotMatchWOLL;
+        int qtyNotMatchWOLL;
+        int partCodeUsedNotMatchWOLL;
+
+        int maksRowpartCodeNotMatchLLWO;
 
         public Compare()
         {
@@ -49,7 +70,6 @@ namespace CompareWOLL
 
             cmbLLModel.Enabled = false;
             btnCompare.Enabled = false;
-            btnGenerate.Enabled = false;
             label3.Visible = false;
             label16.Visible = false;
             gbSummary.Visible = false;
@@ -90,9 +110,7 @@ namespace CompareWOLL
             label3.Visible = false;
             tbCustomer.Text = "";
             tbModel.Text = "";
-            tbMachine.Text = "";
             tbPWBType.Text = "";
-            tbProgNo.Text = "";
             tbStencil.Text = "";
             tbPCB.Text = "";
             woQty.Text = "";
@@ -235,10 +253,8 @@ namespace CompareWOLL
                     if (dset.Rows.Count > 0)
                     {
                         tbCustomer.Text = dset.Rows[0]["customer"].ToString();
-                        tbModel.Text = dset.Rows[0]["model_detail"].ToString();
-                        tbMachine.Text = dset.Rows[0]["machine"].ToString();
+                        tbModel.Text = dset.Rows[0]["model_detail"].ToString().Replace(" (SMT-A)", "");
                         tbPWBType.Text = dset.Rows[0]["pwb_Type"].ToString();
-                        tbProgNo.Text = dset.Rows[0]["prog_No"].ToString();
                         tbStencil.Text = dset.Rows[0]["stencil"].ToString();
                     }
                 }
@@ -302,13 +318,18 @@ namespace CompareWOLL
 
                     //tampilin data temporary result
                     dataGridViewCompareLLWOResult.DataSource = dset.Tables[0];
-
                 }
 
-                int partCodeNotMatchLLWO = 0;
-                int qtyNotMatchLLWO = 0;
-                int partCodeNotFoundLLWO = 0;
-                int partCodeUsedNotMatchLLWO = 0;
+
+
+                LblPartcodeNMLLWO.Text = "";
+                LblPartcodeUsedQtyNMLLWO.Text = "";
+
+                LblQtyPartcodeNMLLWO.Text = "";
+                LblQtyPartcodeUsedQtyNMLLWO.Text = "";
+
+                LblPartcodeQtyNMLLWO.Text = "";
+                LblQtyPartcodeQtyNMLLWO.Text = "";
 
 
                 //menghitung jumlah row data
@@ -333,38 +354,35 @@ namespace CompareWOLL
                     if (dataGridViewCompareLLWO.Rows[i].Cells[0].Value.ToString() !=
                         dataGridViewCompareLLWO.Rows[i].Cells[3].Value.ToString())
                     {
-                        dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Part Code Not Match with Loading List";
+                        dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Part Code Not Match with Work Order";
                         dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleError;
 
                         btnWO.Enabled = true;
-
                         partCodeNotMatchLLWO++;
+                        LblPartcodeNMLLWO.Text += "\n" + dataGridViewCompareLLWO.Rows[i].Cells[0].Value.ToString();
+                        LblQtyPartcodeNMLLWO.Text += "\n" + dataGridViewCompareLLWO.Rows[i].Cells[1].Value.ToString();
                     }
 
                     else if (dataGridViewCompareLLWO.Rows[i].Cells[1].Value.ToString() !=
                         dataGridViewCompareLLWO.Rows[i].Cells[4].Value.ToString())
                     {
-                        dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Qty Not Match with Loading List";
+                        dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Qty Not Match with Work Order";
                         dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleError;
 
                         qtyNotMatchLLWO++;
-                    }
-
-                    else if (dataGridViewCompareLLWO.Rows[i].Cells[0].Value.ToString() !=
-                        dataGridViewCompareLLWO.Rows[i].Cells[3].Value.ToString())
-                    {
-                        dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Part Code Not Found in Loading List";
-                        dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleError;
-
-                        partCodeNotFoundLLWO++;
+                        LblPartcodeQtyNMLLWO.Text += "\n" + dataGridViewCompareLLWO.Rows[i].Cells[0].Value.ToString();
+                        LblQtyPartcodeQtyNMLLWO.Text += "\n" + dataGridViewCompareLLWO.Rows[i].Cells[1].Value.ToString();
                     }
 
                     else if (dataGridViewCompareLLWO.Rows[i].Cells[2].Value.ToString() !=
                        dataGridViewCompareLLWO.Rows[i].Cells[5].Value.ToString())
                     {
-                        dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Part Code Used Qty Not Match with Loading List";
+                        dataGridViewCompareLLWO.Rows[i].Cells[6].Value = "Part Code Used Qty Not Match with Work Order";
                         dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleWarning;
                         partCodeUsedNotMatchLLWO++;
+
+                        LblPartcodeUsedQtyNMLLWO.Text += "\n" + dataGridViewCompareLLWO.Rows[i].Cells[0].Value.ToString();
+                        LblQtyPartcodeUsedQtyNMLLWO.Text += "\n" + dataGridViewCompareLLWO.Rows[i].Cells[1].Value.ToString();
                     }
 
                     //compare partcode
@@ -379,10 +397,10 @@ namespace CompareWOLL
                         dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleOk;
                     }
 
-                    int LLWONMPartCode = partCodeNotMatchLLWO;
-                    int LLWONMQty = qtyNotMatchLLWO;
-                    int LLWONFPartCode = partCodeNotFoundLLWO;
-                    int LLWONMPartCodeUsed = partCodeUsedNotMatchLLWO;
+
+                    LLWONMPartCode = partCodeNotMatchLLWO;
+                    LLWONMQty = qtyNotMatchLLWO;
+                    LLWONMPartCodeUsed = partCodeUsedNotMatchLLWO;
 
                     if (LLWONMPartCode > 0)
                     {
@@ -392,24 +410,20 @@ namespace CompareWOLL
                     {
                         LLWONMQtys = "\nQty Not Match LL VS WO : " + qtyNotMatchLLWO.ToString();
                     }
-                    if (LLWONFPartCode > 0)
-                    {
-                        LLWONFPartCodes = "\nPartcode Not Found LL VS WO : " + partCodeNotFoundLLWO.ToString();
-                    }
                     if (LLWONMPartCodeUsed > 0)
                     {
                         LLWONMPartCodeUseds = "\nPartcode Used Not Match LL VS WO : " + partCodeUsedNotMatchLLWO.ToString();
                     }
                 }
 
-                if (LLWONMPartCodes == "" && LLWONMQtys == "" && LLWONFPartCodes =="" && LLWONMPartCodeUseds =="")
+                if (LLWONMPartCodes == "" && LLWONMQtys == "" && LLWONFPartCodes == "" && LLWONMPartCodeUseds == "")
                 {
                     lbSummaryLLWO.Text = "All Data Match";
                 }
                 else
                 {
                     lbSummaryLLWO.Text = LLWONMPartCodes + LLWONMQtys + LLWONFPartCodes + LLWONMPartCodeUseds;
-                }                
+                }
 
                 if (lbSummaryLLWO.Text.Contains("Partcode Not Match LL VS WO : ") || lbSummaryWOLL.Text.Contains("Partcode Not Match WO VS LL: "))
                 {
@@ -427,6 +441,7 @@ namespace CompareWOLL
                     comparePartcode.Text = "Match";
                     comparePartcode.BackColor = System.Drawing.Color.Blue;
                 }
+
 
                 // Set table title Wo
                 string[] titleWO = { "PART CODE LL ", "QTY LL", "PART LL USED", "PART CODE WO", "QTY WO", "PART WO USED" };
@@ -461,10 +476,16 @@ namespace CompareWOLL
 
                 }
 
-                int partCodeNotMatchWOLL = 0;
-                int qtyNotMatchWOLL = 0;
-                int partCodeNotFoundWOLL = 0;
-                int partCodeUsedNotMatchWOLL = 0;
+
+                LblPartcodeNMWOLL.Text = "";
+                LblQtyPartcodeNMWOLL.Text = "";
+
+                LblPartcodeUsedQtyNMWOLL.Text = "";
+                LblQtyPartcodeUsedQtyNMWOLL.Text = "";
+
+                LblPartcodeQtyNMWOLL.Text = "";
+                LblQtyPartcodeQtyNMWOLL.Text = "";
+
 
                 //menghitung jumlah row data
                 int rowCounts = ((DataTable)this.dataGridViewCompareWOLL.DataSource).Rows.Count;
@@ -488,43 +509,35 @@ namespace CompareWOLL
                     if (dataGridViewCompareWOLL.Rows[i].Cells[0].Value.ToString() !=
                         dataGridViewCompareWOLL.Rows[i].Cells[3].Value.ToString())
                     {
-                        dataGridViewCompareWOLL.Rows[i].Cells[6].Value = "Part Code Not Match with Work Order";
+                        dataGridViewCompareWOLL.Rows[i].Cells[6].Value = "Part Code Not Match with Loading List";
                         dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleError;
                         btnWO.Enabled = true;
 
                         partCodeNotMatchWOLL++;
+                        LblPartcodeNMWOLL.Text += "\n" + dataGridViewCompareWOLL.Rows[i].Cells[0].Value.ToString();
+                        LblQtyPartcodeNMWOLL.Text += "\n" + dataGridViewCompareWOLL.Rows[i].Cells[1].Value.ToString();
                     }
 
                     else if (dataGridViewCompareWOLL.Rows[i].Cells[1].Value.ToString() !=
                        dataGridViewCompareWOLL.Rows[i].Cells[4].Value.ToString())
                     {
-                        dataGridViewCompareWOLL.Rows[i].Cells[6].Value = "Qty Not Match with Work Order";
+                        dataGridViewCompareWOLL.Rows[i].Cells[6].Value = "Qty Not Match with Loading List";
                         dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleError;
                         qtyNotMatchWOLL++;
-                    }
 
-                    else if (dataGridViewCompareWOLL.Rows[i].Cells[0].Value.ToString() !=
-                        dataGridViewCompareWOLL.Rows[i].Cells[3].Value.ToString())
-                    {
-                        dataGridViewCompareWOLL.Rows[i].Cells[6].Value = "Part Code Not Found in Work Order";
-                        dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleError;
-                        partCodeNotFoundWOLL++;
-                    }
-
-                    else if (dataGridViewCompareWOLL.Rows[i].Cells[1].Value.ToString() !=
-                        dataGridViewCompareWOLL.Rows[i].Cells[4].Value.ToString())
-                    {
-                        dataGridViewCompareWOLL.Rows[i].Cells[6].Value = "Qty Not Match with Work Order";
-                        dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleError;
-                        qtyNotMatchWOLL++;
+                        LblPartcodeQtyNMWOLL.Text += "\n" + dataGridViewCompareWOLL.Rows[i].Cells[0].Value.ToString();
+                        LblQtyPartcodeQtyNMWOLL.Text += "\n" + dataGridViewCompareWOLL.Rows[i].Cells[1].Value.ToString();
                     }
 
                     else if (dataGridViewCompareWOLL.Rows[i].Cells[2].Value.ToString() !=
                        dataGridViewCompareWOLL.Rows[i].Cells[5].Value.ToString())
                     {
-                        dataGridViewCompareWOLL.Rows[i].Cells[6].Value = "Part Code Used Qty Not Match with Work Order";
+                        dataGridViewCompareWOLL.Rows[i].Cells[6].Value = "Part Code Used Qty Not Match with Loading List";
                         dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleWarning;
                         partCodeUsedNotMatchWOLL++;
+
+                        LblPartcodeUsedQtyNMWOLL.Text += "\n" + dataGridViewCompareWOLL.Rows[i].Cells[0].Value.ToString();
+                        LblQtyPartcodeUsedQtyNMWOLL.Text += "\n" + dataGridViewCompareWOLL.Rows[i].Cells[1].Value.ToString();
                     }
 
                     //compare partcode
@@ -539,10 +552,9 @@ namespace CompareWOLL
                         dataGridViewCompareWOLL.Rows[i].DefaultCellStyle = styleOk;
                     }
 
-                    int WOLLNMPartCode = partCodeNotMatchWOLL;
-                    int WOLLNMQty = qtyNotMatchWOLL;
-                    int WOLLNFPartCode = partCodeNotFoundWOLL;
-                    int WOLLNMPartCodeUsed = partCodeUsedNotMatchWOLL;
+                    WOLLNMPartCode = partCodeNotMatchWOLL;
+                    WOLLNMQty = qtyNotMatchWOLL;
+                    WOLLNMPartCodeUsed = partCodeUsedNotMatchWOLL;
 
                     if (WOLLNMPartCode > 0)
                     {
@@ -551,10 +563,6 @@ namespace CompareWOLL
                     if (WOLLNMQty > 0)
                     {
                         WOLLNMQtys = "\nQty Not Match WO VS LL : " + qtyNotMatchWOLL.ToString();
-                    }
-                    if (WOLLNFPartCode > 0)
-                    {
-                        WOLLNFPartCodes = "\nPartcode Not Found WO VS LL : " + partCodeNotFoundWOLL.ToString();
                     }
                     if (WOLLNMPartCodeUsed > 0)
                     {
@@ -569,6 +577,7 @@ namespace CompareWOLL
                     {
                         lbSummaryWOLL.Text = WOLLNMPartCodes + WOLLNMQtys + WOLLNFPartCodes + WOLLNMPartCodeUseds;
                     }
+
 
                 }
 
@@ -589,27 +598,23 @@ namespace CompareWOLL
                 {
                     compareQty.Text = "#ERROR";
                     compareQty.BackColor = System.Drawing.Color.Red;
-                    btnGenerate.Enabled = true;
                 }
 
                 else if (woQty.Text == llQty.Text)
                 {
                     compareQty.BackColor = System.Drawing.Color.Blue;
                     compareQty.Text = "Match";
-                    btnGenerate.Enabled = true;
                 }
 
                 else if (woQty.Text != llQty.Text)
                 {
                     compareQty.Text = "Not Match";
                     compareQty.BackColor = System.Drawing.Color.Red;
-                    btnGenerate.Enabled = true;
                 }
 
                 if (tbPCB.Text == "")
                 {
                     MessageBox.Show("No any selected PCB", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
-                    btnGenerate.Enabled = true;
                 }
                 connection.Close();
             }
@@ -626,7 +631,7 @@ namespace CompareWOLL
             if (tbCustomer.Text == "PEGATRON")
             {
                 //nampilin part yang perlu check sum
-                string queryPartcodeLL = "SELECT * FROM tbl_lldetail WHERE partcode LIKE '0500%'";
+                string queryPartcodeLL = "SELECT * FROM tbl_lldetail WHERE model_No = '" + cmbLLModel.Text + "' AND partcode LIKE '0500%'";
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryPartcodeLL, connection))
                 {
                     DataTable dset = new DataTable();
@@ -634,45 +639,21 @@ namespace CompareWOLL
                     NotifCheckSum notif = new NotifCheckSum();
                     for (int i = 0; i < dset.Rows.Count; i++)
                     {
-                        notif.tbChecksum.Text += "\r\n" + dset.Rows[i]["partcode"].ToString()+ " ";
+                        notif.tbChecksum.Text += "\r\n" + dset.Rows[i]["partcode"].ToString() + " ";
                     }
                     notif.Show();
-                }             
+                }
             }
         }
 
-        private void btnGenerate_Click(object sender, EventArgs e)
+        private void btnReport_Click(object sender, EventArgs e)
         {
             btnHome.Enabled = false;
             btnWO.Enabled = false;
 
-            int totalpart;
-            int totalPointRow;
-            int remarkRow;
-            int footerRow;
-
-            // to split model and process
-            string str = cmbLLModel.Text;
-            char ch = '|';
-
-            var model = str.Split(ch);
-
-
-            //truncate result tabel
-            var cmd = new MySqlCommand("", connection);
-            connection.Open();
-
-            for (int i = 0; i < dataGridViewCompareLLWOResult.Rows.Count; i++)
-            {
-                string queryResult = "TRUNCATE tbl_resultcompare";
-                cmd.CommandText = queryResult;
-                cmd.ExecuteNonQuery();
-            }
-            connection.Close();
 
             // Create a new workbook with a single sheet
             excelConvert.NewFile();
-
             // creating Excel Application  
             Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
             // creating new WorkBook within Excel application  
@@ -686,136 +667,234 @@ namespace CompareWOLL
             worksheet = workbook.Sheets["Sheet1"];
             worksheet = workbook.ActiveSheet;
             // changing the name of active sheet  
-
+            // worksheet.Name = "Report";
             // set hide gridlines
             app.ActiveWindow.DisplayGridlines = false;
 
-            connection.Open();
-
-            for (int i = 0; i < dataGridViewCompareLLWOResult.Rows.Count; i++)
-            {
-                string queryResult = "INSERT INTO tbl_resultcompare (tbl_resultcompare.model_No, tbl_resultcompare.process_Name, " +
-                    "tbl_resultcompare.reel, tbl_resultcompare.partcode, tbl_resultcompare.alt_No, tbl_resultcompare.tp, tbl_resultcompare.qty," +
-                    " tbl_resultcompare.loc, tbl_resultcompare.dec, tbl_resultcompare.f_Type)" +
-                    "SELECT tbl_reel.model_No, tbl_reel.process_Name, tbl_reel.reel, tbl_partcodedetail.partcode,tbl_lldetail.alt_No," +
-                    " tbl_partcodedetail.tp, tbl_reel.qty, tbl_reel.loc, tbl_partcodedetail.dec,tbl_reel.f_Type " +
-                    "FROM tbl_reel, tbl_partcodedetail, tbl_lldetail WHERE tbl_reel.reel = '" + dataGridViewCompareLLWOResult.Rows[i].Cells[0].Value.ToString() + "' " +
-                    "AND tbl_partcodedetail.partcode = '" + dataGridViewCompareLLWOResult.Rows[i].Cells[1].Value.ToString() + "' AND tbl_reel.model_No = '" + model[0].Replace(" ", "").ToString() + "' " +
-                    "AND tbl_reel.process_Name = '" + model[1].Replace(" ", "") + "' " +
-                    "AND tbl_partcodedetail.partcode = tbl_lldetail.partcode";
-                cmd.CommandText = queryResult;
-                cmd.ExecuteNonQuery();
-            }
-            connection.Close();
-
-            worksheet.Range[worksheet.Cells[1, 1], worksheet.Cells[1, 9]].Merge();
-            worksheet.Cells[1, 1].Font.Name = "Times New Roman";
-            worksheet.Cells[1, 1].Font.FontStyle = "Bold";
-            worksheet.Cells[1, 1].Font.Size = 20;
-            worksheet.Cells[1, 1].Font.Color = Color.Blue;
-            worksheet.Cells[1, 1].EntireRow.Font.Bold = true;
-            worksheet.Cells[1, 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-            worksheet.Cells[1, 1] = "SMT MACHINE LOADING LIST";
-
-            worksheet.Cells[2, 9] = "Page 1 of 1";
-            worksheet.Cells[2, 9].Style.Font.Size = 10;
-            //worksheet.Cells.Font.Color = Color.Blue;
-            worksheet.Cells[2, 9].EntireRow.Font.Italic = true;
-
-            worksheet.Range[worksheet.Cells[3, 1], worksheet.Cells[7, 1]].Font.Name = "Courier New";
-            worksheet.Cells[3, 1].Font.FontStyle = "Bold";
-            worksheet.Cells[3, 1].Font.Size = 10;
-            worksheet.Cells[3, 1] = "MODEL     : " + tbModel.Text;
-
-            worksheet.Range[worksheet.Cells[3, 6], worksheet.Cells[3, 9]].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Blue);
-            worksheet.Range[worksheet.Cells[3, 6], worksheet.Cells[3, 9]].Font.Color = Color.White;
-            worksheet.Range[worksheet.Cells[2, 6], worksheet.Cells[3, 9]].Font.Name = "Times New Roman";
-            worksheet.Range[worksheet.Cells[3, 6], worksheet.Cells[3, 9]].Style.Font.Size = 8;
-            worksheet.Cells[3, 6] = "Rev.";
-            worksheet.Cells[3, 7] = "Prepared by";
-            worksheet.Cells[3, 8] = "Checked by";
-            worksheet.Cells[3, 9] = "Approved by";
-
+            worksheet.Range[worksheet.Cells[2, 1], worksheet.Cells[3, 10]].Merge();
+            worksheet.Cells[2, 1].Font.Name = "Arial";
+            worksheet.Cells[2, 1].Font.FontStyle = "Bold";
+            worksheet.Cells[2, 1].Font.Size = 12;
+            worksheet.Cells[2, 1].Font.Color = Color.Black;
+            worksheet.Cells[2, 1].EntireRow.Font.Bold = true;
+            worksheet.Cells[2, 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            worksheet.Cells[2, 1].VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+            worksheet.Cells[2, 1] = "WORK ORDER (WO) AND LOADING LIST (LL) COMPARISON RESULT";
+            worksheet.Range[worksheet.Cells[4, 1], worksheet.Cells[4, 10]].Merge();
             worksheet.Cells[4, 1].Font.FontStyle = "Bold";
-            worksheet.Cells[4, 1].Font.Size = 9;
-            worksheet.Cells[4, 1] = "MACHINE   : " + tbMachine.Text;
-            worksheet.Cells[5, 1].Font.FontStyle = "Bold";
-            worksheet.Cells[5, 1].Font.Size = 9;
-            worksheet.Cells[5, 1] = "PWB TYPE  : " + tbPWBType.Text;
-            worksheet.Cells[6, 1].Font.FontStyle = "Bold";
-            worksheet.Cells[6, 1].Font.Size = 9;
-            worksheet.Cells[6, 1] = "PROG.NO.  : " + tbProgNo.Text;
-            worksheet.Cells[7, 1].Font.FontStyle = "Bold";
-            worksheet.Cells[7, 1].Font.Size = 9;
-            worksheet.Cells[7, 1] = "DATE      : " + DateTime.Now.ToString("dd MMMM yyyy");
+            worksheet.Cells[4, 1].Font.Size = 10;
+            worksheet.Cells[4, 1] = "PT. SAT NUSAPERSADA Tbk";
+            worksheet.Cells[4, 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
 
-            worksheet.Range[worksheet.Cells[8, 1], worksheet.Cells[1000, 7]].Font.Name = "Times New Roman";
-            worksheet.Range[worksheet.Cells[8, 1], worksheet.Cells[8, 7]].Font.FontStyle = "Bold";
-            worksheet.Range[worksheet.Cells[8, 1], worksheet.Cells[8, 7]].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Yellow);
-            worksheet.Cells[8, 1] = "REEL";
-            worksheet.Cells[8, 2] = "PART CODE";
-            worksheet.Cells[8, 3] = "TP";
-            worksheet.Cells[8, 4] = "QTY";
-            worksheet.Cells[8, 5] = "LOC.";
-            worksheet.Cells[8, 6] = "DEC.";
-            worksheet.Cells[8, 7] = "F. TYPE";
-
-            connection.Open();
-            string resultPartCode = "SELECT tbl_resultcompare.reel, tbl_resultcompare.partcode, tbl_resultcompare.tp, tbl_resultcompare.qty, " +
-                "tbl_resultcompare.loc,tbl_resultcompare.dec, tbl_resultcompare.f_Type  FROM tbl_resultcompare " +
-                "WHERE tbl_resultcompare.model_No = '" + model[0].Replace(" ", "") + "' AND tbl_resultcompare.process_Name = '" + model[1].Replace(" ", "") + "'";
+            worksheet.Range[worksheet.Cells[6, 1], worksheet.Cells[1000, 1000]].Font.Name = "Arial";
+            worksheet.Range[worksheet.Cells[6, 1], worksheet.Cells[1000, 1000]].Font.Size = 10;
+            worksheet.Cells[6, 1].Font.Size = 10;
+            worksheet.Cells[6, 1] = "CUSTOMER     : " + tbCustomer.Text;
+            worksheet.Cells[7, 1] = "MODEL     : " + tbModel.Text.Replace(" (SMT-A)", "");
+            worksheet.Cells[8, 1] = "PWB TYPE  : " + tbPWBType.Text;
+            worksheet.Cells[9, 1] = "REPORT DATE: " + DateTime.Now.ToString("dd MMMM yyyy");
 
 
-            using (MySqlDataAdapter dscmd = new MySqlDataAdapter(resultPartCode, connection))
+            worksheet.Range[worksheet.Cells[10, 1], worksheet.Cells[9, 10]].Cells.Borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom].Weight = Microsoft.Office.Interop.Excel.XlBorderWeight.xlMedium;
+
+            worksheet.Range[worksheet.Cells[12, 1], worksheet.Cells[12, 10]].Font.FontStyle = "Bold";
+            worksheet.Range[worksheet.Cells[12, 1], worksheet.Cells[12, 10]].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            worksheet.Range[worksheet.Cells[12, 1], worksheet.Cells[12, 10]].VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+
+            worksheet.Range[worksheet.Cells[12, 1], worksheet.Cells[13, 4]].Merge();
+            worksheet.Cells[12, 1] = "Criteria Comparison";
+            //worksheet.Cells[11, 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+
+            worksheet.Range[worksheet.Cells[12, 6], worksheet.Cells[13, 6]].Merge();
+            worksheet.Cells[12, 6] = "Result";
+
+            worksheet.Range[worksheet.Cells[12, 8], worksheet.Cells[12, 10]].Merge();
+            worksheet.Cells[12, 8] = "NG Comparison Result ";
+            worksheet.Range[worksheet.Cells[12, 8], worksheet.Cells[12, 10]].Cells.Borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom].Weight = Microsoft.Office.Interop.Excel.XlBorderWeight.xlMedium;
+
+            worksheet.Cells[13, 8] = "Data From";
+            worksheet.Cells[13, 9] = "Partcode";
+            worksheet.Cells[13, 10] = "Qty";
+
+            worksheet.Range[worksheet.Cells[14, 1], worksheet.Cells[14, 10]].Cells.Borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom].Weight = Microsoft.Office.Interop.Excel.XlBorderWeight.xlMedium;
+            worksheet.Range[worksheet.Cells[11, 1], worksheet.Cells[14, 10]].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGray);
+
+            worksheet.Cells[16, 2] = "Qty LL Compare To Qty WO";
+            worksheet.Cells[16, 6] = compareQty.Text;
+
+            worksheet.Cells[16, 8] = "LL";
+            worksheet.Cells[16, 10] = llQty.Text;
+
+            worksheet.Cells[17, 8] = "WO";
+            worksheet.Cells[17, 10] = woQty.Text;
+
+            worksheet.Cells[19, 2] = "Partcode LL Compare to WO";
+
+            if (partCodeNotMatchLLWO>0)
             {
-                DataSet ds = new DataSet();
-                dscmd.Fill(ds);
+                worksheet.Cells[19, 6] = "Not Match";
+                worksheet.Cells[19, 8] = "LL";
 
-                totalpart = ds.Tables[0].Rows.Count;
+                // menampilkan data partcode not match LL vs WO 
+                maksRowpartCodeNotMatchLLWO = 19 + partCodeNotMatchLLWO;
+                string[] partCodeNotMatchLLWOText = LblPartcodeNMLLWO.Text.Split('\n');
+                string[] QtyPartcodeNotMatchNMLLWO = LblQtyPartcodeNMLLWO.Text.Split('\n');
 
-                for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+
+                for (int i = 19; i < maksRowpartCodeNotMatchLLWO; i++)
                 {
-                    for (int j = 0; j <= ds.Tables[0].Columns.Count - 1; j++)
+                    for (int j = 0; j <= partCodeNotMatchLLWO; j++)
                     {
-                        string data = ds.Tables[0].Rows[i].ItemArray[j].ToString();
-                        worksheet.Cells[i + 9, j + 1] = "'" + data;
+                        worksheet.Cells[i, 9] = partCodeNotMatchLLWOText[j];
+                        worksheet.Cells[i, 10] = QtyPartcodeNotMatchNMLLWO[j];
                     }
                 }
-
             }
-
-            int woQtyy = Convert.ToInt32(woQty.Text);
-            int totalPoint = woQtyy - 1;
-
-
-            totalPointRow = totalpart + 9;
-            worksheet.Range[worksheet.Cells[totalPointRow, 1], worksheet.Cells[totalPointRow, 3]].Merge();
-            worksheet.Range[worksheet.Cells[totalPointRow, 1], worksheet.Cells[totalPointRow, 6]].Font.FontStyle = "Bold";
-            worksheet.Cells[totalPointRow, 1] = "TOTAL POINT";
-            worksheet.Cells[totalPointRow, 4] = totalPoint;
-            worksheet.Cells[totalPointRow, 5] = " PCB NO: " + tbPCB.Text;
-            worksheet.Cells[totalPointRow, 6] = " STENCIL NO : " + tbStencil.Text;
-
-            remarkRow = totalpart + 11;
-
-            string remark = "SELECT remarks FROM tbl_ll";
-
-            using (MySqlDataAdapter dscmd = new MySqlDataAdapter(remark, connection))
+            else
             {
-                DataSet ds = new DataSet();
-                dscmd.Fill(ds);
+                worksheet.Cells[19, 6] = "Match";
+            }                      
 
-                for (int i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+
+
+            // menampilkan data partcode not match WO vs LL
+            int newRowpartCodeNotMatchWOLL = maksRowpartCodeNotMatchLLWO + 1;
+            int maksRowpartCodeNotMatchWOLL = newRowpartCodeNotMatchWOLL + partCodeNotMatchWOLL;
+            string[] partCodeNotMatchWOLLText = LblPartcodeNMWOLL.Text.Split('\n');
+            string[] QtyPartcodeNotMatchNMWOLL = LblQtyPartcodeNMWOLL.Text.Split('\n');
+
+            worksheet.Cells[newRowpartCodeNotMatchWOLL, 2] = "Partcode WO Compare to LL";
+            if (partCodeNotMatchWOLL > 0)
+            {
+                worksheet.Cells[newRowpartCodeNotMatchWOLL, 6] = "Not Match";
+                worksheet.Cells[newRowpartCodeNotMatchWOLL, 8] = "WO";
+
+                for (int i = newRowpartCodeNotMatchWOLL; i < maksRowpartCodeNotMatchWOLL; i++)
                 {
-                    string data = ds.Tables[0].Rows[i].ItemArray[i].ToString();
+                    for (int j = 0; j <= partCodeNotMatchWOLL; j++)
+                    {
+                        worksheet.Cells[i, 9] = partCodeNotMatchWOLLText[j];
+                        worksheet.Cells[i, 10] = QtyPartcodeNotMatchNMWOLL[j];
+                    }
+                }
+            }    
+            else
+            {
+                worksheet.Cells[newRowpartCodeNotMatchWOLL, 6] = "Match";
+            }           
 
-                    worksheet.Range[worksheet.Cells[remarkRow, 1], worksheet.Cells[remarkRow, 9]].Merge();
-                    worksheet.Cells[remarkRow, 1] = data;
+
+            // menampilkan data partcode qty not match LL vs WO 
+            int newRowQtyNotMatchLLWO = maksRowpartCodeNotMatchWOLL + 1;
+            int maksRowQtyNotMatchLLWO = newRowQtyNotMatchLLWO + qtyNotMatchLLWO;
+            string[] qtyNotMatchLLWOText = LblPartcodeQtyNMLLWO.Text.Split('\n');
+            string[] QtyPartcodeNMLLWO = LblQtyPartcodeQtyNMLLWO.Text.Split('\n');
+
+            worksheet.Cells[newRowQtyNotMatchLLWO, 2] = "Partcode Qty LL Compare to WO";
+            if (qtyNotMatchLLWO > 0)
+            {
+                worksheet.Cells[newRowQtyNotMatchLLWO, 6] = "Not Match";
+                worksheet.Cells[newRowQtyNotMatchLLWO, 8] = "LL";
+
+                for (int i = newRowQtyNotMatchLLWO; i < maksRowQtyNotMatchLLWO; i++)
+                {
+                    for (int j = 0; j <= qtyNotMatchLLWO; j++)
+                    {
+                        worksheet.Cells[i, 9] = qtyNotMatchLLWOText[j];
+                        worksheet.Cells[i, 10] = QtyPartcodeNMLLWO[j];
+                    }
                 }
             }
-            connection.Close();
+            else
+            {
+                worksheet.Cells[newRowQtyNotMatchLLWO, 6] = "Match";
+            }
+                       
 
-            worksheet.Cells[remarkRow + 2, 1] = "FM - SMT - ENG - 011";
+
+            // menampilkan data partcode qty not match WO vs LL
+            int newRowQtyNotMatchWOLL = maksRowQtyNotMatchLLWO + 1;
+            int maksRowQtyNotMatchWOLL = newRowQtyNotMatchWOLL + qtyNotMatchWOLL;
+            string[] qtyNotMatchWOLLText = LblPartcodeQtyNMWOLL.Text.Split('\n');
+            string[] QtyPartcodeNMWOLL = LblQtyPartcodeQtyNMWOLL.Text.Split('\n');
+
+            worksheet.Cells[newRowQtyNotMatchWOLL, 2] = "Partcode Qty WO Compare to LL";
+            if (qtyNotMatchWOLL > 0)
+            {
+                worksheet.Cells[newRowQtyNotMatchWOLL, 6] = "Not Match";
+                worksheet.Cells[newRowQtyNotMatchWOLL, 8] = "WO";
+
+                for (int i = newRowQtyNotMatchWOLL; i < maksRowQtyNotMatchWOLL; i++)
+                {
+                    for (int j = 0; j <= qtyNotMatchWOLL; j++)
+                    {
+                        worksheet.Cells[i, 9] = qtyNotMatchWOLLText[j];
+                        worksheet.Cells[i, 10] = QtyPartcodeNMWOLL[j];
+                    }
+                }
+            }
+            else 
+            {
+                worksheet.Cells[newRowQtyNotMatchWOLL, 6] = "Match";
+            }           
+
+
+            // menampilkan data Partcode Used not match LL vs WO
+            int newRowPartcodeUsedNotMatchLLWO = maksRowQtyNotMatchWOLL + 1;
+            int maksRowPartcodeUsedNotMatchLLWO = newRowPartcodeUsedNotMatchLLWO + partCodeUsedNotMatchLLWO;
+            string[] PartcodeUsedNotMatchLLWOText = LblPartcodeUsedQtyNMLLWO.Text.Split('\n');
+            string[] QtyPartcodeUsedNMLLWO = LblQtyPartcodeUsedQtyNMLLWO.Text.Split('\n');
+
+            worksheet.Cells[newRowPartcodeUsedNotMatchLLWO, 2] = "Partcode Used LL Compare to WO";
+            if (partCodeUsedNotMatchLLWO > 0)
+            {
+                worksheet.Cells[newRowPartcodeUsedNotMatchLLWO, 6] = "Not Match";
+                worksheet.Cells[newRowPartcodeUsedNotMatchLLWO, 8] = "LL";
+
+                for (int i = newRowPartcodeUsedNotMatchLLWO; i < maksRowPartcodeUsedNotMatchLLWO; i++)
+                {
+                    for (int j = 0; j <= partCodeUsedNotMatchLLWO; j++)
+                    {
+                        worksheet.Cells[i, 9] = PartcodeUsedNotMatchLLWOText[j];
+                        worksheet.Cells[i, 10] = QtyPartcodeUsedNMLLWO[j];
+                    }
+                }
+            }
+            else
+            {
+                worksheet.Cells[newRowPartcodeUsedNotMatchLLWO, 6] = "Match";
+            }            
+
+            // menampilkan data Partcode Used not match WO vs LL
+            int newRowPartcodeUsedNotMatchWOLL = maksRowPartcodeUsedNotMatchLLWO + 1;
+            int maksRowPartcodeUsedNotMatchWOLL = newRowPartcodeUsedNotMatchWOLL + partCodeUsedNotMatchWOLL;
+            string[] PartcodeUsedNotMatchWOLLText = LblPartcodeUsedQtyNMWOLL.Text.Split('\n');
+            string[] QtyPartcodeUsedNMWOLL = LblQtyPartcodeUsedQtyNMWOLL.Text.Split('\n');
+
+            worksheet.Cells[newRowPartcodeUsedNotMatchWOLL, 2] = "Partcode Used WO Compare to LL";
+            if (partCodeUsedNotMatchWOLL > 0)
+            {
+                worksheet.Cells[newRowPartcodeUsedNotMatchWOLL, 6] = "Not Match";
+                worksheet.Cells[newRowPartcodeUsedNotMatchWOLL, 8] = "WO";
+
+                for (int i = newRowPartcodeUsedNotMatchWOLL; i < maksRowPartcodeUsedNotMatchWOLL; i++)
+                {
+                    for (int j = 0; j <= partCodeUsedNotMatchWOLL; j++)
+                    {
+                        worksheet.Cells[i, 9] = PartcodeUsedNotMatchWOLLText[j];
+                        worksheet.Cells[i, 10] = QtyPartcodeUsedNMWOLL[j];
+                    }
+                }
+            }
+            else
+            {
+                worksheet.Cells[newRowPartcodeUsedNotMatchWOLL, 6] = "Match";
+            }           
+
+
+            worksheet.Range[worksheet.Cells[maksRowPartcodeUsedNotMatchWOLL+1, 1], worksheet.Cells[maksRowPartcodeUsedNotMatchWOLL + 1, 10]].Cells.Borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom].Weight = Microsoft.Office.Interop.Excel.XlBorderWeight.xlMedium;
+            worksheet.Cells[maksRowPartcodeUsedNotMatchWOLL + 1, 1] = "SMT DEPT";
+            worksheet.Cells[maksRowPartcodeUsedNotMatchWOLL + 1, 1].Font.FontStyle = "Bold";
 
             // Saving the file in a speicifed path
             // excelConvert.SaveAs(@"D:\" + model[0].Replace(" ", "").ToString() + " ( " + model[1].Replace(" ", "").ToString() + " )");

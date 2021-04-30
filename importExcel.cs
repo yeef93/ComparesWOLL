@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CompareWOLL
@@ -102,7 +96,6 @@ namespace CompareWOLL
                             //tbPWBType.Text = dataGridViewLLDetail.Rows[2].Cells[0].Value.ToString().Remove(0, 12);
                             //tbProg.Text = dataGridViewLLDetail.Rows[3].Cells[0].Value.ToString().Remove(0, 12);
                             //tbRev.Text = dataGridViewLLDetail.Rows[4].Cells[5].Value.ToString();
-
 
                             OleDbcon = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + openFileDialog.FileName + ";Extended Properties=Excel 12.0;");
 

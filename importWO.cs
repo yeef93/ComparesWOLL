@@ -367,12 +367,12 @@ namespace CompareWOLL
                     connection.Open();
                     //Buka koneksi
 
-                    string cekmodel = "SELECT model_No, process_Name FROM tbl_model  WHERE model_No = '" + modelNoo + "'";
+                    string cekwoPTSN = "SELECT wo_PTSN FROM tbl_wo  WHERE wo_PTSN = '" + woPTSNN + "'";
                     string query = "INSERT INTO tbl_wo VALUES('', '" + woPTSNN + "','" + woNoo + "','" + modelNoo + "','" + modell + "', '" + woqtyy + "', '" + wousagee + "', '" + customer + "')";
                     string querymodel = "INSERT INTO tbl_model ( model_No, process_Name ) SELECT model_No, process_Name FROM tbl_wodetail GROUP BY process_Name, model_No";
                     string trncteModel = "TRUNCATE tbl_model";
 
-                    using (MySqlDataAdapter dscmd = new MySqlDataAdapter(cekmodel, connection))
+                    using (MySqlDataAdapter dscmd = new MySqlDataAdapter(cekwoPTSN, connection))
                     {
                         DataSet ds = new DataSet();
                         dscmd.Fill(ds);
@@ -380,7 +380,7 @@ namespace CompareWOLL
                         if (ds.Tables[0].Rows.Count >= 1)
                         {
                             CloseProgress();
-                            MessageBox.Show("Work Order Data " + modelNoo + "  already uploaded", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+                            MessageBox.Show("Work Order PTSN " + woPTSNN + "  already uploaded", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
                             tbfilepathWO.Text = "";
                             tbwoPTSN.Text = "";
                             tbwoNo.Text = "";
