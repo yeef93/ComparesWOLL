@@ -23,12 +23,10 @@ namespace CompareWOLL
 
         int LLWONMPartCode;
         int LLWONMQty;
-        int LLWONFPartCode;
         int LLWONMPartCodeUsed;
 
         int WOLLNMPartCode;
         int WOLLNMQty;
-        int WOLLNFPartCode;
         int WOLLNMPartCodeUsed;
 
         string notMatchPartCodeLLWO = string.Empty;
@@ -73,7 +71,6 @@ namespace CompareWOLL
             label3.Visible = false;
             label16.Visible = false;
             gbSummary.Visible = false;
-
             groupBox4.Visible = false;
 
             string queryWODropDown = "SELECT wo_PTSN FROM tbl_wo ";
@@ -115,6 +112,8 @@ namespace CompareWOLL
             tbPCB.Text = "";
             woQty.Text = "";
             llQty.Text = "";
+            lbSummaryLLWO.Text = "";
+            lbSummaryWOLL.Text = "";
             compareQty.Text = "";
             comparePartcode.Text = "";
             gbSummary.Visible = false;
@@ -126,6 +125,9 @@ namespace CompareWOLL
 
             partCodeNotMatchLLWO = 0;
             partCodeNotMatchWOLL = 0;
+
+            LLWONMPartCodes = "";
+            WOLLNMPartCodes = "";
 
             dataGridViewCompareLLWO.DataSource = null;
             dataGridViewCompareLLWO.Refresh();
@@ -247,8 +249,8 @@ namespace CompareWOLL
         {
             btnHome.Enabled = true;
             btnWO.Enabled = true;
-
             gbSummary.Visible = true;
+
 
             string queryTotalLL = "SELECT SUM(tbl_lldetail.qty) AS totalLL FROM tbl_lldetail WHERE wo_PTSN = '" + cmbLL.Text + "'";
 
@@ -336,7 +338,6 @@ namespace CompareWOLL
                 }
 
 
-
                 LblPartcodeNMLLWO.Text = "";
                 LblPartcodeUsedQtyNMLLWO.Text = "";
 
@@ -365,6 +366,7 @@ namespace CompareWOLL
                     DataGridViewCellStyle styleWarning = new DataGridViewCellStyle();
                     styleWarning.BackColor = Color.Yellow;
                     styleWarning.ForeColor = Color.Black;
+                    
 
                     if (dataGridViewCompareLLWO.Rows[i].Cells[0].Value.ToString() !=
                         dataGridViewCompareLLWO.Rows[i].Cells[3].Value.ToString())
@@ -419,6 +421,7 @@ namespace CompareWOLL
                     if (LLWONMPartCode > 0)
                     {
                         LLWONMPartCodes = "Partcode Not Match LL VS WO : " + partCodeNotMatchLLWO.ToString();
+
                     }
                     if (LLWONMQty > 0)
                     {
