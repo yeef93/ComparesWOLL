@@ -369,7 +369,7 @@ namespace CompareWOLL
 
                     string cekwoPTSN = "SELECT wo_PTSN FROM tbl_wo  WHERE wo_PTSN = '" + woPTSNN + "'";
                     string query = "INSERT INTO tbl_wo VALUES('', '" + woPTSNN + "','" + woNoo + "','" + modelNoo + "','" + modell + "', '" + woqtyy + "', '" + wousagee + "', '" + customer + "')";
-                    string querymodel = "INSERT INTO tbl_model ( model_No, process_Name ) SELECT model_No, process_Name FROM tbl_wodetail GROUP BY process_Name, model_No";
+                    string querymodel = "INSERT INTO tbl_model ( wo_PTSN, process_Name ) SELECT wo_PTSN, process_Name FROM tbl_wodetail GROUP BY process_Name, wo_PTSN";
                     string trncteModel = "TRUNCATE tbl_model";
 
                     using (MySqlDataAdapter dscmd = new MySqlDataAdapter(cekwoPTSN, connection))
@@ -394,6 +394,8 @@ namespace CompareWOLL
 
                             homeButton.Enabled = true;
                             backButton.Enabled = true;
+
+                            connection.Close();
                         }
 
                         else
@@ -408,7 +410,7 @@ namespace CompareWOLL
                             for (int i = 0; i < dataGridViewWO.Rows.Count; i++)
                             {
                                 string StrQuery = "INSERT INTO tbl_wodetail VALUES ('"
-                                    + dataGridViewWO.Rows[i].Cells[2].Value.ToString() + "', '"
+                                    + dataGridViewWO.Rows[i].Cells[8].Value.ToString() + "', '"
                                     + dataGridViewWO.Rows[i].Cells[1].Value.ToString() + "', '"
                                     + dataGridViewWO.Rows[i].Cells[7].Value.ToString() + "', '"
                                     + dataGridViewWO.Rows[i].Cells[3].Value.ToString() + "', '"

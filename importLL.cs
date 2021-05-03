@@ -110,7 +110,7 @@ namespace CompareWOLL
 
             openFileDialogLL.Title = "Please Select a File Loading List";
             openFileDialogLL.Filter = "Excel Files|*.xls;*.xlsx;";
-            openFileDialogLL.InitialDirectory = @"D:\";
+            //openFileDialogLL.InitialDirectory = @"D:\";
             if (openFileDialogLL.ShowDialog() == DialogResult.OK)
             {
                 saveButton.Enabled = true;
@@ -146,7 +146,7 @@ namespace CompareWOLL
                         string modelLLNO = modelLL.Substring(3, 12);
                         string processLL = modelLL.Substring(modelLL.Length - lengthProcess).Replace(")", "");
 
-                        if (modelLL == tbModelNo.Text || processLL == cmbProcess.Text)
+                        if (modelLL == tbWoPTSN.Text || processLL == cmbProcess.Text)
                         {
                             // baca data detail LL
                             DataTable dtExcel1 = new DataTable();
@@ -279,9 +279,9 @@ namespace CompareWOLL
                                 MessageBox.Show("There is " + count.ToString() + " cell is blank, Please revise the document ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error                        
                             }
                         }
-                        if (modelLLNO != tbModelNo.Text || processLL != cmbProcess.Text)
+                        if (processLL != cmbProcess.Text)
                         {
-                            MessageBox.Show("Excel file not contain with Model " + tbModelNo.Text + " and Process " + cmbProcess.Text + ", Please check again the document.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+                            MessageBox.Show("Excel file not contain with Process " + cmbProcess.Text + ", Please check again the document.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
                             filepathLL.Text = "";
                             tbModel.Text = "";
                             tbMachine.Text = "";
@@ -329,7 +329,7 @@ namespace CompareWOLL
                 //lf.Show();
 
                 string cust = tbCust.Text;
-                string model = tbModelNo.Text;
+                string woPTSN = tbWoPTSN.Text;
                 string modelLL = tbModel.Text;
                 string machine = tbMachine.Text;
                 string pwbType = tbPWBType.Text;
@@ -342,7 +342,7 @@ namespace CompareWOLL
 
                 saveButton.Enabled = false;
 
-                if (model == "" | process == "" | modelLL == "" | machine == "" | pwbType == "" | prog == "" | pcb == "")
+                if (woPTSN == "" | process == "" | modelLL == "" | machine == "" | pwbType == "" | prog == "" | pcb == "")
                 {
                     CloseProgress();
                     MessageBox.Show("Unable to import Work Order without fill data properly", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -357,11 +357,11 @@ namespace CompareWOLL
                     {                        
                         var cmd = new MySqlCommand("", connection);
 
-                        string cekmodel = "SELECT model_No, process_Name FROM tbl_ll  WHERE model_No = '" + model + "'AND process_Name ='" + process + "'";
-                        string cekPCB = "SELECT * FROM tbl_lldetail WHERE partcode = '" + pcb + "' AND model_No = '" + model + "' AND reel = 'PCB'";
-                        string queryLL = "INSERT INTO tbl_ll VALUES('','" + cust + "','" + model + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','" + llUsage + "','" + stencil + "','" + remark + "')";
-                        string queryInputPCB = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','PCB', '" + pcb + "', '1', '1');";
-                        string queryAddPartCodePCB = "INSERT INTO tbl_partcodedetail VALUES ('" + model + "','" + process + "','PCB',  '" + pcb + "', '','PCB' ); ";
+                        string cekmodel = "SELECT wo_PTSN, process_Name FROM tbl_ll  WHERE wo_PTSN = '" + woPTSN + "'AND process_Name ='" + process + "'";
+                        string cekPCB = "SELECT * FROM tbl_lldetail WHERE partcode = '" + pcb + "' AND wo_PTSN = '" + woPTSN + "' AND reel = 'PCB'";
+                        string queryLL = "INSERT INTO tbl_ll VALUES('','" + cust + "','" + woPTSN + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','" + llUsage + "','" + stencil + "','" + remark + "')";
+                        string queryInputPCB = "INSERT INTO tbl_lldetail VALUES ('" + woPTSN + "','" + process + "','PCB', '" + pcb + "', '1', '1');";
+                        string queryAddPartCodePCB = "INSERT INTO tbl_partcodedetail VALUES ('" + woPTSN + "','" + process + "','PCB',  '" + pcb + "', '','PCB' ); ";
 
                         connection.Open();
                         //Buka koneksi
@@ -374,7 +374,7 @@ namespace CompareWOLL
                             if (ds.Tables[0].Rows.Count >= 1)
                             {
                                 lf.Hide();
-                                MessageBox.Show("Loading List Data Model " + model + " and Process " + process + "  already uploaded", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+                                MessageBox.Show("Loading List Data with WO PTSN  " + woPTSN + " and Process " + process + "  already uploaded", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
                                 backButton.Enabled = true;
                             }
 
@@ -415,7 +415,7 @@ namespace CompareWOLL
                                     if (prtCode != "")
                                     {
                                         // query insert data part code
-                                        string StrQuery = "INSERT INTO tbl_partcodedetail VALUES ('" + model + "','" + process + "','"
+                                        string StrQuery = "INSERT INTO tbl_partcodedetail VALUES ('" + woPTSN + "','" + process + "','"
                                             + dataGridViewLL.Rows[i].Cells[0].Value.ToString() + "','"
                                             + dataGridViewLL.Rows[i].Cells[1].Value.ToString() + "', '"
                                             + dataGridViewLL.Rows[i].Cells[2].Value.ToString() + "', '"
@@ -440,14 +440,14 @@ namespace CompareWOLL
                                         qty = dataGridViewLL.Rows[j].Cells[3].Value.ToString();
                                         altNo = 1;
                                         string StrQueryReelDetail = "INSERT INTO tbl_reel VALUES ('','"
-                                            + reelID + "', '" + model + "','" + process + "','" + dataGridViewLL.Rows[j].Cells[3].Value.ToString() + "', '"
+                                            + reelID + "', '" + woPTSN + "','" + process + "','" + dataGridViewLL.Rows[j].Cells[3].Value.ToString() + "', '"
                                             + dataGridViewLL.Rows[j].Cells[4].Value.ToString() + "', '"
                                             + dataGridViewLL.Rows[j].Cells[6].Value.ToString() + "');";
 
                                         cmd.CommandText = StrQueryReelDetail;
                                         cmd.ExecuteNonQuery();
 
-                                        string StrQueryLLDetail = "INSERT INTO tbl_lldetail VALUES ('" + model + "','" + process + "','"
+                                        string StrQueryLLDetail = "INSERT INTO tbl_lldetail VALUES ('" + woPTSN + "','" + process + "','"
                                    + reelID + "', '"
                                    + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "','" + altNo + "', '"
                                    + qty + "');";
@@ -460,7 +460,7 @@ namespace CompareWOLL
                                         loc = dataGridViewLL.Rows[j].Cells[4].Value.ToString();
 
                                         string StrQueryAddLoc = "UPDATE tbl_reel SET loc = CONCAT(loc,'" + loc + "') " +
-                                            "WHERE reel = '" + reelID + "' AND tbl_reel.model_No = '" + model + "' and tbl_reel.process_Name = '" + process + "'";
+                                            "WHERE reel = '" + reelID + "' AND tbl_reel.WO_ptsn = '" + woPTSN + "' and tbl_reel.process_Name = '" + process + "'";
                                         cmd.CommandText = StrQueryAddLoc;
                                         cmd.ExecuteNonQuery();
                                     }                                    
@@ -497,7 +497,7 @@ namespace CompareWOLL
                                 }
                                 else if (count == 0)
                                 {
-                                    string message = "Do you want to compare this model ?";
+                                    string message = "Do you want to compare this Loading List ?";
                                     string title = "Compare WO vs LL";
                                     MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                                     DialogResult result = MessageBox.Show(message, title, buttons);
@@ -505,7 +505,7 @@ namespace CompareWOLL
                                     {
                                         Compare cowl = new Compare();
                                         //cowl.cmbWOModel.SelectedItem = cowl.cmbWOModel.Items[0];
-                                        cowl.cmbWOModel.SelectedItem = tbModelNo.Text;
+                                        cowl.cmbWOPtsn.SelectedItem = tbWoPTSN.Text;
                                         cowl.Show();
                                         this.Hide();
                                     }
@@ -522,6 +522,7 @@ namespace CompareWOLL
                     catch (Exception ex)
                     {
                         CloseProgress();
+                        connection.Close();
                         MessageBox.Show(ex.Message.ToString());
                         backButton.Enabled = true;
                         saveButton.Enabled = true;

@@ -29,13 +29,13 @@ namespace CompareWOLL
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
             this.tbProcess = new System.Windows.Forms.TextBox();
-            this.tbModelNo = new System.Windows.Forms.TextBox();
+            this.tbWoPTSN = new System.Windows.Forms.TextBox();
             this.tbRemark = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -61,6 +61,8 @@ namespace CompareWOLL
             this.label14 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.backButton = new System.Windows.Forms.Button();
+            this.tbStencil = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLL)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -99,17 +101,17 @@ namespace CompareWOLL
             this.tbProcess.Size = new System.Drawing.Size(223, 20);
             this.tbProcess.TabIndex = 53;
             // 
-            // tbModelNo
+            // tbWoPTSN
             // 
-            this.tbModelNo.Location = new System.Drawing.Point(546, 47);
-            this.tbModelNo.Name = "tbModelNo";
-            this.tbModelNo.ReadOnly = true;
-            this.tbModelNo.Size = new System.Drawing.Size(223, 20);
-            this.tbModelNo.TabIndex = 52;
+            this.tbWoPTSN.Location = new System.Drawing.Point(546, 47);
+            this.tbWoPTSN.Name = "tbWoPTSN";
+            this.tbWoPTSN.ReadOnly = true;
+            this.tbWoPTSN.Size = new System.Drawing.Size(223, 20);
+            this.tbWoPTSN.TabIndex = 52;
             // 
             // tbRemark
             // 
-            this.tbRemark.Location = new System.Drawing.Point(115, 241);
+            this.tbRemark.Location = new System.Drawing.Point(115, 267);
             this.tbRemark.Multiline = true;
             this.tbRemark.Name = "tbRemark";
             this.tbRemark.ReadOnly = true;
@@ -119,7 +121,7 @@ namespace CompareWOLL
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(20, 244);
+            this.label12.Location = new System.Drawing.Point(20, 270);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(44, 13);
             this.label12.TabIndex = 50;
@@ -184,24 +186,24 @@ namespace CompareWOLL
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewLL.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewLL.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewLL.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewLL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewLL.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewLL.Location = new System.Drawing.Point(12, 394);
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewLL.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridViewLL.Location = new System.Drawing.Point(12, 420);
             this.dataGridViewLL.Name = "dataGridViewLL";
             this.dataGridViewLL.ReadOnly = true;
             this.dataGridViewLL.Size = new System.Drawing.Size(1070, 275);
@@ -264,21 +266,23 @@ namespace CompareWOLL
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(451, 47);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 13);
+            this.label5.Size = new System.Drawing.Size(58, 13);
             this.label5.TabIndex = 0;
-            this.label5.Text = "Model No";
+            this.label5.Text = "WO PTSN";
             // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.tbStencil);
+            this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.tbCustomer);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.totalPart);
             this.groupBox1.Controls.Add(this.tbProcess);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.totalPoint);
-            this.groupBox1.Controls.Add(this.tbModelNo);
+            this.groupBox1.Controls.Add(this.tbWoPTSN);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.tbRemark);
             this.groupBox1.Controls.Add(this.label12);
@@ -298,7 +302,7 @@ namespace CompareWOLL
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Location = new System.Drawing.Point(12, 42);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1070, 346);
+            this.groupBox1.Size = new System.Drawing.Size(1070, 372);
             this.groupBox1.TabIndex = 36;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Loading List Detail";
@@ -384,6 +388,23 @@ namespace CompareWOLL
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
+            // tbStencil
+            // 
+            this.tbStencil.Location = new System.Drawing.Point(115, 232);
+            this.tbStencil.Name = "tbStencil";
+            this.tbStencil.ReadOnly = true;
+            this.tbStencil.Size = new System.Drawing.Size(223, 20);
+            this.tbStencil.TabIndex = 66;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(18, 232);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(56, 13);
+            this.label13.TabIndex = 65;
+            this.label13.Text = "Stencil No";
+            // 
             // DetailLL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -412,7 +433,7 @@ namespace CompareWOLL
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel dateTimeNow;
         public System.Windows.Forms.TextBox tbProcess;
-        public System.Windows.Forms.TextBox tbModelNo;
+        public System.Windows.Forms.TextBox tbWoPTSN;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
@@ -438,5 +459,7 @@ namespace CompareWOLL
         private System.Windows.Forms.Label label14;
         public System.Windows.Forms.TextBox tbCustomer;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label13;
+        public System.Windows.Forms.TextBox tbStencil;
     }
 }

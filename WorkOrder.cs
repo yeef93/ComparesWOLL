@@ -23,7 +23,7 @@ namespace CompareWOLL
 
             connection.Open();
 
-            string querywo = "SELECT customer, model_No, model, wo_PTSN, wo_No, wo_QTY, wo_Usage FROM tbl_wo ORDER BY id DESC";
+            string querywo = "SELECT customer, wo_PTSN, model_No, model,  wo_No, wo_QTY, wo_Usage FROM tbl_wo ORDER BY id DESC";
 
             using (MySqlDataAdapter adpt = new MySqlDataAdapter(querywo, connection))
             {
@@ -69,7 +69,7 @@ namespace CompareWOLL
             connection.Close();
 
             // Set table title Wo
-            string[] titleWO = { "CUSTOMER", "MODEL NO", "MODEL", "WO PTSN", "WO NO", "WO USAGE", "WO QTY" };
+            string[] titleWO = { "CUSTOMER", "WO PTSN", "MODEL NO", "MODEL",  "WO NO", "WO USAGE", "WO QTY" };
             for (int i = 0; i < titleWO.Length; i++)
             {
                 dataGridViewWoList.Columns[i].HeaderText = "" + titleWO[i];
@@ -96,15 +96,15 @@ namespace CompareWOLL
         {
             int i;
             i = dataGridViewWoList.SelectedCells[0].RowIndex;
-            string modelslctd = dataGridViewWoList.Rows[i].Cells[1].Value.ToString();
+            string woPTSNslctd = dataGridViewWoList.Rows[i].Cells[1].Value.ToString();
 
             if (e.ColumnIndex == 7)
             {
                 DetailWO dwo = new DetailWO();
                 string cust = dataGridViewWoList.Rows[e.RowIndex].Cells[0].Value.ToString();
-                string modelNo = dataGridViewWoList.Rows[e.RowIndex].Cells[1].Value.ToString();
-                string model = dataGridViewWoList.Rows[e.RowIndex].Cells[2].Value.ToString();
-                string woPtsn = dataGridViewWoList.Rows[e.RowIndex].Cells[3].Value.ToString();
+                string woPtsn = dataGridViewWoList.Rows[e.RowIndex].Cells[1].Value.ToString();
+                string modelNo = dataGridViewWoList.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string model = dataGridViewWoList.Rows[e.RowIndex].Cells[3].Value.ToString();
                 string woNo = dataGridViewWoList.Rows[e.RowIndex].Cells[4].Value.ToString();
                 //string processName = dataGridViewWoList.Rows[e.RowIndex].Cells[4].Value.ToString();
                 string woQty = dataGridViewWoList.Rows[e.RowIndex].Cells[5].Value.ToString();
@@ -125,7 +125,7 @@ namespace CompareWOLL
 
             if (e.ColumnIndex == 8)
             {
-                string message = "Do you want to delete this Work Order and Loading List record model " + modelslctd + " ?";
+                string message = "Do you want to delete this Work Order and Loading List record for WO PTSN " + woPTSNslctd + " ?";
                 string title = "Delete Work Order";
                 MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                 DialogResult result = MessageBox.Show(message, title, buttons);
@@ -133,15 +133,15 @@ namespace CompareWOLL
                 {
                     var cmd = new MySqlCommand("", connection);
 
-                    string querydeleteWO = "DELETE FROM tbl_wo WHERE model_No = '" + modelslctd + "'";
-                    string querydeleteWODetail = "DELETE FROM tbl_wodetail WHERE  model_No = '" + modelslctd + "'";
-                    string querydeleteModel = "DELETE FROM tbl_model WHERE  model_No = '" + modelslctd + "'";
+                    string querydeleteWO = "DELETE FROM tbl_wo WHERE wo_PTSN = '" + woPTSNslctd + "'";
+                    string querydeleteWODetail = "DELETE FROM tbl_wodetail WHERE  wo_PTSN = '" + woPTSNslctd + "'";
+                    string querydeleteModel = "DELETE FROM tbl_model WHERE  wo_PTSN = '" + woPTSNslctd + "'";
 
-                    string querydeleteLL = "DELETE FROM tbl_ll WHERE model_No = '" + modelslctd + "'";
-                    string querydeleteLLDetail = "DELETE FROM tbl_lldetail WHERE model_No = '" + modelslctd + "'";
-                    string querydeletePartCode = "DELETE FROM tbl_partcodedetail WHERE model_No = '" + modelslctd + "'";
-                    string querydeleteReel = "DELETE FROM tbl_reel WHERE model_No = '" + modelslctd + "'";
-                    string querydeleteResult = "DELETE FROM tbl_resultcompare WHERE model_No = '" + modelslctd + "'";
+                    string querydeleteLL = "DELETE FROM tbl_ll WHERE wo_PTSN = '" + woPTSNslctd + "'";
+                    string querydeleteLLDetail = "DELETE FROM tbl_lldetail WHERE wo_PTSN = '" + woPTSNslctd + "'";
+                    string querydeletePartCode = "DELETE FROM tbl_partcodedetail WHERE wo_PTSN = '" + woPTSNslctd + "'";
+                    string querydeleteReel = "DELETE FROM tbl_reel WHERE wo_PTSN= '" + woPTSNslctd + "'";
+                    string querydeleteResult = "DELETE FROM tbl_resultcompare WHERE wo_PTSN = '" + woPTSNslctd + "'";
 
                     connection.Open();
 
@@ -169,11 +169,11 @@ namespace CompareWOLL
             {
 
                 ImportLL il = new ImportLL();
-                string model = dataGridViewWoList.Rows[e.RowIndex].Cells[1].Value.ToString();
+                string woPtsn = dataGridViewWoList.Rows[e.RowIndex].Cells[1].Value.ToString();
                 string cust = dataGridViewWoList.Rows[e.RowIndex].Cells[0].Value.ToString();
 
                 il.Show();
-                il.tbModelNo.Text = model;
+                il.tbWoPTSN.Text = woPtsn;
                 il.tbCust.Text = cust;
 
                 connection.Open();
@@ -220,10 +220,10 @@ namespace CompareWOLL
 
             if (e.ColumnIndex == 10)
             {
-                string model = dataGridViewWoList.Rows[e.RowIndex].Cells[1].Value.ToString();
+                string woPtsn = dataGridViewWoList.Rows[e.RowIndex].Cells[1].Value.ToString();
 
                 Compare cowl = new Compare();
-                cowl.cmbWOModel.Text = model;
+                cowl.cmbWOPtsn.Text = woPtsn;
                 cowl.Show();
                 this.Hide();
             }

@@ -46,7 +46,7 @@ namespace CompareWOLL
             this.label14 = new System.Windows.Forms.Label();
             this.tbStencil = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.tbModelNo = new System.Windows.Forms.TextBox();
+            this.tbWoPTSN = new System.Windows.Forms.TextBox();
             this.tbRemark = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.tbPcbNo = new System.Windows.Forms.TextBox();
@@ -112,7 +112,7 @@ namespace CompareWOLL
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.tbStencil);
             this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.tbModelNo);
+            this.groupBox1.Controls.Add(this.tbWoPTSN);
             this.groupBox1.Controls.Add(this.tbRemark);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.tbPcbNo);
@@ -227,13 +227,13 @@ namespace CompareWOLL
             this.label13.TabIndex = 54;
             this.label13.Text = "Stencil No";
             // 
-            // tbModelNo
+            // tbWoPTSN
             // 
-            this.tbModelNo.Location = new System.Drawing.Point(544, 39);
-            this.tbModelNo.Name = "tbModelNo";
-            this.tbModelNo.ReadOnly = true;
-            this.tbModelNo.Size = new System.Drawing.Size(223, 20);
-            this.tbModelNo.TabIndex = 52;
+            this.tbWoPTSN.Location = new System.Drawing.Point(544, 39);
+            this.tbWoPTSN.Name = "tbWoPTSN";
+            this.tbWoPTSN.ReadOnly = true;
+            this.tbWoPTSN.Size = new System.Drawing.Size(223, 20);
+            this.tbWoPTSN.TabIndex = 52;
             // 
             // tbRemark
             // 
@@ -396,16 +396,17 @@ namespace CompareWOLL
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(449, 39);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 13);
+            this.label5.Size = new System.Drawing.Size(58, 13);
             this.label5.TabIndex = 0;
-            this.label5.Text = "Model No";
+            this.label5.Text = "WO PTSN";
             // 
             // saveButton
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.saveButton.Location = new System.Drawing.Point(500, 692);
+            this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.saveButton.Location = new System.Drawing.Point(500, 695);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.Size = new System.Drawing.Size(80, 30);
             this.saveButton.TabIndex = 32;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -436,7 +437,7 @@ namespace CompareWOLL
             this.dataGridViewLLHide.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewLLHide.Location = new System.Drawing.Point(12, 474);
             this.dataGridViewLLHide.Name = "dataGridViewLLHide";
-            this.dataGridViewLLHide.Size = new System.Drawing.Size(1121, 181);
+            this.dataGridViewLLHide.Size = new System.Drawing.Size(1121, 189);
             this.dataGridViewLLHide.TabIndex = 31;
             // 
             // statusStrip1
@@ -447,7 +448,7 @@ namespace CompareWOLL
             this.toolStripUsername,
             this.toolStripStatusLabel1,
             this.dateTimeNow});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 720);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 728);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1145, 22);
             this.statusStrip1.TabIndex = 33;
@@ -498,7 +499,7 @@ namespace CompareWOLL
             this.dataGridViewLL.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewLL.Location = new System.Drawing.Point(12, 445);
             this.dataGridViewLL.Name = "dataGridViewLL";
-            this.dataGridViewLL.Size = new System.Drawing.Size(1121, 236);
+            this.dataGridViewLL.Size = new System.Drawing.Size(1121, 244);
             this.dataGridViewLL.TabIndex = 34;
             // 
             // dataGridViewPCBNo
@@ -561,14 +562,14 @@ namespace CompareWOLL
             this.dataGridViewStencil.Location = new System.Drawing.Point(12, 474);
             this.dataGridViewStencil.Name = "dataGridViewStencil";
             this.dataGridViewStencil.ReadOnly = true;
-            this.dataGridViewStencil.Size = new System.Drawing.Size(497, 207);
+            this.dataGridViewStencil.Size = new System.Drawing.Size(497, 215);
             this.dataGridViewStencil.TabIndex = 38;
             // 
             // ImportLL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1145, 742);
+            this.ClientSize = new System.Drawing.Size(1145, 750);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.groupBox1);
@@ -626,7 +627,7 @@ namespace CompareWOLL
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox tbRemark;
         private System.Windows.Forms.Label label12;
-        public System.Windows.Forms.TextBox tbModelNo;
+        public System.Windows.Forms.TextBox tbWoPTSN;
         private System.Windows.Forms.DataGridView dataGridViewPCBNo;
         private System.Windows.Forms.DataGridView dataGridAltPCB;
         public System.Windows.Forms.ToolStripStatusLabel toolStripUsername;

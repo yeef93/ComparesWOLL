@@ -25,8 +25,8 @@ namespace CompareWOLL
 
             string query = "SELECT tbl_wo.model, tbl_wodetail.partcode, tbl_wo.model_No, tbl_wodetail.qty, " +
                 "tbl_wodetail.issue, tbl_wo.wo_No, tbl_wodetail.bom_Row, tbl_wodetail.process_Name, tbl_wo.wo_ptsn , " +
-                "tbl_wo.wo_Usage FROM tbl_wodetail, tbl_wo WHERE tbl_wo.model_No = tbl_wodetail.model_No " +
-                "AND tbl_wodetail.model_No = '" + tbmodelNo.Text + "'";
+                "tbl_wo.wo_Usage FROM tbl_wodetail, tbl_wo WHERE tbl_wo.wo_PTSN = tbl_wodetail.wo_PTSN " +
+                "AND tbl_wodetail.wo_PTSN = '" + tbwoPTSN.Text + "'";
 
             using (MySqlDataAdapter adpt = new MySqlDataAdapter(query, connection))
             {

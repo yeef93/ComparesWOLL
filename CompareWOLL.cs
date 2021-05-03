@@ -118,7 +118,7 @@ namespace CompareWOLL
                         if (result == DialogResult.Yes)
                         {
                             ImportLL ill = new ImportLL();
-                            ill.tbModelNo.Text = model[0].Replace(" ", "");
+                            ill.tbWoPTSN.Text = model[0].Replace(" ", "");
                             ill.Show();
                             this.Hide();
                         }

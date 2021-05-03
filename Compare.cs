@@ -68,7 +68,7 @@ namespace CompareWOLL
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 
-            cmbLLModel.Enabled = false;
+            cmbLL.Enabled = false;
             btnCompare.Enabled = false;
             label3.Visible = false;
             label16.Visible = false;
@@ -76,7 +76,7 @@ namespace CompareWOLL
 
             groupBox4.Visible = false;
 
-            string queryWODropDown = "SELECT model_No FROM tbl_wo ";
+            string queryWODropDown = "SELECT wo_PTSN FROM tbl_wo ";
 
             try
             {
@@ -88,8 +88,8 @@ namespace CompareWOLL
 
                     for (int i = 0; i < dset.Rows.Count; i++)
                     {
-                        cmbWOModel.Items.Add(dset.Rows[i][0]);
-                        cmbWOModel.ValueMember = dset.Rows[i][0].ToString();
+                        cmbWOPtsn.Items.Add(dset.Rows[i][0]);
+                        cmbWOPtsn.ValueMember = dset.Rows[i][0].ToString();
                     }
                 }
 
@@ -104,8 +104,8 @@ namespace CompareWOLL
 
         private void cmbWOModel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmbLLModel.ResetText();
-            cmbLLModel.Enabled = true;
+            cmbLL.ResetText();
+            cmbLL.Enabled = true;
             label16.Visible = false;
             label3.Visible = false;
             tbCustomer.Text = "";
@@ -131,11 +131,11 @@ namespace CompareWOLL
                 dataGridViewCompareWOLL.Rows.RemoveAt(0);
             }
 
-            cmbLLModel.Items.Clear();
+            cmbLL.Items.Clear();
 
-            string model = cmbWOModel.Text;
+            string woPTSN = cmbWOPtsn.Text;
 
-            string queryLLDropDown = "SELECT model_No FROM tbl_ll WHERE model_No = '" + model + "'GROUP BY model_No";
+            string queryLLDropDown = "SELECT wo_PTSN FROM tbl_ll WHERE wo_PTSN = '" + woPTSN + "'GROUP BY wo_PTSN";
 
             try
             {
@@ -149,8 +149,8 @@ namespace CompareWOLL
                     {
                         for (int i = 0; i < dset.Rows.Count; i++)
                         {
-                            cmbLLModel.Items.Add(dset.Rows[i][0]);
-                            cmbLLModel.ValueMember = dset.Rows[i][0].ToString();
+                            cmbLL.Items.Add(dset.Rows[i][0]);
+                            cmbLL.ValueMember = dset.Rows[i][0].ToString();
                         }
                     }
                     else
@@ -162,12 +162,12 @@ namespace CompareWOLL
                         if (result == DialogResult.Yes)
                         {
                             ImportLL ill = new ImportLL();
-                            ill.tbModelNo.Text = model;
+                            ill.tbWoPTSN.Text = woPTSN;
 
                             try
                             {
 
-                                string queryCustName = "SELECT customer FROM tbl_wo WHERE model_No = '" + model + "'";
+                                string queryCustName = "SELECT customer FROM tbl_wo WHERE wo_PTSN = '" + woPTSN + "'";
 
                                 using (MySqlDataAdapter adt = new MySqlDataAdapter(queryCustName, connection))
                                 {
@@ -181,7 +181,7 @@ namespace CompareWOLL
 
                                 }
 
-                                string queryProcessDropDown = "SELECT tbl_customer.process_Name FROM tbl_wo, tbl_customer WHERE tbl_wo.customer =  tbl_customer.custname AND tbl_wo.model_No = '" + model + "'";
+                                string queryProcessDropDown = "SELECT tbl_customer.process_Name FROM tbl_wo, tbl_customer WHERE tbl_wo.customer =  tbl_customer.custname AND tbl_wo.wo_PTSN = '" + woPTSN + "'";
                                 using (MySqlDataAdapter adpts = new MySqlDataAdapter(queryProcessDropDown, connection))
                                 {
                                     DataTable dsets = new DataTable();
@@ -235,11 +235,11 @@ namespace CompareWOLL
         {
             gbSummary.Visible = true;
 
-            string queryTotalLL = "SELECT SUM(tbl_lldetail.qty) AS totalLL FROM tbl_lldetail WHERE model_No = '" + cmbLLModel.Text + "'";
+            string queryTotalLL = "SELECT SUM(tbl_lldetail.qty) AS totalLL FROM tbl_lldetail WHERE wo_PTSN = '" + cmbLL.Text + "'";
 
-            string queryTotalWO = "SELECT SUM(tbl_wodetail.qty) AS totalWO FROM tbl_wodetail WHERE model_No = '" + cmbLLModel.Text + "'";
+            string queryTotalWO = "SELECT SUM(tbl_wodetail.qty) AS totalWO FROM tbl_wodetail WHERE wo_PTSN = '" + cmbLL.Text + "'";
 
-            string queryDetailLL = "SELECT customer, model_detail, machine, pwb_Type, prog_No, stencil FROM tbl_ll WHERE  model_No = '" + cmbLLModel.Text + "' GROUP BY model_No";
+            string queryDetailLL = "SELECT customer, model_detail, machine, pwb_Type, prog_No, stencil FROM tbl_ll WHERE wo_PTSN = '" + cmbLL.Text + "' GROUP BY wo_PTSN";
 
             try
             {
@@ -285,7 +285,7 @@ namespace CompareWOLL
                 //nampilin selected PCB
                 string queryPCB = "SELECT tbl_wodetail.partcode FROM tbl_wodetail LEFT JOIN tbl_lldetail " +
                     "ON tbl_wodetail.partcode = tbl_lldetail.partcode  " +
-                    "WHERE tbl_wodetail.model_No = '" + cmbLLModel.Text + "' AND tbl_lldetail.model_No = '" + cmbLLModel.Text + "' " +
+                    "WHERE tbl_wodetail.wo_PTSN = '" + cmbLL.Text + "' AND tbl_lldetail.wo_PTSN = '" + cmbLL.Text + "' " +
                     "AND tbl_lldetail.reel = 'PCB' GROUP BY tbl_wodetail.partcode";
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryPCB, connection))
                 {
@@ -303,9 +303,9 @@ namespace CompareWOLL
 
                 string queryLLWO = "SELECT  t1.partcode, t1.llQty, t1.partUsed, t2.partcode, t2.woQty, t2.partUsed " +
                     "FROM (SELECT tbl_lldetail.partcode, COUNT(tbl_lldetail.partcode) AS partUsed, SUM(tbl_lldetail.qty) AS llQty" +
-                    " FROM tbl_lldetail WHERE tbl_lldetail.model_No = '" + cmbLLModel.Text + "' GROUP BY tbl_lldetail.partcode ) t1 " +
+                    " FROM tbl_lldetail WHERE tbl_lldetail.wo_PTSN = '" + cmbLL.Text + "' GROUP BY tbl_lldetail.partcode ) t1 " +
                     "LEFT JOIN ( SELECT tbl_wodetail.partcode, COUNT(tbl_wodetail.partcode) AS partUsed, " +
-                    "SUM(tbl_wodetail.qty) AS woQty     FROM tbl_wodetail WHERE tbl_wodetail.model_No = '" + cmbLLModel.Text + "' " +
+                    "SUM(tbl_wodetail.qty) AS woQty FROM tbl_wodetail WHERE tbl_wodetail.wo_PTSN = '" + cmbLL.Text + "' " +
                     "GROUP BY tbl_wodetail.partcode ) t2 ON t1.partcode = t2.partcode ORDER BY t2.partcode";
 
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryLLWO, connection))
@@ -397,7 +397,6 @@ namespace CompareWOLL
                         dataGridViewCompareLLWO.Rows[i].DefaultCellStyle = styleOk;
                     }
 
-
                     LLWONMPartCode = partCodeNotMatchLLWO;
                     LLWONMQty = qtyNotMatchLLWO;
                     LLWONMPartCodeUsed = partCodeUsedNotMatchLLWO;
@@ -460,9 +459,9 @@ namespace CompareWOLL
 
                 string queryWOLL = "SELECT t1.partcode, t1.woQty, t1.partUsed, t2.partcode, t2.llQty, t2.partUsed " +
                     "FROM ( SELECT tbl_wodetail.partcode, COUNT(tbl_wodetail.partcode) AS partUsed, SUM(tbl_wodetail.qty) AS woQty" +
-                    " FROM tbl_wodetail WHERE tbl_wodetail.model_No = '" + cmbLLModel.Text + "' GROUP BY tbl_wodetail.partcode ) t1  " +
+                    " FROM tbl_wodetail WHERE tbl_wodetail.wo_PTSN = '" + cmbLL.Text + "' GROUP BY tbl_wodetail.partcode ) t1  " +
                     "LEFT JOIN ( SELECT tbl_lldetail.partcode, COUNT(tbl_lldetail.partcode) AS partUsed, SUM(tbl_lldetail.qty) AS llQty " +
-                    "FROM tbl_lldetail WHERE tbl_lldetail.model_No = '" + cmbLLModel.Text + "' GROUP BY tbl_lldetail.partcode ) t2 " +
+                    "FROM tbl_lldetail WHERE tbl_lldetail.wo_PTSN = '" + cmbLL.Text + "' GROUP BY tbl_lldetail.partcode ) t2 " +
                     "ON t1.partcode = t2.partcode ORDER BY t2.partcode";
 
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryWOLL, connection))
@@ -631,7 +630,7 @@ namespace CompareWOLL
             if (tbCustomer.Text == "PEGATRON")
             {
                 //nampilin part yang perlu check sum
-                string queryPartcodeLL = "SELECT * FROM tbl_lldetail WHERE model_No = '" + cmbLLModel.Text + "' AND partcode LIKE '0500%'";
+                string queryPartcodeLL = "SELECT * FROM tbl_lldetail WHERE wo_PTSN = '" + cmbLL.Text + "' AND partcode LIKE '0500%'";
                 using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryPartcodeLL, connection))
                 {
                     DataTable dset = new DataTable();

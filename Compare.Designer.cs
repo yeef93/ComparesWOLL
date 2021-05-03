@@ -36,10 +36,10 @@ namespace CompareWOLL
             this.tbStencil = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.cmbWOModel = new System.Windows.Forms.ComboBox();
+            this.cmbWOPtsn = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.cmbLLModel = new System.Windows.Forms.ComboBox();
+            this.cmbLL = new System.Windows.Forms.ComboBox();
             this.btnCompare = new System.Windows.Forms.Button();
             this.dataGridViewCompareLLWO = new System.Windows.Forms.DataGridView();
             this.tbPWBType = new System.Windows.Forms.TextBox();
@@ -161,10 +161,10 @@ namespace CompareWOLL
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.cmbWOModel);
+            this.groupBox2.Controls.Add(this.cmbWOPtsn);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.cmbLLModel);
+            this.groupBox2.Controls.Add(this.cmbLL);
             this.groupBox2.Controls.Add(this.btnCompare);
             this.groupBox2.Location = new System.Drawing.Point(16, 24);
             this.groupBox2.Name = "groupBox2";
@@ -173,16 +173,16 @@ namespace CompareWOLL
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Model ";
             // 
-            // cmbWOModel
+            // cmbWOPtsn
             // 
-            this.cmbWOModel.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cmbWOModel.FormattingEnabled = true;
-            this.cmbWOModel.Location = new System.Drawing.Point(106, 64);
-            this.cmbWOModel.Name = "cmbWOModel";
-            this.cmbWOModel.Size = new System.Drawing.Size(204, 21);
-            this.cmbWOModel.Sorted = true;
-            this.cmbWOModel.TabIndex = 38;
-            this.cmbWOModel.SelectedIndexChanged += new System.EventHandler(this.cmbWOModel_SelectedIndexChanged);
+            this.cmbWOPtsn.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbWOPtsn.FormattingEnabled = true;
+            this.cmbWOPtsn.Location = new System.Drawing.Point(106, 64);
+            this.cmbWOPtsn.Name = "cmbWOPtsn";
+            this.cmbWOPtsn.Size = new System.Drawing.Size(204, 21);
+            this.cmbWOPtsn.Sorted = true;
+            this.cmbWOPtsn.TabIndex = 38;
+            this.cmbWOPtsn.SelectedIndexChanged += new System.EventHandler(this.cmbWOModel_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -202,16 +202,16 @@ namespace CompareWOLL
             this.label1.TabIndex = 31;
             this.label1.Text = "Loading List";
             // 
-            // cmbLLModel
+            // cmbLL
             // 
-            this.cmbLLModel.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cmbLLModel.FormattingEnabled = true;
-            this.cmbLLModel.Location = new System.Drawing.Point(106, 124);
-            this.cmbLLModel.Name = "cmbLLModel";
-            this.cmbLLModel.Size = new System.Drawing.Size(204, 21);
-            this.cmbLLModel.Sorted = true;
-            this.cmbLLModel.TabIndex = 32;
-            this.cmbLLModel.SelectedIndexChanged += new System.EventHandler(this.cmbLLModel_SelectedIndexChanged);
+            this.cmbLL.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbLL.FormattingEnabled = true;
+            this.cmbLL.Location = new System.Drawing.Point(106, 124);
+            this.cmbLL.Name = "cmbLL";
+            this.cmbLL.Size = new System.Drawing.Size(204, 21);
+            this.cmbLL.Sorted = true;
+            this.cmbLL.TabIndex = 32;
+            this.cmbLL.SelectedIndexChanged += new System.EventHandler(this.cmbLLModel_SelectedIndexChanged);
             // 
             // btnCompare
             // 
@@ -768,10 +768,10 @@ namespace CompareWOLL
         private System.Windows.Forms.TextBox tbStencil;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.GroupBox groupBox2;
-        public System.Windows.Forms.ComboBox cmbWOModel;
+        public System.Windows.Forms.ComboBox cmbWOPtsn;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmbLLModel;
+        private System.Windows.Forms.ComboBox cmbLL;
         private System.Windows.Forms.Button btnCompare;
         private System.Windows.Forms.DataGridView dataGridViewCompareLLWO;
         private System.Windows.Forms.TextBox tbPWBType;
