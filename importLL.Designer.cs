@@ -404,7 +404,7 @@ namespace CompareWOLL
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.saveButton.Location = new System.Drawing.Point(500, 695);
+            this.saveButton.Location = new System.Drawing.Point(500, 687);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(80, 30);
             this.saveButton.TabIndex = 32;
@@ -437,7 +437,7 @@ namespace CompareWOLL
             this.dataGridViewLLHide.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewLLHide.Location = new System.Drawing.Point(12, 474);
             this.dataGridViewLLHide.Name = "dataGridViewLLHide";
-            this.dataGridViewLLHide.Size = new System.Drawing.Size(1121, 189);
+            this.dataGridViewLLHide.Size = new System.Drawing.Size(1121, 181);
             this.dataGridViewLLHide.TabIndex = 31;
             // 
             // statusStrip1
@@ -448,7 +448,7 @@ namespace CompareWOLL
             this.toolStripUsername,
             this.toolStripStatusLabel1,
             this.dateTimeNow});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 728);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 720);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1145, 22);
             this.statusStrip1.TabIndex = 33;
@@ -499,7 +499,7 @@ namespace CompareWOLL
             this.dataGridViewLL.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewLL.Location = new System.Drawing.Point(12, 445);
             this.dataGridViewLL.Name = "dataGridViewLL";
-            this.dataGridViewLL.Size = new System.Drawing.Size(1121, 244);
+            this.dataGridViewLL.Size = new System.Drawing.Size(1121, 236);
             this.dataGridViewLL.TabIndex = 34;
             // 
             // dataGridViewPCBNo
@@ -562,14 +562,14 @@ namespace CompareWOLL
             this.dataGridViewStencil.Location = new System.Drawing.Point(12, 474);
             this.dataGridViewStencil.Name = "dataGridViewStencil";
             this.dataGridViewStencil.ReadOnly = true;
-            this.dataGridViewStencil.Size = new System.Drawing.Size(497, 215);
+            this.dataGridViewStencil.Size = new System.Drawing.Size(497, 207);
             this.dataGridViewStencil.TabIndex = 38;
             // 
             // ImportLL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1145, 750);
+            this.ClientSize = new System.Drawing.Size(1145, 742);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.groupBox1);

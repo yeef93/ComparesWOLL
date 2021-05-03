@@ -121,14 +121,26 @@ namespace CompareWOLL
             compareQty.BackColor = SystemColors.Control;
             comparePartcode.BackColor = SystemColors.Control;
 
-            while (dataGridViewCompareLLWO.Rows.Count > 0)
+            partCodeUsedNotMatchLLWO = 0;
+            partCodeUsedNotMatchWOLL = 0;
+
+            partCodeNotMatchLLWO = 0;
+            partCodeNotMatchWOLL = 0;
+
+            dataGridViewCompareLLWO.DataSource = null;
+            dataGridViewCompareLLWO.Refresh();
+
+            dataGridViewCompareWOLL.DataSource = null;
+            dataGridViewCompareWOLL.Refresh();
+
+            while (dataGridViewCompareLLWO.Columns.Count > 0)
             {
-                dataGridViewCompareLLWO.Rows.RemoveAt(0);
+                dataGridViewCompareLLWO.Columns.RemoveAt(0);
             }
 
-            while (dataGridViewCompareWOLL.Rows.Count > 0)
+            while (dataGridViewCompareWOLL.Columns.Count > 0)
             {
-                dataGridViewCompareWOLL.Rows.RemoveAt(0);
+                dataGridViewCompareWOLL.Columns.RemoveAt(0);
             }
 
             cmbLL.Items.Clear();
@@ -233,6 +245,9 @@ namespace CompareWOLL
 
         private void btnCompare_Click(object sender, EventArgs e)
         {
+            btnHome.Enabled = true;
+            btnWO.Enabled = true;
+
             gbSummary.Visible = true;
 
             string queryTotalLL = "SELECT SUM(tbl_lldetail.qty) AS totalLL FROM tbl_lldetail WHERE wo_PTSN = '" + cmbLL.Text + "'";
@@ -441,7 +456,6 @@ namespace CompareWOLL
                     comparePartcode.BackColor = System.Drawing.Color.Blue;
                 }
 
-
                 // Set table title Wo
                 string[] titleWO = { "PART CODE LL ", "QTY LL", "PART LL USED", "PART CODE WO", "QTY WO", "PART WO USED" };
                 for (int i = 0; i < titleWO.Length; i++)
@@ -644,6 +658,8 @@ namespace CompareWOLL
                 }
             }
         }
+
+
 
         private void btnReport_Click(object sender, EventArgs e)
         {
@@ -904,5 +920,6 @@ namespace CompareWOLL
             btnHome.Enabled = true;
             btnWO.Enabled = true;
         }
+
     }
 }
