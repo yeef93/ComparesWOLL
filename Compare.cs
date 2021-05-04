@@ -251,7 +251,6 @@ namespace CompareWOLL
             btnWO.Enabled = true;
             gbSummary.Visible = true;
 
-
             string queryTotalLL = "SELECT SUM(tbl_lldetail.qty) AS totalLL FROM tbl_lldetail WHERE wo_PTSN = '" + cmbLL.Text + "'";
 
             string queryTotalWO = "SELECT SUM(tbl_wodetail.qty) AS totalWO FROM tbl_wodetail WHERE wo_PTSN = '" + cmbLL.Text + "'";
@@ -662,13 +661,10 @@ namespace CompareWOLL
             }
         }
 
-
-
         private void btnReport_Click(object sender, EventArgs e)
         {
             btnHome.Enabled = false;
             btnWO.Enabled = false;
-
 
             // Create a new workbook with a single sheet
             excelConvert.NewFile();
@@ -689,7 +685,7 @@ namespace CompareWOLL
             // set hide gridlines
             app.ActiveWindow.DisplayGridlines = false;
 
-            worksheet.Range[worksheet.Cells[2, 1], worksheet.Cells[3, 10]].Merge();
+            worksheet.Range[worksheet.Cells[2, 1], worksheet.Cells[3, 12]].Merge();
             worksheet.Cells[2, 1].Font.Name = "Arial";
             worksheet.Cells[2, 1].Font.FontStyle = "Bold";
             worksheet.Cells[2, 1].Font.Size = 12;
@@ -698,7 +694,7 @@ namespace CompareWOLL
             worksheet.Cells[2, 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
             worksheet.Cells[2, 1].VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
             worksheet.Cells[2, 1] = "WORK ORDER (WO) AND LOADING LIST (LL) COMPARISON RESULT";
-            worksheet.Range[worksheet.Cells[4, 1], worksheet.Cells[4, 10]].Merge();
+            worksheet.Range[worksheet.Cells[4, 1], worksheet.Cells[4, 12]].Merge();
             worksheet.Cells[4, 1].Font.FontStyle = "Bold";
             worksheet.Cells[4, 1].Font.Size = 10;
             worksheet.Cells[4, 1] = "PT. SAT NUSAPERSADA Tbk";
@@ -712,8 +708,7 @@ namespace CompareWOLL
             worksheet.Cells[8, 1] = "PWB TYPE  : " + tbPWBType.Text;
             worksheet.Cells[9, 1] = "REPORT DATE: " + DateTime.Now.ToString("dd MMMM yyyy");
 
-
-            worksheet.Range[worksheet.Cells[10, 1], worksheet.Cells[9, 10]].Cells.Borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom].Weight = Microsoft.Office.Interop.Excel.XlBorderWeight.xlMedium;
+            worksheet.Range[worksheet.Cells[10, 1], worksheet.Cells[9, 12]].Cells.Borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom].Weight = Microsoft.Office.Interop.Excel.XlBorderWeight.xlMedium;
 
             worksheet.Range[worksheet.Cells[12, 1], worksheet.Cells[12, 10]].Font.FontStyle = "Bold";
             worksheet.Range[worksheet.Cells[12, 1], worksheet.Cells[12, 10]].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
@@ -726,25 +721,25 @@ namespace CompareWOLL
             worksheet.Range[worksheet.Cells[12, 6], worksheet.Cells[13, 6]].Merge();
             worksheet.Cells[12, 6] = "Result";
 
-            worksheet.Range[worksheet.Cells[12, 8], worksheet.Cells[12, 10]].Merge();
+            worksheet.Range[worksheet.Cells[12, 8], worksheet.Cells[12, 12]].Merge();
             worksheet.Cells[12, 8] = "NG Comparison Result ";
-            worksheet.Range[worksheet.Cells[12, 8], worksheet.Cells[12, 10]].Cells.Borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom].Weight = Microsoft.Office.Interop.Excel.XlBorderWeight.xlMedium;
+            worksheet.Range[worksheet.Cells[12, 8], worksheet.Cells[12, 12]].Cells.Borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom].Weight = Microsoft.Office.Interop.Excel.XlBorderWeight.xlMedium;
 
             worksheet.Cells[13, 8] = "Data From";
             worksheet.Cells[13, 9] = "Partcode";
-            worksheet.Cells[13, 10] = "Qty";
+            worksheet.Cells[13, 12] = "Qty";
 
-            worksheet.Range[worksheet.Cells[14, 1], worksheet.Cells[14, 10]].Cells.Borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom].Weight = Microsoft.Office.Interop.Excel.XlBorderWeight.xlMedium;
-            worksheet.Range[worksheet.Cells[11, 1], worksheet.Cells[14, 10]].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGray);
+            worksheet.Range[worksheet.Cells[14, 1], worksheet.Cells[14, 12]].Cells.Borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom].Weight = Microsoft.Office.Interop.Excel.XlBorderWeight.xlMedium;
+            worksheet.Range[worksheet.Cells[11, 1], worksheet.Cells[14, 12]].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGray);
 
             worksheet.Cells[16, 2] = "Qty LL Compare To Qty WO";
             worksheet.Cells[16, 6] = compareQty.Text;
 
             worksheet.Cells[16, 8] = "LL";
-            worksheet.Cells[16, 10] = llQty.Text;
+            worksheet.Cells[16, 12] = llQty.Text;
 
             worksheet.Cells[17, 8] = "WO";
-            worksheet.Cells[17, 10] = woQty.Text;
+            worksheet.Cells[17, 12] = woQty.Text;
 
             worksheet.Cells[19, 2] = "Partcode LL Compare to WO";
 
@@ -764,14 +759,21 @@ namespace CompareWOLL
                     for (int j = 0; j <= partCodeNotMatchLLWO; j++)
                     {
                         worksheet.Cells[i, 9] = partCodeNotMatchLLWOText[j];
-                        worksheet.Cells[i, 10] = QtyPartcodeNotMatchNMLLWO[j];
+                        worksheet.Cells[i, 12] = QtyPartcodeNotMatchNMLLWO[j];
+
+                        if (partCodeNotMatchLLWOText[j].StartsWith("35"))
+                        {
+                            worksheet.Cells[i, 11] = "PCB";
+                        }
+
                     }
+
                 }
             }
             else
             {
                 worksheet.Cells[19, 6] = "Match";
-            }                      
+            }                    
 
 
 
@@ -792,7 +794,12 @@ namespace CompareWOLL
                     for (int j = 0; j <= partCodeNotMatchWOLL; j++)
                     {
                         worksheet.Cells[i, 9] = partCodeNotMatchWOLLText[j];
-                        worksheet.Cells[i, 10] = QtyPartcodeNotMatchNMWOLL[j];
+                        worksheet.Cells[i, 12] = QtyPartcodeNotMatchNMWOLL[j];
+
+                        if (partCodeNotMatchWOLLText[j].StartsWith("35"))
+                        {
+                            worksheet.Cells[i, 11] = "PCB";
+                        }
                     }
                 }
             }    
@@ -819,7 +826,7 @@ namespace CompareWOLL
                     for (int j = 0; j <= qtyNotMatchLLWO; j++)
                     {
                         worksheet.Cells[i, 9] = qtyNotMatchLLWOText[j];
-                        worksheet.Cells[i, 10] = QtyPartcodeNMLLWO[j];
+                        worksheet.Cells[i, 12] = QtyPartcodeNMLLWO[j];
                     }
                 }
             }
@@ -847,7 +854,7 @@ namespace CompareWOLL
                     for (int j = 0; j <= qtyNotMatchWOLL; j++)
                     {
                         worksheet.Cells[i, 9] = qtyNotMatchWOLLText[j];
-                        worksheet.Cells[i, 10] = QtyPartcodeNMWOLL[j];
+                        worksheet.Cells[i, 12] = QtyPartcodeNMWOLL[j];
                     }
                 }
             }
@@ -874,7 +881,7 @@ namespace CompareWOLL
                     for (int j = 0; j <= partCodeUsedNotMatchLLWO; j++)
                     {
                         worksheet.Cells[i, 9] = PartcodeUsedNotMatchLLWOText[j];
-                        worksheet.Cells[i, 10] = QtyPartcodeUsedNMLLWO[j];
+                        worksheet.Cells[i, 12] = QtyPartcodeUsedNMLLWO[j];
                     }
                 }
             }
@@ -900,7 +907,7 @@ namespace CompareWOLL
                     for (int j = 0; j <= partCodeUsedNotMatchWOLL; j++)
                     {
                         worksheet.Cells[i, 9] = PartcodeUsedNotMatchWOLLText[j];
-                        worksheet.Cells[i, 10] = QtyPartcodeUsedNMWOLL[j];
+                        worksheet.Cells[i, 12] = QtyPartcodeUsedNMWOLL[j];
                     }
                 }
             }
@@ -910,7 +917,7 @@ namespace CompareWOLL
             }           
 
 
-            worksheet.Range[worksheet.Cells[maksRowPartcodeUsedNotMatchWOLL+1, 1], worksheet.Cells[maksRowPartcodeUsedNotMatchWOLL + 1, 10]].Cells.Borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom].Weight = Microsoft.Office.Interop.Excel.XlBorderWeight.xlMedium;
+            worksheet.Range[worksheet.Cells[maksRowPartcodeUsedNotMatchWOLL+1, 1], worksheet.Cells[maksRowPartcodeUsedNotMatchWOLL + 1, 12]].Cells.Borders[Microsoft.Office.Interop.Excel.XlBordersIndex.xlEdgeBottom].Weight = Microsoft.Office.Interop.Excel.XlBorderWeight.xlMedium;
             worksheet.Cells[maksRowPartcodeUsedNotMatchWOLL + 1, 1] = "SMT DEPT";
             worksheet.Cells[maksRowPartcodeUsedNotMatchWOLL + 1, 1].Font.FontStyle = "Bold";
 

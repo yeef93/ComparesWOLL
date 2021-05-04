@@ -169,7 +169,23 @@ namespace CompareWOLL
 
                             if (dataView.Count > 0)
                             {
-                                tbPcbNo.Text = dataGridViewPCBNo.Rows[0].Cells[0].Value.ToString().Substring(11, 12);
+                                if (tbCust.Text == "XIAOMI")
+                                {
+                                    tbPcbNo.Text = dataGridViewPCBNo.Rows[0].Cells[0].Value.ToString().Substring(11, 12);
+                                }
+                                if (tbCust.Text == "ASUS")
+                                {
+                                    tbPcbNo.Text = dataGridViewPCBNo.Rows[0].Cells[0].Value.ToString().Substring(11, 13).Insert(5,"-");
+                                }
+                                if (tbCust.Text == "PEGATRON")
+                                {
+                                    tbPcbNo.Text = dataGridViewPCBNo.Rows[0].Cells[0].Value.ToString().Substring(11, 12);
+                                }
+                                else
+                                {
+                                    tbPcbNo.Text = dataGridViewPCBNo.Rows[0].Cells[0].Value.ToString().Substring(11, 12);
+                                }
+
                             }
                             else if (dataView.Count == 0)
                             {

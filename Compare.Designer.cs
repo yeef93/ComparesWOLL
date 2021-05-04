@@ -64,7 +64,6 @@ namespace CompareWOLL
             this.comparePartcode = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.gbSummary = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnReport = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -235,7 +234,7 @@ namespace CompareWOLL
             this.dataGridViewCompareLLWO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewCompareLLWO.Location = new System.Drawing.Point(16, 25);
             this.dataGridViewCompareLLWO.Name = "dataGridViewCompareLLWO";
-            this.dataGridViewCompareLLWO.Size = new System.Drawing.Size(590, 236);
+            this.dataGridViewCompareLLWO.Size = new System.Drawing.Size(618, 236);
             this.dataGridViewCompareLLWO.TabIndex = 48;
             // 
             // tbPWBType
@@ -460,7 +459,6 @@ namespace CompareWOLL
             // 
             // gbSummary
             // 
-            this.gbSummary.Controls.Add(this.button1);
             this.gbSummary.Controls.Add(this.btnReport);
             this.gbSummary.Controls.Add(this.label17);
             this.gbSummary.Controls.Add(this.label15);
@@ -472,16 +470,6 @@ namespace CompareWOLL
             this.gbSummary.TabIndex = 61;
             this.gbSummary.TabStop = false;
             this.gbSummary.Text = "Summary";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(122, 144);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(133, 23);
-            this.button1.TabIndex = 64;
-            this.button1.Text = "Generate Loading List";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
             // 
             // btnReport
             // 
@@ -543,7 +531,7 @@ namespace CompareWOLL
             this.groupBox3.Controls.Add(this.dataGridViewCompareLLWO);
             this.groupBox3.Location = new System.Drawing.Point(12, 374);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(630, 300);
+            this.groupBox3.Size = new System.Drawing.Size(650, 300);
             this.groupBox3.TabIndex = 53;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "LL vs WO";
@@ -552,7 +540,7 @@ namespace CompareWOLL
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 270);
+            this.label3.Location = new System.Drawing.Point(33, 270);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 57;
@@ -819,6 +807,5 @@ namespace CompareWOLL
         private System.Windows.Forms.Label LblPartcodeUsedQtyNMWOLL;
         private System.Windows.Forms.Label LblQtyPartcodeQtyNMWOLL;
         private System.Windows.Forms.Label LblPartcodeQtyNMWOLL;
-        private System.Windows.Forms.Button button1;
     }
 }
