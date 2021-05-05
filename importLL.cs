@@ -13,7 +13,7 @@ namespace CompareWOLL
     public partial class ImportLL : Form
     {
         Helper help = new Helper();
-        MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
+        MySqlConnection connection = new MySqlConnection("server=192.168.1.1;database=pe;user=root;password=12345;");
         LoadForm lf = new LoadForm();
 
         string filePathLL = string.Empty;
@@ -173,11 +173,11 @@ namespace CompareWOLL
                                 {
                                     tbPcbNo.Text = dataGridViewPCBNo.Rows[0].Cells[0].Value.ToString().Substring(11, 12);
                                 }
-                                if (tbCust.Text == "ASUS")
+                                else if (tbCust.Text == "ASUS")
                                 {
                                     tbPcbNo.Text = dataGridViewPCBNo.Rows[0].Cells[0].Value.ToString().Substring(11, 13).Insert(5,"-");
                                 }
-                                if (tbCust.Text == "PEGATRON")
+                                else if (tbCust.Text == "PEGATRON")
                                 {
                                     tbPcbNo.Text = dataGridViewPCBNo.Rows[0].Cells[0].Value.ToString().Substring(11, 12);
                                 }
@@ -185,7 +185,6 @@ namespace CompareWOLL
                                 {
                                     tbPcbNo.Text = dataGridViewPCBNo.Rows[0].Cells[0].Value.ToString().Substring(11, 12);
                                 }
-
                             }
                             else if (dataView.Count == 0)
                             {

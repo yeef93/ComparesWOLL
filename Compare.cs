@@ -8,7 +8,7 @@ namespace CompareWOLL
 {
     public partial class Compare : Form
     {
-        MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
+        MySqlConnection connection = new MySqlConnection("server=192.168.1.1;database=pe;user=root;password=12345;");
         ExcelConvert excelConvert = new ExcelConvert();
         string LLWONMPartCodes = string.Empty;
         string LLWONMQtys = string.Empty;
@@ -247,6 +247,7 @@ namespace CompareWOLL
 
         private void btnCompare_Click(object sender, EventArgs e)
         {
+            tbCustomer.Select();
             btnHome.Enabled = true;
             btnWO.Enabled = true;
             gbSummary.Visible = true;

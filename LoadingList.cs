@@ -8,7 +8,7 @@ namespace CompareWOLL
 {
     public partial class LoadingList : Form
     {
-        MySqlConnection connection = new MySqlConnection("server=localhost;database=pe;user=root;password=;");
+        MySqlConnection connection = new MySqlConnection("server=192.168.1.1;database=pe;user=root;password=12345;");
 
         public LoadingList()
         {
