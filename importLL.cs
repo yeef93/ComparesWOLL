@@ -13,7 +13,7 @@ namespace CompareWOLL
     public partial class ImportLL : Form
     {
         Helper help = new Helper();
-        MySqlConnection connection = new MySqlConnection("server=192.168.1.1;database=pe;user=root;password=12345;");
+        MySqlConnection connection = new MySqlConnection("server=192.168.1.1;database=pedev;user=root;password=12345;");
         LoadForm lf = new LoadForm();
 
         string filePathLL = string.Empty;
@@ -374,9 +374,9 @@ namespace CompareWOLL
 
                         string cekmodel = "SELECT wo_PTSN, process_Name FROM tbl_ll  WHERE wo_PTSN = '" + woPTSN + "'AND process_Name ='" + process + "'";
                         string cekPCB = "SELECT * FROM tbl_lldetail WHERE partcode = '" + pcb + "' AND wo_PTSN = '" + woPTSN + "' AND reel = 'PCB'";
-                        string queryLL = "INSERT INTO tbl_ll VALUES('','" + cust + "','" + woPTSN + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','" + llUsage + "','" + stencil + "','" + remark + "')";
+                        string queryLL = "INSERT INTO tbl_ll VALUES(null,'" + cust + "','" + woPTSN + "','" + process + "','" + modelLL + "','" + machine + "','" + pwbType + "','" + prog + "','" + rev + "','" + pcb + "','" + llUsage + "','" + stencil + "','" + remark + "')";
                         string queryInputPCB = "INSERT INTO tbl_lldetail VALUES ('" + woPTSN + "','" + process + "','PCB', '" + pcb + "', '1', '1');";
-                        string queryAddPartCodePCB = "INSERT INTO tbl_partcodedetail VALUES ('" + woPTSN + "','" + process + "','PCB',  '" + pcb + "', '','PCB' ); ";
+                        string queryAddPartCodePCB = "INSERT INTO tbl_partcodedetail VALUES ('" + woPTSN + "','" + process + "','PCB',  '" + pcb + "', 0,'PCB' ); ";
 
                         connection.Open();
                         //Buka koneksi
@@ -454,7 +454,7 @@ namespace CompareWOLL
                                         reelID = dataGridViewLL.Rows[j].Cells[0].Value.ToString();
                                         qty = dataGridViewLL.Rows[j].Cells[3].Value.ToString();
                                         altNo = 1;
-                                        string StrQueryReelDetail = "INSERT INTO tbl_reel VALUES ('','"
+                                        string StrQueryReelDetail = "INSERT INTO tbl_reel VALUES (null,'"
                                             + reelID + "', '" + woPTSN + "','" + process + "','" + dataGridViewLL.Rows[j].Cells[3].Value.ToString() + "', '"
                                             + dataGridViewLL.Rows[j].Cells[4].Value.ToString() + "', '"
                                             + dataGridViewLL.Rows[j].Cells[6].Value.ToString() + "');";

@@ -18,7 +18,7 @@ namespace CompareWOLL
     {
         LoadForm lf = new LoadForm();
         Helper help = new Helper();
-        MySqlConnection connection = new MySqlConnection("server=192.168.1.1;database=pe;user=root;password=12345;");
+        MySqlConnection connection = new MySqlConnection("server=192.168.1.1;database=pedev;user=root;password=12345;");
         public importWO()
         {
             InitializeComponent();
@@ -75,7 +75,7 @@ namespace CompareWOLL
 
             connection.Open();
 
-            string queryCustDropDown = "SELECT custname FROM tbl_customer";
+            string queryCustDropDown = "SELECT custname FROM tbl_customer WHERE detail = 'wo'";
 
             try
             {
@@ -116,7 +116,6 @@ namespace CompareWOLL
 
             openFileDialogWO.Title = "Please Select a File Work Order";
             openFileDialogWO.Filter = "Excel Files|*.xls;*.xlsx;";
-            //openFileDialogWO.InitialDirectory = @"D:\";
             if (openFileDialogWO.ShowDialog() == DialogResult.OK)
             {
 
@@ -177,7 +176,6 @@ namespace CompareWOLL
                             for (int j = 0; j < dataGridViewWO.Columns.Count; j++)
                             {
                                 var cellValue = dataGridViewWO.Rows[i].Cells[j].Value;
-                                //var cellPosition = dataGridViewWO.Rows[i].Cells[j];
 
                                 if (cellValue == null ||
                                     cellValue == DBNull.Value || string.IsNullOrEmpty(cellValue.ToString()))
@@ -209,7 +207,7 @@ namespace CompareWOLL
                             }                            
                         }
 
-                        // mendadai merah jika data 1 column tidak sama
+                        // mendai merah jika data 1 column tidak sama
                         for (int i = 0; i < dataGridViewWO.Rows.Count; ++i)
                         {
                             var cellValueModel = dataGridViewWO.Rows[i].Cells[0].Value.ToString();
@@ -336,7 +334,6 @@ namespace CompareWOLL
 
             homeButton.Enabled = false;
             backButton.Enabled = false;
-
             System.Threading.Thread.Sleep(2000);
 
             string woPTSNN = tbwoPTSN.Text;
@@ -368,7 +365,7 @@ namespace CompareWOLL
                     //Buka koneksi
 
                     string cekwoPTSN = "SELECT wo_PTSN FROM tbl_wo  WHERE wo_PTSN = '" + woPTSNN + "'";
-                    string query = "INSERT INTO tbl_wo VALUES('', '" + woPTSNN + "','" + woNoo + "','" + modelNoo + "','" + modell + "', '" + woqtyy + "', '" + wousagee + "', '" + customer + "')";
+                    string query = "INSERT INTO tbl_wo (id, wo_PTSN, wo_No, model_No, model, wo_QTY, wo_Usage, Customer, detail) VALUES (null, '" + woPTSNN + "','" + woNoo + "','" + modelNoo + "','" + modell + "', '" + woqtyy + "', '" + wousagee + "', '" + customer + "', 'wo')";
                     string querymodel = "INSERT INTO tbl_model ( wo_PTSN, process_Name ) SELECT wo_PTSN, process_Name FROM tbl_wodetail GROUP BY process_Name, wo_PTSN";
                     string trncteModel = "TRUNCATE tbl_model";
 
@@ -439,7 +436,10 @@ namespace CompareWOLL
                 {
                     CloseProgress();
                     MessageBox.Show(ex.Message.ToString());
+                    connection.Close();
                     saveButton.Enabled = true;
+                    homeButton.Enabled = true;
+                    backButton.Enabled = true;
                 }
             }
         }

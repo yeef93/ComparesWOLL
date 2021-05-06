@@ -8,7 +8,7 @@ namespace CompareWOLL
 {
     public partial class WorkOrder : Form
     {
-        MySqlConnection connection = new MySqlConnection("server=192.168.1.1;database=pe;user=root;password=12345;");
+        MySqlConnection connection = new MySqlConnection("server=192.168.1.1;database=pedev;user=root;password=12345;");
 
         public WorkOrder()
         {
@@ -23,7 +23,7 @@ namespace CompareWOLL
 
             connection.Open();
 
-            string querywo = "SELECT customer, wo_PTSN, model_No, model,  wo_No, wo_QTY, wo_Usage FROM tbl_wo ORDER BY id DESC";
+            string querywo = "SELECT customer, wo_PTSN, model_No, model,  wo_No, wo_QTY, wo_Usage FROM tbl_wo WHERE detail = 'wo' ORDER BY id DESC";
 
             using (MySqlDataAdapter adpt = new MySqlDataAdapter(querywo, connection))
             {
@@ -125,7 +125,6 @@ namespace CompareWOLL
 
             if (e.ColumnIndex == 8)
             {
-
                 ImportLL il = new ImportLL();
                 string woPtsn = dataGridViewWoList.Rows[e.RowIndex].Cells[1].Value.ToString();
                 string cust = dataGridViewWoList.Rows[e.RowIndex].Cells[0].Value.ToString();
@@ -241,11 +240,6 @@ namespace CompareWOLL
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

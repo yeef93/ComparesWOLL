@@ -10,7 +10,7 @@ namespace CompareWOLL
         MySql.Data.MySqlClient.MySqlConnection conn;
         string myConnectionString;
         static string host = "192.168.1.1";
-        static string database = "pe";
+        static string database = "pedev";
         static string userDB = "root";
         static string password = "12345";
         public static string strProvider = "server=" + host + ";Database=" + database + ";User ID=" + userDB + ";Password=" + password;

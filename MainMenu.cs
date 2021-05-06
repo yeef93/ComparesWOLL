@@ -16,8 +16,6 @@ namespace CompareWOLL
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 
-            label1.Visible = false;
-            //label1.Text = "Hello,\nHow are you?\nI'm fine!";
 
         }
 
@@ -57,7 +55,14 @@ namespace CompareWOLL
             importExcel import = new importExcel();
             import.Show();
             this.Hide();
+        }
 
+        private void purchaseOrderToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            PurchaseOrder po = new PurchaseOrder();
+            po.toolStripUsername.Text = toolStripUsername.Text;
+            po.Show();
+            this.Hide();
         }
     }
 }

@@ -32,13 +32,13 @@ namespace CompareWOLL
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.workOrderToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.purchaseOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadingListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compareWOVsLLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripUsername = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
-            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -57,6 +57,7 @@ namespace CompareWOLL
             // 
             this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.workOrderToolStripMenuItem1,
+            this.purchaseOrderToolStripMenuItem,
             this.loadingListToolStripMenuItem,
             this.compareWOVsLLToolStripMenuItem});
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
@@ -66,21 +67,28 @@ namespace CompareWOLL
             // workOrderToolStripMenuItem1
             // 
             this.workOrderToolStripMenuItem1.Name = "workOrderToolStripMenuItem1";
-            this.workOrderToolStripMenuItem1.Size = new System.Drawing.Size(138, 22);
+            this.workOrderToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.workOrderToolStripMenuItem1.Text = "Work Order";
             this.workOrderToolStripMenuItem1.Click += new System.EventHandler(this.workOrderToolStripMenuItem1_Click);
+            // 
+            // purchaseOrderToolStripMenuItem
+            // 
+            this.purchaseOrderToolStripMenuItem.Name = "purchaseOrderToolStripMenuItem";
+            this.purchaseOrderToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.purchaseOrderToolStripMenuItem.Text = "Purchase Order";
+            this.purchaseOrderToolStripMenuItem.Click += new System.EventHandler(this.purchaseOrderToolStripMenuItem_Click_1);
             // 
             // loadingListToolStripMenuItem
             // 
             this.loadingListToolStripMenuItem.Name = "loadingListToolStripMenuItem";
-            this.loadingListToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.loadingListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadingListToolStripMenuItem.Text = "Loading List";
             this.loadingListToolStripMenuItem.Click += new System.EventHandler(this.loadingListToolStripMenuItem_Click);
             // 
             // compareWOVsLLToolStripMenuItem
             // 
             this.compareWOVsLLToolStripMenuItem.Name = "compareWOVsLLToolStripMenuItem";
-            this.compareWOVsLLToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.compareWOVsLLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.compareWOVsLLToolStripMenuItem.Text = "Compare";
             this.compareWOVsLLToolStripMenuItem.Click += new System.EventHandler(this.compareWOVsLLToolStripMenuItem_Click);
             // 
@@ -116,21 +124,11 @@ namespace CompareWOLL
             this.dateTimeNow.Size = new System.Drawing.Size(124, 17);
             this.dateTimeNow.Text = "toolStripStatusLabel2";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(213, 188);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "label1";
-            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(824, 395);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -159,7 +157,7 @@ namespace CompareWOLL
         private System.Windows.Forms.ToolStripMenuItem compareWOVsLLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem workOrderToolStripMenuItem1;
         public System.Windows.Forms.ToolStripStatusLabel toolStripUsername;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripMenuItem purchaseOrderToolStripMenuItem;
     }
 }
 
