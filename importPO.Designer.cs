@@ -31,10 +31,8 @@ namespace CompareWOLL
         {
             this.backButton = new System.Windows.Forms.Button();
             this.homeButton = new System.Windows.Forms.Button();
-            this.saveButton = new System.Windows.Forms.Button();
             this.dataGridViewPO = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cmbCustomer = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tbtotalPart = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -43,9 +41,6 @@ namespace CompareWOLL
             this.tbPoQty = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.tbPoNo = new System.Windows.Forms.TextBox();
-            this.browseSO = new System.Windows.Forms.Button();
-            this.tbfilepathPO = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tbPoModel = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -53,7 +48,12 @@ namespace CompareWOLL
             this.toolStripUsername = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dateTimeNow = new System.Windows.Forms.ToolStripStatusLabel();
+            this.saveButton = new System.Windows.Forms.Button();
             this.openFileDialogPO = new System.Windows.Forms.OpenFileDialog();
+            this.cmbCustomer = new System.Windows.Forms.ComboBox();
+            this.browseSO = new System.Windows.Forms.Button();
+            this.tbfilepathPO = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPO)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -80,18 +80,6 @@ namespace CompareWOLL
             this.homeButton.Text = "Home";
             this.homeButton.UseVisualStyleBackColor = true;
             this.homeButton.Click += new System.EventHandler(this.homeButton_Click);
-            // 
-            // saveButton
-            // 
-            this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(564, 638);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(80, 30);
-            this.saveButton.TabIndex = 29;
-            this.saveButton.Text = "Save";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // dataGridViewPO
             // 
@@ -132,16 +120,6 @@ namespace CompareWOLL
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Purchase Order Detail";
-            // 
-            // cmbCustomer
-            // 
-            this.cmbCustomer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cmbCustomer.FormattingEnabled = true;
-            this.cmbCustomer.Location = new System.Drawing.Point(115, 34);
-            this.cmbCustomer.Name = "cmbCustomer";
-            this.cmbCustomer.Size = new System.Drawing.Size(223, 21);
-            this.cmbCustomer.TabIndex = 35;
-            this.cmbCustomer.SelectedIndexChanged += new System.EventHandler(this.cmbCustomer_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -226,33 +204,6 @@ namespace CompareWOLL
             this.tbPoNo.Size = new System.Drawing.Size(223, 20);
             this.tbPoNo.TabIndex = 14;
             // 
-            // browseSO
-            // 
-            this.browseSO.Location = new System.Drawing.Point(727, 37);
-            this.browseSO.Name = "browseSO";
-            this.browseSO.Size = new System.Drawing.Size(75, 23);
-            this.browseSO.TabIndex = 12;
-            this.browseSO.Text = "Browse";
-            this.browseSO.UseVisualStyleBackColor = true;
-            this.browseSO.Click += new System.EventHandler(this.browseSO_Click);
-            // 
-            // tbfilepathPO
-            // 
-            this.tbfilepathPO.Location = new System.Drawing.Point(479, 37);
-            this.tbfilepathPO.Name = "tbfilepathPO";
-            this.tbfilepathPO.ReadOnly = true;
-            this.tbfilepathPO.Size = new System.Drawing.Size(223, 20);
-            this.tbfilepathPO.TabIndex = 11;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(384, 42);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(41, 13);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "PO File";
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -311,6 +262,55 @@ namespace CompareWOLL
             this.dateTimeNow.Size = new System.Drawing.Size(124, 17);
             this.dateTimeNow.Text = "toolStripStatusLabel2";
             // 
+            // saveButton
+            // 
+            this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveButton.Location = new System.Drawing.Point(564, 638);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(80, 30);
+            this.saveButton.TabIndex = 29;
+            this.saveButton.Text = "Save";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // cmbCustomer
+            // 
+            this.cmbCustomer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbCustomer.FormattingEnabled = true;
+            this.cmbCustomer.Location = new System.Drawing.Point(115, 34);
+            this.cmbCustomer.Name = "cmbCustomer";
+            this.cmbCustomer.Size = new System.Drawing.Size(223, 21);
+            this.cmbCustomer.TabIndex = 35;
+            this.cmbCustomer.SelectedIndexChanged += new System.EventHandler(this.cmbCustomer_SelectedIndexChanged);
+            // 
+            // browseSO
+            // 
+            this.browseSO.Location = new System.Drawing.Point(727, 37);
+            this.browseSO.Name = "browseSO";
+            this.browseSO.Size = new System.Drawing.Size(75, 23);
+            this.browseSO.TabIndex = 12;
+            this.browseSO.Text = "Browse";
+            this.browseSO.UseVisualStyleBackColor = true;
+            this.browseSO.Click += new System.EventHandler(this.browseSO_Click);
+            // 
+            // tbfilepathPO
+            // 
+            this.tbfilepathPO.Location = new System.Drawing.Point(479, 37);
+            this.tbfilepathPO.Name = "tbfilepathPO";
+            this.tbfilepathPO.ReadOnly = true;
+            this.tbfilepathPO.Size = new System.Drawing.Size(223, 20);
+            this.tbfilepathPO.TabIndex = 11;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(384, 42);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(41, 13);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "PO File";
+            // 
             // importPO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -339,10 +339,8 @@ namespace CompareWOLL
 
         private System.Windows.Forms.Button backButton;
         private System.Windows.Forms.Button homeButton;
-        private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.DataGridView dataGridViewPO;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox cmbCustomer;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tbtotalPart;
         private System.Windows.Forms.Label label5;
@@ -351,9 +349,6 @@ namespace CompareWOLL
         private System.Windows.Forms.TextBox tbPoQty;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox tbPoNo;
-        private System.Windows.Forms.Button browseSO;
-        private System.Windows.Forms.TextBox tbfilepathPO;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tbPoModel;
         private System.Windows.Forms.Label label3;
@@ -361,6 +356,11 @@ namespace CompareWOLL
         public System.Windows.Forms.ToolStripStatusLabel toolStripUsername;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel dateTimeNow;
+        private System.Windows.Forms.ComboBox cmbCustomer;
+        private System.Windows.Forms.Button browseSO;
+        private System.Windows.Forms.TextBox tbfilepathPO;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.OpenFileDialog openFileDialogPO;
     }
 }

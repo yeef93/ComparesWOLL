@@ -109,6 +109,25 @@ namespace CompareWOLL
             int i = dataGridViewPoList.SelectedCells[0].RowIndex;
             string poNoslctd = dataGridViewPoList.Rows[i].Cells[1].Value.ToString();
 
+            if (e.ColumnIndex == 5)
+            {
+                DetailPO dpo = new DetailPO();
+                string cust = dataGridViewPoList.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string poNo = dataGridViewPoList.Rows[e.RowIndex].Cells[1].Value.ToString();
+                string model = dataGridViewPoList.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string totalUsage = dataGridViewPoList.Rows[e.RowIndex].Cells[3].Value.ToString();
+                string poQty = dataGridViewPoList.Rows[e.RowIndex].Cells[4].Value.ToString();
+
+                dpo.tbCustomer.Text = cust;
+                dpo.tbPoNo.Text = poNo;
+                dpo.tbPoModel.Text = model;
+                dpo.tbtotalUsage.Text = totalUsage;
+                dpo.tbPoQty.Text = poQty;
+
+                dpo.Show();
+                this.Hide();
+            }
+
             if (e.ColumnIndex == 7)
             {
                 string poNo = dataGridViewPoList.Rows[e.RowIndex].Cells[1].Value.ToString();

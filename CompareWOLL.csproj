@@ -111,6 +111,12 @@
     <Compile Include="DetailLL.Designer.cs">
       <DependentUpon>DetailLL.cs</DependentUpon>
     </Compile>
+    <Compile Include="DetailPO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetailPO.Designer.cs">
+      <DependentUpon>DetailPO.cs</DependentUpon>
+    </Compile>
     <Compile Include="DetailWO.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -203,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DetailLL.resx">
       <DependentUpon>DetailLL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DetailPO.resx">
+      <DependentUpon>DetailPO.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DetailWO.resx">
       <DependentUpon>DetailWO.cs</DependentUpon>
