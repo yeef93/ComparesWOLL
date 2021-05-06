@@ -408,7 +408,7 @@ namespace CompareWOLL
                             {
                                 string StrQuery = "INSERT INTO tbl_wodetail VALUES ('"
                                     + dataGridViewWO.Rows[i].Cells[8].Value.ToString() + "', '"
-                                    + dataGridViewWO.Rows[i].Cells[1].Value.ToString() + "', '"
+                                    + dataGridViewWO.Rows[i].Cells[1].Value.ToString() + "','', '"
                                     + dataGridViewWO.Rows[i].Cells[7].Value.ToString() + "', '"
                                     + dataGridViewWO.Rows[i].Cells[3].Value.ToString() + "', '"
                                     + dataGridViewWO.Rows[i].Cells[6].Value.ToString() + "', '"

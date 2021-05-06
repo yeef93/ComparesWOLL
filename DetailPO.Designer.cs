@@ -204,6 +204,7 @@ namespace CompareWOLL
             this.backButton.TabIndex = 38;
             this.backButton.Text = "Back";
             this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
             // homeButton
             // 
@@ -214,6 +215,7 @@ namespace CompareWOLL
             this.homeButton.TabIndex = 37;
             this.homeButton.Text = "Home";
             this.homeButton.UseVisualStyleBackColor = true;
+            this.homeButton.Click += new System.EventHandler(this.homeButton_Click);
             // 
             // dataGridViewPO
             // 

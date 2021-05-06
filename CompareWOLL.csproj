@@ -180,6 +180,12 @@
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="ConnectionDB.cs" />
+    <Compile Include="NonCKDSMTA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NonCKDSMTA.Designer.cs">
+      <DependentUpon>NonCKDSMTA.cs</DependentUpon>
+    </Compile>
     <Compile Include="NotifCheckSum.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,6 +248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NonCKDSMTA.resx">
+      <DependentUpon>NonCKDSMTA.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NotifCheckSum.resx">
       <DependentUpon>NotifCheckSum.cs</DependentUpon>

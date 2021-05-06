@@ -73,7 +73,7 @@ namespace CompareWOLL
             gbSummary.Visible = false;
             groupBox4.Visible = false;
 
-            string queryWODropDown = "SELECT wo_PTSN FROM tbl_wo ";
+            string queryWODropDown = "SELECT wo_PTSN FROM tbl_wo WHERE detail = 'wo'";
 
             try
             {
@@ -932,5 +932,11 @@ namespace CompareWOLL
             btnWO.Enabled = true;
         }
 
+        private void btnPO_Click(object sender, EventArgs e)
+        {
+            PurchaseOrder po = new PurchaseOrder();
+            po.Show();
+            this.Hide();
+        }
     }
 }

@@ -48,13 +48,21 @@ namespace CompareWOLL
                 btnImport.Name = "btnImport";
                 btnImport.UseColumnTextForButtonValue = true;
 
-                // add button compare WO LL in datagridview table
-                DataGridViewButtonColumn btnCompare = new DataGridViewButtonColumn();
-                dataGridViewPoList.Columns.Add(btnCompare);
-                btnCompare.HeaderText = "";
-                btnCompare.Text = "Compare With LL";
-                btnCompare.Name = "btnCompare";
-                btnCompare.UseColumnTextForButtonValue = true;
+                // add button generate LL SMT-A in datagridview table
+                DataGridViewButtonColumn btnSMTA = new DataGridViewButtonColumn();
+                dataGridViewPoList.Columns.Add(btnSMTA);
+                btnSMTA.HeaderText = "";
+                btnSMTA.Text = "Generate SMT-A";
+                btnSMTA.Name = "btnSMTA";
+                btnSMTA.UseColumnTextForButtonValue = true;
+
+                // add button generate LL SMT-B in datagridview table
+                DataGridViewButtonColumn btnSMTB = new DataGridViewButtonColumn();
+                dataGridViewPoList.Columns.Add(btnSMTB);
+                btnSMTB.HeaderText = "";
+                btnSMTB.Text = "Generate SMT-B";
+                btnSMTB.Name = "btnSMTB";
+                btnSMTB.UseColumnTextForButtonValue = true;
 
                 // add button delete in datagridview table
                 DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn();
@@ -128,17 +136,78 @@ namespace CompareWOLL
                 this.Hide();
             }
 
-            if (e.ColumnIndex == 7)
+            if (e.ColumnIndex == 6)
             {
+                ImportLL il = new ImportLL();
+
+                string cust = dataGridViewPoList.Rows[e.RowIndex].Cells[0].Value.ToString();
                 string poNo = dataGridViewPoList.Rows[e.RowIndex].Cells[1].Value.ToString();
 
-                Compare cowl = new Compare();
-                cowl.cmbWOPtsn.Text = poNo;
-                cowl.Show();
+                il.Show();
+                il.labelWoPTSN.Visible = false;
+                il.labelPoNo.Visible = true;
+                il.tbWoPTSN.Text = poNo;
+                il.tbCust.Text = cust;
+
+                connection.Open();
+
+                string queryProcessDropDown = "SELECT process_Name FROM tbl_customer WHERE custname = '" + cust + "'";
+
+                try
+                {
+
+                    using (MySqlDataAdapter adpt = new MySqlDataAdapter(queryProcessDropDown, connection))
+                    {
+                        DataTable dset = new DataTable();
+                        adpt.Fill(dset);
+
+                        if (dset.Rows.Count > 0)
+                        {
+                            string process = dset.Rows[0][0].ToString().Replace(" ", String.Empty); ;
+                            int totalProcess = process.Split(',').Length;
+                            var processName = process.Split(',');
+
+                            for (int j = 0; j < totalProcess; j++)
+                            {
+                                il.cmbProcess.Items.Add(processName[j]);
+                                il.cmbProcess.ValueMember = processName[j].ToString();
+                            }
+                        }
+                        else
+                        {
+                        }
+                    }
+
+                    connection.Close();
+
+                }
+                catch (Exception ex)
+                {
+                    // tampilkan pesan error
+                    MessageBox.Show(ex.Message);
+                }
+
                 this.Hide();
             }
 
-            if (e.ColumnIndex == 8)
+            if (e.ColumnIndex == 7)
+            {
+                NonCKDSMTA smtA = new NonCKDSMTA();
+
+                string cust = dataGridViewPoList.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string poNo = dataGridViewPoList.Rows[e.RowIndex].Cells[1].Value.ToString();
+
+                smtA.tbCustomer.Text = cust;
+                smtA.tbPoNo.Text = poNo;
+                smtA.Show();
+                //smtA.labelWoPTSN.Visible = false;
+                //smtA.labelPoNo.Visible = true;
+                this.Hide();
+
+            }
+
+
+                if (e.ColumnIndex == 9)
             {
                 string message = "Do you want to delete this Purchase Order and Loading List record for PO NO " + poNoslctd + " ?";
                 string title = "Delete Purchase Order";

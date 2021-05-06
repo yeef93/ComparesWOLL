@@ -103,6 +103,14 @@ namespace CompareWOLL
             lengthProcess = cmbProcess.Text.Length + 1;
         }
 
+        public void importLLCkd()
+        {
+        }
+
+        public void importLLNonCkd()
+        {
+        }
+
         private void browseWO_Click(object sender, EventArgs e)
         {
 
@@ -175,11 +183,15 @@ namespace CompareWOLL
                                 }
                                 else if (tbCust.Text == "ASUS")
                                 {
-                                    tbPcbNo.Text = dataGridViewPCBNo.Rows[0].Cells[0].Value.ToString().Substring(11, 13).Insert(5,"-");
+                                    tbPcbNo.Text = dataGridViewPCBNo.Rows[0].Cells[0].Value.ToString().Substring(11, 13).Insert(5, "-");
                                 }
                                 else if (tbCust.Text == "PEGATRON")
                                 {
                                     tbPcbNo.Text = dataGridViewPCBNo.Rows[0].Cells[0].Value.ToString().Substring(11, 12);
+                                }
+                                else if (tbCust.Text == "MEISEI")
+                                {
+                                    tbPcbNo.Text = dataGridViewPCBNo.Rows[0].Cells[0].Value.ToString().Substring(11, 9);
                                 }
                                 else
                                 {
@@ -272,27 +284,60 @@ namespace CompareWOLL
                                 dataGridViewLL.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
                             }
 
-                            int count = 0;
-                            int[] slctdColumn = { 4 };
-                            for (int i = 0; i < dataGridViewLL.Rows.Count; ++i)
-                            {
-                                for (int j = 0; j < slctdColumn.Length; j++)
-                                {
-                                    var cellValue = dataGridViewLL.Rows[i].Cells[slctdColumn[j]].Value;
-                                    //var cellPosition = dataGridViewWO.Rows[i].Cells[j];
 
-                                    if (cellValue == null ||
-                                        cellValue == DBNull.Value || string.IsNullOrEmpty(cellValue.ToString()))
+                            if (tbCust.Text == "XIAOMI" || tbCust.Text == "TCL" || tbCust.Text == "PEGATRON" || tbCust.Text == "ASUS")
+                            {
+                                //give red color if cell null
+                                int count = 0;
+                                int[] slctdColumn = { 4 };
+                                for (int i = 0; i < dataGridViewLL.Rows.Count; ++i)
+                                {
+                                    for (int j = 0; j < slctdColumn.Length; j++)
                                     {
-                                        dataGridViewLL.Rows[i].Cells[slctdColumn[j]].Style.BackColor = Color.Red;
-                                        count++;
+                                        var cellValue = dataGridViewLL.Rows[i].Cells[slctdColumn[j]].Value;
+                                        //var cellPosition = dataGridViewWO.Rows[i].Cells[j];
+
+                                        if (cellValue == null ||
+                                            cellValue == DBNull.Value || string.IsNullOrEmpty(cellValue.ToString()))
+                                        {
+                                            dataGridViewLL.Rows[i].Cells[slctdColumn[j]].Style.BackColor = Color.Red;
+                                            count++;
+                                        }
                                     }
                                 }
+                                if (count > 0)
+                                {
+                                    MessageBox.Show("There is " + count.ToString() + " cell is blank, Please revise the document ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error                        
+                                }
+
                             }
-                            if (count > 0)
+                            if (tbCust.Text == "MEISEI")
                             {
-                                MessageBox.Show("There is " + count.ToString() + " cell is blank, Please revise the document ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error                        
+                                //give red color if cell null
+                                int count = 0;
+                                int[] slctdColumn = { 1,2,5 };
+                                for (int i = 0; i < dataGridViewLL.Rows.Count; ++i)
+                                {
+                                    for (int j = 0; j < slctdColumn.Length; j++)
+                                    {
+                                        var cellValue = dataGridViewLL.Rows[i].Cells[slctdColumn[j]].Value;
+
+                                        if (cellValue == null ||
+                                            cellValue == DBNull.Value || string.IsNullOrEmpty(cellValue.ToString()))
+                                        {
+                                            dataGridViewLL.Rows[i].Cells[slctdColumn[j]].Style.BackColor = Color.Red;
+                                            count++;
+                                        }
+                                    }
+                                }
+                                if (count > 0)
+                                {
+                                    MessageBox.Show("There is " + count.ToString() + " cell is blank, Please revise the document ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error                        
+                                }
+
                             }
+
+
                         }
                         if (processLL != cmbProcess.Text)
                         {
@@ -363,13 +408,13 @@ namespace CompareWOLL
                     MessageBox.Show("Unable to import Work Order without fill data properly", "Work Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     saveButton.Enabled = true;
                     backButton.Enabled = true;
-                    
+
                 }
 
                 else
                 {
                     try
-                    {                        
+                    {
                         var cmd = new MySqlCommand("", connection);
 
                         string cekmodel = "SELECT wo_PTSN, process_Name FROM tbl_ll  WHERE wo_PTSN = '" + woPTSN + "'AND process_Name ='" + process + "'";
@@ -421,24 +466,6 @@ namespace CompareWOLL
                                         cmd.ExecuteNonQuery();
                                         //Jalankan perintah / query dalam CommandText pada database
                                     }
-                                }                                
-
-                                for (int i = 0; i < dataGridViewLL.Rows.Count; i++)
-                                {
-                                    string prtCode = dataGridViewLL.Rows[i].Cells[1].Value.ToString();
-
-                                    if (prtCode != "")
-                                    {
-                                        // query insert data part code
-                                        string StrQuery = "INSERT INTO tbl_partcodedetail VALUES ('" + woPTSN + "','" + process + "','"
-                                            + dataGridViewLL.Rows[i].Cells[0].Value.ToString() + "','"
-                                            + dataGridViewLL.Rows[i].Cells[1].Value.ToString() + "', '"
-                                            + dataGridViewLL.Rows[i].Cells[2].Value.ToString() + "', '"
-                                            + dataGridViewLL.Rows[i].Cells[5].Value.ToString() + "');";
-
-                                        cmd.CommandText = StrQuery;
-                                        cmd.ExecuteNonQuery();
-                                    }
                                 }
 
                                 String reelID = "";
@@ -462,12 +489,6 @@ namespace CompareWOLL
                                         cmd.CommandText = StrQueryReelDetail;
                                         cmd.ExecuteNonQuery();
 
-                                        string StrQueryLLDetail = "INSERT INTO tbl_lldetail VALUES ('" + woPTSN + "','" + process + "','"
-                                   + reelID + "', '"
-                                   + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "','" + altNo + "', '"
-                                   + qty + "');";
-                                        cmd.CommandText = StrQueryLLDetail;
-                                        cmd.ExecuteNonQuery();
                                     }
                                     else
                                     {
@@ -478,7 +499,29 @@ namespace CompareWOLL
                                             "WHERE reel = '" + reelID + "' AND tbl_reel.WO_ptsn = '" + woPTSN + "' and tbl_reel.process_Name = '" + process + "'";
                                         cmd.CommandText = StrQueryAddLoc;
                                         cmd.ExecuteNonQuery();
-                                    }                                    
+                                    }
+
+                                    //insert datalldetail if data partcode != null
+                                    if (dataGridViewLL.Rows[j].Cells[1].Value.ToString() != "")
+                                    {
+                                        string StrQueryLLDetail = "INSERT INTO tbl_lldetail VALUES ('" + woPTSN + "','" + process + "','"
+                                   + reelID + "', '"
+                                   + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "','" + altNo + "', '"
+                                   + qty + "');";
+                                        cmd.CommandText = StrQueryLLDetail;
+                                        cmd.ExecuteNonQuery();
+
+                                        string StrQuery = "INSERT INTO tbl_partcodedetail VALUES ('" + woPTSN + "','" + process + "','"
+                                           + reelID + "','"
+                                           + dataGridViewLL.Rows[j].Cells[1].Value.ToString() + "', '"
+                                           + dataGridViewLL.Rows[j].Cells[2].Value.ToString() + "', '"
+                                           + dataGridViewLL.Rows[j].Cells[5].Value.ToString() + "');";
+
+                                        cmd.CommandText = StrQuery;
+                                        cmd.ExecuteNonQuery();
+
+                                        altNo++;
+                                    }                                        
                                 }
 
                                 connection.Close();

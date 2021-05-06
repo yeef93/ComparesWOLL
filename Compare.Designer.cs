@@ -86,6 +86,7 @@ namespace CompareWOLL
             this.LblPartcodeUsedQtyNMWOLL = new System.Windows.Forms.Label();
             this.LblQtyPartcodeQtyNMWOLL = new System.Windows.Forms.Label();
             this.LblPartcodeQtyNMWOLL = new System.Windows.Forms.Label();
+            this.btnPO = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareLLWO)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompareLLWOResult)).BeginInit();
@@ -287,7 +288,7 @@ namespace CompareWOLL
             // btnWO
             // 
             this.btnWO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnWO.Location = new System.Drawing.Point(1275, 13);
+            this.btnWO.Location = new System.Drawing.Point(1177, 13);
             this.btnWO.Name = "btnWO";
             this.btnWO.Size = new System.Drawing.Size(75, 23);
             this.btnWO.TabIndex = 52;
@@ -325,7 +326,7 @@ namespace CompareWOLL
             // btnHome
             // 
             this.btnHome.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnHome.Location = new System.Drawing.Point(1194, 13);
+            this.btnHome.Location = new System.Drawing.Point(1097, 13);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(75, 23);
             this.btnHome.TabIndex = 51;
@@ -700,11 +701,23 @@ namespace CompareWOLL
             this.LblPartcodeQtyNMWOLL.Text = "LblPartcodeQtyNMWOLL";
             this.LblPartcodeQtyNMWOLL.Visible = false;
             // 
+            // btnPO
+            // 
+            this.btnPO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPO.Location = new System.Drawing.Point(1255, 13);
+            this.btnPO.Name = "btnPO";
+            this.btnPO.Size = new System.Drawing.Size(94, 23);
+            this.btnPO.TabIndex = 71;
+            this.btnPO.Text = "Purchase Order";
+            this.btnPO.UseVisualStyleBackColor = true;
+            this.btnPO.Click += new System.EventHandler(this.btnPO_Click);
+            // 
             // Compare
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1362, 742);
+            this.Controls.Add(this.btnPO);
             this.Controls.Add(this.LblQtyPartcodeQtyNMWOLL);
             this.Controls.Add(this.LblPartcodeQtyNMWOLL);
             this.Controls.Add(this.LblQtyPartcodeUsedQtyNMWOLL);
@@ -807,5 +820,6 @@ namespace CompareWOLL
         private System.Windows.Forms.Label LblPartcodeUsedQtyNMWOLL;
         private System.Windows.Forms.Label LblQtyPartcodeQtyNMWOLL;
         private System.Windows.Forms.Label LblPartcodeQtyNMWOLL;
+        private System.Windows.Forms.Button btnPO;
     }
 }

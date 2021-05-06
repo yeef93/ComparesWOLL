@@ -64,6 +64,7 @@ namespace CompareWOLL
             this.dataGridViewCompareLLWOResult = new System.Windows.Forms.DataGridView();
             this.btnHome = new System.Windows.Forms.Button();
             this.btnWO = new System.Windows.Forms.Button();
+            this.btnPO = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -418,7 +419,7 @@ namespace CompareWOLL
             // btnHome
             // 
             this.btnHome.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnHome.Location = new System.Drawing.Point(1194, 25);
+            this.btnHome.Location = new System.Drawing.Point(1095, 25);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(75, 23);
             this.btnHome.TabIndex = 44;
@@ -429,7 +430,7 @@ namespace CompareWOLL
             // btnWO
             // 
             this.btnWO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnWO.Location = new System.Drawing.Point(1275, 25);
+            this.btnWO.Location = new System.Drawing.Point(1176, 25);
             this.btnWO.Name = "btnWO";
             this.btnWO.Size = new System.Drawing.Size(75, 23);
             this.btnWO.TabIndex = 45;
@@ -437,11 +438,23 @@ namespace CompareWOLL
             this.btnWO.UseVisualStyleBackColor = true;
             this.btnWO.Click += new System.EventHandler(this.btnWO_Click);
             // 
+            // btnPO
+            // 
+            this.btnPO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPO.Location = new System.Drawing.Point(1255, 25);
+            this.btnPO.Name = "btnPO";
+            this.btnPO.Size = new System.Drawing.Size(94, 23);
+            this.btnPO.TabIndex = 46;
+            this.btnPO.Text = "Purchase Order";
+            this.btnPO.UseVisualStyleBackColor = true;
+            this.btnPO.Click += new System.EventHandler(this.btnPO_Click);
+            // 
             // CompareWOLL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1362, 742);
+            this.Controls.Add(this.btnPO);
             this.Controls.Add(this.btnWO);
             this.Controls.Add(this.btnHome);
             this.Controls.Add(this.dataGridViewCompareLLWOResult);
@@ -504,5 +517,6 @@ namespace CompareWOLL
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         public System.Windows.Forms.ComboBox cmbWOModel;
+        private System.Windows.Forms.Button btnPO;
     }
 }

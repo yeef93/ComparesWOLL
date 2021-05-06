@@ -317,11 +317,11 @@ namespace CompareWOLL
                     connection.Open();
                     //Buka koneksi
 
-                    string cekwoPTSN = "SELECT wo_No FROM tbl_wo  WHERE wo_No = '" + poNO + "'";
+                    string cekPoNo = "SELECT wo_PTSN FROM tbl_wo  WHERE wo_PTSN = '" + poNO + "'";
                     string query = "INSERT INTO tbl_wo (id, wo_PTSN, wo_No, model_No, model, wo_QTY, wo_Usage, customer, detail) VALUES " +
                         "(NULL,  '" + poNO + "', NULL, NULL, '" + poModel + "', '" + poqty + "', '" + totalUsage + "', '" + customer + "', 'po')";
 
-                    using (MySqlDataAdapter dscmd = new MySqlDataAdapter(cekwoPTSN, connection))
+                    using (MySqlDataAdapter dscmd = new MySqlDataAdapter(cekPoNo, connection))
                     {
                         DataSet ds = new DataSet();
                         dscmd.Fill(ds);
@@ -329,7 +329,7 @@ namespace CompareWOLL
                         if (ds.Tables[0].Rows.Count >= 1)
                         {
                             CloseProgress();
-                            MessageBox.Show("Purchase Order with PO No" + poNO + "  already uploaded", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
+                            MessageBox.Show("Purchase Order with PO No " + poNO + " already uploaded", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error); //custom messageBox to show error  
                             tbfilepathPO.Text = "";
                             tbPoNo.Text = "";
                             tbPoModel.Text = "";
@@ -355,7 +355,8 @@ namespace CompareWOLL
                             {
                                 string StrQuery = "INSERT INTO tbl_wodetail VALUES ('"
                                     + dataGridViewPO.Rows[i].Cells[0].Value.ToString() + "', '"
-                                    + dataGridViewPO.Rows[i].Cells[2].Value.ToString() + "', null, '"
+                                    + dataGridViewPO.Rows[i].Cells[2].Value.ToString() + "', '"
+                                    + dataGridViewPO.Rows[i].Cells[3].Value.ToString() + "', null, '"
                                     + dataGridViewPO.Rows[i].Cells[4].Value.ToString() + "', null, '"
                                     + dataGridViewPO.Rows[i].Cells[5].Value.ToString() + "');";
                                 cmd.CommandText = StrQuery;

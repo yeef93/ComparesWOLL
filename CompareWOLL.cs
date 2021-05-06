@@ -100,7 +100,7 @@ namespace CompareWOLL
                     DataTable dset = new DataTable();
                     adpt.Fill(dset);
 
-                    if (dset.Rows.Count >0)
+                    if (dset.Rows.Count > 0)
                     {
                         for (int i = 0; i < dset.Rows.Count; i++)
                         {
@@ -122,7 +122,7 @@ namespace CompareWOLL
                             ill.Show();
                             this.Hide();
                         }
-                    }                    
+                    }
                 }
 
                 connection.Close();
@@ -147,7 +147,7 @@ namespace CompareWOLL
             string str = cmbLLModel.Text;
             char ch = '|';
 
-            var model = str.Split(ch);            
+            var model = str.Split(ch);
 
             string queryTotalWO = "SELECT SUM(tbl_wodetail.qty) AS totalWO  FROM tbl_wodetail LEFT JOIN tbl_lldetail " +
                 "ON tbl_wodetail.partcode = tbl_lldetail.partcode " +
@@ -511,7 +511,7 @@ namespace CompareWOLL
                     for (int j = 0; j <= ds.Tables[0].Columns.Count - 1; j++)
                     {
                         string data = ds.Tables[0].Rows[i].ItemArray[j].ToString();
-                        worksheet.Cells[i + 9, j + 1] = "'"+data;
+                        worksheet.Cells[i + 9, j + 1] = "'" + data;
                     }
                 }
 
@@ -580,6 +580,13 @@ namespace CompareWOLL
         {
             this.Refresh();
             btnCompare.Enabled = true;
+        }
+
+        private void btnPO_Click(object sender, EventArgs e)
+        {
+            PurchaseOrder po = new PurchaseOrder();
+            po.Show();
+            this.Hide();
         }
     }
 }
